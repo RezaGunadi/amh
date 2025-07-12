@@ -16,9 +16,9 @@ class ToolsAddress extends Migration
         Schema::create('tools_address', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id');
-            $table->text('token')->unique();
-            $table->text('name');
-            $table->text('user_name');
+            $table->string('token', 9)->nullable()->unique();
+            $table->string('name');
+            $table->string('user_name');
             $table->integer('is_deleted')->default(0);
             $table->timestamps();
         });

@@ -35,6 +35,75 @@ class ApiArduinoController extends Controller
         }
         return $data;
     }
+
+    public function atiqahData($token, Request $req)
+    {
+        try {
+            // Validasi token
+            $isActive = ToolsAddress::where('token', $token)->where('is_deleted', 0)->first();
+            
+            if (!$isActive) {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Token tidak valid atau masa aktif habis',
+                    'status_code' => 401
+                ], 401);
+            }
+
+            // Validasi input data
+            $req->validate([
+                'ir' => 'required|numeric',
+                'suhu' => 'required|numeric',
+                'kelembapan' => 'required|numeric',
+                'kecemasan' => 'required|numeric',
+                'lat' => 'required|numeric',
+                'lng' => 'required|numeric'
+            ]);
+
+            // Simpan data ke ApiArduino dengan mapping ke port0-port6
+            $data = new ApiArduino;
+            $data->token_id = $token;
+            $data->port0 = $req->ir;           // IR sensor
+            $data->port1 = $req->suhu;         // Suhu
+            $data->port2 = $req->kelembapan;   // Kelembapan
+            $data->port3 = $req->kecemasan;    // Kecemasan
+            $data->port4 = $req->lat;          // Latitude
+            $data->port5 = $req->lng;          // Longitude
+            $data->port6 = 0;                  // Port kosong atau bisa digunakan untuk data tambahan
+            $data->save();
+
+            return response()->json([
+                'error' => false,
+                'message' => 'Data berhasil disimpan',
+                'data' => [
+                    'id' => $data->id,
+                    'token' => $token,
+                    'ir' => $data->port0,
+                    'suhu' => $data->port1,
+                    'kelembapan' => $data->port2,
+                    'kecemasan' => $data->port3,
+                    'lat' => $data->port4,
+                    'lng' => $data->port5,
+                    'created_at' => $data->created_at
+                ],
+                'status_code' => 200
+            ], 200);
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'error' => true,
+                'message' => 'Data tidak valid',
+                'errors' => $e->errors(),
+                'status_code' => 422
+            ], 422);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => true,
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage(),
+                'status_code' => 500
+            ], 500);
+        }
+    }
     public function dhtPulseGetDetail($token_id, Request $req)
     {
         $limit=$req->has('take')?$req->take:10;

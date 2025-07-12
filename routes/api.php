@@ -105,3 +105,6 @@ Route::post('/generate-monthly-paket', function () {
         return response()->json(['error' => $e->getMessage()], 500);
     }
 })->middleware('api');
+
+// Route untuk API Arduino Atiqah
+Route::post('/arduino/atiqah/{token}', [\App\Http\Controllers\api\ApiArduinoController::class, 'atiqahData']);
