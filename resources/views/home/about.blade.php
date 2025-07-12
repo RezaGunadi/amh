@@ -1,280 +1,397 @@
 @extends('layouts.app')
 
-
 @push('meta')
-    
-    
-<meta name="title" content="Kelas Privat - Les Privat Terbaik">
-<meta name="description" content="Les Privat terbaik berkualitas dan responsive">
-<meta name="keywords" content="Kelas Privat, latihan soal, pendalaman matri, Les Privat, olimpiade, berita seputar pendidikan">
-<meta property="og:title" content="Kelas Privat: Les Privat Terbaik">
-<meta property="og:description" content="latihan soal, pendalaman matri, Les Privat, olimpiade dan berita seputar pendidikan">
-<meta property="og:site_name" content="Kelas Privat: Les Privat Terbaik">
-
+<meta name="title" content="Kelas Privat - Les Privat Terbaik di Indonesia | Tutor Berpengalaman">
+<meta name="description" content="Les Privat terbaik dengan tutor berpengalaman dari PTN/PTS ternama. Program belajar personal, konsultasi rutin, dan metode pembelajaran yang efektif untuk SD, SMP, dan SMA.">
+<meta name="keywords" content="Kelas Privat, les privat terbaik, tutor berpengalaman, bimbingan belajar, les privat SD, les privat SMP, les privat SMA, bimbel online, guru privat, konsultasi belajar">
+<meta property="og:title" content="Kelas Privat: Les Privat Terbaik dengan Tutor Berpengalaman">
+<meta property="og:description" content="Les Privat terbaik dengan tutor berpengalaman dari PTN/PTS ternama. Program belajar personal, konsultasi rutin, dan metode pembelajaran yang efektif.">
+<meta property="og:site_name" content="Kelas Privat: Les Privat Terbaik di Indonesia">
 <meta property="og:image" content="https://kelas-privat.com/assets/img/logo.png">
 <meta property="og:image:width" content="600">
 <meta property="og:image:height" content="600">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kelas-privat.com">
+<meta name="robots" content="index, follow">
+<meta name="language" content="Indonesian">
+<meta name="revisit-after" content="7 days">
+<meta name="author" content="Kelas Privat">
 @endpush
 
-
-
 @section('content')
-  
-<div class="mt-3 pb-3 px-3 my-auto text-center s28-500 align-bottom shadow" style='color:rgb(195, 202, 247); -webkit-text-fill-color: rgb(190, 190, 247); -webkit-text-stroke: 1.3px black; background: white; border-radius: 12px;background-image: url("/assets/img/upgrade.gif");  padding-top: 255px;
-background-repeat: no-repeat;
-background-attachment: fixed;
-background-position: center;'>
-    Kelas privat merupakan lembaga pendidikan les privat yang berfokus pada perkembangan belajar siswa.
-</div>
-<div class="mx-auto mt-4 mb-3 text-center">
-    <img src="{{ URL::To('/assets/img/management.png') }}" class="img-fluid" alt="">
-    <div class="text-center fs-1" style="-webkit-text-stroke: 1px black; font-weight:600; color:blue">
-        KELAS PRIVAT
+<!-- Hero Section -->
+<section class="py-5 bg-gradient-primary text-white position-relative overflow-hidden">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-lg-6" data-aos="fade-right">
+                <h1 class="display-4 fw-bold mb-4">Les Privat Terbaik di Indonesia</h1>
+                <p class="lead mb-4">Lembaga pendidikan les privat yang berfokus pada perkembangan belajar siswa dengan metode pembelajaran yang efektif dan tutor berpengalaman dari PTN/PTS ternama.</p>
+                <div class="d-flex gap-3">
+                    <a href="https://api.whatsapp.com/send?phone=6281211006445&text=Halo%20nama%20saya%20......%20saya,%20mau%20tanya%20terkait" class="btn btn-light btn-lg px-4">
+                        <i class="fab fa-whatsapp me-2"></i>Konsultasi Gratis
+                    </a>
+                    <a href="{{ route('contact') }}" class="btn btn-outline-light btn-lg px-4">
+                        <i class="fas fa-info-circle me-2"></i>Informasi Program
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <img src="{{ asset('assets/img/management.png') }}" alt="Kelas Privat - Les Privat Terbaik" class="img-fluid floating">
+            </div>
+        </div>
     </div>
-    <div class="mt-2 text-center fs-5">
-        hadir sebagai solusi bagi orangtua serta siswa yang membutuhkan les privat dengan konsultasi rutin dan diskusi mengenai permasalahan belajar anak serta kiat kiat belajar agar hasil yang didapatkan maksimal. 
+    <div class="position-absolute top-0 end-0 w-50 h-100 d-none d-lg-block">
+        <div class="shape-1"></div>
+        <div class="shape-2"></div>
     </div>
-</div>
-<div class="mx-auto my-5">
+</section>
 
-      
-      <section>
-        <div class="container reveal fade-left">
-            <div class="row justify-content-center">
-                <div class="col-auto bg-light p-3 rounded-pill mx-3 my-2">
-                    <img src="{{ URL::To('/assets/img/ui.png') }}" class="" style="height: 80px; width:80px;" alt="">
+<!-- Why Choose Us Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="display-5 fw-bold">Mengapa Memilih Kelas Privat?</h2>
+            <p class="lead text-muted">Keunggulan yang membuat kami menjadi pilihan utama les privat di Indonesia</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="card h-100 border-0 shadow-sm hover-card">
+                    <div class="card-body p-4">
+                        <div class="feature-icon bg-primary bg-gradient text-white rounded-circle mb-3">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="h5 fw-bold mb-3">Tutor Berpengalaman</h3>
+                        <p class="text-muted mb-0">Tutor kami berasal dari PTN/PTS ternama dengan pengalaman mengajar yang mumpuni dan kemampuan pedagogis yang teruji.</p>
+                    </div>
                 </div>
-                <div class="col-auto bg-light p-3 rounded-pill mx-3 my-2">
-                    <img src="{{ URL::To('/assets/img/gundar.png') }}" class="" style="height: 80px; width:80px;" alt="">
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="card h-100 border-0 shadow-sm hover-card">
+                    <div class="card-body p-4">
+                        <div class="feature-icon bg-primary bg-gradient text-white rounded-circle mb-3">
+                            <i class="fas fa-book-reader"></i>
+                        </div>
+                        <h3 class="h5 fw-bold mb-3">Metode Pembelajaran Personal</h3>
+                        <p class="text-muted mb-0">Program belajar yang disesuaikan dengan kebutuhan dan kemampuan siswa, memastikan pemahaman yang optimal.</p>
+                    </div>
                 </div>
-                <div class="col-auto bg-light p-3 rounded-pill mx-3 my-2">
-                    <img src="{{ URL::To('/assets/img/ipb.png') }}" class="" style="height: 80px; width:80px;" alt="">
-                </div>
-                <div class="col-auto bg-light p-3 rounded-pill mx-3 my-2">
-                    <img src="{{ URL::To('/assets/img/itb.png') }}" class="" style="height: 80px; width:80px;" alt="">
-                </div>
-                <div class="col-auto bg-light p-3 rounded-pill mx-3 my-2">
-                    <img src="{{ URL::To('/assets/img/uin.png') }}" class="" style="height: 80px; width:80px;" alt="">
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="card h-100 border-0 shadow-sm hover-card">
+                    <div class="card-body p-4">
+                        <div class="feature-icon bg-primary bg-gradient text-white rounded-circle mb-3">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3 class="h5 fw-bold mb-3">Konsultasi Rutin</h3>
+                        <p class="text-muted mb-0">Diskusi berkala dengan orang tua untuk membahas perkembangan belajar dan memberikan saran pembelajaran.</p>
+                    </div>
                 </div>
             </div>
         </div>
-      </section>
-      
-      <section>
-        <div class="container reveal fade-bottom text-center s28-500">
-            Kelas privat memiliki tutor tutor pengajar yang berkompeten serta menggunakan metode metode pembelajaran khusus yang sesuai dengan kriteria masing masing siswa
-        </div>
-      </section>
-      <section>
-        <div class="container reveal fade-right text-center">
-            <div class="row">
+    </div>
+</section>
 
-                <div class="col-auto mx-auto text-center">
-                    <a href="https://api.whatsapp.com/send?phone=6281211006445&text=Halo%20nama%20saya%20......%20saya,%20mau%20tanya%20terkait">
-                        <div class="p-3 mb-5 col-auto  text-center" style='color: white;margin-top:-40px; background: rgb(43, 0, 255); border-radius: 12px;width:220px'>
-                            Join with US
+<!-- Vision Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center" data-aos="fade-up">
+                <h2 class="display-5 fw-bold mb-4">Visi Kami</h2>
+                <p class="lead text-muted mb-5">
+                    Hadir sebagai solusi terbaik bagi orangtua serta siswa yang membutuhkan les privat dengan konsultasi rutin dan diskusi mengenai permasalahan belajar anak serta kiat-kiat belajar agar hasil yang didapatkan maksimal.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Program Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="display-5 fw-bold">Program Unggulan Kami</h2>
+            <p class="lead text-muted">Program belajar yang dirancang untuk memaksimalkan potensi siswa</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="card h-100 border-0 shadow-sm hover-card">
+                    <div class="card-body p-4">
+                        <h3 class="h4 fw-bold mb-3">Les Privat SD</h3>
+                        <p class="text-muted">Program belajar untuk siswa SD dengan fokus pada pengembangan dasar-dasar pembelajaran yang kuat, termasuk:</p>
+                        <ul class="text-muted">
+                            <li>Pembelajaran Matematika Dasar</li>
+                            <li>Bahasa Indonesia</li>
+                            <li>IPA Terpadu</li>
+                            <li>IPS Terpadu</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="card h-100 border-0 shadow-sm hover-card">
+                    <div class="card-body p-4">
+                        <h3 class="h4 fw-bold mb-3">Les Privat SMP</h3>
+                        <p class="text-muted">Program belajar untuk siswa SMP dengan pendekatan yang lebih terstruktur, mencakup:</p>
+                        <ul class="text-muted">
+                            <li>Matematika</li>
+                            <li>IPA (Fisika, Kimia, Biologi)</li>
+                            <li>Bahasa Inggris</li>
+                            <li>Persiapan UNBK</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="card h-100 border-0 shadow-sm hover-card">
+                    <div class="card-body p-4">
+                        <h3 class="h4 fw-bold mb-3">Les Privat SMA</h3>
+                        <p class="text-muted">Program belajar untuk siswa SMA dengan fokus pada persiapan UTBK dan UNBK, meliputi:</p>
+                        <ul class="text-muted">
+                            <li>Matematika</li>
+                            <li>Fisika</li>
+                            <li>Kimia</li>
+                            <li>Biologi</li>
+                            <li>Persiapan UTBK</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
+                <div class="card h-100 border-0 shadow-sm hover-card">
+                    <div class="card-body p-4">
+                        <h3 class="h4 fw-bold mb-3">Program Khusus</h3>
+                        <p class="text-muted">Program tambahan untuk pengembangan kemampuan siswa:</p>
+                        <ul class="text-muted">
+                            <li>Olimpiade Sains</li>
+                            <li>Bahasa Inggris</li>
+                            <li>Komputer</li>
+                            <li>Bimbingan Konseling</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Partner Universities -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="fw-bold">Partner Universitas</h2>
+            <p class="lead text-muted">Berkolaborasi dengan universitas terbaik di Indonesia untuk memberikan kualitas pendidikan terbaik</p>
+        </div>
+        <div class="row justify-content-center g-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-auto">
+                <div class="card border-0 shadow-sm hover-card">
+                    <div class="card-body p-4">
+                        <img src="{{ asset('assets/img/ui.png') }}" alt="Universitas Indonesia" class="img-fluid" style="height: 80px; width: 80px;">
+                    </div>
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="card border-0 shadow-sm hover-card">
+                    <div class="card-body p-4">
+                        <img src="{{ asset('assets/img/gundar.png') }}" alt="Universitas Gunadarma" class="img-fluid" style="height: 80px; width: 80px;">
+                    </div>
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="card border-0 shadow-sm hover-card">
+                    <div class="card-body p-4">
+                        <img src="{{ asset('assets/img/ipb.png') }}" alt="Institut Pertanian Bogor" class="img-fluid" style="height: 80px; width: 80px;">
+                    </div>
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="card border-0 shadow-sm hover-card">
+                    <div class="card-body p-4">
+                        <img src="{{ asset('assets/img/itb.png') }}" alt="Institut Teknologi Bandung" class="img-fluid" style="height: 80px; width: 80px;">
+                    </div>
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="card border-0 shadow-sm hover-card">
+                    <div class="card-body p-4">
+                        <img src="{{ asset('assets/img/uin.png') }}" alt="UIN Jakarta" class="img-fluid" style="height: 80px; width: 80px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Teaching Method -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center" data-aos="fade-up">
+                <h2 class="fw-bold mb-4">Metode Pembelajaran</h2>
+                <p class="lead text-muted">
+                    Kelas privat memiliki tutor pengajar yang berkompeten serta menggunakan metode pembelajaran khusus yang sesuai dengan kriteria masing-masing siswa. Metode kami mencakup:
+                </p>
+                <div class="row g-4 mt-4">
+                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card h-100 border-0 shadow-sm hover-card">
+                            <div class="card-body p-4">
+                                <h3 class="h5 fw-bold mb-3">Pembelajaran Personal</h3>
+                                <p class="text-muted mb-0">Setiap siswa mendapatkan perhatian penuh dari tutor dan program belajar yang disesuaikan dengan kebutuhan.</p>
+                            </div>
                         </div>
+                    </div>
+                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card h-100 border-0 shadow-sm hover-card">
+                            <div class="card-body p-4">
+                                <h3 class="h5 fw-bold mb-3">Evaluasi Berkala</h3>
+                                <p class="text-muted mb-0">Melakukan penilaian rutin untuk memantau perkembangan dan menyesuaikan metode pembelajaran.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="fw-bold">Apa Kata Mereka?</h2>
+            <p class="lead text-muted">Testimoni dari siswa dan orang tua yang telah bergabung dengan Kelas Privat</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="card h-100 border-0 shadow-sm hover-card">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{{ asset('assets/img/avatar-1.jpg') }}" alt="Testimoni Siswa" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                            <div>
+                                <h5 class="mb-0">Sarah Putri</h5>
+                                <small class="text-muted">Siswa SMA</small>
+                            </div>
+                        </div>
+                        <p class="text-muted mb-0">"Berhasil masuk UI berkat bimbingan tutor yang sabar dan metode pembelajaran yang efektif."</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="card h-100 border-0 shadow-sm hover-card">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{{ asset('assets/img/avatar-2.jpg') }}" alt="Testimoni Orang Tua" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                            <div>
+                                <h5 class="mb-0">Budi Santoso</h5>
+                                <small class="text-muted">Orang Tua Siswa SMP</small>
+                            </div>
+                        </div>
+                        <p class="text-muted mb-0">"Konsultasi rutin membantu kami memahami perkembangan belajar anak dan memberikan solusi yang tepat."</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="card h-100 border-0 shadow-sm hover-card">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{{ asset('assets/img/avatar-3.jpg') }}" alt="Testimoni Siswa" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                            <div>
+                                <h5 class="mb-0">Rina Wijaya</h5>
+                                <small class="text-muted">Siswa SD</small>
+                            </div>
+                        </div>
+                        <p class="text-muted mb-0">"Belajar jadi menyenangkan dengan tutor yang ramah dan metode pembelajaran yang menarik."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8" data-aos="fade-up">
+                <h2 class="fw-bold mb-4">Bergabung Bersama Kami</h2>
+                <p class="lead mb-4">Dapatkan pengalaman belajar terbaik dengan tutor berpengalaman dari PTN/PTS ternama</p>
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="https://api.whatsapp.com/send?phone=6281211006445&text=Halo%20nama%20saya%20......%20saya,%20mau%20tanya%20terkait" class="btn btn-light btn-lg px-5">
+                        <i class="fab fa-whatsapp me-2"></i>Konsultasi Gratis
+                    </a>
+                    <a href="{{ route('contact') }}" class="btn btn-outline-light btn-lg px-5">
+                        <i class="fas fa-phone-alt me-2"></i>Hubungi Kami
                     </a>
                 </div>
             </div>
         </div>
-      </section>
-  
-</div>
-<div class="py-3"></div>
+    </div>
+</section>
+
+<style>
+.bg-gradient-primary {
+    background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+}
+
+.shape-1 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+    transform: skewY(-12deg);
+    transform-origin: top right;
+}
+
+.shape-2 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(-45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+    transform: skewY(12deg);
+    transform-origin: top left;
+}
+
+.floating {
+    animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+.hover-card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.hover-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.feature-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+</style>
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize AOS
+    AOS.init({
+        duration: 800,
+        once: true
+    });
+});
+</script>
+@endpush
 @endsection
-
-@push('css')
-<style>
-    .stroke{
-        
-        -webkit-text-stroke: 1px black;
-    }
-    .carousel-indicators [data-bs-target]{
-        width: 6px;
-        height: 6px;
-        border-radius: 100%;
-        margin-right: 2px;
-        margin-left: 2px;
-    }
-    .carousel-control-prev{
-        background-color: rgba(37, 40, 43, 0.6);
-        opacity: 1;
-        margin-left: 16px;
-        border-radius: 7px;
-        width: 28px;
-        height: 28px;
-        
-    }
-    .carousel-control-next{
-        background-color: rgba(37, 40, 43, 0.6);
-        opacity: 1;
-        margin-right: 16px;
-        border-radius: 7px;
-        width: 28px;
-        height: 28px;
-        
-    }
-    .carousel-control-next-icon, .carousel-control-prev-icon{
-        height: 15px;
-        width: 10px;
-    }
-    
-</style>
-<style>
-    /* @import url("https://fonts.googleapis.com/css2?family=Asap&display=swap");
-        * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Asap", sans-serif;
-        }
-        body {
-        background: #42455a;
-        } */
-        section {
-        min-height:20vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        }
-        /* section:nth-child(1) {
-        color: #e0ffff;
-        }
-        section:nth-child(2) {
-        color: #42455a;
-        background: #e0ffff;
-        }
-        section:nth-child(3) {
-        color: #e0ffff;
-        }
-        section:nth-child(4) {
-        color: #42455a;
-        background: #e0ffff;
-        }
-        section .container {
-        margin: 100px;
-        }
-        section h1 {
-        font-size: 3rem;
-        margin: 20px;
-        }
-        section h2 {
-        font-size: 40px;
-        text-align: center;
-        text-transform: uppercase;
-        }
-        section .text-container {
-        display: flex;
-        }
-        section .text-container .text-box {
-        margin: 20px;
-        padding: 20px;
-        background: #00c2cb;
-        }
-        section .text-container .text-box h3 {
-        font-size: 30px;
-        text-align: center;
-        text-transform: uppercase;
-        margin-bottom: 10px;
-        }
-
-        @media (max-width: 900px) {
-        section h1 {
-            font-size: 2rem;
-            text-align: center;
-        }
-        section .text-container {
-            flex-direction: column;
-        } */
-        /* } */
-
-        .reveal {
-        position: relative;
-        opacity: 0;
-        }
-
-        .reveal.active {
-        opacity: 1;
-        }
-        .active.fade-bottom {
-        animation: fade-bottom 1s ease-in;
-        }
-        .active.fade-left {
-        animation: fade-left 1s ease-in;
-        }
-        .active.fade-right {
-        animation: fade-right 1s ease-in;
-        }
-        @keyframes fade-bottom {
-        0% {
-            transform: translateY(50px);
-            opacity: 0;
-        }
-        100% {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        }
-        @keyframes fade-left {
-        0% {
-            transform: translateX(-100px);
-            opacity: 0;
-        }
-        100% {
-            transform: translateX(0);
-            opacity: 1;
-        }
-        }
-
-        @keyframes fade-right {
-        0% {
-            transform: translateX(100px);
-            opacity: 0;
-        }
-        100% {
-            transform: translateX(0);
-            opacity: 1;
-        }
-        }
-</style>
-@endpush
-@push('script')
-    <script>
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 150;
-
-                if (elementTop < windowHeight - elementVisible) {
-                reveals[i].classList.add("active");
-                } else {
-                reveals[i].classList.remove("active");
-                }
-            }
-        }
-
-        window.addEventListener("scroll", reveal);
-    </script>
-    <script>
-        let colors = ['red','pink','coral','orange','yellow','green'];
-
-        let i= 0;
-
-        function changeColor(){ 
-            
-      $('#colorChange1').css('color',  colors[i]); 
-            i++;
-            if (i >= colors.length) {
-                i = 0;
-            }
-        }
-
-        window.setInterval(changeColor,700 );
-    </script>
-@endpush

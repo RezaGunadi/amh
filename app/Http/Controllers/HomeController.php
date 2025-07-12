@@ -25,14 +25,8 @@ class HomeController extends Controller
      */
     public function home()
     {
-        // $data = \Illuminate\Support\Facades\DB::table('news')->get();
-        // foreach ($data as $value) {
-        //     # code...
-        //     $value->images = Image::where('news_id', $value->id)->get();
-        // }
-        return view('home',[
+        return view('home.index',[
             'title' => 'Kelas Privat',
-            // 'data' => $data,
         ]);
     }
     public function index()

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800px" height="600px" viewBox="0 0 800 600" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <!-- Background -->
+        <rect fill="#F3F4F6" x="0" y="0" width="800" height="600"/>
+        
+        <!-- Book -->
+        <path d="M200,100 L600,100 L600,500 L200,500 Z" fill="#1E40AF"/>
+        <path d="M200,100 L600,100 L600,500 L200,500 Z" fill="#2563EB" opacity="0.5"/>
+        
+        <!-- Book Pages -->
+        <path d="M250,150 L550,150 L550,450 L250,450 Z" fill="#FFFFFF"/>
+        <path d="M250,150 L550,150 L550,450 L250,450 Z" fill="#F3F4F6" opacity="0.5"/>
+        
+        <!-- Text Lines -->
+        <rect x="300" y="200" width="250" height="10" fill="#4B5563"/>
+        <rect x="300" y="230" width="200" height="10" fill="#4B5563"/>
+        <rect x="300" y="260" width="250" height="10" fill="#4B5563"/>
+        <rect x="300" y="290" width="200" height="10" fill="#4B5563"/>
+        <rect x="300" y="320" width="250" height="10" fill="#4B5563"/>
+        
+        <!-- Decorative Elements -->
+        <circle cx="400" cy="100" r="20" fill="#FCD34D"/>
+        <circle cx="400" cy="500" r="20" fill="#FCD34D"/>
+        <path d="M200,100 L600,100" stroke="#FCD34D" stroke-width="4"/>
+        <path d="M200,500 L600,500" stroke="#FCD34D" stroke-width="4"/>
+    </g>
+</svg> 

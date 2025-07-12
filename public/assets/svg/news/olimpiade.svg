@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800px" height="600px" viewBox="0 0 800 600" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <!-- Background -->
+        <rect fill="#F3F4F6" x="0" y="0" width="800" height="600"/>
+        
+        <!-- Trophy -->
+        <path d="M350,100 L450,100 L450,200 C450,250 400,300 400,350 C350,300 350,250 350,200 Z" fill="#FCD34D"/>
+        <path d="M350,200 L450,200 L450,250 C450,300 400,350 400,400 C350,350 350,300 350,250 Z" fill="#F59E0B"/>
+        
+        <!-- Trophy Base -->
+        <rect x="300" y="400" width="200" height="20" fill="#FCD34D"/>
+        <rect x="320" y="420" width="160" height="20" fill="#F59E0B"/>
+        
+        <!-- Stars -->
+        <path d="M200,150 L205,165 L220,165 L210,175 L215,190 L200,180 L185,190 L190,175 L180,165 L195,165 Z" fill="#FCD34D"/>
+        <path d="M600,150 L605,165 L620,165 L610,175 L615,190 L600,180 L585,190 L590,175 L580,165 L595,165 Z" fill="#FCD34D"/>
+        
+        <!-- Decorative Lines -->
+        <path d="M200,300 L600,300" stroke="#E5E7EB" stroke-width="2"/>
+        <path d="M200,350 L600,350" stroke="#E5E7EB" stroke-width="2"/>
+        <path d="M200,400 L600,400" stroke="#E5E7EB" stroke-width="2"/>
+    </g>
+</svg> 

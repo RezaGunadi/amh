@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <!-- Homepage -->
+    <url>
+        <loc>https://kelasprivat.id/</loc>
+        <lastmod>2024-03-20</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- Soal Pages -->
+    <url>
+        <loc>https://kelasprivat.id/soal/sd</loc>
+        <lastmod>2024-03-20</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://kelasprivat.id/soal/smp</loc>
+        <lastmod>2024-03-20</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://kelasprivat.id/soal/sma</loc>
+        <lastmod>2024-03-20</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Materi Pages -->
+    <url>
+        <loc>https://kelasprivat.id/materi/sd</loc>
+        <lastmod>2024-03-20</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://kelasprivat.id/materi/smp</loc>
+        <lastmod>2024-03-20</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://kelasprivat.id/materi/sma</loc>
+        <lastmod>2024-03-20</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- News/Blog -->
+    <url>
+        <loc>https://kelasprivat.id/news</loc>
+        <lastmod>2024-03-20</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- About Page -->
+    <url>
+        <loc>https://kelasprivat.id/about</loc>
+        <lastmod>2024-03-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- Contact Page -->
+    <url>
+        <loc>https://kelasprivat.id/contact</loc>
+        <lastmod>2024-03-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+</urlset> 

@@ -1,302 +1,530 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!DOCTYPE html>
+<html lang="id">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    {{-- <meta name="description" content=""> --}}
-    {{-- <meta name="author" content="reza gunadi, ayo indonesia"> --}}
-    {{-- <meta name="generator" content="Hugo 0.88.1">
-    {{-- <title>Ayo Indonesia | Platform penghubung untuk kamu yang suka olahraga</title> --}}
-    @stack('meta')
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    @if (!empty($title))
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title', 'KelasPrivat.id - Les Privat Online Terbaik')</title>
+    <meta name="description" content="@yield('meta_description', 'Les privat online terbaik dengan pengajar berpengalaman. Program les privat SD, SMP, SMA dengan metode pembelajaran interaktif.')">
+    <meta name="keywords" content="@yield('meta_keywords', 'les privat, les privat online, bimbel online, les privat SD, les privat SMP, les privat SMA')">
+    @section('og_title', 'Judul untuk social media')
+    @section('og_description', 'Deskripsi untuk social media')
+    @section('og_image', asset('images/og-image.jpg'))
     
-    <title>{{ $title }}</title>
-    @else
-    <title>{{ config('app.name', 'Laravel') }}</title>
-        @php
-            $title=config('app.name', 'Laravel');
-        @endphp
-    @endif
-    @php
-        if ($title == 'Kelas Privat' || $title == 'KELAS PRIVAT' ) {
-            # code...
-            $background = '#F8F8F8';
-        } else {
-            $background = '#E5E5E5';
-            # code...
-        }
-        
-    @endphp
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <!-- Fonts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
-    <link rel="shortcut icon" href="{{ URL::To('/assets/img/logo.png') }}">
-
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">   
-    @stack('css') 
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
     <style>
-        body
-        {
-          /* font-family: 'Rubik', sans-serif; */
-          font-family: 'Rubik';
-        }
-        .bd-placeholder-img {
-          font-size: 1.125rem;
-          text-anchor: middle;
-          -webkit-user-select: none;
-          -moz-user-select: none;
-          user-select: none;
-        }
-  
-        @media (min-width: 768px) {
-          .bd-placeholder-img-lg {
-            font-size: 3.5rem;
-          }
-        }
-        a{
-            text-decoration: none;
-        }
-        body{
-            background-color: {{ $background }};
+        :root {
+            /* Warna yang lebih profesional dan modern */
+            --primary-color: #2563EB;
+            --primary-dark: #1D4ED8;
+            --primary-light: #60A5FA;
+            --secondary-color: #0F172A;
+            --accent-color: #3B82F6;
+            --success-color: #059669;
+            --warning-color: #D97706;
+            --danger-color: #DC2626;
+            --dark-color: #1E293B;
+            --light-color: #F8FAFC;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-400: #9CA3AF;
+            --gray-500: #6B7280;
+            --gray-600: #4B5563;
+            --gray-700: #374151;
+            --gray-800: #1F2937;
+            --gray-900: #111827;
+            /* Spacing system yang konsisten */
+            --spacing-1: 0.25rem;
+            --spacing-2: 0.5rem;
+            --spacing-3: 0.75rem;
+            --spacing-4: 1rem;
+            --spacing-5: 1.25rem;
+            --spacing-6: 1.5rem;
+            --spacing-8: 2rem;
+            --spacing-10: 2.5rem;
+            --spacing-12: 3rem;
+            --spacing-16: 4rem;
+            --spacing-20: 5rem;
         }
         
-        .side-bar.active {
-          color: #1A237E!important;
-          text-stroke: 6px #000000!important;
-      font-weight: 700!important;
-      text-stroke: 6px #FCE4EC;
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--dark-color);
+            background-color: var(--light-color);
         }
-    .active {
-      font-weight: 600!important;
-      text-stroke: 6px #1A237E;
-    }
-    
-
+        
+        .navbar {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+        }
+        
+        .navbar.scrolled {
+            padding: 0.5rem 0;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            color: var(--dark-color);
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary {
+            background: var(--primary-color);
+            border: none;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px -3px rgba(37, 99, 235, 0.3);
+        }
+        
+        .btn-outline-primary {
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .btn-outline-primary:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 5rem 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+        
+        .footer-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .footer-link:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+            margin: 0 0.5rem;
+        }
+        
+        .social-icon:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px) rotate(360deg);
+        }
+        
+        .card {
+            border: none;
+            border-radius: 1rem;
+            background: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+                        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 
+                        0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border-radius: 1rem;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-icon:hover {
+            transform: rotate(10deg) scale(1.1);
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+        
+        /* Gradien modern */
+        .gradient-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+        }
+        
+        .gradient-dark {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--dark-color) 100%);
+        }
+        
+        /* Typography system yang lebih profesional */
+        h1, .h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+        
+        h2, .h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+        }
+        
+        h3, .h3 {
+            font-size: 2rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        
+        h4, .h4 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+        
+        p, .p {
+            font-size: 1.125rem;
+            line-height: 1.7;
+            color: var(--gray-600);
+        }
+        
+        .lead {
+            font-size: 1.25rem;
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--gray-700);
+        }
+        
+        /* Container yang lebih responsif */
+        .container {
+            max-width: 1280px;
+            padding-left: var(--spacing-4);
+            padding-right: var(--spacing-4);
+        }
+        
+        @media (min-width: 640px) {
+            .container {
+                padding-left: var(--spacing-6);
+                padding-right: var(--spacing-6);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .container {
+                padding-left: var(--spacing-8);
+                padding-right: var(--spacing-8);
+            }
+        }
+        
+        /* Animasi yang lebih halus */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .slide-up {
+            animation: slideUp 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        /* Hover effects yang lebih menarik */
+        .hover-lift {
+            transition: transform 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-5px);
+        }
+        
+        .hover-glow {
+            transition: box-shadow 0.3s ease;
+        }
+        
+        .hover-glow:hover {
+            box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
+        }
+        
+        /* Input fields yang lebih modern */
+        .form-control {
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            border: 2px solid var(--gray-200);
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+        
+        /* Custom select yang lebih menarik */
+        .select-wrapper {
+            position: relative;
+        }
+        
+        .select-wrapper::after {
+            content: '';
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid var(--gray-500);
+            pointer-events: none;
+        }
     </style>
-  
-      
-      <!-- Custom styles for this template -->
-    <link href="{{ URL::To('/assets/css/dashboard.css') }}" rel="stylesheet">
-    <link href="{{ URL::To('/assets/css/texting.css') }}" rel="stylesheet">
-
 </head>
-<header class="navbar navbar-light sticky-top col-md-9 mx-auto bg-gradient flex-md-nowrap p-0 " style="background-color: #ffffff">
-{{-- <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow"> --}}
-    
-    @include('partial.navbar')
-    @include('layouts.flash')
-
-  </header>
 <body>
-    <div id="app" class="container-fluid">
-        {{-- <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} 
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-graduation-cap me-2"></i>KelasPrivat.id
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Beranda</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="/les-privat">Les Privat</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/bank-soal">Bank Soal</a>
+                    </li>
+                    {{-- <li class="nav-item">
+                        <a class="nav-link" href="/materi">Materi</a>
+                    </li> --}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/news">Berita</a>
+                    </li>
+                </ul>
+                <div class="ms-lg-3">
+                    @auth
+                        <div class="dropdown">
+                            <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-user-circle me-1"></i>{{ Auth::user()->name }}
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="/profile"><i class="fas fa-user me-2"></i>Profil</a></li>
+                                <li><a class="dropdown-item" href="/dashboard"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}">
                                         @csrf
+                                        <button type="submit" class="dropdown-item text-danger">
+                                            <i class="fas fa-sign-out-alt me-2"></i>Logout
+                                        </button>
                                     </form>
-                                </div>
-                            </li>
-                        @endguest
+                                </li>
+                            </ul>
+                        </div>
+                    @else
+                        <a href="/login" class="btn btn-outline-primary me-2">Masuk</a>
+                        <a href="/register" class="btn btn-primary">Daftar</a>
+                    @endauth
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-5">
+        @yield('content')
+        
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer gradient-dark text-white py-5" id="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h5 class="fw-bold mb-3">KelasPrivat.id</h5>
+                    <p class="footer-link">Platform les privat online terbaik di Indonesia dengan pengajar berpengalaman dan metode pembelajaran interaktif.</p>
+                    <div class="mt-4 d-flex gap-2">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <h6 class="fw-bold mb-3">Program</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="/les-privat/sd" class="footer-link">Les Privat SD</a></li>
+                        <li><a href="/les-privat/smp" class="footer-link">Les Privat SMP</a></li>
+                        <li><a href="/les-privat/sma" class="footer-link">Les Privat SMA</a></li>
+                        <li><a href="/bank-soal" class="footer-link">Bank Soal</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h6 class="fw-bold mb-3">Perusahaan</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="/about" class="footer-link">Tentang Kami</a></li>
+                        <li><a href="/careers" class="footer-link">Karir</a></li>
+                        <li><a href="/contact" class="footer-link">Kontak</a></li>
+                        <li><a href="/blog" class="footer-link">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h6 class="fw-bold mb-3">Kontak Kami</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2 footer-link"><i class="fas fa-map-marker-alt me-2 text-primary"></i>Jl. Pendidikan No. 123, Jakarta</li>
+                        <li class="mb-2"><a href="https://wa.me/6281211006445" class="footer-link"><i class="fas fa-phone me-2 text-primary"></i>+62 812 1100 6445</a></li>
+                        <li class="mb-2 footer-link"><i class="fas fa-envelope me-2 text-primary"></i>info@kelasprivat.id</li>
                     </ul>
                 </div>
             </div>
-        </nav> --}}
-        <div class="row">
-            @include('partial.side-bar')
-            @yield('content-top')
-            <main class="col-11 mx-auto col-lg-10 px-0 h-100" style="background-color: {{ $background }}">
-                {{-- <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2  border-bottom">
-
-                 </div> --}}
-                @yield('content')
-
-            </main>
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0 footer-link">&copy; 2024 KelasPrivat.id. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="/privacy" class="footer-link me-3">Kebijakan Privasi</a>
+                    <a href="/terms" class="footer-link">Syarat & Ketentuan</a>
+                </div>
+            </div>
         </div>
-        
-    <a href="https://api.whatsapp.com/send?phone=6281211006445&text=Halo%20nama%20saya%20......%20saya,%20mau%20tanya%20terkait">
-        <img src="{{ URL::To("/assets/img/WhatsApp_icon_new.png") }}" style="position: fixed; bottom: 2%; right:2%; width:230px;" alt="">
-    </a>
-    </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    {{-- <script src="//code.jquery.com/jquery-1.10.2.js"></script>--}}
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script> 
-  
-    {{-- CKEditor JS --}}
-    <script src="{{ asset('assets/ckeditor/ckeditor.js') }}"></script>
+    <!-- Custom Scripts -->
+    @stack('scripts')
     
-    @stack('script')
-    {{-- @push('script') --}}
-        <script>
-          $('#button-block').click(function() {
-            alert( "Silahkan Login untuk Melanjutkan" );
-          });
-          $('#button-not-nomer').click(function() {
-            alert( "Anda belum melengkapi data profile, silahkan ke manu profile untuk melengkapi" );
-          });
-          $('#button-not-siswa').click(function() {
-            alert( "Anda belum terdaftar sebagai siswa kelas privat, silahkan menghubungi kami untuk pendaftaran di 0812-1100-6445" );
-          });
-          $(window).bind('DOMContentLoaded load resize', function() {
-          //   var pembagi =6500/$(window).innerWidth();
-          // var margin = $(window).innerWidth()/pembagi;
-          // // var pengurang =$(window).innerWidth()/1.3;
-          // // var margin = $(window).innerWidth()-pengurang;
-          // $('.nav-button').css('margin-left', margin+'px');
-          if ($(window).innerWidth() <= 777) {
-    
-            $('.s24-500').addClass('s16-500');
-            $('.s36-500').addClass('s17-500');
-            $('.s16-400').addClass('s14-400');
-            $('.s12-400').addClass('s8-400');
-            $('.s12-500').addClass('s8-500');
-            $('.s24-500').removeClass('s24-500');
-            $('.s36-500').removeClass('s36-500');
-            $('.s16-400').removeClass('s16-400');
-            $('.s12-400').removeClass('s12-400');
-            $('.s12-500').removeClass('s12-500');
-            $('.foto').css('max-width', '100%');
-            $('.foto').css('height', 'auto');
-            $('.foto').css('max-height', '');
-            $('.cover-img').css('height', $(window).innerWidth()/4);
-            $('.mobile').css('display', 'block');
-          } else {
-            $('.s16-500').addClass('s24-500');
-            $('.s17-500').addClass('s36-500');
-            $('.s14-400').addClass('s16-400');
-            $('.s8-400').addClass('s12-400');
-            $('.s8-500').addClass('s12-500');
-            $('.s16-500').removeClass('s16-500');
-            $('.s17-500').removeClass('s17-500');
-            $('.s14-400').removeClass('s14-400');
-            $('.s8-400').removeClass('s8-400');
-            $('.s8-500').removeClass('s8-500');
-            $('.cover-img').css('height', '200px');
-            $('.foto').css('max-width', '150px');
-            $('.foto').css('height', 'auto');
-            $('.foto').css('max-height', '150px');
-            $('.mobile').css('display', 'none');
-    
-          }
-    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true
         });
-        </script>
         
-<script>
-    
-    var title = '<?php echo $title; ?>';
-    
-    if (title == 'Kelas News') {
-        $(".nav-bar").removeClass('active');
-        $(".nav-news").addClass('active');
-    }
-    if (title == 'Tanya Kelas') {
-        $(".nav-bar").removeClass('active');
-        $(".nav-tanya-kelas").addClass('active');
-    }
-    if (title == 'Profile SiLas') {
-        $(".nav-bar").removeClass('active');
-        $(".nav-Profile").addClass('active');
-    }
-    if (title == 'Reward') {
-        $(".nav-bar").removeClass('active');
-        $(".nav-Reward").addClass('active');
-    }
-    if (title == 'Latihan Soal SiLas') {
-        $(".nav-bar").removeClass('active');
-        $(".nav-Practice").addClass('active');
-    }
-    if (title == 'Award') {
-        $(".nav-bar").removeClass('active');
-        $(".nav-Award").addClass('active');
-    }
-    if (title == 'About Kelas Privat') {
-        $(".nav-bar").removeClass('active');
-        $(".nav-About").addClass('active');
-    }
-    if (title == 'List Soal') {
-        $(".nav-bar").removeClass('active');
-        $(".nav-buatSoal").addClass('active');
-    }
-    if (title == 'Latihan Soal SiLas') {
-        $(".nav-bar").removeClass('active');
-        $(".nav-Practice").addClass('active');
-    }
-    if (title == 'Materi SiLas') {
-        $(".nav-bar").removeClass('active');
-        $(".nav-materi").addClass('active');
-    }
-    if (title == 'Create Materi') {
-        $(".nav-bar").removeClass('active');
-        $(".nav-create-materi").addClass('active');
-    }
-    
-    // $('.nav-materi').click(function() {
-    //     alert( "Coming soon" );
-    //   });
-    // $(document).ready(function(){
-    //     $('img').error(function(){
-    //         $(this).attr('src', 'https://ayo.co.id/backend/assets/images/avatar-default.jpg');
-    //     });
-    // });
-</script>
-    {{-- @endpush --}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
 </body>
 </html>

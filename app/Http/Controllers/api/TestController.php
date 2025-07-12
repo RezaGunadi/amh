@@ -250,7 +250,7 @@ class TestController extends Controller
             $answerEachQuestion->answer_id = $answer->id;
             $answerEachQuestion->kunci = $value['key'];
             $answerEachQuestion->jawaban = $value['answer'];
-            $answerEachQuestion->is_true = $value['key'] == $value['answer'] ? 1 : 0;
+            $answerEachQuestion->is_true = strtolower($value['key']) == strtolower($value['answer']) ? 1 : 0;
             $answerEachQuestion->save();
         }
 

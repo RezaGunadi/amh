@@ -1,124 +1,153 @@
 @extends('layouts.app')
 
-
 @push('meta')
-    
-    
-<meta name="title" content="Kelas Privat - Materi Pembelajran Online">
-<meta name="description" content="Materi Pembelajran gratis dan lengkap">
-<meta name="keywords" content="Kelas Privat, Materi pembelajaran gratis, Materi pembelajaran,">
-<meta property="og:title" content="Kelas Privat - Materi Pembelajran Online">
-<meta property="og:description" content="Materi Pembelajran gratis dan lengkap">
-<meta property="og:site_name" content="Kelas Privat: Materi Pembelajran Online">
-
-<meta property="og:image" content="https://kelas-privat.com/assets/img/logo.png">
-<meta property="og:image:width" content="600">
-<meta property="og:image:height" content="600">
+<meta name="title" content="Kelas Privat - Tambah Materi Baru">
+<meta name="description" content="Tambah materi pembelajaran baru di Kelas Privat. Berbagi pengetahuan dan membantu sesama dalam belajar.">
+<meta name="keywords" content="Kelas Privat, tambah materi, materi pembelajaran, berbagi pengetahuan, belajar online">
+<meta property="og:title" content="Kelas Privat - Tambah Materi Baru">
+<meta property="og:description" content="Tambah materi pembelajaran baru di Kelas Privat. Berbagi pengetahuan dan membantu sesama dalam belajar.">
+<meta property="og:site_name" content="Kelas Privat: Platform Pembelajaran Online">
 <meta property="og:type" content="website">
-<meta property="og:url" content="{{ url()->current(); }}">
+<meta property="og:url" content="{{ url()->current() }}">
 @endpush
-
-
 
 @section('content')
-    
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white py-3">
+                    <h1 class="h4 mb-0">Tambah Materi Baru</h1>
+                </div>
+                <div class="card-body p-4">
+                    <form action="{{ route('materi.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-4">
+                            <label for="title" class="form-label">Judul Materi</label>
+                            <input type="text" 
+                                   class="form-control @error('title') is-invalid @enderror" 
+                                   id="title" 
+                                   name="title" 
+                                   placeholder="Masukkan judul materi"
+                                   value="{{ old('title') }}"
+                                   required>
+                            @error('title')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
 
-<div class="col-11 mx-auto  bg-light my-md-3 my-1 rounded p-md-4 p-2">
+                        <div class="mb-4">
+                            <label for="category" class="form-label">Kategori</label>
+                            <select class="form-select @error('category') is-invalid @enderror" 
+                                    id="category" 
+                                    name="category"
+                                    required>
+                                <option value="">Pilih kategori</option>
+                                <option value="SD" {{ old('category') == 'SD' ? 'selected' : '' }}>SD</option>
+                                <option value="SMP" {{ old('category') == 'SMP' ? 'selected' : '' }}>SMP</option>
+                                <option value="SMA" {{ old('category') == 'SMA' ? 'selected' : '' }}>SMA</option>
+                            </select>
+                            @error('category')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
 
-  
-  <form method="POST"  id="list-search"  enctype="multipart/form-data" action="{{ route('store_materi') }}">
-    @csrf
-    <div class="mb-3 col-12">
-      <div class="col" style="font-weight: 500">
-        Title
-      </div> 
-      <input class="w-100 mb-2" style="height: 30px" type="text" name="title">
-      {{-- <input type="text" name="mapel"> --}}
-      <select style="height: 30px"  name="mapel" id="">
-        <option value="Matematika">Matematika</option>
-        <option value="Fisika">Fisika</option>
-        <option value="Bahasa Inggris">Bahasa Inggris</option>
-        {{-- <option value="KULIAH">KULIAH</option> --}}
-      </select>
-      <select style="height: 30px"  name="grade" id="">
-        <option value="SD">SD</option>
-        <option value="SMP">SMP</option>
-        <option value="SMA">SMA</option>
-        {{-- <option value="KULIAH">KULIAH</option> --}}
-      </select>
+                        <div class="mb-4">
+                            <label for="subject" class="form-label">Mata Pelajaran</label>
+                            <select class="form-select @error('subject') is-invalid @enderror" 
+                                    id="subject" 
+                                    name="subject"
+                                    required>
+                                <option value="">Pilih mata pelajaran</option>
+                                <option value="Matematika" {{ old('subject') == 'Matematika' ? 'selected' : '' }}>Matematika</option>
+                                <option value="Bahasa Indonesia" {{ old('subject') == 'Bahasa Indonesia' ? 'selected' : '' }}>Bahasa Indonesia</option>
+                                <option value="Bahasa Inggris" {{ old('subject') == 'Bahasa Inggris' ? 'selected' : '' }}>Bahasa Inggris</option>
+                                <option value="IPA" {{ old('subject') == 'IPA' ? 'selected' : '' }}>IPA</option>
+                                <option value="IPS" {{ old('subject') == 'IPS' ? 'selected' : '' }}>IPS</option>
+                            </select>
+                            @error('subject')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="content" class="form-label">Isi Materi</label>
+                            <textarea class="form-control @error('content') is-invalid @enderror" 
+                                      id="content" 
+                                      name="content" 
+                                      rows="15" 
+                                      placeholder="Tulis isi materi Anda di sini..."
+                                      required>{{ old('content') }}</textarea>
+                            @error('content')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="image" class="form-label">Gambar Materi (Opsional)</label>
+                            <input type="file" 
+                                   class="form-control @error('image') is-invalid @enderror" 
+                                   id="image" 
+                                   name="image"
+                                   accept="image/*">
+                            <div class="form-text">Format yang didukung: JPG, PNG, GIF. Maksimal 2MB.</div>
+                            @error('image')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="{{ route('materi.index') }}" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Kembali
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>Simpan Materi
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    
-    
-    
-    <div class="form-group">
-      <label for="blog_post" style="font-weight: 500">Content</label>
-      {{-- <textarea name="post" id="blog_post" class="form-control"></textarea> --}}
-      <textarea class="form-control" id="summary-ckeditor" name="summary-ckeditor" required></textarea>
-      
-    </div>
-    <div class="form-group mt-2">
-      <label for="blog_post" style="font-weight: 500">Resume</label>
-      {{-- <textarea name="post" id="blog_post" class="form-control"></textarea> --}}
-      <textarea name="resume" id="" cols="" class="w-100 rounded" rows="10" required></textarea>
-      
-    </div>
-    <div style="font-weight: 500">
-      Tags
-      <input class="w-100 mb-2" style="height: 30px" type="text" name="tags">
-    </div>
-    {{-- <input type="file" name="image_soal"> --}}
-    {{-- <input type="hidden" name="paket_id" value="{{ $paket }}"> --}}
-    <div class="w-100 mb-3">
-        
-      <div class="col-auto sumbit-button-container pe-0 mt-3 align-self-end">
-        <button type="submit"  class="btn btn-primary rounded bayangan w-100 submit-button">SUBMIT</button>
-      </div>
-    </div>
-  </form>
-  
-  
 </div>
-@endsection
 
-@push('script')
-
-<script>
-  $(document).ready(function(){
-
-      CKEDITOR.replace( 'summary-ckeditor', {
-      filebrowserUploadUrl: "{{route('upload_image_materi', ['_token' => csrf_token() ])}}",
-      filebrowserUploadMethod: 'form'
-  });
-    //  CKEDITOR.tools.callFunction(1, 'https://kelas-privat.com/assets/img/logo.png', 'Image uploaded successfully');
-  });
-</script>
-    <script>
-        
-
-        $(window).bind('DOMContentLoaded load resize', function() {
-          
-          if ($(window).innerWidth() <= 777) {
-    
-            $('.tahun-container').addClass('pe-0');
-            $('.mapel-container').addClass('px-0');
-            $('.mapel-container').addClass('mt-3');
-            $('.mapel-container').addClass('w-100');
-            $('.sumbit-button-container').addClass('w-100');
-            $('.sumbit-button-container').addClass('ps-0');
-            $('.submit-button').addClass('w-100');
-            $('.submit-button').addClass('mt-3');
-          } else {
-            $('.tahun-container').removeClass('pe-0');
-            $('.mapel-container').removeClass('mt-3');
-            $('.mapel-container').removeClass('px-0');
-            $('.mapel-container').removeClass('w-100');
-            $('.sumbit-button-container').removeClass('w-100');
-            $('.sumbit-button-container').removeClass('ps-0');
-            $('.submit-button').removeClass('w-100');
-            $('.submit-button').removeClass('mt-3');
-    
-          }
-    
-        });
-    </script>
+@push('styles')
+<style>
+.form-control:focus,
+.form-select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+</style>
 @endpush
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Preview image before upload
+    const imageInput = document.getElementById('image');
+    const imagePreview = document.createElement('img');
+    imagePreview.className = 'img-fluid mt-2 rounded';
+    imagePreview.style.maxHeight = '200px';
+    imagePreview.style.display = 'none';
+    
+    imageInput.parentNode.appendChild(imagePreview);
+    
+    imageInput.addEventListener('change', function() {
+        if (this.files && this.files[0]) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result;
+                imagePreview.style.display = 'block';
+            }
+            
+            reader.readAsDataURL(this.files[0]);
+        } else {
+            imagePreview.style.display = 'none';
+        }
+    });
+});
+</script>
+@endpush
+@endsection

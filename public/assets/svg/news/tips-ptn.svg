@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800px" height="600px" viewBox="0 0 800 600" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <!-- Background -->
+        <rect fill="#F3F4F6" x="0" y="0" width="800" height="600"/>
+        
+        <!-- University Building -->
+        <path d="M400,100 L600,200 L600,500 L200,500 L200,200 Z" fill="#1E40AF"/>
+        <path d="M400,100 L200,200 L200,500 L400,400 Z" fill="#2563EB"/>
+        <path d="M400,100 L600,200 L600,500 L400,400 Z" fill="#3B82F6"/>
+        
+        <!-- Windows -->
+        <rect x="250" y="250" width="60" height="60" fill="#FFFFFF"/>
+        <rect x="350" y="250" width="60" height="60" fill="#FFFFFF"/>
+        <rect x="450" y="250" width="60" height="60" fill="#FFFFFF"/>
+        <rect x="250" y="350" width="60" height="60" fill="#FFFFFF"/>
+        <rect x="350" y="350" width="60" height="60" fill="#FFFFFF"/>
+        <rect x="450" y="350" width="60" height="60" fill="#FFFFFF"/>
+        
+        <!-- Door -->
+        <rect x="350" y="400" width="60" height="100" fill="#FFFFFF"/>
+        
+        <!-- Graduation Cap -->
+        <path d="M300,150 L500,150 L400,50 Z" fill="#1E40AF"/>
+        <path d="M400,50 L400,100" stroke="#1E40AF" stroke-width="4"/>
+        
+        <!-- Stars -->
+        <path d="M150,100 L155,115 L170,115 L160,125 L165,140 L150,130 L135,140 L140,125 L130,115 L145,115 Z" fill="#FCD34D"/>
+        <path d="M650,100 L655,115 L670,115 L660,125 L665,140 L650,130 L635,140 L640,125 L630,115 L645,115 Z" fill="#FCD34D"/>
+    </g>
+</svg> 

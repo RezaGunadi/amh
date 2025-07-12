@@ -1,84 +1,118 @@
 @extends('layouts.app')
 
-
 @push('meta')
-    
-    
-<meta name="title" content="Kelas Privat - Tanya Jawab">
-<meta name="description" content="Tanya Jawab soal dan pr bersama teman, guru, dosen, admin dan mitra Kelas Privat">
-<meta name="keywords" content="Kelas Privat, tanya jawab soal, tanya jawab pr, tanya guru, tanya teman, tanya admin, tanya kelas privat">
-<meta property="og:title" content="Kelas Privat - Tanya Jawab">
-<meta property="og:description" content="Tanya Jawab soal dan pr bersama teman, guru, dosen, admin dan mitra Kelas Privat">
-<meta property="og:site_name" content="Kelas Privat: Tanya Jawab">
-
-<meta property="og:image" content="https://kelas-privat.com/assets/img/logo.png">
-<meta property="og:image:width" content="600">
-<meta property="og:image:height" content="600">
+<meta name="title" content="Kelas Privat - Buat Diskusi Baru">
+<meta name="description" content="Buat diskusi baru di forum Kelas Privat. Berbagi pertanyaan, pengalaman, dan pengetahuan dengan komunitas belajar online.">
+<meta name="keywords" content="Kelas Privat, forum diskusi, diskusi online, tanya jawab online, komunitas belajar">
+<meta property="og:title" content="Kelas Privat - Buat Diskusi Baru">
+<meta property="og:description" content="Buat diskusi baru di forum Kelas Privat. Berbagi pertanyaan, pengalaman, dan pengetahuan dengan komunitas belajar online.">
+<meta property="og:site_name" content="Kelas Privat: Forum Diskusi Online">
 <meta property="og:type" content="website">
-<meta property="og:url" content="{{ url()->current(); }}">
+<meta property="og:url" content="{{ url()->current() }}">
 @endpush
 
-
-
 @section('content')
-    
-    <div class="col-12 mx-auto bayangan p-2 p-md-3 mt-md-5 mt-3" style="background-color: white; border-radius:12px;">
-        <form method="POST" enctype="multipart/form-data" id="list-search" action="{{ route($type.'_store') }}">
-            @csrf
-            <input type="hidden" name="id" value="{{ Auth::user()->id }}">
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white py-3">
+                    <h1 class="h4 mb-0">Buat Diskusi Baru</h1>
+                </div>
+                <div class="card-body p-4">
+                    <form action="{{ route('chat.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-4">
+                            <label for="title" class="form-label">Judul Diskusi</label>
+                            <input type="text" 
+                                   class="form-control @error('title') is-invalid @enderror" 
+                                   id="title" 
+                                   name="title" 
+                                   placeholder="Masukkan judul diskusi"
+                                   value="{{ old('title') }}"
+                                   required>
+                            @error('title')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
 
-        @if ($type == 'chat')
-            <div class="row mt-3">
-                {{-- <div class="col-md-2">
-                    Title :    
-                </div> --}}
-                <div class="col">
-                    
-                    <input type="text" placeholder="Title" class="w-100" class="rounded" name="title">
-                </div>    
+                        <div class="mb-4">
+                            <label for="chat" class="form-label">Isi Diskusi</label>
+                            <textarea class="form-control @error('chat') is-invalid @enderror" 
+                                      id="chat" 
+                                      name="chat" 
+                                      rows="10" 
+                                      placeholder="Tulis isi diskusi Anda di sini..."
+                                      required>{{ old('chat') }}</textarea>
+                            @error('chat')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="picture" class="form-label">Gambar (Opsional)</label>
+                            <input type="file" 
+                                   class="form-control @error('picture') is-invalid @enderror" 
+                                   id="picture" 
+                                   name="picture"
+                                   accept="image/*">
+                            <div class="form-text">Format yang didukung: JPG, PNG, GIF. Maksimal 2MB.</div>
+                            @error('picture')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="{{ route('chat.index') }}" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Kembali
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane me-2"></i>Kirim Diskusi
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        @endif
-        <div class="row mt-3">
-            {{-- <div class="col-md-2">
-                Chat :    
-            </div> --}}
-            <div class="col">
-                
-                <textarea type="text-are"  rows="14" placeholder="Content" class="w-100" class="rounded" name="chat">{!! nl2br(old('body')) !!}</textarea>
-            </div>    
         </div>
-        <div class="row mt-3">
-            {{-- <div class="col-md-2">
-                Add a Picture :    
-            </div> --}}
-            <div class="col">
-                
-                <input type="file" placeholder="File" class="w-100" class="rounded" name="picture">
-            </div>    
-        </div>
-        <button type="submit" class="mt-2 rounded btn btn-primary">Submit</button>
-        </form>
     </div>
-@endsection
-@push('css')
-<style>
-  input[type=file]::file-selector-button {
-  border: 2px solid #929292;
-  /* border-radius: 12px; */
-  padding: .2em .4em;
-  border-radius: .4em;
-  background-color: #8f8f8f;
-  color :white;
-    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important; 
-  transition: 1s;
-}
+</div>
 
-input[type=file]::file-selector-button:hover {
-  background-color: #81ecec;
-  border-radius: 12px;
-  border: 2px solid #00cec9;
-  box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
-  color : black;
+@push('styles')
+<style>
+.form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 }
 </style>
 @endpush
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Preview image before upload
+    const pictureInput = document.getElementById('picture');
+    const picturePreview = document.createElement('img');
+    picturePreview.className = 'img-fluid mt-2 rounded';
+    picturePreview.style.maxHeight = '200px';
+    picturePreview.style.display = 'none';
+    
+    pictureInput.parentNode.appendChild(picturePreview);
+    
+    pictureInput.addEventListener('change', function() {
+        if (this.files && this.files[0]) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                picturePreview.src = e.target.result;
+                picturePreview.style.display = 'block';
+            }
+            
+            reader.readAsDataURL(this.files[0]);
+        } else {
+            picturePreview.style.display = 'none';
+        }
+    });
+});
+</script>
+@endpush
+@endsection

@@ -18,43 +18,76 @@ class MateriController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $req)
+    public function index(Request $request)
     {
-        //
-        $materi = Materi::where('is_deleted', 0);
+        $query = Materi::where('is_deleted', 0);
         $role = 'null';
+        
+        // Handle authentication and role-based access
         if (empty(Auth::user())) {
-            # code...
-            $materi = $materi->where('user_id', 1);
+            $query = $query->where('user_id', 1);
         } else {
-            # code...
             $role = Auth::user()->role;
-            if (Auth::user()->role == 'ADMIN') {
-                # code...
-                
-            } else if (Auth::user()->role == 'SISWA') {
-                # code...
-                $materi = $materi->where('is_public', 1);
+            if ($role == 'ADMIN') {
+                // Admin can see all materials
+            } else if ($role == 'SISWA') {
+                $query = $query->where('is_public', 1);
             } else {
-                $materi = $materi->where(function ($query) {
-                    $query->where('user_id', Auth::user()->role)->orWhere('user_id', 1);
-                    # code...
+                $query = $query->where(function ($q) {
+                    $q->where('user_id', Auth::user()->role)
+                      ->orWhere('user_id', 1);
                 });
             }
         }
-        if (isset($req->search)) {
-            # code...
-            $materi = $materi->where(function ($query) use ($req) {
-                $query->orWhere('title', 'like',"%".$req->search."%")->orWhere('content', 'like',"%".$req->search."%")->orWhere('mapel', 'like',"%".$req->search."%")->orWhere('grade', 'like',"%".$req->search."%");
-                # code...
+
+        // Handle filters
+        $level = $request->get('level');
+        $subject = $request->get('subject');
+        $search = $request->get('search');
+
+        if ($level) {
+            $query = $query->where('grade', $level);
+        }
+
+        if ($subject) {
+            $query = $query->where('mapel', $subject);
+        }
+
+        if ($search) {
+            $query = $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('content', 'like', "%{$search}%")
+                  ->orWhere('mapel', 'like', "%{$search}%")
+                  ->orWhere('grade', 'like', "%{$search}%");
             });
         }
-        $materi = $materi->orderBy('id','desc')->get();
-        return view('materi.index',[
-            'title' => 'Materi SiLas',
-            'tags' => 'Materi pembelajaran, materi pelajaran, materi sd, materi smp, materi msa, materi matematika, materi fisika,',
+
+        // Get all materials
+        $materi = $query->orderBy('id', 'desc')->get();
+
+        // Get unique levels and subjects for filter dropdowns
+        $levels = Materi::where('is_deleted', 0)
+                       ->distinct()
+                       ->pluck('grade')
+                       ->filter()
+                       ->values();
+
+        $subjects = Materi::where('is_deleted', 0)
+                         ->distinct()
+                         ->pluck('mapel')
+                         ->filter()
+                         ->values();
+
+        return view('materi.index', [
+            'title' => 'Materi Pembelajaran',
+            'tags' => 'Materi pembelajaran, materi pelajaran, materi sd, materi smp, materi sma, materi matematika, materi fisika',
             'materi' => $materi,
             'role' => $role,
+            'levels' => $levels,
+            'subjects' => $subjects,
+            'selectedLevel' => $level,
+            'selectedSubject' => $subject,
+            'search' => $search
         ]);
     }
 

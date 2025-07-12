@@ -9,40 +9,64 @@ use App\Models\ScoreJawaban;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\DB;
 
 class SoalController extends Controller
 {
     //
     
-    public function index()
+    public function index(Request $request)
     {
-
         $paket = PaketSoal::where('is_deleted', 0);
         $role = 'null';
+        
+        // Filter by jenjang if provided
+        if ($request->has('jenjang')) {
+            $paket = $paket->where('jenjang', $request->jenjang);
+        }
+        
         if (empty(Auth::user())) {
-            # code...
             $paket = $paket->where('user_id', 1);
         } else {
-            # code...
             $role = Auth::user()->role;
             if (Auth::user()->role == 'ADMIN') {
-                # code...
-                
+                // Admin can see all questions
             } else if (Auth::user()->role == 'SISWA') {
-                # code...
                 $paket = $paket->where('is_public', 1);
             } else {
                 $paket = $paket->where(function ($query) {
-                    $query->where('user_id', Auth::user()->role)->orWhere('user_id', 1);
-                    # code...
+                    $query->where('user_id', Auth::user()->role)
+                          ->orWhere('user_id', 1);
                 });
             }
         }
-        $paket = $paket->orderBy('id','desc')->get();
-        return view('soal.index',[
+        
+        // Use paginate instead of get
+        $paket = $paket->orderBy('id', 'desc')->paginate(12);
+        
+        // Calculate total soal for each paket
+        $totalSoal = [];
+        foreach ($paket as $p) {
+            $totalSoal[$p->id] = (string) soal::where('paket_id', $p->id)
+                                    ->where('is_deleted', 0)
+                                    ->count();
+        }
+        
+        // Get list of unique subjects for filter
+        $mapelList = PaketSoal::where('is_deleted', 0)
+                             ->distinct()
+                             ->pluck('mapel')
+                             ->filter()
+                             ->values()
+                             ->toArray();
+        
+        return view('soal.index', [
             'title' => 'Latihan Soal SiLas',
             'paket' => $paket,
             'role' => $role,
+            'jenjang' => $request->jenjang ?? null,
+            'totalSoal' => $totalSoal,
+            'mapelList' => $mapelList
         ]);
     }
 
@@ -61,17 +85,53 @@ class SoalController extends Controller
     }
     public function show(Request $req)
     {
-        // $req = $req->toArray();
-        // dd($req);
-        $soal = soal::where('paket_id', $req->paket)->where('is_deleted', 0)
-        // ->orderBy('id','desc')
-        ->get();
-        $paket =  PaketSoal::where('id', $req->paket)->first();
-        return view('soal.show',[
+        $soal = soal::where('paket_id', $req->paket)
+                    ->where('is_deleted', 0)
+                    ->get();
+                    
+        $paket = PaketSoal::where('id', $req->paket)
+                          ->where('is_deleted', 0)
+                          ->first();
+                          
+        if (!$paket) {
+            return redirect()->route('soal.index')
+                            ->with('error', 'Paket soal tidak ditemukan');
+        }
+
+        // Get current question index from request or default to 0
+        $currentIndex = $req->index ?? 0;
+        
+        // Get current question
+        $currentSoal = $soal->get($currentIndex);
+        
+        if (!$currentSoal) {
+            return redirect()->route('soal.index')
+                            ->with('error', 'Soal tidak ditemukan');
+        }
+
+        // Initialize arrays for answers and flags
+        $answers = array_fill(0, $soal->count(), null);
+        $flagged = array_fill(0, $soal->count(), false);
+        
+        // Get temporary answers from session if they exist
+        $sessionKey = 'temp_answers_' . $paket->id;
+        $sessionFlaggedKey = 'temp_flagged_' . $paket->id;
+        
+        if (session()->has($sessionKey)) {
+            $answers = session($sessionKey);
+        }
+        if (session()->has($sessionFlaggedKey)) {
+            $flagged = session($sessionFlaggedKey);
+        }
+        
+        return view('soal.show', [
             'title' => 'Latihan Soal SiLas',
-            'soal' => $soal,
-            'paket' => $req->paket,
-            'data_paket' => $paket,
+            'soal' => $currentSoal,
+            'allSoal' => $soal,
+            'paket' => $paket,
+            'currentIndex' => $currentIndex,
+            'answers' => $answers,
+            'flagged' => $flagged
         ]);
     }
     public function list()
@@ -231,59 +291,221 @@ class SoalController extends Controller
         //     'title' => 'Buat Soal'
         // ]);
     }
-    public function showHasil(Request $req)
+    public function showHasil(Request $request, $id, $index)
     {
-        // $req = $req->toArray();
-        // dd($req);
-        $count = count($req->all());
-        $count =$count-2;
-        $count =$count/3;
-        $count =$count;
-        // dd($count);
-        $a=0;
-        $kunci = '';
-        $answer = '';
-
-        for ($i=0; $i < $count; $i++) { 
-            $jawaban = 'jawaban_'.$i;
-            $soal = 'kunci_'.$i;
-            $soal_id = 'soal_'.$i;
-            $kunci = $kunci .'No.'.$i. ' '.$req->$soal  .','; 
-            $answer = $answer .'No.'.$i. ' '.$req->$jawaban .','; 
-            $final_jawaban = $req->$jawaban;
-            // dd($final_jawaban);
-            $jawaban = new jawaban;
-            $jawaban->user_id = Auth::user()->id; 
-            $jawaban->id_soal = $req->$soal_id; 
-            $jawaban->id_paket = $req->paket; 
-            $jawaban->kunci = $req->$soal; 
-            $jawaban->jawaban = $final_jawaban; 
-            // dd($req->$soal);
-            if ($req->$soal == $final_jawaban) {
-                $jawaban->is_true = 1; 
-                $a=$a+1;
-            } else {
-                $jawaban->is_true = 0; 
-                
+        try {
+            // Validate request
+            if (!Auth::check()) {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Anda harus login terlebih dahulu',
+                    'redirect' => route('login')
+                ], 401);
             }
-            $jawaban->save(); 
-        }
-        // dd($count);
-        $hasil = $a*100/$count;
-        $hasil = number_format($hasil, 2, '.', '');
-        $cek_score=  ScoreJawaban::where('user_id', Auth::user()->id)->where('paket_id', $req->paket)->latest('id')->first();
-        $repeat = 0;
-        if (!empty($cek_score)) {
-            $repeat = $cek_score->repeat+1;
-        } 
-        
-        $score= new ScoreJawaban;
-        $score->paket_id = $req->paket;
-        $score->user_id = Auth::user()->id;
-        $score->repeat = $repeat;
-        $score->score = $hasil;
-        $score->save();
 
-        return redirect()->route('practice')->with('info', "Score anda adalah $hasil");
+            $paket = PaketSoal::where('id', $id)
+                             ->where('is_deleted', 0)
+                             ->first();
+                             
+            if (!$paket) {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Paket soal tidak ditemukan'
+                ], 404);
+            }
+                             
+            $soal = soal::where('paket_id', $id)
+                        ->where('is_deleted', 0)
+                        ->orderBy('id', 'asc')
+                        ->get();
+                        
+            if (!$soal->count()) {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Tidak ada soal yang tersedia'
+                ], 404);
+            }
+
+            // Get answers from request
+            $answers = $request->input('answers', []);
+            $flagged = $request->input('flagged', []);
+            
+            // Start database transaction
+            DB::beginTransaction();
+            
+            try {
+                // Save answers to database
+                foreach ($answers as $soalIndex => $answer) {
+                    if ($answer) {
+                        // Validate answer format
+                        if (!in_array(strtoupper($answer), ['A', 'B', 'C', 'D', 'E'])) {
+                            throw new \Exception('Format jawaban tidak valid');
+                        }
+                        
+                        $currentSoal = $soal->get($soalIndex);
+                        if ($currentSoal) {
+                            // Create new answer
+                            $newAnswer = new jawaban();
+                            $newAnswer->user_id = Auth::id();
+                            $newAnswer->id_soal = $currentSoal->id;
+                            $newAnswer->id_paket = $paket->id;
+                            $newAnswer->kunci = $currentSoal->kunci;
+                            $newAnswer->jawaban = $answer;
+                            $newAnswer->is_true = strtolower($answer) === strtolower($currentSoal->kunci) ? 1 : 0;
+                            $newAnswer->save();
+                        }
+                    }
+                }
+
+                // Calculate score
+                $totalQuestions = $soal->count();
+                $correctAnswers = jawaban::where('user_id', Auth::id())
+                                       ->where('id_paket', $paket->id)
+                                       ->where('is_true', 1)
+                                       ->count();
+                                       
+                $score = ($correctAnswers / $totalQuestions) * 100;
+                
+                // Get latest repeat count with lock to prevent race condition
+                $latestScore = ScoreJawaban::where('user_id', Auth::id())
+                                         ->where('paket_id', $paket->id)
+                                         ->lockForUpdate()
+                                         ->latest('id')
+                                         ->first();
+                                         
+                $repeat = $latestScore ? $latestScore->repeat + 1 : 1;
+                
+                // Save score
+                $scoreJawaban = new ScoreJawaban();
+                $scoreJawaban->paket_id = $paket->id;
+                $scoreJawaban->user_id = Auth::id();
+                $scoreJawaban->score = $score;
+                $scoreJawaban->repeat = $repeat;
+                $scoreJawaban->save();
+
+                // Clear temporary answers from session
+                session()->forget('temp_answers_' . $paket->id);
+                session()->forget('temp_flagged_' . $paket->id);
+
+                // Commit transaction
+                DB::commit();
+
+                return response()->json([
+                    'error' => false,
+                    'message' => 'Jawaban berhasil disimpan',
+                    'redirect' => route('soal.result', ['id' => $paket->id])
+                ]);
+                
+            } catch (\Exception $e) {
+                // Rollback transaction on error
+                DB::rollBack();
+                throw $e;
+            }
+            
+        } catch (\Exception $e) {
+            \Log::error('Error in showHasil: ' . $e->getMessage());
+            \Log::error($e->getTraceAsString());
+            
+            return response()->json([
+                'error' => true,
+                'message' => 'Terjadi kesalahan saat menyimpan jawaban: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function showResult($id)
+    {
+        try {
+            if (!Auth::check()) {
+                return redirect()->route('login');
+            }
+
+            $paket = PaketSoal::where('id', $id)
+                             ->where('is_deleted', 0)
+                             ->first();
+                             
+            if (!$paket) {
+                return redirect()->route('soal.index')
+                                ->with('error', 'Paket soal tidak ditemukan');
+            }
+
+            // Get latest score
+            $score = ScoreJawaban::where('user_id', Auth::id())
+                                ->where('paket_id', $id)
+                                ->latest('id')
+                                ->first();
+                                
+            if (!$score) {
+                return redirect()->route('soal.index')
+                                ->with('error', 'Hasil test tidak ditemukan');
+            }
+
+            // Get all answers
+            $answers = jawaban::where('user_id', Auth::id())
+                            ->where('id_paket', $id)
+                            ->get();
+
+            // Get all questions
+            $questions = soal::where('paket_id', $id)
+                           ->where('is_deleted', 0)
+                           ->orderBy('id', 'asc')
+                           ->get();
+
+            return view('soal.result', [
+                'title' => 'Hasil Test',
+                'paket' => $paket,
+                'score' => $score,
+                'answers' => $answers,
+                'questions' => $questions
+            ]);
+            
+        } catch (\Exception $e) {
+            \Log::error('Error in showResult: ' . $e->getMessage());
+            \Log::error($e->getTraceAsString());
+            
+            return redirect()->route('soal.index')
+                            ->with('error', 'Terjadi kesalahan saat menampilkan hasil test');
+        }
+    }
+
+    public function saveTempAnswers(Request $request, $id)
+    {
+        try {
+            if (!Auth::check()) {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Anda harus login terlebih dahulu'
+                ], 401);
+            }
+
+            $paket = PaketSoal::where('id', $id)
+                             ->where('is_deleted', 0)
+                             ->first();
+                             
+            if (!$paket) {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Paket soal tidak ditemukan'
+                ], 404);
+            }
+
+            // Save answers to session
+            session(['temp_answers_' . $id => $request->input('answers', [])]);
+            session(['temp_flagged_' . $id => $request->input('flagged', [])]);
+
+            return response()->json([
+                'error' => false,
+                'message' => 'Jawaban sementara berhasil disimpan'
+            ]);
+            
+        } catch (\Exception $e) {
+            \Log::error('Error in saveTempAnswers: ' . $e->getMessage());
+            \Log::error($e->getTraceAsString());
+            
+            return response()->json([
+                'error' => true,
+                'message' => 'Terjadi kesalahan saat menyimpan jawaban sementara'
+            ], 500);
+        }
     }
 }

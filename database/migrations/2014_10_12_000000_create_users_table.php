@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
             $table->string('point')->nullable();
             $table->string('rating')->nullable();
             $table->longText('status')->nullable();
+            $table->longText('life_motto')->nullable();
             $table->integer('is_active')->default(0);
             $table->rememberToken();
             $table->timestamps();

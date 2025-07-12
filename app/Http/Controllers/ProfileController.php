@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class ProfileController extends Controller
 {
@@ -26,8 +28,10 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        return view('profile.index',[
-            'title' => 'Profile SiLas'
+        $user = Auth::user();
+        return view('profile.index', [
+            'title' => 'Profile SiLas',
+            'user' => $user
         ]);
     }
     public function store(Request $req, $id)
@@ -83,6 +87,60 @@ class ProfileController extends Controller
         }
         $data->save();
         return redirect()->route('profile');
+    }
+
+    public function update(Request $request)
+    {
+        Log::info('Updating profile');
+        Log::info($request->all());
+        try {
+            $user = Auth::user();
+            
+            // Validate request
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'school' => 'required|string|max:255',
+                'address' => 'required|string',
+                'class' => 'required|string|max:50',
+                'phone' => 'required|string|max:20',
+                'life_motto' => 'nullable|string|max:500',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            ]);
+
+            // Update user data
+            $user->name = $request->name;
+            $user->sekolah = $request->school;
+            $user->alamat = $request->address;
+            $user->kelas = $request->class;
+            $user->hp = $request->phone;
+            $user->life_motto = $request->life_motto;
+
+            // Handle image upload
+            if ($request->hasFile('image')) {
+                $originName = $request->file('image')->getClientOriginalName();
+                $fileName = pathinfo($originName, PATHINFO_FILENAME);
+                $extension = $request->file('image')->getClientOriginalExtension();
+                $fileName = $fileName.'_'.time().'.'.$extension;
+            
+                $request->file('image')->move(public_path('upload/image'), $fileName);
+                $user->image = '/upload/image/'.$fileName;
+            }
+
+            // Save changes
+            $saved = $user->save();
+            if (!$saved) {
+                throw new \Exception('Gagal menyimpan perubahan');
+            }
+
+            Log::info('Profile updated successfully');
+            Log::info('Updated user data:', $user->toArray());
+
+            return redirect()->route('my_profile')->with('success', 'Profil berhasil diperbarui');
+        } catch (\Exception $e) {
+            Log::error('Error updating profile: ' . $e->getMessage());
+            Log::error($e->getTraceAsString());
+            return redirect()->route('my_profile')->with('error', 'Terjadi kesalahan saat memperbarui profil: ' . $e->getMessage());
+        }
     }
 
 }

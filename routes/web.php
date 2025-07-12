@@ -21,7 +21,8 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
-Route::get('/news', [App\Http\Controllers\HomeController::class, 'index'])->name('news');
+Route::get('/news', [App\Http\Controllers\NewsController::class, 'index'])->name('page_news');
+Route::get('/news/{id}', [App\Http\Controllers\NewsController::class, 'show'])->name('news.show');
 
 Route::get('/chat', [App\Http\Controllers\ChatController::class, 'index'])->name('chat');
 Route::get('/chat/new', [App\Http\Controllers\ChatController::class, 'create'])->name('addChat');
@@ -31,7 +32,8 @@ Route::get('/komen/detail/{id?}', [App\Http\Controllers\KomenController::class, 
 Route::get('/pinned/{chat_id?}/{id?}/{user_id?}', [App\Http\Controllers\KomenController::class, 'pinned'])->name('pinned');
 Route::post('/komen/store', [App\Http\Controllers\KomenController::class, 'store'])->name('komen_store');
 
-Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile');
+Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('my_profile');
+Route::post('/profile/update', [App\Http\Controllers\ProfileController::class, 'update'])->name('update_my_profile');
 Route::post('/profile/{id?}', [App\Http\Controllers\ProfileController::class, 'store'])->name('profile_edit');
 
 Route::get('/test', [App\Http\Controllers\SoalController::class, 'index'])->name('test');
@@ -130,3 +132,33 @@ Route::post('/api/change-profile-images', [App\Http\Controllers\api\ApiAuth::cla
 
 
 Route::post('/api/create-news', [App\Http\Controllers\api\NewsController::class, 'createNews'])->name('createNews');
+
+// SEO-optimized pages
+Route::get('/les-privat', function () {
+    return view('pages.les-privat');
+})->name('les-privat');
+
+Route::get('/bank-soal', function () {
+    return view('pages.bank-soal');
+})->name('bank-soal');
+
+Route::get('/soal', [App\Http\Controllers\SoalController::class, 'index'])->name('soal.index');
+Route::get('/soal/{id}', [App\Http\Controllers\SoalController::class, 'show'])->name('soal.show');
+Route::post('/soal/{id}/answer/{index}', [App\Http\Controllers\SoalController::class, 'showHasil'])->name('submit_answer');
+Route::post('/soal/{id}/save-temp', [App\Http\Controllers\SoalController::class, 'saveTempAnswers'])->name('save_temp_answers');
+Route::get('/soal/{id}/result', [App\Http\Controllers\SoalController::class, 'showResult'])->name('soal.result');
+
+// Contact Route
+Route::get('/contact', function () {
+    return view('pages.contact');
+})->name('contact');
+
+// Privacy Policy Route
+Route::get('/privacy', function () {
+    return view('privacy');
+})->name('privacy');
+
+// Terms & Conditions Route
+Route::get('/terms', function () {
+    return view('terms');
+})->name('terms');
