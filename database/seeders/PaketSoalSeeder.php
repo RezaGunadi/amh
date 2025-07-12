@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\PaketSoal;
-use App\Models\Soal;
+use App\Models\soal;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
@@ -1336,7 +1336,7 @@ class PaketSoalSeeder extends Seeder
         }
 
         // Buat soal
-        $soal = Soal::create([
+        $soal = soal::create([
             'paket_id' => $paketId,
             'soal' => $template['soal'],
             'jawaban_a' => $jawaban['jawaban']['a'] ?? 'Jawaban A',
@@ -1807,7 +1807,7 @@ class PaketSoalSeeder extends Seeder
         file_put_contents(public_path('assets/soal/' . $filename), $svg);
 
         // Update soal dengan path gambar
-        Soal::where('id', $soalId)->update([
+        soal::where('id', $soalId)->update([
             'image_soal' => '/assets/soal/' . $filename
         ]);
     }
