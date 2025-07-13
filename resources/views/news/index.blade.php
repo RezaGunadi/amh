@@ -42,7 +42,7 @@
     @if($featuredArticle)
     <div class="row mb-5">
         <div class="col-12">
-            <a href="{{ route('news.show', $featuredArticle['id']) }}" class="text-decoration-none">
+            <a href="{{ route('news.show', $featuredArticle['slug']) }}" class="text-decoration-none">
                 <div class="card border-0 shadow-sm">
                     <div class="row g-0">
                         <div class="col-md-4">
@@ -81,7 +81,7 @@
     <div class="row g-4">
         @forelse ($articles as $article)
         <div class="col-md-4">
-            <a href="{{ route('news.show', $article['id']) }}" class="text-decoration-none">
+            <a href="{{ route('news.show', $article['slug']) }}" class="text-decoration-none">
                 <div class="card h-100 border-0 shadow-sm">
                     <img src="{{ asset('assets/svg/news/' . $article['image']) }}" 
                          class="card-img-top" 

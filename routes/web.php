@@ -27,7 +27,7 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 Route::get('/news', [App\Http\Controllers\NewsController::class, 'index'])->name('page_news');
-Route::get('/news/{id}', [App\Http\Controllers\NewsController::class, 'show'])->name('news.show');
+Route::get('/news/{slug}', [App\Http\Controllers\NewsController::class, 'show'])->name('news.show');
 
 Route::get('/chat', [App\Http\Controllers\ChatController::class, 'index'])->name('chat');
 Route::get('/chat/new', [App\Http\Controllers\ChatController::class, 'create'])->name('addChat');

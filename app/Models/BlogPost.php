@@ -17,7 +17,7 @@ class BlogPost extends Model
         'content',
         'featured_image',
         'svg_icon',
-        'category',
+        'blog_category_id',
         'author_name',
         'author_avatar',
         'reading_time',
@@ -49,6 +49,12 @@ class BlogPost extends Model
         });
     }
 
+    // Relationship dengan BlogCategory
+    public function category()
+    {
+        return $this->belongsTo(BlogCategory::class, 'blog_category_id');
+    }
+
     public function scopePublished($query)
     {
         return $query->where('is_published', true);
@@ -61,7 +67,9 @@ class BlogPost extends Model
 
     public function scopeByCategory($query, $category)
     {
-        return $query->where('category', $category);
+        return $query->whereHas('category', function($q) use ($category) {
+            $q->where('slug', $category);
+        });
     }
 
     public function getRouteKeyName()
@@ -86,29 +94,16 @@ class BlogPost extends Model
 
     public function getCategoryDisplayNameAttribute()
     {
-        $categories = [
-            'tips-belajar' => 'Tips Belajar',
-            'pendidikan' => 'Pendidikan',
-            'teknologi' => 'Teknologi',
-            'motivasi' => 'Motivasi',
-            'karir' => 'Karir',
-            'komunitas' => 'Komunitas'
-        ];
-
-        return $categories[$this->category] ?? ucfirst($this->category);
+        return $this->category ? $this->category->name : 'Uncategorized';
     }
 
     public function getCategoryBadgeColorAttribute()
     {
-        $colors = [
-            'tips-belajar' => 'primary',
-            'pendidikan' => 'success',
-            'teknologi' => 'info',
-            'motivasi' => 'warning',
-            'karir' => 'danger',
-            'komunitas' => 'secondary'
-        ];
+        return $this->category ? $this->category->color : '#3B82F6';
+    }
 
-        return $colors[$this->category] ?? 'primary';
+    public function getCategorySlugAttribute()
+    {
+        return $this->category ? $this->category->slug : '';
     }
 }

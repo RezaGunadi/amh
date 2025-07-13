@@ -73,10 +73,10 @@ class NewsController extends Controller
         ]);
     }
 
-    public function show($id)
+    public function show($slug)
     {
-        // Find the article by ID
-        $article = news::where('id', $id)
+        // Find the article by slug
+        $article = news::where('slug', $slug)
                       ->where('is_deleted', 0)
                       ->first();
 

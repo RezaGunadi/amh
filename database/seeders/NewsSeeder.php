@@ -22,6 +22,12 @@ class NewsSeeder extends Seeder
         // Simulasi hasil scraping data berita pendidikan (bisa diganti hasil scraping asli)
         $scrapedNews = $this->getScrapedNews();
 
+        // Tambahkan slug ke setiap data
+        foreach ($scrapedNews as &$item) {
+            $item['slug'] = Str::slug($item['title']);
+        }
+        unset($item);
+
         // Chunking: proses per 5 data
         $chunks = array_chunk($scrapedNews, 5);
         foreach ($chunks as $chunk) {
