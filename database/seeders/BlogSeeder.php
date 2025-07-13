@@ -9,7 +9,7 @@ use App\Models\BlogCategory;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
-class BlogSeeder extends Seeder
+class CC extends Seeder
 {
     /**
      * Run the database seeds.

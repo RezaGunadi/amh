@@ -19,7 +19,7 @@ return new class extends Migration
             $table->longText('content');
             $table->string('featured_image')->nullable();
             $table->string('svg_icon')->nullable();
-            $table->enum('category', ['tips-belajar', 'pendidikan', 'teknologi', 'motivasi', 'karir', 'komunitas']);
+            $table->foreignId('blog_category_id')->constrained('blog_categories')->onDelete('cascade');
             $table->string('author_name');
             $table->string('author_avatar')->nullable();
             $table->integer('reading_time')->default(5); // dalam menit
@@ -30,7 +30,7 @@ return new class extends Migration
             $table->timestamps();
             
             // Indexes
-            $table->index(['category', 'is_published']);
+            $table->index(['blog_category_id', 'is_published']);
             $table->index(['is_featured', 'is_published']);
             $table->index('published_at');
         });
