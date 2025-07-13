@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Spatie\Sitemap\SitemapGenerator;
+
+// Sitemap routes
+Route::get('/generate-sitemap', [App\Http\Controllers\SitemapController::class, 'generate'])->name('generate.sitemap');
+Route::get('/sitemap-status', [App\Http\Controllers\SitemapController::class, 'show'])->name('sitemap.status');
 
 /*
 |--------------------------------------------------------------------------
@@ -233,6 +238,13 @@ Route::get('/terms', function () {
     return view('terms');
 })->name('terms');
 
+// Admin Blog Routes
+Route::middleware(['auth', 'role:owner'])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('blog', \App\Http\Controllers\Admin\BlogController::class);
+    Route::post('blog/{blog}/toggle-featured', [\App\Http\Controllers\Admin\BlogController::class, 'toggleFeatured'])->name('blog.toggle-featured');
+    Route::post('blog/{blog}/toggle-published', [\App\Http\Controllers\Admin\BlogController::class, 'togglePublished'])->name('blog.toggle-published');
+});
+
 // Error Pages
 Route::get('/404', function () {
     return view('errors.404');
@@ -241,3 +253,7 @@ Route::get('/404', function () {
 Route::get('/500', function () {
     return view('errors.500');
 })->name('500');
+
+// Sitemap routes
+Route::get('/generate-sitemap', [App\Http\Controllers\SitemapController::class, 'generate'])->name('generate.sitemap');
+Route::get('/sitemap-status', [App\Http\Controllers\SitemapController::class, 'show'])->name('sitemap.status');
