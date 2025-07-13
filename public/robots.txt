@@ -1,16 +1,33 @@
 User-agent: *
 Allow: /
-Allow: /soal/
-Allow: /materi/
-Allow: /news/
-Allow: /test/
 
 # Sitemap
 Sitemap: https://kelasprivat.id/sitemap.xml
 
 # Disallow admin and private areas
 Disallow: /admin/
-Disallow: /login
-Disallow: /register
-Disallow: /password/
-Disallow: /api/
+Disallow: /dashboard/
+Disallow: /storage/
+Disallow: /vendor/
+Disallow: /node_modules/
+Disallow: /app/
+Disallow: /bootstrap/
+Disallow: /config/
+Disallow: /database/
+Disallow: /resources/
+Disallow: /routes/
+Disallow: /tests/
+
+# Allow important pages
+Allow: /about
+Allow: /careers
+Allow: /contact
+Allow: /blog
+Allow: /les-privat/
+Allow: /privacy
+Allow: /terms
+Allow: /bank-soal
+Allow: /news
+
+# Crawl delay (optional)
+Crawl-delay: 1

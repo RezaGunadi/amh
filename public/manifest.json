@@ -1,0 +1,140 @@
+{
+    "name": "KelasPrivat.id - Platform Les Privat Online",
+    "short_name": "KelasPrivat",
+    "description": "Platform les privat online terbaik di Indonesia dengan pengajar berpengalaman dan metode pembelajaran interaktif",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#2563eb",
+    "orientation": "portrait-primary",
+    "scope": "/",
+    "lang": "id",
+    "dir": "ltr",
+    "categories": [
+        "education",
+        "productivity"
+    ],
+    "icons": [
+        {
+            "src": "/assets/img/icon-72x72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "maskable any"
+        },
+        {
+            "src": "/assets/img/icon-96x96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "maskable any"
+        },
+        {
+            "src": "/assets/img/icon-128x128.png",
+            "sizes": "128x128",
+            "type": "image/png",
+            "purpose": "maskable any"
+        },
+        {
+            "src": "/assets/img/icon-144x144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "maskable any"
+        },
+        {
+            "src": "/assets/img/icon-152x152.png",
+            "sizes": "152x152",
+            "type": "image/png",
+            "purpose": "maskable any"
+        },
+        {
+            "src": "/assets/img/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable any"
+        },
+        {
+            "src": "/assets/img/icon-384x384.png",
+            "sizes": "384x384",
+            "type": "image/png",
+            "purpose": "maskable any"
+        },
+        {
+            "src": "/assets/img/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable any"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Les Privat SD",
+            "short_name": "SD",
+            "description": "Akses program les privat SD",
+            "url": "/les-privat/sd",
+            "icons": [
+                {
+                    "src": "/assets/img/shortcut-sd.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Les Privat SMP",
+            "short_name": "SMP",
+            "description": "Akses program les privat SMP",
+            "url": "/les-privat/smp",
+            "icons": [
+                {
+                    "src": "/assets/img/shortcut-smp.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Les Privat SMA",
+            "short_name": "SMA",
+            "description": "Akses program les privat SMA",
+            "url": "/les-privat/sma",
+            "icons": [
+                {
+                    "src": "/assets/img/shortcut-sma.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Bank Soal",
+            "short_name": "Soal",
+            "description": "Latih kemampuan dengan bank soal",
+            "url": "/bank-soal",
+            "icons": [
+                {
+                    "src": "/assets/img/shortcut-soal.png",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/assets/img/screenshot-desktop.png",
+            "sizes": "1280x720",
+            "type": "image/png",
+            "form_factor": "wide",
+            "label": "Halaman Beranda KelasPrivat.id"
+        },
+        {
+            "src": "/assets/img/screenshot-mobile.png",
+            "sizes": "390x844",
+            "type": "image/png",
+            "form_factor": "narrow",
+            "label": "Halaman Beranda KelasPrivat.id (Mobile)"
+        }
+    ],
+    "related_applications": [
+        {
+            "platform": "webapp",
+            "url": "https://kelasprivat.id"
+        }
+    ],
+    "prefer_related_applications": false
+}

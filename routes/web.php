@@ -148,10 +148,38 @@ Route::post('/soal/{id}/answer/{index}', [App\Http\Controllers\SoalController::c
 Route::post('/soal/{id}/save-temp', [App\Http\Controllers\SoalController::class, 'saveTempAnswers'])->name('save_temp_answers');
 Route::get('/soal/{id}/result', [App\Http\Controllers\SoalController::class, 'showResult'])->name('soal.result');
 
+// About Route
+Route::get('/about', function () {
+    return view('pages.about');
+})->name('about');
+
+// Careers Route
+Route::get('/careers', function () {
+    return view('pages.careers');
+})->name('careers');
+
 // Contact Route
 Route::get('/contact', function () {
     return view('pages.contact');
 })->name('contact');
+
+// Blog Route
+Route::get('/blog', function () {
+    return view('pages.blog');
+})->name('blog');
+
+// Les Privat Routes
+Route::get('/les-privat/sd', function () {
+    return view('pages.les-privat-sd');
+})->name('les-privat-sd');
+
+Route::get('/les-privat/smp', function () {
+    return view('pages.les-privat-smp');
+})->name('les-privat-smp');
+
+Route::get('/les-privat/sma', function () {
+    return view('pages.les-privat-sma');
+})->name('les-privat-sma');
 
 // Privacy Policy Route
 Route::get('/privacy', function () {
@@ -162,3 +190,12 @@ Route::get('/privacy', function () {
 Route::get('/terms', function () {
     return view('terms');
 })->name('terms');
+
+// Error Pages
+Route::get('/404', function () {
+    return view('errors.404');
+})->name('404');
+
+Route::get('/500', function () {
+    return view('errors.500');
+})->name('500');
