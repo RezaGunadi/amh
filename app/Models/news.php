@@ -11,14 +11,40 @@ class news extends Model
 
     protected $table = 'news';
     protected $fillable = [
-        'title', 'category', 'discription', 'created_by'
+        'user_id',
+        'title', 
+        'category', 
+        'description', 
+        'created_by',
+        'is_home',
+        'is_deleted',
+        'priority'
     ];
+
+    protected $casts = [
+        'is_home' => 'boolean',
+        'is_deleted' => 'boolean',
+        'priority' => 'integer'
+    ];
+
     public function images()
     {
-     return $this->hasMany('App\Image', 'news_id');
+        return $this->hasMany('App\Image', 'news_id');
     }
+
     public function user()
     {
-     return $this->belongsTo('App\Models\Image', 'created_by');
+        return $this->belongsTo('App\Models\User', 'user_id');
+    }
+
+    // Accessor untuk description (jika field di database masih 'discription')
+    public function getDescriptionAttribute($value)
+    {
+        return $value;
+    }
+
+    public function setDescriptionAttribute($value)
+    {
+        $this->attributes['description'] = $value;
     }
 }
