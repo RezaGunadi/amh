@@ -1,0 +1,49 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad6" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6B7280;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4B5563;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background Circle -->
+  <circle cx="60" cy="60" r="55" fill="url(#grad6)" opacity="0.1"/>
+  
+  <!-- People Group -->
+  <!-- Person 1 (Center) -->
+  <circle cx="60" cy="45" r="12" fill="#6B7280"/>
+  <path d="M60 60C60 60 50 70 50 80H70C70 70 60 60 60 60Z" fill="#6B7280"/>
+  
+  <!-- Person 2 (Left) -->
+  <circle cx="40" cy="50" r="10" fill="#4B5563"/>
+  <path d="M40 63C40 63 32 70 32 78H48C48 70 40 63 40 63Z" fill="#4B5563"/>
+  
+  <!-- Person 3 (Right) -->
+  <circle cx="80" cy="50" r="10" fill="#4B5563"/>
+  <path d="M80 63C80 63 72 70 72 78H88C88 70 80 63 80 63Z" fill="#4B5563"/>
+  
+  <!-- Person 4 (Bottom Left) -->
+  <circle cx="35" cy="70" r="8" fill="#9CA3AF"/>
+  <path d="M35 81C35 81 29 87 29 93H41C41 87 35 81 35 81Z" fill="#9CA3AF"/>
+  
+  <!-- Person 5 (Bottom Right) -->
+  <circle cx="85" cy="70" r="8" fill="#9CA3AF"/>
+  <path d="M85 81C85 81 79 87 79 93H91C91 87 85 81 85 81Z" fill="#9CA3AF"/>
+  
+  <!-- Connection Lines -->
+  <line x1="50" y1="55" x2="45" y2="60" stroke="#D1D5DB" stroke-width="2" opacity="0.6"/>
+  <line x1="70" y1="55" x2="75" y2="60" stroke="#D1D5DB" stroke-width="2" opacity="0.6"/>
+  <line x1="45" y1="75" x2="35" y2="80" stroke="#D1D5DB" stroke-width="2" opacity="0.6"/>
+  <line x1="75" y1="75" x2="85" y2="80" stroke="#D1D5DB" stroke-width="2" opacity="0.6"/>
+  
+  <!-- Chat Bubbles -->
+  <rect x="25" y="30" width="20" height="12" rx="6" fill="#3B82F6" opacity="0.8"/>
+  <polygon points="35,42 30,48 40,48" fill="#3B82F6" opacity="0.8"/>
+  
+  <rect x="75" y="25" width="18" height="10" rx="5" fill="#10B981" opacity="0.8"/>
+  <polygon points="84,35 79,41 89,41" fill="#10B981" opacity="0.8"/>
+  
+  <!-- Community Icon -->
+  <circle cx="60" cy="95" r="8" fill="#6B7280" opacity="0.3"/>
+  <path d="M60 89L62 93L66 93L63 96L64 100L60 98L56 100L57 96L54 93L58 93L60 89Z" fill="#6B7280"/>
+</svg> 

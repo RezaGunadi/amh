@@ -11,7 +11,7 @@
         <div class="row align-items-center">
             <div class="col-lg-6">
                 <h1 class="display-4 fw-bold mb-4">Les Privat SMA</h1>
-                <p class="lead mb-4">Program les privat online khusus untuk siswa SMA dengan fokus pada persiapan UN, SBMPTN, dan penguatan konsep lanjutan.</p>
+                <p class="lead mb-4" style="color:white">Program les privat online khusus untuk siswa SMA dengan fokus pada persiapan UN, SBMPTN, dan penguatan konsep lanjutan.</p>
                 <div class="d-flex gap-4">
                     <div class="text-center">
                         <h3 class="fw-bold mb-0">Kelas 10-12</h3>
@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <img src="{{ asset('assets/svg/hero-image.svg') }}" alt="Les Privat SMA" class="img-fluid">
+                <img src="{{ URL::To('assets/img/hero-img.png') }}" class="img-fluid" alt="Les Privat SMA">
             </div>
         </div>
     </div>

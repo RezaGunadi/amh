@@ -11,7 +11,7 @@
         <div class="row align-items-center">
             <div class="col-lg-6">
                 <h1 class="display-4 fw-bold mb-4">Tentang KelasPrivat.id</h1>
-                <p class="lead mb-4">Platform les privat online terbaik di Indonesia yang menghubungkan siswa dengan pengajar berpengalaman untuk mencapai prestasi akademik yang optimal.</p>
+                <p class="lead mb-4" style="color:white">Platform les privat online terbaik di Indonesia yang menghubungkan siswa dengan pengajar berpengalaman untuk mencapai prestasi akademik yang optimal.</p>
                 <div class="d-flex gap-3">
                     <div class="text-center">
                         <h3 class="fw-bold mb-0">10K+</h3>
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <img src="{{ asset('assets/svg/hero-image.svg') }}" alt="Tentang KelasPrivat.id" class="img-fluid">
+                <img src="{{ asset('assets/img/hero-img.png') }}" alt="Tentang KelasPrivat.id" class="img-fluid">
             </div>
         </div>
     </div>

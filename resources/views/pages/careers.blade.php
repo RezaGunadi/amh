@@ -11,7 +11,7 @@
         <div class="row align-items-center">
             <div class="col-lg-6">
                 <h1 class="display-4 fw-bold mb-4">Bergabunglah dengan Tim Kami</h1>
-                <p class="lead mb-4">Mari berkontribusi dalam revolusi pendidikan Indonesia. Kami mencari talenta-talenta terbaik yang passionate dalam dunia pendidikan dan teknologi.</p>
+                <p class="lead mb-4" style="color:white">Mari berkontribusi dalam revolusi pendidikan Indonesia. Kami mencari talenta-talenta terbaik yang passionate dalam dunia pendidikan dan teknologi.</p>
                 <div class="d-flex gap-4">
                     <div class="text-center">
                         <h3 class="fw-bold mb-0">50+</h3>
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <img src="{{ asset('assets/svg/hero-image.svg') }}" alt="Karir di KelasPrivat.id" class="img-fluid">
+                <img src="{{ asset('assets/img/hero-img.png') }}" alt="Karir di KelasPrivat.id" class="img-fluid">
             </div>
         </div>
     </div>

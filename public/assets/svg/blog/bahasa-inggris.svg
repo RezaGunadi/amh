@@ -1,0 +1,38 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad8" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#EC4899;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#DB2777;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background Circle -->
+  <circle cx="60" cy="60" r="55" fill="url(#grad8)" opacity="0.1"/>
+  
+  <!-- Speech Bubble -->
+  <path d="M30 40C30 35 35 30 40 30H80C85 30 90 35 90 40V70C90 75 85 80 80 80H60L50 90V80H40C35 80 30 75 30 70V40Z" fill="#EC4899"/>
+  
+  <!-- English Text -->
+  <text x="60" y="45" font-family="Arial" font-size="8" fill="white" text-anchor="middle" font-weight="bold">HELLO</text>
+  <text x="60" y="55" font-family="Arial" font-size="8" fill="white" text-anchor="middle" font-weight="bold">WORLD</text>
+  <text x="60" y="65" font-family="Arial" font-size="8" fill="white" text-anchor="middle" font-weight="bold">ENGLISH</text>
+  
+  <!-- Globe -->
+  <circle cx="60" cy="95" r="15" fill="#EC4899" opacity="0.3"/>
+  <path d="M45 95C45 85 51 77 60 77C69 77 75 85 75 95C75 105 69 113 60 113C51 113 45 105 45 95Z" fill="none" stroke="#EC4899" stroke-width="2"/>
+  <path d="M45 95C45 85 51 77 60 77C69 77 75 85 75 95" fill="none" stroke="#EC4899" stroke-width="2"/>
+  <path d="M45 95C45 105 51 113 60 113C69 113 75 105 75 95" fill="none" stroke="#EC4899" stroke-width="2"/>
+  
+  <!-- Letters Floating -->
+  <text x="25" y="35" font-family="Arial" font-size="12" fill="#EC4899" font-weight="bold">A</text>
+  <text x="95" y="45" font-family="Arial" font-size="12" fill="#EC4899" font-weight="bold">B</text>
+  <text x="20" y="75" font-family="Arial" font-size="12" fill="#EC4899" font-weight="bold">C</text>
+  <text x="100" y="65" font-family="Arial" font-size="12" fill="#EC4899" font-weight="bold">D</text>
+  
+  <!-- Translation Arrows -->
+  <path d="M35 50L45 50" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/>
+  <path d="M42 47L45 50L42 53" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <path d="M75 50L85 50" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/>
+  <path d="M82 47L85 50L82 53" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg> 

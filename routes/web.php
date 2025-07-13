@@ -168,6 +168,48 @@ Route::get('/blog', function () {
     return view('pages.blog');
 })->name('blog');
 
+// Individual Blog Posts
+Route::get('/blog/tips-belajar-efektif', function () {
+    return view('blog.tips-belajar-efektif');
+})->name('blog.tips-belajar-efektif');
+
+Route::get('/blog/peran-teknologi-pendidikan', function () {
+    return view('blog.peran-teknologi-pendidikan');
+})->name('blog.peran-teknologi-pendidikan');
+
+Route::get('/blog/mempertahankan-motivasi-belajar', function () {
+    return view('blog.mempertahankan-motivasi-belajar');
+})->name('blog.mempertahankan-motivasi-belajar');
+
+Route::get('/blog/persiapan-ujian-nasional', function () {
+    return view('blog.persiapan-ujian-nasional');
+})->name('blog.persiapan-ujian-nasional');
+
+Route::get('/blog/cara-mudah-belajar-matematika', function () {
+    return view('blog.cara-mudah-belajar-matematika');
+})->name('blog.cara-mudah-belajar-matematika');
+
+Route::get('/blog/tips-jago-bahasa-inggris', function () {
+    return view('blog.tips-jago-bahasa-inggris');
+})->name('blog.tips-jago-bahasa-inggris');
+
+Route::get('/blog/pilihan-jurusan-kuliah', function () {
+    return view('blog.pilihan-jurusan-kuliah');
+})->name('blog.pilihan-jurusan-kuliah');
+
+Route::get('/blog/belajar-fisika-eksperimen', function () {
+    return view('blog.belajar-fisika-eksperimen');
+})->name('blog.belajar-fisika-eksperimen');
+
+Route::get('/blog/kesehatan-mental-belajar', function () {
+    return view('blog.kesehatan-mental-belajar');
+})->name('blog.kesehatan-mental-belajar');
+
+// Blog Categories
+Route::get('/blog/kategori/{category}', function ($category) {
+    return view('blog.category', compact('category'));
+})->name('blog.category');
+
 // Les Privat Routes
 Route::get('/les-privat/sd', function () {
     return view('pages.les-privat-sd');

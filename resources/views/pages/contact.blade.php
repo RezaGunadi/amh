@@ -11,7 +11,7 @@
         <div class="row align-items-center">
             <div class="col-lg-6">
                 <h1 class="display-4 fw-bold mb-4">Hubungi Kami</h1>
-                <p class="lead mb-4">Tim support kami siap membantu Anda 24/7. Jangan ragu untuk menghubungi kami untuk pertanyaan atau bantuan apapun.</p>
+                <p class="lead mb-4" >Tim support kami siap membantu Anda 24/7. Jangan ragu untuk menghubungi kami untuk pertanyaan atau bantuan apapun.</p>
                 <div class="d-flex gap-4">
                     <div class="text-center">
                         <h3 class="fw-bold mb-0">24/7</h3>
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <img src="{{ asset('assets/svg/hero-image.svg') }}" alt="Hubungi Kami" class="img-fluid">
+                <img src="{{ asset('assets/img/hero-img.png') }}" alt="Hubungi Kami" class="img-fluid">
             </div>
         </div>
     </div>
@@ -74,7 +74,7 @@
                         </div>
                         <h5 class="fw-bold mb-3">Alamat Kantor</h5>
                         <p class="text-muted mb-3">Kunjungi kantor kami untuk pertemuan langsung</p>
-                        <p class="text-muted">Jl. Pendidikan No. 123<br>Jakarta Selatan, 12345</p>
+                        <p class="text-muted">Griya Family 4<br>Kab. Bekasi, 17520</p>
                     </div>
                 </div>
             </div>

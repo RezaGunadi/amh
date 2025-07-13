@@ -32,15 +32,15 @@
                     <div class="d-flex gap-4">
                         <div class="text-center">
                             <h3 class="fw-bold mb-0">10+</h3>
-                            <p class="mb-0">Tahun Pengalaman</p>
+                            <p class="mb-0" style="color:white">Tahun Pengalaman</p>
                         </div>
                         <div class="text-center">
                             <h3 class="fw-bold mb-0">5000+</h3>
-                            <p class="mb-0">Siswa Berprestasi</p>
+                            <p class="mb-0" style="color:white">Siswa Berprestasi</p>
                         </div>
                         <div class="text-center">
                             <h3 class="fw-bold mb-0">98%</h3>
-                            <p class="mb-0">Tingkat Kelulusan</p>
+                            <p class="mb-0" style="color:white">Tingkat Kelulusan</p>
                         </div>
                     </div>
                 </div>

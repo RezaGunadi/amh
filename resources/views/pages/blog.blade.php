@@ -11,7 +11,7 @@
         <div class="row align-items-center">
             <div class="col-lg-6">
                 <h1 class="display-4 fw-bold mb-4">Blog Pendidikan</h1>
-                <p class="lead mb-4">Temukan artikel pendidikan terbaru, tips belajar efektif, dan informasi menarik seputar dunia pendidikan.</p>
+                <p class="lead mb-4" style="color:white">Temukan artikel pendidikan terbaru, tips belajar efektif, dan informasi menarik seputar dunia pendidikan.</p>
                 <div class="d-flex gap-4">
                     <div class="text-center">
                         <h3 class="fw-bold mb-0">100+</h3>
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <img src="{{ asset('assets/svg/hero-image.svg') }}" alt="Blog Pendidikan" class="img-fluid">
+                <img src="{{ asset('assets/img/hero-img.png') }}" alt="Blog Pendidikan" class="img-fluid">
             </div>
         </div>
     </div>
@@ -69,62 +69,83 @@
         </div>
         <div class="row g-4">
             <div class="col-lg-8" data-aos="fade-right">
-                <div class="card border-0 shadow-sm h-100">
-                    <div class="row g-0">
-                        <div class="col-md-6">
-                            <img src="{{ asset('assets/img/bg-blue.jpg') }}" class="img-fluid h-100 object-fit-cover" alt="Tips Belajar Efektif">
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card-body p-4">
-                                <div class="d-flex gap-2 mb-2">
-                                    <span class="badge bg-primary">Tips Belajar</span>
-                                    <span class="text-muted small">5 menit baca</span>
+                <a href="/blog/tips-belajar-efektif" class="text-decoration-none">
+                    <div class="card border-0 shadow-sm h-100 blog-card">
+                        <div class="row g-0">
+                            <div class="col-md-6">
+                                <div class="blog-image-container">
+                                    <img src="{{ asset('assets/svg/blog/tips-belajar.svg') }}" class="img-fluid h-100 object-fit-cover" alt="Tips Belajar Efektif">
+                                    <div class="blog-overlay">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
                                 </div>
-                                <h3 class="fw-bold mb-3">10 Tips Belajar Efektif untuk Siswa SD, SMP, dan SMA</h3>
-                                <p class="text-muted mb-3">Temukan strategi belajar yang efektif untuk meningkatkan prestasi akademik Anda. Artikel ini membahas teknik-teknik yang telah terbukti berhasil.</p>
-                                <div class="d-flex align-items-center">
-                                    <img src="{{ asset('assets/img/avatar-default.jpg') }}" alt="Author" class="rounded-circle me-2" width="32" height="32">
-                                    <div>
-                                        <small class="fw-bold d-block">Sarah Putri</small>
-                                        <small class="text-muted">2 hari yang lalu</small>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card-body p-4">
+                                    <div class="d-flex gap-2 mb-2">
+                                        <span class="badge bg-primary">Tips Belajar</span>
+                                        <span class="text-muted small">5 menit baca</span>
+                                    </div>
+                                    <h3 class="fw-bold mb-3 text-dark">10 Tips Belajar Efektif untuk Siswa SD, SMP, dan SMA</h3>
+                                    <p class="text-muted mb-3">Temukan strategi belajar yang efektif untuk meningkatkan prestasi akademik Anda. Artikel ini membahas teknik-teknik yang telah terbukti berhasil.</p>
+                                    <div class="d-flex align-items-center">
+                                        <img src="{{ asset('assets/img/avatar-default.jpg') }}" alt="Author" class="rounded-circle me-2" width="32" height="32">
+                                        <div>
+                                            <small class="fw-bold d-block text-dark">Sarah Putri</small>
+                                            <small class="text-muted">2 hari yang lalu</small>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-lg-4" data-aos="fade-left">
-                <div class="card border-0 shadow-sm mb-4">
-                    <img src="{{ asset('assets/img/bg-blue.jpg') }}" class="card-img-top" alt="Teknologi Pendidikan">
-                    <div class="card-body p-4">
-                        <div class="d-flex gap-2 mb-2">
-                            <span class="badge bg-success">Teknologi</span>
-                            <span class="text-muted small">3 menit baca</span>
+                <a href="/blog/peran-teknologi-pendidikan" class="text-decoration-none">
+                    <div class="card border-0 shadow-sm mb-4 blog-card">
+                        <div class="blog-image-container">
+                            <img src="{{ asset('assets/svg/blog/teknologi.svg') }}" class="card-img-top" alt="Teknologi Pendidikan">
+                            <div class="blog-overlay">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
                         </div>
-                        <h5 class="fw-bold mb-2">Peran Teknologi dalam Pendidikan Modern</h5>
-                        <p class="text-muted small mb-3">Bagaimana teknologi mengubah cara kita belajar dan mengajar di era digital.</p>
-                        <div class="d-flex align-items-center">
-                            <img src="{{ asset('assets/img/avatar-default.jpg') }}" alt="Author" class="rounded-circle me-2" width="24" height="24">
-                            <small class="text-muted">Ahmad Rizki</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="card border-0 shadow-sm">
-                    <img src="{{ asset('assets/img/bg-blue.jpg') }}" class="card-img-top" alt="Motivasi Belajar">
-                    <div class="card-body p-4">
-                        <div class="d-flex gap-2 mb-2">
-                            <span class="badge bg-warning">Motivasi</span>
-                            <span class="text-muted small">4 menit baca</span>
-                        </div>
-                        <h5 class="fw-bold mb-2">Cara Mempertahankan Motivasi Belajar</h5>
-                        <p class="text-muted small mb-3">Strategi untuk tetap termotivasi dalam perjalanan belajar Anda.</p>
-                        <div class="d-flex align-items-center">
-                            <img src="{{ asset('assets/img/avatar-default.jpg') }}" alt="Author" class="rounded-circle me-2" width="24" height="24">
-                            <small class="text-muted">Budi Santoso</small>
+                        <div class="card-body p-4">
+                            <div class="d-flex gap-2 mb-2">
+                                <span class="badge bg-success">Teknologi</span>
+                                <span class="text-muted small">3 menit baca</span>
+                            </div>
+                            <h5 class="fw-bold mb-2 text-dark">Peran Teknologi dalam Pendidikan Modern</h5>
+                            <p class="text-muted small mb-3">Bagaimana teknologi mengubah cara kita belajar dan mengajar di era digital.</p>
+                            <div class="d-flex align-items-center">
+                                <img src="{{ asset('assets/img/avatar-default.jpg') }}" alt="Author" class="rounded-circle me-2" width="24" height="24">
+                                <small class="text-muted">Ahmad Rizki</small>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
+                <a href="/blog/mempertahankan-motivasi-belajar" class="text-decoration-none">
+                    <div class="card border-0 shadow-sm blog-card">
+                        <div class="blog-image-container">
+                            <img src="{{ asset('assets/svg/blog/motivasi.svg') }}" class="card-img-top" alt="Motivasi Belajar">
+                            <div class="blog-overlay">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="d-flex gap-2 mb-2">
+                                <span class="badge bg-warning">Motivasi</span>
+                                <span class="text-muted small">4 menit baca</span>
+                            </div>
+                            <h5 class="fw-bold mb-2 text-dark">Cara Mempertahankan Motivasi Belajar</h5>
+                            <p class="text-muted small mb-3">Strategi untuk tetap termotivasi dalam perjalanan belajar Anda.</p>
+                            <div class="d-flex align-items-center">
+                                <img src="{{ asset('assets/img/avatar-default.jpg') }}" alt="Author" class="rounded-circle me-2" width="24" height="24">
+                                <small class="text-muted">Budi Santoso</small>
+                            </div>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
@@ -139,124 +160,166 @@
         </div>
         <div class="row g-4">
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                <div class="card border-0 shadow-sm h-100">
-                    <img src="{{ asset('assets/img/bg-blue.jpg') }}" class="card-img-top" alt="Persiapan Ujian">
-                    <div class="card-body p-4">
-                        <div class="d-flex gap-2 mb-2">
-                            <span class="badge bg-info">Pendidikan</span>
-                            <span class="text-muted small">6 menit baca</span>
-                        </div>
-                        <h5 class="fw-bold mb-2">Persiapan Ujian Nasional yang Efektif</h5>
-                        <p class="text-muted mb-3">Panduan lengkap untuk mempersiapkan ujian nasional dengan strategi yang tepat dan efektif.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex align-items-center">
-                                <img src="{{ asset('assets/img/avatar-default.jpg') }}" alt="Author" class="rounded-circle me-2" width="24" height="24">
-                                <small class="text-muted">Diana Sari</small>
+                <a href="/blog/persiapan-ujian-nasional" class="text-decoration-none">
+                    <div class="card border-0 shadow-sm h-100 blog-card">
+                        <div class="blog-image-container">
+                            <img src="{{ asset('assets/svg/blog/pendidikan.svg') }}" class="card-img-top" alt="Persiapan Ujian">
+                            <div class="blog-overlay">
+                                <i class="fas fa-arrow-right"></i>
                             </div>
-                            <small class="text-muted">1 minggu yang lalu</small>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="d-flex gap-2 mb-2">
+                                <span class="badge bg-info">Pendidikan</span>
+                                <span class="text-muted small">6 menit baca</span>
+                            </div>
+                            <h5 class="fw-bold mb-2 text-dark">Persiapan Ujian Nasional yang Efektif</h5>
+                            <p class="text-muted mb-3">Panduan lengkap untuk mempersiapkan ujian nasional dengan strategi yang tepat dan efektif.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <img src="{{ asset('assets/img/avatar-default.jpg') }}" alt="Author" class="rounded-circle me-2" width="24" height="24">
+                                    <small class="text-muted">Diana Sari</small>
+                                </div>
+                                <small class="text-muted">1 minggu yang lalu</small>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                <div class="card border-0 shadow-sm h-100">
-                    <img src="{{ asset('assets/img/bg-blue.jpg') }}" class="card-img-top" alt="Matematika">
-                    <div class="card-body p-4">
-                        <div class="d-flex gap-2 mb-2">
-                            <span class="badge bg-danger">Tips Belajar</span>
-                            <span class="text-muted small">7 menit baca</span>
-                        </div>
-                        <h5 class="fw-bold mb-2">Cara Mudah Belajar Matematika</h5>
-                        <p class="text-muted mb-3">Teknik dan trik untuk menguasai matematika dengan cara yang menyenangkan dan mudah dipahami.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex align-items-center">
-                                <img src="{{ asset('assets/img/avatar-default.jpg') }}" alt="Author" class="rounded-circle me-2" width="24" height="24">
-                                <small class="text-muted">Rina Wati</small>
+                <a href="/blog/cara-mudah-belajar-matematika" class="text-decoration-none">
+                    <div class="card border-0 shadow-sm h-100 blog-card">
+                        <div class="blog-image-container">
+                            <img src="{{ asset('assets/svg/blog/matematika.svg') }}" class="card-img-top" alt="Matematika">
+                            <div class="blog-overlay">
+                                <i class="fas fa-arrow-right"></i>
                             </div>
-                            <small class="text-muted">1 minggu yang lalu</small>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="d-flex gap-2 mb-2">
+                                <span class="badge bg-danger">Tips Belajar</span>
+                                <span class="text-muted small">7 menit baca</span>
+                            </div>
+                            <h5 class="fw-bold mb-2 text-dark">Cara Mudah Belajar Matematika</h5>
+                            <p class="text-muted mb-3">Teknik dan trik untuk menguasai matematika dengan cara yang menyenangkan dan mudah dipahami.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <img src="{{ asset('assets/img/avatar-default.jpg') }}" alt="Author" class="rounded-circle me-2" width="24" height="24">
+                                    <small class="text-muted">Rina Wati</small>
+                                </div>
+                                <small class="text-muted">1 minggu yang lalu</small>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                <div class="card border-0 shadow-sm h-100">
-                    <img src="{{ asset('assets/img/bg-blue.jpg') }}" class="card-img-top" alt="Bahasa Inggris">
-                    <div class="card-body p-4">
-                        <div class="d-flex gap-2 mb-2">
-                            <span class="badge bg-secondary">Pendidikan</span>
-                            <span class="text-muted small">5 menit baca</span>
-                        </div>
-                        <h5 class="fw-bold mb-2">Tips Jago Bahasa Inggris</h5>
-                        <p class="text-muted mb-3">Metode praktis untuk meningkatkan kemampuan berbahasa Inggris dengan cepat dan efektif.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex align-items-center">
-                                <img src="{{ asset('assets/img/avatar-default.jpg') }}" alt="Author" class="rounded-circle me-2" width="24" height="24">
-                                <small class="text-muted">John Doe</small>
+                <a href="/blog/tips-jago-bahasa-inggris" class="text-decoration-none">
+                    <div class="card border-0 shadow-sm h-100 blog-card">
+                        <div class="blog-image-container">
+                            <img src="{{ asset('assets/svg/blog/bahasa-inggris.svg') }}" class="card-img-top" alt="Bahasa Inggris">
+                            <div class="blog-overlay">
+                                <i class="fas fa-arrow-right"></i>
                             </div>
-                            <small class="text-muted">2 minggu yang lalu</small>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="d-flex gap-2 mb-2">
+                                <span class="badge bg-secondary">Pendidikan</span>
+                                <span class="text-muted small">5 menit baca</span>
+                            </div>
+                            <h5 class="fw-bold mb-2 text-dark">Tips Jago Bahasa Inggris</h5>
+                            <p class="text-muted mb-3">Metode praktis untuk meningkatkan kemampuan berbahasa Inggris dengan cepat dan efektif.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <img src="{{ asset('assets/img/avatar-default.jpg') }}" alt="Author" class="rounded-circle me-2" width="24" height="24">
+                                    <small class="text-muted">John Doe</small>
+                                </div>
+                                <small class="text-muted">2 minggu yang lalu</small>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-                <div class="card border-0 shadow-sm h-100">
-                    <img src="{{ asset('assets/img/bg-blue.jpg') }}" class="card-img-top" alt="Kuliah">
-                    <div class="card-body p-4">
-                        <div class="d-flex gap-2 mb-2">
-                            <span class="badge bg-primary">Karir</span>
-                            <span class="text-muted small">8 menit baca</span>
-                        </div>
-                        <h5 class="fw-bold mb-2">Pilihan Jurusan Kuliah yang Menjanjikan</h5>
-                        <p class="text-muted mb-3">Analisis mendalam tentang jurusan kuliah yang memiliki prospek karir cerah di masa depan.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex align-items-center">
-                                <img src="{{ asset('assets/img/avatar-default.jpg') }}" alt="Author" class="rounded-circle me-2" width="24" height="24">
-                                <small class="text-muted">Lisa Chen</small>
+                <a href="/blog/pilihan-jurusan-kuliah" class="text-decoration-none">
+                    <div class="card border-0 shadow-sm h-100 blog-card">
+                        <div class="blog-image-container">
+                            <img src="{{ asset('assets/svg/blog/karir.svg') }}" class="card-img-top" alt="Kuliah">
+                            <div class="blog-overlay">
+                                <i class="fas fa-arrow-right"></i>
                             </div>
-                            <small class="text-muted">2 minggu yang lalu</small>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="d-flex gap-2 mb-2">
+                                <span class="badge bg-primary">Karir</span>
+                                <span class="text-muted small">8 menit baca</span>
+                            </div>
+                            <h5 class="fw-bold mb-2 text-dark">Pilihan Jurusan Kuliah yang Menjanjikan</h5>
+                            <p class="text-muted mb-3">Analisis mendalam tentang jurusan kuliah yang memiliki prospek karir cerah di masa depan.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <img src="{{ asset('assets/img/avatar-default.jpg') }}" alt="Author" class="rounded-circle me-2" width="24" height="24">
+                                    <small class="text-muted">Lisa Chen</small>
+                                </div>
+                                <small class="text-muted">2 minggu yang lalu</small>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-                <div class="card border-0 shadow-sm h-100">
-                    <img src="{{ asset('assets/img/bg-blue.jpg') }}" class="card-img-top" alt="Fisika">
-                    <div class="card-body p-4">
-                        <div class="d-flex gap-2 mb-2">
-                            <span class="badge bg-success">Tips Belajar</span>
-                            <span class="text-muted small">6 menit baca</span>
-                        </div>
-                        <h5 class="fw-bold mb-2">Belajar Fisika dengan Eksperimen Sederhana</h5>
-                        <p class="text-muted mb-3">Cara memahami konsep fisika melalui eksperimen yang bisa dilakukan di rumah.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex align-items-center">
-                                <img src="{{ asset('assets/img/avatar-default.jpg') }}" alt="Author" class="rounded-circle me-2" width="24" height="24">
-                                <small class="text-muted">Prof. Dr. Surya</small>
+                <a href="/blog/belajar-fisika-eksperimen" class="text-decoration-none">
+                    <div class="card border-0 shadow-sm h-100 blog-card">
+                        <div class="blog-image-container">
+                            <img src="{{ asset('assets/svg/blog/tips-belajar.svg') }}" class="card-img-top" alt="Fisika">
+                            <div class="blog-overlay">
+                                <i class="fas fa-arrow-right"></i>
                             </div>
-                            <small class="text-muted">3 minggu yang lalu</small>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="d-flex gap-2 mb-2">
+                                <span class="badge bg-success">Tips Belajar</span>
+                                <span class="text-muted small">6 menit baca</span>
+                            </div>
+                            <h5 class="fw-bold mb-2 text-dark">Belajar Fisika dengan Eksperimen Sederhana</h5>
+                            <p class="text-muted mb-3">Cara memahami konsep fisika melalui eksperimen yang bisa dilakukan di rumah.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <img src="{{ asset('assets/img/avatar-default.jpg') }}" alt="Author" class="rounded-circle me-2" width="24" height="24">
+                                    <small class="text-muted">Prof. Dr. Surya</small>
+                                </div>
+                                <small class="text-muted">3 minggu yang lalu</small>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-                <div class="card border-0 shadow-sm h-100">
-                    <img src="{{ asset('assets/img/bg-blue.jpg') }}" class="card-img-top" alt="Kesehatan Mental">
-                    <div class="card-body p-4">
-                        <div class="d-flex gap-2 mb-2">
-                            <span class="badge bg-warning">Motivasi</span>
-                            <span class="text-muted small">4 menit baca</span>
-                        </div>
-                        <h5 class="fw-bold mb-2">Menjaga Kesehatan Mental Saat Belajar</h5>
-                        <p class="text-muted mb-3">Pentingnya menjaga kesehatan mental dalam proses pembelajaran dan cara mengelolanya.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex align-items-center">
-                                <img src="{{ asset('assets/img/avatar-default.jpg') }}" alt="Author" class="rounded-circle me-2" width="24" height="24">
-                                <small class="text-muted">Dr. Maya</small>
+                <a href="/blog/kesehatan-mental-belajar" class="text-decoration-none">
+                    <div class="card border-0 shadow-sm h-100 blog-card">
+                        <div class="blog-image-container">
+                            <img src="{{ asset('assets/svg/blog/motivasi.svg') }}" class="card-img-top" alt="Kesehatan Mental">
+                            <div class="blog-overlay">
+                                <i class="fas fa-arrow-right"></i>
                             </div>
-                            <small class="text-muted">3 minggu yang lalu</small>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="d-flex gap-2 mb-2">
+                                <span class="badge bg-warning">Motivasi</span>
+                                <span class="text-muted small">4 menit baca</span>
+                            </div>
+                            <h5 class="fw-bold mb-2 text-dark">Menjaga Kesehatan Mental Saat Belajar</h5>
+                            <p class="text-muted mb-3">Pentingnya menjaga kesehatan mental dalam proses pembelajaran dan cara mengelolanya.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <img src="{{ asset('assets/img/avatar-default.jpg') }}" alt="Author" class="rounded-circle me-2" width="24" height="24">
+                                    <small class="text-muted">Dr. Maya</small>
+                                </div>
+                                <small class="text-muted">3 minggu yang lalu</small>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>
@@ -294,70 +357,82 @@
         </div>
         <div class="row g-4">
             <div class="col-lg-2 col-md-4 col-6" data-aos="fade-up" data-aos-delay="100">
-                <div class="card border-0 shadow-sm text-center h-100">
-                    <div class="card-body p-4">
-                        <div class="bg-primary bg-opacity-10 p-3 rounded-circle d-inline-block mb-3">
-                            <i class="fas fa-lightbulb text-primary fa-2x"></i>
+                <a href="/blog/kategori/tips-belajar" class="text-decoration-none">
+                    <div class="card border-0 shadow-sm text-center h-100 category-card">
+                        <div class="card-body p-4">
+                            <div class="bg-primary bg-opacity-10 p-3 rounded-circle d-inline-block mb-3">
+                                <img src="{{ asset('assets/svg/blog/tips-belajar.svg') }}" alt="Tips Belajar" width="40" height="40">
+                            </div>
+                            <h6 class="fw-bold mb-2 text-dark">Tips Belajar</h6>
+                            <small class="text-muted">25 Artikel</small>
                         </div>
-                        <h6 class="fw-bold mb-2">Tips Belajar</h6>
-                        <small class="text-muted">25 Artikel</small>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-lg-2 col-md-4 col-6" data-aos="fade-up" data-aos-delay="200">
-                <div class="card border-0 shadow-sm text-center h-100">
-                    <div class="card-body p-4">
-                        <div class="bg-success bg-opacity-10 p-3 rounded-circle d-inline-block mb-3">
-                            <i class="fas fa-graduation-cap text-success fa-2x"></i>
+                <a href="/blog/kategori/pendidikan" class="text-decoration-none">
+                    <div class="card border-0 shadow-sm text-center h-100 category-card">
+                        <div class="card-body p-4">
+                            <div class="bg-success bg-opacity-10 p-3 rounded-circle d-inline-block mb-3">
+                                <img src="{{ asset('assets/svg/blog/pendidikan.svg') }}" alt="Pendidikan" width="40" height="40">
+                            </div>
+                            <h6 class="fw-bold mb-2 text-dark">Pendidikan</h6>
+                            <small class="text-muted">18 Artikel</small>
                         </div>
-                        <h6 class="fw-bold mb-2">Pendidikan</h6>
-                        <small class="text-muted">18 Artikel</small>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-lg-2 col-md-4 col-6" data-aos="fade-up" data-aos-delay="300">
-                <div class="card border-0 shadow-sm text-center h-100">
-                    <div class="card-body p-4">
-                        <div class="bg-info bg-opacity-10 p-3 rounded-circle d-inline-block mb-3">
-                            <i class="fas fa-laptop text-info fa-2x"></i>
+                <a href="/blog/kategori/teknologi" class="text-decoration-none">
+                    <div class="card border-0 shadow-sm text-center h-100 category-card">
+                        <div class="card-body p-4">
+                            <div class="bg-info bg-opacity-10 p-3 rounded-circle d-inline-block mb-3">
+                                <img src="{{ asset('assets/svg/blog/teknologi.svg') }}" alt="Teknologi" width="40" height="40">
+                            </div>
+                            <h6 class="fw-bold mb-2 text-dark">Teknologi</h6>
+                            <small class="text-muted">12 Artikel</small>
                         </div>
-                        <h6 class="fw-bold mb-2">Teknologi</h6>
-                        <small class="text-muted">12 Artikel</small>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-lg-2 col-md-4 col-6" data-aos="fade-up" data-aos-delay="400">
-                <div class="card border-0 shadow-sm text-center h-100">
-                    <div class="card-body p-4">
-                        <div class="bg-warning bg-opacity-10 p-3 rounded-circle d-inline-block mb-3">
-                            <i class="fas fa-heart text-warning fa-2x"></i>
+                <a href="/blog/kategori/motivasi" class="text-decoration-none">
+                    <div class="card border-0 shadow-sm text-center h-100 category-card">
+                        <div class="card-body p-4">
+                            <div class="bg-warning bg-opacity-10 p-3 rounded-circle d-inline-block mb-3">
+                                <img src="{{ asset('assets/svg/blog/motivasi.svg') }}" alt="Motivasi" width="40" height="40">
+                            </div>
+                            <h6 class="fw-bold mb-2 text-dark">Motivasi</h6>
+                            <small class="text-muted">15 Artikel</small>
                         </div>
-                        <h6 class="fw-bold mb-2">Motivasi</h6>
-                        <small class="text-muted">15 Artikel</small>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-lg-2 col-md-4 col-6" data-aos="fade-up" data-aos-delay="500">
-                <div class="card border-0 shadow-sm text-center h-100">
-                    <div class="card-body p-4">
-                        <div class="bg-danger bg-opacity-10 p-3 rounded-circle d-inline-block mb-3">
-                            <i class="fas fa-briefcase text-danger fa-2x"></i>
+                <a href="/blog/kategori/karir" class="text-decoration-none">
+                    <div class="card border-0 shadow-sm text-center h-100 category-card">
+                        <div class="card-body p-4">
+                            <div class="bg-danger bg-opacity-10 p-3 rounded-circle d-inline-block mb-3">
+                                <img src="{{ asset('assets/svg/blog/karir.svg') }}" alt="Karir" width="40" height="40">
+                            </div>
+                            <h6 class="fw-bold mb-2 text-dark">Karir</h6>
+                            <small class="text-muted">10 Artikel</small>
                         </div>
-                        <h6 class="fw-bold mb-2">Karir</h6>
-                        <small class="text-muted">10 Artikel</small>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-lg-2 col-md-4 col-6" data-aos="fade-up" data-aos-delay="600">
-                <div class="card border-0 shadow-sm text-center h-100">
-                    <div class="card-body p-4">
-                        <div class="bg-secondary bg-opacity-10 p-3 rounded-circle d-inline-block mb-3">
-                            <i class="fas fa-users text-secondary fa-2x"></i>
+                <a href="/blog/kategori/komunitas" class="text-decoration-none">
+                    <div class="card border-0 shadow-sm text-center h-100 category-card">
+                        <div class="card-body p-4">
+                            <div class="bg-secondary bg-opacity-10 p-3 rounded-circle d-inline-block mb-3">
+                                <img src="{{ asset('assets/svg/blog/komunitas.svg') }}" alt="Komunitas" width="40" height="40">
+                            </div>
+                            <h6 class="fw-bold mb-2 text-dark">Komunitas</h6>
+                            <small class="text-muted">8 Artikel</small>
                         </div>
-                        <h6 class="fw-bold mb-2">Komunitas</h6>
-                        <small class="text-muted">8 Artikel</small>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>
@@ -368,13 +443,58 @@
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
 }
 
-.card {
+.blog-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
 }
 
-.card:hover {
+.blog-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+}
+
+.category-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.category-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.blog-image-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.blog-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(37, 99, 235, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.blog-card:hover .blog-overlay {
+    opacity: 1;
+}
+
+.blog-overlay i {
+    color: white;
+    font-size: 2rem;
+    transform: translateX(-10px);
+    transition: transform 0.3s ease;
+}
+
+.blog-card:hover .blog-overlay i {
+    transform: translateX(0);
 }
 
 .object-fit-cover {
@@ -393,6 +513,15 @@
 
 .btn:focus {
     box-shadow: 0 0 0 0.25rem rgba(37, 99, 235, 0.25);
+}
+
+/* SVG styling */
+.blog-image-container img {
+    transition: transform 0.3s ease;
+}
+
+.blog-card:hover .blog-image-container img {
+    transform: scale(1.05);
 }
 </style>
 

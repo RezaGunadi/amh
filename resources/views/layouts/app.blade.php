@@ -500,7 +500,7 @@
                 <div class="col-lg-4">
                     <h6 class="fw-bold mb-3">Kontak Kami</h6>
                     <ul class="list-unstyled">
-                        <li class="mb-2 footer-link"><i class="fas fa-map-marker-alt me-2 text-primary"></i>Jl. Pendidikan No. 123, Jakarta</li>
+                        <li class="mb-2 footer-link"><i class="fas fa-map-marker-alt me-2 text-primary"></i>Griya Family 4, Kab. Bekasi</li>
                         <li class="mb-2"><a href="https://wa.me/6281211006445" class="footer-link"><i class="fas fa-phone me-2 text-primary"></i>+62 812 1100 6445</a></li>
                         <li class="mb-2 footer-link"><i class="fas fa-envelope me-2 text-primary"></i>info@kelasprivat.id</li>
                     </ul>
