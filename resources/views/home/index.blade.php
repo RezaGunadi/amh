@@ -640,38 +640,6 @@
             animation: patternMove 30s linear infinite;
         }
 
-        /* Floating Orbs */
-        .bg-gradient-primary .floating-orb {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-            animation: floatOrb 15s ease-in-out infinite;
-        }
-
-        .bg-gradient-primary .floating-orb:nth-child(1) {
-            width: 300px;
-            height: 300px;
-            top: -150px;
-            right: -150px;
-            animation-delay: 0s;
-        }
-
-        .bg-gradient-primary .floating-orb:nth-child(2) {
-            width: 200px;
-            height: 200px;
-            bottom: -100px;
-            right: 50px;
-            animation-delay: -5s;
-        }
-
-        .bg-gradient-primary .floating-orb:nth-child(3) {
-            width: 150px;
-            height: 150px;
-            top: 50%;
-            left: -75px;
-            animation-delay: -10s;
-        }
 
         /* Background Animations */
         @keyframes gradientMove {
