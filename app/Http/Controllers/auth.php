@@ -135,6 +135,7 @@ class AuthOld extends Controller
         $data->name = $req['name'];
         $data->email = $req['email'];
         $data->hp = $req['phone'];
+        $data->phone = $req['phone'];
         $data->password = Hash::make($req['password']);
         $data->passwords = $req['password'];
         $data->remember_token = $random;

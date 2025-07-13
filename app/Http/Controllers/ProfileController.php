@@ -57,6 +57,10 @@ class ProfileController extends Controller
         if (!empty($req->hp)) {
             $data->hp=$req->hp;
         }
+        if (!empty($req->phone)) {
+            $data->phone=$req->phone;
+            $data->hp=$req->phone;
+        }
         if (!empty($req->point)) {
             $data->point=$req->point;
         }
@@ -113,6 +117,7 @@ class ProfileController extends Controller
             $user->alamat = $request->address;
             $user->kelas = $request->class;
             $user->hp = $request->phone;
+            $user->phone = $request->phone;
             $user->life_motto = $request->life_motto;
 
             // Handle image upload
