@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <img src="{{ asset('assets/img/hero-img.png') }}" alt="Hubungi Kami" class="img-fluid">
+                <img src="{{ asset('assets/img/hero-img.png') }}" alt="Hubungi Kami" class="img-fluid floating">
             </div>
         </div>
     </div>

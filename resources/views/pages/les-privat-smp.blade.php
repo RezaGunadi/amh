@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <img src="{{ URL::To('assets/img/hero-img.png') }}" class="img-fluid" alt="Les Privat SMP">
+                <img src="{{ URL::To('assets/img/hero-img.png') }}" class="img-fluid floating" alt="Les Privat SMP">
             </div>
         </div>
     </div>

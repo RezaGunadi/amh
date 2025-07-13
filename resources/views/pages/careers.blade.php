@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <img src="{{ asset('assets/img/hero-img.png') }}" alt="Karir di KelasPrivat.id" class="img-fluid">
+                <img src="{{ asset('assets/img/hero-img.png') }}" alt="Karir di KelasPrivat.id" class="img-fluid floating">
             </div>
         </div>
     </div>
@@ -232,7 +232,7 @@
                 </div>
             </div>
             <div class="col-lg-6" data-aos="fade-left">
-                <img src="{{ asset('assets/svg/hero-image.svg') }}" alt="Budaya Kerja" class="img-fluid">
+                <img src="{{ asset('assets/img/hero-img.png') }}" alt="Budaya Kerja" class="img-fluid floating">
             </div>
         </div>
     </div>

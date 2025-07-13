@@ -48,7 +48,7 @@
                     <a href="https://wa.me/6281211006445">
                         <img src="{{ asset('assets/img/hero-img.png') }}" alt="Les Privat Profesional" class="img-fluid floating">
                     </a>
-                    {{-- <img src="{{ asset('assets/svg/hero-image.svg') }}" alt="Les Privat Profesional" class="img-fluid floating"> --}}
+                    {{-- <img src="{{ asset('assets/img/hero-img.png') }}" alt="Les Privat Profesional" class="img-fluid floating"> --}}
                 </div>
             </div>
         </div>
