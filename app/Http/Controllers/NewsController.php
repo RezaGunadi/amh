@@ -42,11 +42,34 @@ class NewsController extends Controller
         // Get paginated results
         $articles = $query->orderBy('created_at', 'desc')->paginate(10);
 
+        // Get featured article (first article with is_home = 1)
+        $featuredArticle = news::where('is_deleted', 0)
+                              ->where('is_home', 1)
+                              ->orderBy('priority', 'asc')
+                              ->first();
+
+        // Convert featured article to array format expected by view
+        $featuredArticleArray = null;
+        if ($featuredArticle) {
+            $featuredArticleArray = [
+                'id' => $featuredArticle->id,
+                'title' => $featuredArticle->title,
+                'category' => $featuredArticle->category,
+                'description' => $featuredArticle->description,
+                'author' => $featuredArticle->created_by,
+                'time' => $featuredArticle->created_at->diffForHumans(),
+                'image' => 'tips-ptn.svg' // Default image
+            ];
+        }
+
         return view('news.index', [
             'articles' => $articles,
             'categories' => $categories,
             'selectedCategory' => $selectedCategory,
-            'search' => $search
+            'search' => $search,
+            'featuredArticle' => $featuredArticleArray,
+            'currentPage' => $articles->currentPage(),
+            'lastPage' => $articles->lastPage()
         ]);
     }
 

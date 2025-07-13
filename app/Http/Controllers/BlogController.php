@@ -30,7 +30,10 @@ class BlogController extends Controller
         $categories = BlogCategory::active()->get();
         $featuredPosts = BlogPost::published()->featured()->latest('published_at')->take(3)->get();
 
-        return view('pages.blog', compact('posts', 'categories', 'featuredPosts'));
+        // Get latest posts for the main section
+        $latestPosts = BlogPost::published()->latest('published_at')->take(6)->get();
+
+        return view('pages.blog', compact('posts', 'categories', 'featuredPosts', 'latestPosts'));
     }
 
     public function show($slug)
@@ -42,7 +45,7 @@ class BlogController extends Controller
 
         // Related posts
         $relatedPosts = BlogPost::published()
-            ->where('category', $post->category)
+            ->where('blog_category_id', $post->blog_category_id)
             ->where('id', '!=', $post->id)
             ->latest('published_at')
             ->take(3)

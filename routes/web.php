@@ -169,11 +169,15 @@ Route::get('/contact', function () {
 })->name('contact');
 
 // Blog Route
-Route::get('/blog', function () {
-    return view('pages.blog');
-})->name('blog');
+Route::get('/blog', [App\Http\Controllers\BlogController::class, 'index'])->name('blog');
 
-// Individual Blog Posts
+// Blog post dengan slug dinamis
+Route::get('/blog/{slug}', [App\Http\Controllers\BlogController::class, 'show'])->name('blog.show');
+
+// Blog Categories
+Route::get('/blog/kategori/{category}', [App\Http\Controllers\BlogController::class, 'category'])->name('blog.category');
+
+// Individual Blog Posts (static routes - bisa dihapus jika sudah menggunakan dynamic routes)
 Route::get('/blog/tips-belajar-efektif', function () {
     return view('blog.tips-belajar-efektif');
 })->name('blog.tips-belajar-efektif');
@@ -209,11 +213,6 @@ Route::get('/blog/belajar-fisika-eksperimen', function () {
 Route::get('/blog/kesehatan-mental-belajar', function () {
     return view('blog.kesehatan-mental-belajar');
 })->name('blog.kesehatan-mental-belajar');
-
-// Blog Categories
-Route::get('/blog/kategori/{category}', function ($category) {
-    return view('blog.category', compact('category'));
-})->name('blog.category');
 
 // Les Privat Routes
 Route::get('/les-privat/sd', function () {
