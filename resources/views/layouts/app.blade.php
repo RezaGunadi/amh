@@ -11,7 +11,14 @@
     @section('og_image', asset('images/og-image.jpg'))
     
     <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="/favicon-32x32.svg" sizes="32x32">
+    <link rel="icon" type="image/svg+xml" href="/favicon-16x16.svg" sizes="16x16">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.svg">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#2563EB">
+    <meta name="msapplication-TileColor" content="#2563EB">
     
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
