@@ -155,7 +155,7 @@ class PaketSoalSeeder extends Seeder
                 $jumlahSoal = min($soalPerSubTopik, $soalTersisa);
                 
                 // Process soal dalam chunk
-                $this->processSoalChunk($paketId, $mapel, $jenjang, $topik, $subTopik, $jumlahSoal, $soalChunkSize);
+                $this->processSoalChunk($paketId, $mapel, $jenjang, $topik, $key, $jumlahSoal, $soalChunkSize);
                 
                 $soalTersisa -= $jumlahSoal;
             }
