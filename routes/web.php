@@ -198,6 +198,14 @@ Route::get('/blog/cara-mudah-belajar-matematika', function () {
     return view('blog.cara-mudah-belajar-matematika');
 })->name('blog.cara-mudah-belajar-matematika');
 
+// Scraper Routes
+Route::prefix('scraper')->group(function () {
+    Route::get('/', [App\Http\Controllers\ScraperController::class, 'index'])->name('scraper.index');
+    Route::post('/scrape', [App\Http\Controllers\ScraperController::class, 'scrape'])->name('scraper.scrape');
+    Route::get('/history', [App\Http\Controllers\ScraperController::class, 'history'])->name('scraper.history');
+    Route::post('/clear', [App\Http\Controllers\ScraperController::class, 'clear'])->name('scraper.clear');
+});
+
 Route::get('/blog/tips-jago-bahasa-inggris', function () {
     return view('blog.tips-jago-bahasa-inggris');
 })->name('blog.tips-jago-bahasa-inggris');

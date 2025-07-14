@@ -17,6 +17,8 @@ class PaketSoalSeeder extends Seeder
      */
     public function run()
     {
+        $this->command->info('Memulai seeding dengan optimasi memory...');
+        
         // Mata pelajaran per jenjang
         $mataPelajaran = [
             'SD' => [
@@ -51,43 +53,93 @@ class PaketSoalSeeder extends Seeder
             ]
         ];
 
-        // Jumlah paket per mata pelajaran (50 paket untuk setiap mata pelajaran)
-        $jumlahPaket = 50;
+        $totalJenjang = count($mataPelajaran);
+        $currentJenjang = 0;
 
-        // Tahun ajaran
-        $tahunAjaran = ['2022', '2023', '2024'];
-
-        // Generate paket soal untuk setiap jenjang
         foreach ($mataPelajaran as $jenjang => $mapelList) {
+            $currentJenjang++;
+            $this->command->info("Processing jenjang {$jenjang} ({$currentJenjang}/{$totalJenjang})");
+            
+            $totalMapel = count($mapelList);
+            $currentMapel = 0;
+            
             foreach ($mapelList as $mapel) {
-                for ($i = 1; $i <= $jumlahPaket; $i++) {
-                    // Buat paket soal
-                    $paketSoal = PaketSoal::create([
-                        'user_id' => 1, // Admin ID
-                        'name' => "Paket {$i} {$mapel} {$jenjang}",
-                        'jenjang' => $jenjang,
-                        'mapel' => $mapel,
-                        'tahun' => $tahunAjaran[array_rand($tahunAjaran)],
-                        'is_public' => 1,
-                        'is_deleted' => 0
-                    ]);
-
-                    // Generate 50 soal untuk setiap paket
-                    for ($j = 1; $j <= 50; $j++) {
-                        $this->generateSoal($paketSoal->id, $mapel, $jenjang);
-                    }
-                }
+                $currentMapel++;
+                $this->command->info("  Processing mapel {$mapel} ({$currentMapel}/{$totalMapel})");
+                
+                // Process dalam chunk untuk setiap mata pelajaran
+                $this->processMapelInChunks($jenjang, $mapel);
+                
+                // Clear memory setelah setiap mata pelajaran
+                gc_collect_cycles();
             }
+        }
+        
+        $this->command->info('Seeding selesai!');
+    }
+
+    /**
+     * Process mata pelajaran dalam chunk untuk menghemat memory
+     */
+    private function processMapelInChunks($jenjang, $mapel)
+    {
+        $jumlahPaket = 50; // Total paket per mata pelajaran
+        $chunkSize = 10; // Jumlah paket per chunk
+        $chunks = ceil($jumlahPaket / $chunkSize);
+        
+        for ($chunkIndex = 0; $chunkIndex < $chunks; $chunkIndex++) {
+            $startIndex = $chunkIndex * $chunkSize;
+            $endIndex = min(($chunkIndex + 1) * $chunkSize, $jumlahPaket);
+            
+            $this->command->info("    Processing chunk " . ($chunkIndex + 1) . "/{$chunks} (paket " . ($startIndex + 1) . "-{$endIndex})");
+            
+            // Process paket dalam chunk ini
+            $this->processPaketChunk($jenjang, $mapel, $startIndex, $endIndex);
+            
+            // Clear memory setelah setiap chunk
+            gc_collect_cycles();
         }
     }
 
-    private function generateSoal($paketId, $mapel, $jenjang)
+    /**
+     * Process chunk paket soal
+     */
+    private function processPaketChunk($jenjang, $mapel, $startIndex, $endIndex)
+    {
+        $tahunAjaran = ['2022', '2023', '2024'];
+        
+        for ($i = $startIndex; $i < $endIndex; $i++) {
+            $paketNumber = $i + 1;
+            
+            // Buat paket soal
+            $paketSoal = PaketSoal::create([
+                'user_id' => 1, // Admin ID
+                'name' => "Paket {$paketNumber} {$mapel} {$jenjang}",
+                'jenjang' => $jenjang,
+                'mapel' => $mapel,
+                'tahun' => $tahunAjaran[array_rand($tahunAjaran)],
+                'is_public' => 1,
+                'is_deleted' => 0
+            ]);
+
+            // Generate soal dalam chunk untuk paket ini
+            $this->generateSoalInChunks($paketSoal->id, $mapel, $jenjang);
+            
+            // Clear memory setelah setiap paket
+            unset($paketSoal);
+            gc_collect_cycles();
+        }
+    }
+
+    /**
+     * Generate soal dalam chunk untuk menghemat memory
+     */
+    private function generateSoalInChunks($paketId, $mapel, $jenjang)
     {
         // Dapatkan kurikulum untuk mata pelajaran dan jenjang
         $kurikulum = $this->getKurikulum($mapel, $jenjang);
 
         // Hitung jumlah topik dan sub-topik
-        $totalTopik = count($kurikulum);
         $totalSubTopik = 0;
         foreach ($kurikulum as $topik => $subTopik) {
             $totalSubTopik += count($subTopik);
@@ -96,19 +148,41 @@ class PaketSoalSeeder extends Seeder
         // Distribusikan soal berdasarkan topik dan sub-topik
         $soalPerSubTopik = ceil(50 / $totalSubTopik);
         $soalTersisa = 50;
+        $soalChunkSize = 10; // Jumlah soal per chunk
 
         foreach ($kurikulum as $topik => $subTopikList) {
             foreach ($subTopikList as $key => $subTopik) {
                 $jumlahSoal = min($soalPerSubTopik, $soalTersisa);
-                for ($i = 0; $i < $jumlahSoal; $i++) {
-                    // Generate template soal
-                    $template = $this->generateTemplateSoal($mapel, $jenjang, $topik, $subTopik);
-
-                    // Create the soal
-                    $this->createSoal($paketId, $template);
-                }
+                
+                // Process soal dalam chunk
+                $this->processSoalChunk($paketId, $mapel, $jenjang, $topik, $subTopik, $jumlahSoal, $soalChunkSize);
+                
                 $soalTersisa -= $jumlahSoal;
             }
+        }
+    }
+
+    /**
+     * Process chunk soal
+     */
+    private function processSoalChunk($paketId, $mapel, $jenjang, $topik, $subTopik, $jumlahSoal, $chunkSize)
+    {
+        $chunks = ceil($jumlahSoal / $chunkSize);
+        
+        for ($chunkIndex = 0; $chunkIndex < $chunks; $chunkIndex++) {
+            $startIndex = $chunkIndex * $chunkSize;
+            $endIndex = min(($chunkIndex + 1) * $chunkSize, $jumlahSoal);
+            
+            for ($i = $startIndex; $i < $endIndex; $i++) {
+                // Generate template soal menggunakan fungsi asli yang kaya variasi
+                $template = $this->generateTemplateSoal($mapel, $jenjang, $topik, $subTopik);
+
+                // Create the soal
+                $this->createSoal($paketId, $template);
+            }
+            
+            // Clear memory setelah setiap chunk soal
+            gc_collect_cycles();
         }
     }
 
@@ -172,6 +246,174 @@ class PaketSoalSeeder extends Seeder
             case 'Geometri':
                 $template = $this->generateSoalMatematika($jenjang, $topik, $subTopik);
                 break;
+            case 'Kalkulus':
+                if ($subTopik == 'Limit') {
+                    switch ($jenjang) {
+                        case 'SMA':
+                            $questions = [
+                                [
+                                    'soal' => "Nilai dari lim(x→2) (x² - 4)/(x - 2) adalah...",
+                                    'jawaban' => [
+                                        'a' => '4',
+                                        'b' => '2',
+                                        'c' => '0',
+                                        'd' => '∞',
+                                        'e' => 'Tidak ada'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Nilai dari lim(x→0) sin(x)/x adalah...",
+                                    'jawaban' => [
+                                        'a' => '1',
+                                        'b' => '0',
+                                        'c' => '∞',
+                                        'd' => '-1',
+                                        'e' => 'Tidak ada'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Nilai dari lim(x→∞) (2x + 1)/(x + 3) adalah...",
+                                    'jawaban' => [
+                                        'a' => '2',
+                                        'b' => '1',
+                                        'c' => '0',
+                                        'd' => '∞',
+                                        'e' => 'Tidak ada'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Turunan') {
+                    switch ($jenjang) {
+                        case 'SMA':
+                            $questions = [
+                                [
+                                    'soal' => "Turunan dari f(x) = x² adalah...",
+                                    'jawaban' => [
+                                        'a' => 'f\'(x) = 2x',
+                                        'b' => 'f\'(x) = x',
+                                        'c' => 'f\'(x) = 2x²',
+                                        'd' => 'f\'(x) = x²',
+                                        'e' => 'f\'(x) = 2'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Turunan dari f(x) = x³ + 2x² adalah...",
+                                    'jawaban' => [
+                                        'a' => 'f\'(x) = 3x² + 4x',
+                                        'b' => 'f\'(x) = 3x² + 2x',
+                                        'c' => 'f\'(x) = x² + 4x',
+                                        'd' => 'f\'(x) = 3x + 4',
+                                        'e' => 'f\'(x) = 3x + 2'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Turunan dari f(x) = sin(x) adalah...",
+                                    'jawaban' => [
+                                        'a' => 'f\'(x) = cos(x)',
+                                        'b' => 'f\'(x) = -sin(x)',
+                                        'c' => 'f\'(x) = -cos(x)',
+                                        'd' => 'f\'(x) = sin(x)',
+                                        'e' => 'f\'(x) = tan(x)'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Integral') {
+                    switch ($jenjang) {
+                        case 'SMA':
+                            $questions = [
+                                [
+                                    'soal' => "Integral dari f(x) = 2x adalah...",
+                                    'jawaban' => [
+                                        'a' => '∫f(x)dx = x² + C',
+                                        'b' => '∫f(x)dx = x + C',
+                                        'c' => '∫f(x)dx = 2x² + C',
+                                        'd' => '∫f(x)dx = x²',
+                                        'e' => '∫f(x)dx = 2x + C'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Integral dari f(x) = 3x² adalah...",
+                                    'jawaban' => [
+                                        'a' => '∫f(x)dx = x³ + C',
+                                        'b' => '∫f(x)dx = 3x + C',
+                                        'c' => '∫f(x)dx = x² + C',
+                                        'd' => '∫f(x)dx = 3x³ + C',
+                                        'e' => '∫f(x)dx = x³'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Integral dari f(x) = cos(x) adalah...",
+                                    'jawaban' => [
+                                        'a' => '∫f(x)dx = sin(x) + C',
+                                        'b' => '∫f(x)dx = -sin(x) + C',
+                                        'c' => '∫f(x)dx = -cos(x) + C',
+                                        'd' => '∫f(x)dx = cos(x) + C',
+                                        'e' => '∫f(x)dx = tan(x) + C'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Aplikasi') {
+                    switch ($jenjang) {
+                        case 'SMA':
+                            $questions = [
+                                [
+                                    'soal' => "Aplikasi turunan untuk mencari nilai maksimum/minimum fungsi adalah...",
+                                    'jawaban' => [
+                                        'a' => 'Mencari titik stasioner dengan f\'(x) = 0',
+                                        'b' => 'Mencari nilai fungsi di titik tertentu',
+                                        'c' => 'Mencari integral dari fungsi',
+                                        'd' => 'Mencari limit fungsi',
+                                        'e' => 'Mencari domain fungsi'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Aplikasi integral untuk menghitung luas daerah adalah...",
+                                    'jawaban' => [
+                                        'a' => '∫[a,b] f(x)dx',
+                                        'b' => 'f(b) - f(a)',
+                                        'c' => 'f\'(b) - f\'(a)',
+                                        'd' => 'f(a) + f(b)',
+                                        'e' => 'f(a) × f(b)'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                }
+                break;
         }
 
         // Ensure template has valid content
@@ -181,16 +423,6 @@ class PaketSoalSeeder extends Seeder
 
         return $template;
     }
-
-    // private function generateDefaultTemplate($mapel, $jenjang, $topik, $subTopik)
-    // {
-    //     return [
-    //         'soal' => $this->generateDefaultSoal($mapel, $jenjang, $topik, $subTopik),
-    //         'jawaban' => $this->generateDefaultJawaban($mapel, $jenjang, $topik, $subTopik),
-    //         'benar' => 'a',
-    //         'perlu_gambar' => false
-    //     ];
-    // }
 
     private function generateDefaultSoal($mapel, $jenjang, $topik, $subTopik)
     {
@@ -228,22 +460,6 @@ class PaketSoalSeeder extends Seeder
 
         return $soalTemplates[array_rand($soalTemplates)];
     }
-
-    // private function generateDefaultJawaban($mapel, $jenjang, $topik, $subTopik)
-    // {
-    //     $jawabanTemplates = [
-    //         'a' => "Jawaban yang paling tepat dan sesuai dengan konteks",
-    //         'b' => "Jawaban yang kurang tepat namun masih relevan",
-    //         'c' => "Jawaban yang tidak sesuai dengan konteks",
-    //         'd' => "Jawaban yang bertentangan dengan konteks",
-    //         'e' => "Jawaban yang tidak ada hubungannya dengan konteks"
-    //     ];
-
-    //     return [
-    //         'jawaban' => $jawabanTemplates,
-    //         'benar' => 'a'
-    //     ];
-    // }
 
     private function generateSoalMatematika($jenjang, $topik, $subTopik)
     {
@@ -1364,22 +1580,30 @@ class PaketSoalSeeder extends Seeder
                         'Bilangan Cacah' => 'Operasi hitung bilangan cacah sampai 1000',
                         'Bilangan Bulat' => 'Operasi hitung bilangan bulat dan sifat-sifatnya',
                         'Pecahan' => 'Pecahan sederhana dan operasi hitung pecahan',
-                        'KPK dan FPB' => 'Kelipatan Persekutuan Terkecil dan Faktor Persekutuan Terbesar'
+                        'KPK dan FPB' => 'Kelipatan Persekutuan Terkecil dan Faktor Persekutuan Terbesar',
+                        'Bilangan Desimal' => 'Bilangan desimal dan operasi hitungnya',
+                        'Bilangan Romawi' => 'Bilangan Romawi dan konversinya'
                     ],
                     'Geometri' => [
                         'Bangun Datar' => 'Sifat-sifat bangun datar sederhana (persegi, persegi panjang, segitiga)',
                         'Luas dan Keliling' => 'Menghitung luas dan keliling bangun datar sederhana',
-                        'Simetri' => 'Simetri lipat dan simetri putar pada bangun datar'
+                        'Simetri' => 'Simetri lipat dan simetri putar pada bangun datar',
+                        'Bangun Ruang' => 'Sifat-sifat bangun ruang sederhana (kubus, balok)',
+                        'Volume' => 'Menghitung volume bangun ruang sederhana'
                     ],
                     'Pengukuran' => [
                         'Satuan Panjang' => 'Satuan panjang dan konversinya',
                         'Satuan Berat' => 'Satuan berat dan konversinya',
                         'Satuan Waktu' => 'Satuan waktu dan konversinya',
-                        'Satuan Luas' => 'Satuan luas dan konversinya'
+                        'Satuan Luas' => 'Satuan luas dan konversinya',
+                        'Satuan Volume' => 'Satuan volume dan konversinya',
+                        'Satuan Debit' => 'Satuan debit dan konversinya'
                     ],
                     'Statistika' => [
                         'Pengumpulan Data' => 'Mengumpulkan dan menyajikan data dalam bentuk tabel',
-                        'Diagram' => 'Menyajikan data dalam bentuk diagram batang dan diagram gambar'
+                        'Diagram' => 'Menyajikan data dalam bentuk diagram batang dan diagram gambar',
+                        'Rata-rata' => 'Menghitung rata-rata dari data',
+                        'Modus' => 'Menentukan modus dari data'
                     ]
                 ],
                 'SMP' => [
@@ -1387,22 +1611,32 @@ class PaketSoalSeeder extends Seeder
                         'Bilangan Bulat' => 'Operasi hitung bilangan bulat dan sifat-sifatnya',
                         'Bilangan Pecahan' => 'Operasi hitung pecahan dan desimal',
                         'Bilangan Berpangkat' => 'Bilangan berpangkat dan bentuk akar',
-                        'Perbandingan' => 'Perbandingan senilai dan berbalik nilai'
+                        'Perbandingan' => 'Perbandingan senilai dan berbalik nilai',
+                        'Bilangan Rasional' => 'Bilangan rasional dan irasional',
+                        'Bilangan Real' => 'Sistem bilangan real'
                     ],
                     'Aljabar' => [
                         'Persamaan Linear' => 'Persamaan dan pertidaksamaan linear satu variabel',
                         'Sistem Persamaan' => 'Sistem persamaan linear dua variabel',
-                        'Fungsi' => 'Relasi dan fungsi'
+                        'Fungsi' => 'Relasi dan fungsi',
+                        'Persamaan Kuadrat' => 'Persamaan kuadrat dan penyelesaiannya',
+                        'Pertidaksamaan' => 'Pertidaksamaan linear dan kuadrat',
+                        'Polinomial' => 'Operasi aljabar pada polinomial'
                     ],
                     'Geometri' => [
                         'Bangun Datar' => 'Sifat-sifat dan keliling serta luas bangun datar',
                         'Bangun Ruang' => 'Sifat-sifat dan luas permukaan serta volume bangun ruang',
-                        'Teorema Pythagoras' => 'Teorema Pythagoras dan tripel Pythagoras'
+                        'Teorema Pythagoras' => 'Teorema Pythagoras dan tripel Pythagoras',
+                        'Kesebangunan' => 'Kesebangunan dan kekongruenan',
+                        'Lingkaran' => 'Unsur-unsur lingkaran dan luasnya',
+                        'Transformasi' => 'Translasi, refleksi, rotasi, dan dilatasi'
                     ],
                     'Statistika' => [
                         'Penyajian Data' => 'Menyajikan data dalam bentuk tabel, diagram, dan grafik',
                         'Ukuran Pemusatan' => 'Mean, median, dan modus',
-                        'Peluang' => 'Peluang kejadian sederhana'
+                        'Peluang' => 'Peluang kejadian sederhana',
+                        'Ukuran Penyebaran' => 'Jangkauan, simpangan rata-rata, dan variansi',
+                        'Distribusi Frekuensi' => 'Distribusi frekuensi dan histogram'
                     ]
                 ],
                 'SMA' => [
@@ -1410,23 +1644,38 @@ class PaketSoalSeeder extends Seeder
                         'Fungsi' => 'Fungsi komposisi dan fungsi invers',
                         'Persamaan' => 'Persamaan dan pertidaksamaan kuadrat',
                         'Logaritma' => 'Logaritma dan sifat-sifatnya',
-                        'Matriks' => 'Operasi matriks dan determinan'
+                        'Matriks' => 'Operasi matriks dan determinan',
+                        'Sistem Persamaan' => 'Sistem persamaan linear tiga variabel',
+                        'Pertidaksamaan' => 'Pertidaksamaan nilai mutlak dan pecahan',
+                        'Polinomial' => 'Teorema sisa dan faktor polinomial'
                     ],
                     'Kalkulus' => [
                         'Limit' => 'Limit fungsi aljabar dan trigonometri',
                         'Turunan' => 'Turunan fungsi aljabar dan trigonometri',
                         'Integral' => 'Integral tak tentu dan integral tentu',
-                        'Aplikasi' => 'Aplikasi turunan dan integral'
+                        'Aplikasi' => 'Aplikasi turunan dan integral',
+                        'Limit Tak Hingga' => 'Limit fungsi untuk x mendekati tak hingga',
+                        'Kontinuitas' => 'Kontinuitas fungsi',
+                        'Turunan Tingkat Tinggi' => 'Turunan kedua dan seterusnya',
+                        'Integral Parsial' => 'Integral dengan metode parsial',
+                        'Integral Substitusi' => 'Integral dengan metode substitusi'
                     ],
                     'Geometri' => [
                         'Trigonometri' => 'Perbandingan trigonometri dan identitas trigonometri',
                         'Vektor' => 'Operasi vektor dan aplikasinya',
-                        'Transformasi' => 'Transformasi geometri'
+                        'Transformasi' => 'Transformasi geometri',
+                        'Lingkaran' => 'Persamaan lingkaran dan garis singgung',
+                        'Elips' => 'Persamaan elips dan sifat-sifatnya',
+                        'Parabola' => 'Persamaan parabola dan sifat-sifatnya',
+                        'Hiperbola' => 'Persamaan hiperbola dan sifat-sifatnya'
                     ],
                     'Statistika' => [
                         'Peluang' => 'Peluang kejadian majemuk',
                         'Distribusi' => 'Distribusi normal dan binomial',
-                        'Inferensia' => 'Statistika inferensial'
+                        'Inferensia' => 'Statistika inferensial',
+                        'Regresi' => 'Analisis regresi dan korelasi',
+                        'Uji Hipotesis' => 'Uji hipotesis dan interval kepercayaan',
+                        'Distribusi Sampling' => 'Distribusi sampling dan teorema limit pusat'
                     ]
                 ]
             ],
@@ -1435,66 +1684,90 @@ class PaketSoalSeeder extends Seeder
                     'Membaca' => [
                         'Membaca Nyaring' => 'Membaca nyaring dengan lafal dan intonasi yang tepat',
                         'Membaca Pemahaman' => 'Membaca dan memahami teks sederhana',
-                        'Membaca Cepat' => 'Membaca cepat dengan pemahaman'
+                        'Membaca Cepat' => 'Membaca cepat dengan pemahaman',
+                        'Membaca Intensif' => 'Membaca intensif untuk memahami isi teks',
+                        'Membaca Ekstensif' => 'Membaca ekstensif untuk memperluas wawasan'
                     ],
                     'Menulis' => [
                         'Menulis Karangan' => 'Menulis karangan sederhana',
                         'Menulis Surat' => 'Menulis surat pribadi',
-                        'Menulis Puisi' => 'Menulis puisi anak'
+                        'Menulis Puisi' => 'Menulis puisi anak',
+                        'Menulis Cerita' => 'Menulis cerita pengalaman',
+                        'Menulis Laporan' => 'Menulis laporan sederhana'
                     ],
                     'Berbicara' => [
                         'Berbicara di Depan Kelas' => 'Berbicara di depan kelas dengan bahasa yang baik',
                         'Berdiskusi' => 'Berdiskusi dalam kelompok kecil',
-                        'Bercerita' => 'Bercerita pengalaman pribadi'
+                        'Bercerita' => 'Bercerita pengalaman pribadi',
+                        'Berwawancara' => 'Melakukan wawancara sederhana',
+                        'Berpidato' => 'Berpidato dengan bahasa yang baik'
                     ],
                     'Kebahasaan' => [
                         'Kata Baku' => 'Penggunaan kata baku dan tidak baku',
                         'Ejaan' => 'Penggunaan ejaan yang benar',
-                        'Tanda Baca' => 'Penggunaan tanda baca yang tepat'
+                        'Tanda Baca' => 'Penggunaan tanda baca yang tepat',
+                        'Kalimat' => 'Struktur kalimat yang benar',
+                        'Paragraf' => 'Pengembangan paragraf sederhana'
                     ]
                 ],
                 'SMP' => [
                     'Membaca' => [
                         'Membaca Kritis' => 'Membaca dan memahami teks dengan kritis',
                         'Membaca Sastra' => 'Membaca dan memahami karya sastra',
-                        'Membaca Berita' => 'Membaca dan memahami berita'
+                        'Membaca Berita' => 'Membaca dan memahami berita',
+                        'Membaca Teks Ilmiah' => 'Membaca dan memahami teks ilmiah',
+                        'Membaca Teks Narasi' => 'Membaca dan memahami teks narasi'
                     ],
                     'Menulis' => [
                         'Menulis Karya Ilmiah' => 'Menulis karya ilmiah sederhana',
                         'Menulis Cerpen' => 'Menulis cerita pendek',
-                        'Menulis Berita' => 'Menulis berita'
+                        'Menulis Berita' => 'Menulis berita',
+                        'Menulis Puisi' => 'Menulis puisi bebas',
+                        'Menulis Drama' => 'Menulis naskah drama sederhana'
                     ],
                     'Berbicara' => [
                         'Berpidato' => 'Berpidato dengan bahasa yang baik',
                         'Debat' => 'Berdebat dengan argumentasi yang baik',
-                        'Wawancara' => 'Melakukan wawancara'
+                        'Wawancara' => 'Melakukan wawancara',
+                        'Diskusi' => 'Berdiskusi dengan bahasa yang baik',
+                        'Presentasi' => 'Mempresentasikan hasil kerja'
                     ],
                     'Kebahasaan' => [
                         'Kalimat Efektif' => 'Penggunaan kalimat efektif',
                         'Paragraf' => 'Pengembangan paragraf',
-                        'Karya Sastra' => 'Unsur-unsur karya sastra'
+                        'Karya Sastra' => 'Unsur-unsur karya sastra',
+                        'Teks' => 'Jenis-jenis teks dan strukturnya',
+                        'Bahasa Figuratif' => 'Penggunaan bahasa figuratif'
                     ]
                 ],
                 'SMA' => [
                     'Membaca' => [
                         'Membaca Karya Sastra' => 'Membaca dan menganalisis karya sastra',
                         'Membaca Kritis' => 'Membaca dan menganalisis teks secara kritis',
-                        'Membaca Berita' => 'Membaca dan menganalisis berita'
+                        'Membaca Berita' => 'Membaca dan menganalisis berita',
+                        'Membaca Teks Akademik' => 'Membaca dan menganalisis teks akademik',
+                        'Membaca Teks Kompleks' => 'Membaca dan menganalisis teks kompleks'
                     ],
                     'Menulis' => [
                         'Menulis Karya Ilmiah' => 'Menulis karya ilmiah',
                         'Menulis Karya Sastra' => 'Menulis karya sastra',
-                        'Menulis Berita' => 'Menulis berita dengan bahasa jurnalistik'
+                        'Menulis Berita' => 'Menulis berita dengan bahasa jurnalistik',
+                        'Menulis Esai' => 'Menulis esai argumentatif',
+                        'Menulis Resensi' => 'Menulis resensi buku'
                     ],
                     'Berbicara' => [
                         'Berpidato' => 'Berpidato dengan bahasa yang baik dan benar',
                         'Debat' => 'Berdebat dengan argumentasi yang kuat',
-                        'Diskusi' => 'Berdiskusi dengan bahasa yang baik'
+                        'Diskusi' => 'Berdiskusi dengan bahasa yang baik',
+                        'Presentasi' => 'Mempresentasikan karya ilmiah',
+                        'Orasi' => 'Berorasi dengan bahasa yang persuasif'
                     ],
                     'Kebahasaan' => [
                         'Kalimat Efektif' => 'Penggunaan kalimat efektif dalam berbagai konteks',
                         'Paragraf' => 'Pengembangan paragraf yang koheren',
-                        'Karya Sastra' => 'Analisis karya sastra'
+                        'Karya Sastra' => 'Analisis karya sastra',
+                        'Teks' => 'Analisis struktur dan kaidah kebahasaan teks',
+                        'Bahasa Figuratif' => 'Penggunaan bahasa figuratif dalam karya sastra'
                     ]
                 ]
             ],
@@ -1503,51 +1776,238 @@ class PaketSoalSeeder extends Seeder
                     'Makhluk Hidup' => [
                         'Ciri-ciri Makhluk Hidup' => 'Ciri-ciri makhluk hidup dan pengelompokannya',
                         'Pertumbuhan' => 'Pertumbuhan dan perkembangan makhluk hidup',
-                        'Adaptasi' => 'Adaptasi makhluk hidup terhadap lingkungan'
+                        'Adaptasi' => 'Adaptasi makhluk hidup terhadap lingkungan',
+                        'Ekosistem' => 'Ekosistem dan rantai makanan',
+                        'Pelestarian' => 'Pelestarian makhluk hidup'
                     ],
                     'Benda dan Sifatnya' => [
                         'Sifat Benda' => 'Sifat-sifat benda padat, cair, dan gas',
                         'Perubahan Wujud' => 'Perubahan wujud benda',
-                        'Energi' => 'Bentuk-bentuk energi dan perubahannya'
+                        'Energi' => 'Bentuk-bentuk energi dan perubahannya',
+                        'Gaya' => 'Gaya dan pengaruhnya terhadap benda',
+                        'Pesawat Sederhana' => 'Pesawat sederhana dalam kehidupan sehari-hari'
                     ],
                     'Bumi dan Alam Semesta' => [
                         'Tata Surya' => 'Sistem tata surya dan benda-benda langit',
                         'Cuaca' => 'Cuaca dan iklim',
-                        'Bencana Alam' => 'Bencana alam dan cara penanggulangannya'
+                        'Bencana Alam' => 'Bencana alam dan cara penanggulangannya',
+                        'Struktur Bumi' => 'Struktur bumi dan lapisan-lapisan',
+                        'Sumber Daya Alam' => 'Sumber daya alam dan pemanfaatannya'
                     ]
                 ],
                 'SMP' => [
                     'Fisika' => [
                         'Gerak' => 'Gerak lurus dan gerak melingkar',
                         'Gaya' => 'Gaya dan hukum Newton',
-                        'Energi' => 'Energi dan perubahannya'
+                        'Energi' => 'Energi dan perubahannya',
+                        'Usaha' => 'Usaha dan daya',
+                        'Pesawat Sederhana' => 'Pesawat sederhana dan keuntungan mekanis',
+                        'Tekanan' => 'Tekanan pada zat padat, cair, dan gas',
+                        'Getaran' => 'Getaran dan gelombang',
+                        'Bunyi' => 'Bunyi dan sifat-sifatnya',
+                        'Cahaya' => 'Cahaya dan sifat-sifatnya',
+                        'Listrik' => 'Listrik statis dan dinamis',
+                        'Magnet' => 'Magnet dan kemagnetannya'
                     ],
                     'Kimia' => [
                         'Zat' => 'Sifat fisika dan kimia zat',
                         'Larutan' => 'Larutan dan konsentrasi',
-                        'Asam Basa' => 'Asam, basa, dan garam'
+                        'Asam Basa' => 'Asam, basa, dan garam',
+                        'Unsur' => 'Unsur, senyawa, dan campuran',
+                        'Perubahan Zat' => 'Perubahan fisika dan kimia',
+                        'Struktur Atom' => 'Struktur atom dan sistem periodik',
+                        'Ikatan Kimia' => 'Ikatan kimia sederhana',
+                        'Reaksi Kimia' => 'Reaksi kimia dan persamaan reaksi'
                     ],
                     'Biologi' => [
                         'Sistem Organ' => 'Sistem organ pada manusia',
                         'Reproduksi' => 'Reproduksi pada manusia',
-                        'Pewarisan' => 'Pewarisan sifat'
+                        'Pewarisan' => 'Pewarisan sifat',
+                        'Ekosistem' => 'Ekosistem dan interaksi antar komponen',
+                        'Pencemaran' => 'Pencemaran lingkungan dan dampaknya',
+                        'Bioteknologi' => 'Bioteknologi sederhana',
+                        'Pertumbuhan' => 'Pertumbuhan dan perkembangan tumbuhan',
+                        'Fotosintesis' => 'Fotosintesis dan respirasi'
                     ]
                 ],
                 'SMA' => [
                     'Fisika' => [
                         'Mekanika' => 'Hukum Newton dan gerak',
                         'Termodinamika' => 'Hukum termodinamika',
-                        'Listrik' => 'Listrik statis dan dinamis'
+                        'Listrik' => 'Listrik statis dan dinamis',
+                        'Gelombang' => 'Gelombang mekanik dan elektromagnetik',
+                        'Optik' => 'Optik geometri dan fisis',
+                        'Fisika Modern' => 'Fisika modern dan relativitas'
                     ],
                     'Kimia' => [
                         'Struktur Atom' => 'Struktur atom dan sistem periodik',
                         'Ikatan Kimia' => 'Ikatan kimia dan bentuk molekul',
-                        'Reaksi Kimia' => 'Laju reaksi dan kesetimbangan'
+                        'Reaksi Kimia' => 'Laju reaksi dan kesetimbangan',
+                        'Larutan' => 'Larutan dan sifat koligatif',
+                        'Elektrokimia' => 'Elektrokimia dan sel elektrokimia',
+                        'Kimia Organik' => 'Kimia organik dan hidrokarbon'
                     ],
                     'Biologi' => [
                         'Sel' => 'Struktur dan fungsi sel',
                         'Metabolisme' => 'Metabolisme sel',
-                        'Genetika' => 'Pewarisan sifat dan mutasi'
+                        'Genetika' => 'Pewarisan sifat dan mutasi',
+                        'Evolusi' => 'Evolusi dan seleksi alam',
+                        'Ekologi' => 'Ekologi dan konservasi',
+                        'Bioteknologi' => 'Bioteknologi modern'
+                    ]
+                ]
+            ],
+            'Fisika' => [
+                'SMA' => [
+                    'Mekanika' => [
+                        'Kinematika' => 'Gerak lurus beraturan dan berubah beraturan',
+                        'Dinamika' => 'Hukum Newton dan aplikasinya',
+                        'Energi' => 'Energi kinetik, potensial, dan mekanik',
+                        'Momentum' => 'Momentum linear dan impuls',
+                        'Tumbukan' => 'Tumbukan elastis dan tidak elastis',
+                        'Gerak Melingkar' => 'Gerak melingkar beraturan',
+                        'Gravitasi' => 'Hukum gravitasi Newton',
+                        'Usaha' => 'Usaha dan daya',
+                        'Pesawat Sederhana' => 'Pesawat sederhana dan keuntungan mekanis'
+                    ],
+                    'Fluida' => [
+                        'Tekanan' => 'Tekanan pada zat padat, cair, dan gas',
+                        'Hukum Pascal' => 'Hukum Pascal dan aplikasinya',
+                        'Hukum Archimedes' => 'Hukum Archimedes dan gaya apung',
+                        'Viskositas' => 'Viskositas dan aliran fluida',
+                        'Bernoulli' => 'Persamaan Bernoulli'
+                    ],
+                    'Termodinamika' => [
+                        'Suhu' => 'Suhu dan kalor',
+                        'Pemuaian' => 'Pemuaian zat padat, cair, dan gas',
+                        'Kalor' => 'Kalor jenis dan kalor laten',
+                        'Hukum Termodinamika' => 'Hukum termodinamika I dan II',
+                        'Mesin Kalor' => 'Mesin kalor dan efisiensi'
+                    ],
+                    'Gelombang' => [
+                        'Gelombang Mekanik' => 'Gelombang transversal dan longitudinal',
+                        'Gelombang Bunyi' => 'Gelombang bunyi dan sifat-sifatnya',
+                        'Gelombang Cahaya' => 'Gelombang cahaya dan sifat-sifatnya',
+                        'Interferensi' => 'Interferensi dan difraksi',
+                        'Polarisasi' => 'Polarisasi cahaya'
+                    ],
+                    'Listrik' => [
+                        'Listrik Statis' => 'Muatan listrik dan hukum Coulomb',
+                        'Medan Listrik' => 'Medan listrik dan potensial listrik',
+                        'Kapasitor' => 'Kapasitor dan kapasitansi',
+                        'Arus Listrik' => 'Arus listrik dan hambatan',
+                        'Rangkaian Listrik' => 'Rangkaian seri dan paralel',
+                        'Energi Listrik' => 'Energi dan daya listrik',
+                        'Induksi Elektromagnetik' => 'Induksi elektromagnetik'
+                    ],
+                    'Fisika Modern' => [
+                        'Relativitas' => 'Teori relativitas Einstein',
+                        'Foton' => 'Foton dan efek fotolistrik',
+                        'Atom' => 'Model atom Bohr',
+                        'Radioaktivitas' => 'Radioaktivitas dan peluruhan',
+                        'Fisika Kuantum' => 'Fisika kuantum dan dualisme gelombang-partikel'
+                    ]
+                ]
+            ],
+            'Kimia' => [
+                'SMA' => [
+                    'Struktur Atom' => [
+                        'Model Atom' => 'Perkembangan model atom',
+                        'Konfigurasi Elektron' => 'Konfigurasi elektron dan kulit atom',
+                        'Sistem Periodik' => 'Sistem periodik unsur',
+                        'Sifat Periodik' => 'Sifat periodik unsur',
+                        'Ikatan Ion' => 'Ikatan ion dan senyawa ion',
+                        'Ikatan Kovalen' => 'Ikatan kovalen dan senyawa kovalen',
+                        'Ikatan Logam' => 'Ikatan logam dan sifat logam'
+                    ],
+                    'Stoikiometri' => [
+                        'Rumus Kimia' => 'Rumus kimia dan persamaan reaksi',
+                        'Hukum Dasar' => 'Hukum dasar kimia',
+                        'Perhitungan Kimia' => 'Perhitungan kimia dan stoikiometri',
+                        'Gas' => 'Hukum gas dan persamaan gas ideal',
+                        'Larutan' => 'Konsentrasi larutan dan pengenceran'
+                    ],
+                    'Termokimia' => [
+                        'Entalpi' => 'Entalpi dan perubahan entalpi',
+                        'Hukum Hess' => 'Hukum Hess dan perhitungan entalpi',
+                        'Entalpi Pembentukan' => 'Entalpi pembentukan dan pembakaran',
+                        'Kalorimeter' => 'Kalorimeter dan pengukuran kalor'
+                    ],
+                    'Laju Reaksi' => [
+                        'Faktor Laju' => 'Faktor-faktor yang mempengaruhi laju reaksi',
+                        'Orde Reaksi' => 'Orde reaksi dan persamaan laju',
+                        'Katalis' => 'Katalis dan mekanisme reaksi',
+                        'Kesetimbangan' => 'Kesetimbangan kimia dan tetapan kesetimbangan'
+                    ],
+                    'Larutan' => [
+                        'Sifat Koligatif' => 'Sifat koligatif larutan',
+                        'Penurunan Tekanan Uap' => 'Penurunan tekanan uap jenuh',
+                        'Kenaikan Titik Didih' => 'Kenaikan titik didih larutan',
+                        'Penurunan Titik Beku' => 'Penurunan titik beku larutan',
+                        'Tekanan Osmotik' => 'Tekanan osmotik larutan'
+                    ],
+                    'Elektrokimia' => [
+                        'Sel Volta' => 'Sel volta dan potensial elektrode',
+                        'Sel Elektrolisis' => 'Sel elektrolisis dan hukum Faraday',
+                        'Korosi' => 'Korosi dan pencegahannya',
+                        'Baterai' => 'Baterai dan akumulator'
+                    ],
+                    'Kimia Organik' => [
+                        'Hidrokarbon' => 'Hidrokarbon dan turunannya',
+                        'Alkana' => 'Alkana dan reaksi-reaksinya',
+                        'Alkena' => 'Alkena dan reaksi adisi',
+                        'Alkuna' => 'Alkuna dan reaksi-reaksinya',
+                        'Alkohol' => 'Alkohol dan eter',
+                        'Asam Karboksilat' => 'Asam karboksilat dan ester',
+                        'Polimer' => 'Polimer dan polimerisasi'
+                    ]
+                ]
+            ],
+            'Biologi' => [
+                'SMA' => [
+                    'Sel' => [
+                        'Struktur Sel' => 'Struktur dan fungsi organel sel',
+                        'Membran Sel' => 'Membran sel dan transportasi',
+                        'Nukleus' => 'Nukleus dan kromosom',
+                        'Pembelahan Sel' => 'Mitosis dan meiosis',
+                        'Metabolisme Sel' => 'Metabolisme sel dan enzim'
+                    ],
+                    'Genetika' => [
+                        'Hukum Mendel' => 'Hukum Mendel dan persilangan',
+                        'Alel' => 'Alel ganda dan poligenik',
+                        'Pautan' => 'Pautan gen dan pindah silang',
+                        'Mutasi' => 'Mutasi gen dan kromosom',
+                        'Rekayasa Genetika' => 'Rekayasa genetika dan bioteknologi'
+                    ],
+                    'Evolusi' => [
+                        'Seleksi Alam' => 'Seleksi alam dan adaptasi',
+                        'Variasi' => 'Variasi genetik dan spesiasi',
+                        'Fosil' => 'Fosil dan bukti evolusi',
+                        'Teori Evolusi' => 'Teori evolusi Darwin',
+                        'Evolusi Manusia' => 'Evolusi manusia dan primata'
+                    ],
+                    'Ekologi' => [
+                        'Populasi' => 'Dinamika populasi',
+                        'Komunitas' => 'Komunitas dan suksesi',
+                        'Ekosistem' => 'Ekosistem dan aliran energi',
+                        'Biogeokimia' => 'Siklus biogeokimia',
+                        'Konservasi' => 'Konservasi dan keanekaragaman hayati'
+                    ],
+                    'Sistem Organ' => [
+                        'Sistem Pencernaan' => 'Sistem pencernaan dan nutrisi',
+                        'Sistem Pernapasan' => 'Sistem pernapasan dan pertukaran gas',
+                        'Sistem Sirkulasi' => 'Sistem sirkulasi dan transportasi',
+                        'Sistem Ekskresi' => 'Sistem ekskresi dan osmoregulasi',
+                        'Sistem Saraf' => 'Sistem saraf dan koordinasi',
+                        'Sistem Endokrin' => 'Sistem endokrin dan hormon',
+                        'Sistem Reproduksi' => 'Sistem reproduksi dan perkembangan'
+                    ],
+                    'Mikrobiologi' => [
+                        'Bakteri' => 'Bakteri dan peranannya',
+                        'Virus' => 'Virus dan penyakit',
+                        'Protista' => 'Protista dan keanekaragamannya',
+                        'Jamur' => 'Jamur dan peranannya',
+                        'Imunologi' => 'Sistem imun dan pertahanan tubuh'
                     ]
                 ]
             ],
@@ -1556,66 +2016,98 @@ class PaketSoalSeeder extends Seeder
                     'Sejarah' => [
                         'Sejarah Indonesia' => 'Sejarah perjuangan kemerdekaan Indonesia',
                         'Peninggalan' => 'Peninggalan sejarah di Indonesia',
-                        'Tokoh' => 'Tokoh-tokoh sejarah Indonesia'
+                        'Tokoh' => 'Tokoh-tokoh sejarah Indonesia',
+                        'Kerajaan' => 'Kerajaan-kerajaan di Indonesia',
+                        'Kolonialisme' => 'Masa kolonialisme di Indonesia'
                     ],
                     'Geografi' => [
                         'Kenampakan Alam' => 'Kenampakan alam dan buatan',
                         'Peta' => 'Membaca dan membuat peta',
-                        'Sumber Daya' => 'Sumber daya alam dan pemanfaatannya'
+                        'Sumber Daya' => 'Sumber daya alam dan pemanfaatannya',
+                        'Lingkungan' => 'Lingkungan hidup dan pelestariannya',
+                        'Cuaca' => 'Cuaca dan iklim di Indonesia'
                     ],
                     'Ekonomi' => [
                         'Kegiatan Ekonomi' => 'Kegiatan ekonomi di lingkungan sekitar',
                         'Uang' => 'Sejarah dan fungsi uang',
-                        'Koperasi' => 'Koperasi dan peranannya'
+                        'Koperasi' => 'Koperasi dan peranannya',
+                        'Pasar' => 'Pasar dan jenis-jenisnya',
+                        'Produksi' => 'Kegiatan produksi, distribusi, dan konsumsi'
                     ],
                     'Sosiologi' => [
                         'Norma' => 'Norma dan nilai dalam masyarakat',
                         'Keberagaman' => 'Keberagaman suku bangsa dan budaya',
-                        'Globalisasi' => 'Dampak globalisasi'
+                        'Globalisasi' => 'Dampak globalisasi',
+                        'Interaksi' => 'Interaksi sosial dalam masyarakat',
+                        'Lembaga' => 'Lembaga sosial dalam masyarakat'
                     ]
                 ],
                 'SMP' => [
                     'Sejarah' => [
                         'Perjuangan' => 'Perjuangan kemerdekaan Indonesia',
                         'Proklamasi' => 'Proklamasi kemerdekaan',
-                        'Orde Baru' => 'Masa Orde Baru dan Reformasi'
+                        'Orde Baru' => 'Masa Orde Baru dan Reformasi',
+                        'Kolonialisme' => 'Kolonialisme dan imperialisme',
+                        'Revolusi' => 'Revolusi industri dan dampaknya'
                     ],
                     'Geografi' => [
                         'Kondisi Geografis' => 'Kondisi geografis Indonesia',
                         'Penduduk' => 'Kependudukan dan migrasi',
-                        'Lingkungan' => 'Lingkungan hidup dan pembangunan berkelanjutan'
+                        'Lingkungan' => 'Lingkungan hidup dan pembangunan berkelanjutan',
+                        'Sumber Daya' => 'Sumber daya alam dan pembangunan',
+                        'Bencana Alam' => 'Bencana alam dan mitigasi'
                     ],
                     'Ekonomi' => [
                         'Kebutuhan' => 'Kebutuhan manusia dan kelangkaan',
                         'Pasar' => 'Pasar dan harga',
-                        'Perdagangan' => 'Perdagangan internasional'
+                        'Perdagangan' => 'Perdagangan internasional',
+                        'Uang' => 'Uang dan lembaga keuangan',
+                        'Koperasi' => 'Koperasi dan kewirausahaan'
                     ],
                     'Sosiologi' => [
                         'Interaksi' => 'Interaksi sosial dan sosialisasi',
                         'Lembaga' => 'Lembaga sosial',
-                        'Perubahan' => 'Perubahan sosial dan globalisasi'
+                        'Perubahan' => 'Perubahan sosial dan globalisasi',
+                        'Konflik' => 'Konflik sosial dan integrasi',
+                        'Mobilitas' => 'Mobilitas sosial'
                     ]
                 ],
                 'SMA' => [
                     'Sejarah' => [
                         'Peradaban' => 'Peradaban awal dunia',
                         'Kolonialisme' => 'Kolonialisme dan imperialisme',
-                        'Kemerdekaan' => 'Perjuangan kemerdekaan Indonesia'
+                        'Kemerdekaan' => 'Perjuangan kemerdekaan Indonesia',
+                        'Revolusi' => 'Revolusi industri dan dampaknya',
+                        'Perang Dunia' => 'Perang Dunia I dan II',
+                        'Dekolonisasi' => 'Dekolonisasi di Asia Afrika',
+                        'Perang Dingin' => 'Perang Dingin dan dampaknya'
                     ],
                     'Geografi' => [
                         'Litosfer' => 'Litosfer dan pedosfer',
                         'Atmosfer' => 'Atmosfer dan hidrosfer',
-                        'Biosfer' => 'Biosfer dan antroposfer'
+                        'Biosfer' => 'Biosfer dan antroposfer',
+                        'Klimatologi' => 'Klimatologi dan meteorologi',
+                        'Oseanografi' => 'Oseanografi dan geomorfologi',
+                        'Demografi' => 'Demografi dan kependudukan',
+                        'Pembangunan' => 'Pembangunan dan globalisasi'
                     ],
                     'Ekonomi' => [
                         'Konsep' => 'Konsep dasar ilmu ekonomi',
                         'Pasar' => 'Pasar dan harga',
-                        'Kebijakan' => 'Kebijakan moneter dan fiskal'
+                        'Kebijakan' => 'Kebijakan moneter dan fiskal',
+                        'Pertumbuhan' => 'Pertumbuhan dan pembangunan ekonomi',
+                        'Perdagangan' => 'Perdagangan internasional',
+                        'Ketenagakerjaan' => 'Ketenagakerjaan dan pengangguran',
+                        'Inflasi' => 'Inflasi dan deflasi'
                     ],
                     'Sosiologi' => [
                         'Struktur' => 'Struktur sosial dan diferensiasi',
                         'Konflik' => 'Konflik dan integrasi sosial',
-                        'Perubahan' => 'Perubahan sosial dan modernisasi'
+                        'Perubahan' => 'Perubahan sosial dan modernisasi',
+                        'Mobilitas' => 'Mobilitas sosial',
+                        'Kelompok' => 'Kelompok sosial dan organisasi',
+                        'Masyarakat' => 'Masyarakat multikultural',
+                        'Globalisasi' => 'Globalisasi dan dampaknya'
                     ]
                 ]
             ]
@@ -3381,32 +3873,481 @@ class PaketSoalSeeder extends Seeder
 
         switch ($topik) {
             case 'Mekanika':
-                if ($subTopik == 'Gerak') {
+                if ($subTopik == 'Kinematika') {
                     switch ($jenjang) {
                         case 'SMA':
-                            $template['soal'] = "Rumus untuk menghitung kecepatan adalah...";
+                            $questions = [
+                                [
+                                    'soal' => "Rumus untuk menghitung kecepatan adalah...",
+                                    'jawaban' => [
+                                        'a' => 'v = s/t',
+                                        'b' => 'v = t/s',
+                                        'c' => 'v = s × t',
+                                        'd' => 'v = s + t',
+                                        'e' => 'v = s - t'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Rumus untuk menghitung percepatan adalah...",
+                                    'jawaban' => [
+                                        'a' => 'a = Δv/Δt',
+                                        'b' => 'a = v/t',
+                                        'c' => 'a = s/t²',
+                                        'd' => 'a = v²/s',
+                                        'e' => 'a = s/v'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Rumus untuk menghitung kecepatan rata-rata adalah...",
+                                    'jawaban' => [
+                                        'a' => 'v = (v₁ + v₂)/2',
+                                        'b' => 'v = v₁ + v₂',
+                                        'c' => 'v = v₁ × v₂',
+                                        'd' => 'v = v₁ - v₂',
+                                        'e' => 'v = v₁/v₂'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Dinamika') {
+                    switch ($jenjang) {
+                        case 'SMA':
+                            $questions = [
+                                [
+                                    'soal' => "Rumus untuk menghitung gaya adalah...",
+                                    'jawaban' => [
+                                        'a' => 'F = m × a',
+                                        'b' => 'F = m ÷ a',
+                                        'c' => 'F = m + a',
+                                        'd' => 'F = m - a',
+                                        'e' => 'F = m² × a'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Hukum Newton I menyatakan bahwa...",
+                                    'jawaban' => [
+                                        'a' => 'Benda akan tetap diam atau bergerak lurus beraturan jika tidak ada gaya yang bekerja',
+                                        'b' => 'Percepatan berbanding lurus dengan gaya dan berbanding terbalik dengan massa',
+                                        'c' => 'Setiap aksi akan menimbulkan reaksi yang sama besar dan berlawanan arah',
+                                        'd' => 'Gaya sama dengan massa kali percepatan',
+                                        'e' => 'Energi tidak dapat diciptakan atau dimusnahkan'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Hukum Newton II menyatakan bahwa...",
+                                    'jawaban' => [
+                                        'a' => 'Percepatan berbanding lurus dengan gaya dan berbanding terbalik dengan massa',
+                                        'b' => 'Benda akan tetap diam atau bergerak lurus beraturan jika tidak ada gaya yang bekerja',
+                                        'c' => 'Setiap aksi akan menimbulkan reaksi yang sama besar dan berlawanan arah',
+                                        'd' => 'Gaya sama dengan massa kali percepatan',
+                                        'e' => 'Energi tidak dapat diciptakan atau dimusnahkan'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Energi') {
+                    switch ($jenjang) {
+                        case 'SMA':
+                            $questions = [
+                                [
+                                    'soal' => "Rumus untuk menghitung energi kinetik adalah...",
+                                    'jawaban' => [
+                                        'a' => 'Ek = ½mv²',
+                                        'b' => 'Ek = mv',
+                                        'c' => 'Ek = mgh',
+                                        'd' => 'Ek = Fs',
+                                        'e' => 'Ek = Pt'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Rumus untuk menghitung energi potensial gravitasi adalah...",
+                                    'jawaban' => [
+                                        'a' => 'Ep = mgh',
+                                        'b' => 'Ep = ½mv²',
+                                        'c' => 'Ep = Fs',
+                                        'd' => 'Ep = Pt',
+                                        'e' => 'Ep = mv'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Hukum kekekalan energi menyatakan bahwa...",
+                                    'jawaban' => [
+                                        'a' => 'Energi tidak dapat diciptakan atau dimusnahkan, hanya berubah bentuk',
+                                        'b' => 'Energi selalu bertambah dalam setiap proses',
+                                        'c' => 'Energi selalu berkurang dalam setiap proses',
+                                        'd' => 'Energi dapat diciptakan dari ketiadaan',
+                                        'e' => 'Energi dapat dimusnahkan menjadi ketiadaan'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Momentum') {
+                    switch ($jenjang) {
+                        case 'SMA':
+                            $questions = [
+                                [
+                                    'soal' => "Rumus untuk menghitung momentum adalah...",
+                                    'jawaban' => [
+                                        'a' => 'p = mv',
+                                        'b' => 'p = m/v',
+                                        'c' => 'p = m + v',
+                                        'd' => 'p = m - v',
+                                        'e' => 'p = m²v'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Rumus untuk menghitung impuls adalah...",
+                                    'jawaban' => [
+                                        'a' => 'I = FΔt',
+                                        'b' => 'I = F/Δt',
+                                        'c' => 'I = F + Δt',
+                                        'd' => 'I = F - Δt',
+                                        'e' => 'I = F²Δt'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Hukum kekekalan momentum menyatakan bahwa...",
+                                    'jawaban' => [
+                                        'a' => 'Momentum total sistem tertutup tetap konstan',
+                                        'b' => 'Momentum selalu bertambah dalam setiap tumbukan',
+                                        'c' => 'Momentum selalu berkurang dalam setiap tumbukan',
+                                        'd' => 'Momentum dapat diciptakan dalam tumbukan',
+                                        'e' => 'Momentum dapat dimusnahkan dalam tumbukan'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Tumbukan') {
+                    switch ($jenjang) {
+                        case 'SMA':
+                            $questions = [
+                                [
+                                    'soal' => "Tumbukan elastis adalah tumbukan yang...",
+                                    'jawaban' => [
+                                        'a' => 'Energi kinetiknya kekal',
+                                        'b' => 'Energi kinetiknya tidak kekal',
+                                        'c' => 'Momentumnya tidak kekal',
+                                        'd' => 'Kedua benda menyatu setelah tumbukan',
+                                        'e' => 'Salah satu benda berhenti setelah tumbukan'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Tumbukan tidak elastis adalah tumbukan yang...",
+                                    'jawaban' => [
+                                        'a' => 'Energi kinetiknya tidak kekal',
+                                        'b' => 'Energi kinetiknya kekal',
+                                        'c' => 'Momentumnya tidak kekal',
+                                        'd' => 'Kedua benda terpisah setelah tumbukan',
+                                        'e' => 'Kedua benda bergerak dengan kecepatan sama'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Gerak Melingkar') {
+                    switch ($jenjang) {
+                        case 'SMA':
+                            $questions = [
+                                [
+                                    'soal' => "Rumus untuk menghitung kecepatan sudut adalah...",
+                                    'jawaban' => [
+                                        'a' => 'ω = θ/t',
+                                        'b' => 'ω = t/θ',
+                                        'c' => 'ω = θ × t',
+                                        'd' => 'ω = θ + t',
+                                        'e' => 'ω = θ - t'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Rumus untuk menghitung percepatan sentripetal adalah...",
+                                    'jawaban' => [
+                                        'a' => 'as = v²/r',
+                                        'b' => 'as = v/r',
+                                        'c' => 'as = v × r',
+                                        'd' => 'as = v + r',
+                                        'e' => 'as = v - r'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Gravitasi') {
+                    switch ($jenjang) {
+                        case 'SMA':
+                            $questions = [
+                                [
+                                    'soal' => "Hukum gravitasi Newton menyatakan bahwa...",
+                                    'jawaban' => [
+                                        'a' => 'Gaya gravitasi berbanding lurus dengan massa dan berbanding terbalik dengan kuadrat jarak',
+                                        'b' => 'Gaya gravitasi berbanding terbalik dengan massa dan berbanding lurus dengan kuadrat jarak',
+                                        'c' => 'Gaya gravitasi berbanding lurus dengan massa dan jarak',
+                                        'd' => 'Gaya gravitasi berbanding terbalik dengan massa dan jarak',
+                                        'e' => 'Gaya gravitasi tidak bergantung pada massa dan jarak'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Rumus untuk menghitung gaya gravitasi adalah...",
+                                    'jawaban' => [
+                                        'a' => 'F = G(m₁m₂)/r²',
+                                        'b' => 'F = G(m₁ + m₂)/r²',
+                                        'c' => 'F = G(m₁m₂)/r',
+                                        'd' => 'F = G(m₁ + m₂)/r',
+                                        'e' => 'F = G(m₁m₂)r²'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Usaha') {
+                    switch ($jenjang) {
+                        case 'SMA':
+                            $questions = [
+                                [
+                                    'soal' => "Rumus untuk menghitung usaha adalah...",
+                                    'jawaban' => [
+                                        'a' => 'W = Fs cos θ',
+                                        'b' => 'W = Fs sin θ',
+                                        'c' => 'W = Fs tan θ',
+                                        'd' => 'W = F + s',
+                                        'e' => 'W = F - s'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Rumus untuk menghitung daya adalah...",
+                                    'jawaban' => [
+                                        'a' => 'P = W/t',
+                                        'b' => 'P = t/W',
+                                        'c' => 'P = W × t',
+                                        'd' => 'P = W + t',
+                                        'e' => 'P = W - t'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                }
+                break;
+            case 'Fluida':
+                if ($subTopik == 'Tekanan') {
+                    switch ($jenjang) {
+                        case 'SMA':
+                            $questions = [
+                                [
+                                    'soal' => "Rumus untuk menghitung tekanan adalah...",
+                                    'jawaban' => [
+                                        'a' => 'P = F/A',
+                                        'b' => 'P = A/F',
+                                        'c' => 'P = F × A',
+                                        'd' => 'P = F + A',
+                                        'e' => 'P = F - A'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Rumus untuk menghitung tekanan hidrostatis adalah...",
+                                    'jawaban' => [
+                                        'a' => 'P = ρgh',
+                                        'b' => 'P = ρg/h',
+                                        'c' => 'P = ρ + gh',
+                                        'd' => 'P = ρ - gh',
+                                        'e' => 'P = ρgh²'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Hukum Pascal') {
+                    switch ($jenjang) {
+                        case 'SMA':
+                            $template['soal'] = "Hukum Pascal menyatakan bahwa...";
                             $template['jawaban'] = [
-                                'a' => 'v = s/t',
-                                'b' => 'v = t/s',
-                                'c' => 'v = s × t',
-                                'd' => 'v = s + t',
-                                'e' => 'v = s - t'
+                                'a' => 'Tekanan yang diberikan pada fluida dalam ruang tertutup diteruskan sama besar ke segala arah',
+                                'b' => 'Tekanan berbanding lurus dengan kedalaman',
+                                'c' => 'Tekanan berbanding terbalik dengan luas permukaan',
+                                'd' => 'Tekanan tidak bergantung pada jenis fluida',
+                                'e' => 'Tekanan selalu konstan dalam fluida'
                             ];
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Gaya') {
+                } elseif ($subTopik == 'Hukum Archimedes') {
                     switch ($jenjang) {
                         case 'SMA':
-                            $template['soal'] = "Rumus untuk menghitung gaya adalah...";
+                            $template['soal'] = "Hukum Archimedes menyatakan bahwa...";
                             $template['jawaban'] = [
-                                'a' => 'F = m × a',
-                                'b' => 'F = m ÷ a',
-                                'c' => 'F = m + a',
-                                'd' => 'F = m - a',
-                                'e' => 'F = m² × a'
+                                'a' => 'Gaya apung sama dengan berat fluida yang dipindahkan',
+                                'b' => 'Gaya apung sama dengan berat benda',
+                                'c' => 'Gaya apung berbanding lurus dengan volume benda',
+                                'd' => 'Gaya apung tidak bergantung pada jenis fluida',
+                                'e' => 'Gaya apung selalu konstan'
                             ];
                             $template['benar'] = 'a';
+                            break;
+                    }
+                }
+                break;
+            case 'Termodinamika':
+                if ($subTopik == 'Suhu') {
+                    switch ($jenjang) {
+                        case 'SMA':
+                            $questions = [
+                                [
+                                    'soal' => "Rumus untuk menghitung kalor adalah...",
+                                    'jawaban' => [
+                                        'a' => 'Q = mcΔT',
+                                        'b' => 'Q = m/cΔT',
+                                        'c' => 'Q = m + cΔT',
+                                        'd' => 'Q = m - cΔT',
+                                        'e' => 'Q = mc/ΔT'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Satuan SI untuk suhu adalah...",
+                                    'jawaban' => [
+                                        'a' => 'Kelvin',
+                                        'b' => 'Celsius',
+                                        'c' => 'Fahrenheit',
+                                        'd' => 'Reamur',
+                                        'e' => 'Rankine'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Hukum Termodinamika') {
+                    switch ($jenjang) {
+                        case 'SMA':
+                            $questions = [
+                                [
+                                    'soal' => "Hukum Termodinamika I menyatakan bahwa...",
+                                    'jawaban' => [
+                                        'a' => 'Energi dalam sistem tertutup adalah kekal',
+                                        'b' => 'Entropi sistem tertutup selalu bertambah',
+                                        'c' => 'Tidak ada mesin yang efisiensinya 100%',
+                                        'd' => 'Kalor mengalir dari benda panas ke benda dingin',
+                                        'e' => 'Energi tidak dapat diubah bentuknya'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Hukum Termodinamika II menyatakan bahwa...",
+                                    'jawaban' => [
+                                        'a' => 'Entropi sistem tertutup selalu bertambah',
+                                        'b' => 'Energi dalam sistem tertutup adalah kekal',
+                                        'c' => 'Kalor mengalir dari benda dingin ke benda panas',
+                                        'd' => 'Tidak ada mesin yang efisiensinya 100%',
+                                        'e' => 'Energi dapat diciptakan dari ketiadaan'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                }
+                break;
+            case 'Gelombang':
+                if ($subTopik == 'Gelombang Mekanik') {
+                    switch ($jenjang) {
+                        case 'SMA':
+                            $questions = [
+                                [
+                                    'soal' => "Rumus untuk menghitung kecepatan gelombang adalah...",
+                                    'jawaban' => [
+                                        'a' => 'v = λf',
+                                        'b' => 'v = λ/f',
+                                        'c' => 'v = λ + f',
+                                        'd' => 'v = λ - f',
+                                        'e' => 'v = λ²f'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Rumus untuk menghitung frekuensi adalah...",
+                                    'jawaban' => [
+                                        'a' => 'f = 1/T',
+                                        'b' => 'f = T',
+                                        'c' => 'f = 1 + T',
+                                        'd' => 'f = 1 - T',
+                                        'e' => 'f = T²'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
                 }
@@ -3436,6 +4377,70 @@ class PaketSoalSeeder extends Seeder
                                 'c' => 'Watt',
                                 'd' => 'Ohm',
                                 'e' => 'Coulomb'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                    }
+                } elseif ($subTopik == 'Hambatan') {
+                    switch ($jenjang) {
+                        case 'SMA':
+                            $questions = [
+                                [
+                                    'soal' => "Rumus untuk menghitung hambatan adalah...",
+                                    'jawaban' => [
+                                        'a' => 'R = V/I',
+                                        'b' => 'R = I/V',
+                                        'c' => 'R = V × I',
+                                        'd' => 'R = V + I',
+                                        'e' => 'R = V - I'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Rumus untuk menghitung hambatan seri adalah...",
+                                    'jawaban' => [
+                                        'a' => 'R = R₁ + R₂ + R₃',
+                                        'b' => 'R = 1/R₁ + 1/R₂ + 1/R₃',
+                                        'c' => 'R = R₁ × R₂ × R₃',
+                                        'd' => 'R = R₁/R₂/R₃',
+                                        'e' => 'R = R₁ - R₂ - R₃'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                }
+                break;
+            case 'Fisika Modern':
+                if ($subTopik == 'Relativitas') {
+                    switch ($jenjang) {
+                        case 'SMA':
+                            $template['soal'] = "Teori relativitas Einstein menyatakan bahwa...";
+                            $template['jawaban'] = [
+                                'a' => 'Kecepatan cahaya adalah konstan dan tidak bergantung pada pengamat',
+                                'b' => 'Kecepatan cahaya berubah tergantung pada pengamat',
+                                'c' => 'Waktu dan ruang adalah absolut',
+                                'd' => 'Massa tidak berubah dengan kecepatan',
+                                'e' => 'Energi tidak setara dengan massa'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                    }
+                } elseif ($subTopik == 'Foton') {
+                    switch ($jenjang) {
+                        case 'SMA':
+                            $template['soal'] = "Rumus untuk menghitung energi foton adalah...";
+                            $template['jawaban'] = [
+                                'a' => 'E = hf',
+                                'b' => 'E = h/f',
+                                'c' => 'E = h + f',
+                                'd' => 'E = h - f',
+                                'e' => 'E = h²f'
                             ];
                             $template['benar'] = 'a';
                             break;
