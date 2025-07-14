@@ -244,7 +244,73 @@ class PaketSoalSeeder extends Seeder
                 $template = $this->generateSoalSosiologi($jenjang, $topik, $subTopik);
                 break;
             case 'Geometri':
-                $template = $this->generateSoalMatematika($jenjang, $topik, $subTopik);
+                if ($subTopik == 'Bangun Datar') {
+                    switch ($jenjang) {
+                        case 'SMP':
+                            $questions = [
+                                [
+                                    'soal' => "Luas persegi panjang dengan panjang 8 cm dan lebar 6 cm adalah...",
+                                    'jawaban' => [
+                                        'a' => '48 cm²',
+                                        'b' => '28 cm²',
+                                        'c' => '56 cm²',
+                                        'd' => '24 cm²',
+                                        'e' => '32 cm²'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Keliling persegi dengan sisi 5 cm adalah...",
+                                    'jawaban' => [
+                                        'a' => '20 cm',
+                                        'b' => '25 cm',
+                                        'c' => '15 cm',
+                                        'd' => '10 cm',
+                                        'e' => '30 cm'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Bangun Ruang') {
+                    switch ($jenjang) {
+                        case 'SMP':
+                            $questions = [
+                                [
+                                    'soal' => "Volume kubus dengan panjang rusuk 4 cm adalah...",
+                                    'jawaban' => [
+                                        'a' => '64 cm³',
+                                        'b' => '16 cm³',
+                                        'c' => '32 cm³',
+                                        'd' => '48 cm³',
+                                        'e' => '80 cm³'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Luas permukaan balok dengan panjang 6 cm, lebar 4 cm, dan tinggi 3 cm adalah...",
+                                    'jawaban' => [
+                                        'a' => '108 cm²',
+                                        'b' => '72 cm²',
+                                        'c' => '144 cm²',
+                                        'd' => '90 cm²',
+                                        'e' => '120 cm²'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                }
                 break;
             case 'Kalkulus':
                 if ($subTopik == 'Limit') {
@@ -662,6 +728,347 @@ class PaketSoalSeeder extends Seeder
                                         'e' => '36'
                                     ],
                                     'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Berapakah FPB dari 16 dan 24?",
+                                    'jawaban' => [
+                                        'a' => '8',
+                                        'b' => '4',
+                                        'c' => '12',
+                                        'd' => '6',
+                                        'e' => '16'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Berapakah KPK dari 15 dan 20?",
+                                    'jawaban' => [
+                                        'a' => '60',
+                                        'b' => '30',
+                                        'c' => '45',
+                                        'd' => '75',
+                                        'e' => '90'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Berapakah FPB dari 30 dan 45?",
+                                    'jawaban' => [
+                                        'a' => '15',
+                                        'b' => '5',
+                                        'c' => '10',
+                                        'd' => '20',
+                                        'e' => '25'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Berapakah KPK dari 6, 8, dan 12?",
+                                    'jawaban' => [
+                                        'a' => '24',
+                                        'b' => '12',
+                                        'c' => '36',
+                                        'd' => '48',
+                                        'e' => '18'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Berapakah FPB dari 18, 27, dan 36?",
+                                    'jawaban' => [
+                                        'a' => '9',
+                                        'b' => '3',
+                                        'c' => '6',
+                                        'd' => '12',
+                                        'e' => '18'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Bilangan desimal dan operasi hitungnya') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Berapakah hasil dari 2,5 + 1,75?",
+                                    'jawaban' => [
+                                        'a' => '4,25',
+                                        'b' => '3,25',
+                                        'c' => '4,15',
+                                        'd' => '3,75',
+                                        'e' => '4,5'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Berapakah hasil dari 3,2 - 1,8?",
+                                    'jawaban' => [
+                                        'a' => '1,4',
+                                        'b' => '1,6',
+                                        'c' => '1,2',
+                                        'd' => '1,8',
+                                        'e' => '2,0'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Berapakah hasil dari 2,5 x 3?",
+                                    'jawaban' => [
+                                        'a' => '7,5',
+                                        'b' => '6,5',
+                                        'c' => '8,5',
+                                        'd' => '7,0',
+                                        'e' => '8,0'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Bilangan Romawi dan konversinya') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Angka Romawi dari 25 adalah ...",
+                                    'jawaban' => [
+                                        'a' => 'XXV',
+                                        'b' => 'XV',
+                                        'c' => 'XX',
+                                        'd' => 'XXX',
+                                        'e' => 'XXIV'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Angka Romawi dari 15 adalah ...",
+                                    'jawaban' => [
+                                        'a' => 'XV',
+                                        'b' => 'X',
+                                        'c' => 'XX',
+                                        'd' => 'V',
+                                        'e' => 'XIV'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Angka Romawi dari 30 adalah ...",
+                                    'jawaban' => [
+                                        'a' => 'XXX',
+                                        'b' => 'XX',
+                                        'c' => 'XXV',
+                                        'd' => 'XXIX',
+                                        'e' => 'XXXI'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Operasi hitung bilangan bulat dan sifat-sifatnya') {
+                    switch ($jenjang) {
+                        case 'SMP':
+                            $questions = [
+                                [
+                                    'soal' => "Berapakah hasil dari (-12) + 8?",
+                                    'jawaban' => [
+                                        'a' => '-4',
+                                        'b' => '4',
+                                        'c' => '-20',
+                                        'd' => '20',
+                                        'e' => '-8'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Berapakah hasil dari (-15) × (-3)?",
+                                    'jawaban' => [
+                                        'a' => '45',
+                                        'b' => '-45',
+                                        'c' => '35',
+                                        'd' => '-35',
+                                        'e' => '55'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Operasi hitung pecahan dan desimal') {
+                    switch ($jenjang) {
+                        case 'SMP':
+                            $questions = [
+                                [
+                                    'soal' => "Berapakah hasil dari 2/3 + 1/4?",
+                                    'jawaban' => [
+                                        'a' => '11/12',
+                                        'b' => '3/7',
+                                        'c' => '3/12',
+                                        'd' => '2/7',
+                                        'e' => '1/2'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Berapakah hasil dari 3,5 × 2,4?",
+                                    'jawaban' => [
+                                        'a' => '8,4',
+                                        'b' => '7,4',
+                                        'c' => '9,4',
+                                        'd' => '6,4',
+                                        'e' => '10,4'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Bilangan berpangkat dan bentuk akar') {
+                    switch ($jenjang) {
+                        case 'SMP':
+                            $questions = [
+                                [
+                                    'soal' => "Berapakah hasil dari 2³?",
+                                    'jawaban' => [
+                                        'a' => '8',
+                                        'b' => '6',
+                                        'c' => '4',
+                                        'd' => '10',
+                                        'e' => '12'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Berapakah hasil dari √16?",
+                                    'jawaban' => [
+                                        'a' => '4',
+                                        'b' => '2',
+                                        'c' => '8',
+                                        'd' => '6',
+                                        'e' => '10'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Perbandingan senilai dan berbalik nilai') {
+                    switch ($jenjang) {
+                        case 'SMP':
+                            $questions = [
+                                [
+                                    'soal' => "Jika 3 buku harganya Rp 15.000, berapa harga 5 buku?",
+                                    'jawaban' => [
+                                        'a' => 'Rp 25.000',
+                                        'b' => 'Rp 20.000',
+                                        'c' => 'Rp 30.000',
+                                        'd' => 'Rp 35.000',
+                                        'e' => 'Rp 40.000'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Jika 4 pekerja selesai dalam 6 hari, berapa hari jika ada 6 pekerja?",
+                                    'jawaban' => [
+                                        'a' => '4 hari',
+                                        'b' => '6 hari',
+                                        'c' => '8 hari',
+                                        'd' => '3 hari',
+                                        'e' => '9 hari'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Bilangan rasional dan irasional') {
+                    switch ($jenjang) {
+                        case 'SMP':
+                            $questions = [
+                                [
+                                    'soal' => "Bilangan yang dapat dinyatakan dalam bentuk pecahan disebut...",
+                                    'jawaban' => [
+                                        'a' => 'Bilangan rasional',
+                                        'b' => 'Bilangan irasional',
+                                        'c' => 'Bilangan bulat',
+                                        'd' => 'Bilangan cacah',
+                                        'e' => 'Bilangan prima'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Contoh bilangan irasional adalah...",
+                                    'jawaban' => [
+                                        'a' => 'π (pi)',
+                                        'b' => '2',
+                                        'c' => '1/2',
+                                        'd' => '0,5',
+                                        'e' => '3'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Sistem bilangan real') {
+                    switch ($jenjang) {
+                        case 'SMP':
+                            $questions = [
+                                [
+                                    'soal' => "Himpunan bilangan real terdiri dari...",
+                                    'jawaban' => [
+                                        'a' => 'Bilangan rasional dan irasional',
+                                        'b' => 'Hanya bilangan bulat',
+                                        'c' => 'Hanya bilangan pecahan',
+                                        'd' => 'Hanya bilangan positif',
+                                        'e' => 'Hanya bilangan negatif'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Bilangan real dapat digambarkan pada...",
+                                    'jawaban' => [
+                                        'a' => 'Garis bilangan',
+                                        'b' => 'Bidang kartesius',
+                                        'c' => 'Diagram venn',
+                                        'd' => 'Grafik batang',
+                                        'e' => 'Diagram lingkaran'
+                                    ],
+                                    'benar' => 'a'
                                 ]
                             ];
                             $selectedQuestion = $questions[array_rand($questions)];
@@ -673,94 +1080,2006 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Geometri':
-                $template = $this->generateSoalMatematika($jenjang, $topik, $subTopik);
-                break;
-            case 'Pengukuran':
-                if ($subTopik == 'Satuan Panjang') {
+                if ($subTopik == 'Bangun Datar') {
                     switch ($jenjang) {
                         case 'SD':
-                            $template['soal'] = "1 meter sama dengan berapa sentimeter?";
-                            $template['jawaban'] = [
-                                'a' => '100 cm',
-                                'b' => '10 cm',
-                                'c' => '1000 cm',
-                                'd' => '50 cm',
-                                'e' => '200 cm'
+                            $questions = [
+                                [
+                                    'soal' => "Berapakah jumlah sisi pada persegi?",
+                                    'jawaban' => [
+                                        'a' => '4',
+                                        'b' => '3',
+                                        'c' => '5',
+                                        'd' => '6',
+                                        'e' => '8'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Bangun datar yang memiliki tiga sisi adalah...",
+                                    'jawaban' => [
+                                        'a' => 'Segitiga',
+                                        'b' => 'Persegi',
+                                        'c' => 'Lingkaran',
+                                        'd' => 'Persegi panjang',
+                                        'e' => 'Jajar genjang'
+                                    ],
+                                    'benar' => 'a'
+                                ]
                             ];
-                            $template['benar'] = 'a';
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Luas dan Keliling') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Berapakah luas persegi dengan sisi 4 cm?",
+                                    'jawaban' => [
+                                        'a' => '16 cm²',
+                                        'b' => '8 cm²',
+                                        'c' => '12 cm²',
+                                        'd' => '20 cm²',
+                                        'e' => '24 cm²'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Keliling persegi panjang dengan panjang 6 cm dan lebar 4 cm adalah...",
+                                    'jawaban' => [
+                                        'a' => '20 cm',
+                                        'b' => '24 cm',
+                                        'c' => '18 cm',
+                                        'd' => '16 cm',
+                                        'e' => '22 cm'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Berapakah luas persegi panjang dengan panjang 8 cm dan lebar 5 cm?",
+                                    'jawaban' => [
+                                        'a' => '40 cm²',
+                                        'b' => '35 cm²',
+                                        'c' => '45 cm²',
+                                        'd' => '30 cm²',
+                                        'e' => '50 cm²'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Keliling persegi dengan sisi 7 cm adalah...",
+                                    'jawaban' => [
+                                        'a' => '28 cm',
+                                        'b' => '21 cm',
+                                        'c' => '35 cm',
+                                        'd' => '14 cm',
+                                        'e' => '42 cm'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Berapakah luas segitiga dengan alas 6 cm dan tinggi 4 cm?",
+                                    'jawaban' => [
+                                        'a' => '12 cm²',
+                                        'b' => '10 cm²',
+                                        'c' => '14 cm²',
+                                        'd' => '8 cm²',
+                                        'e' => '16 cm²'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Keliling segitiga dengan sisi 5 cm, 6 cm, dan 7 cm adalah...",
+                                    'jawaban' => [
+                                        'a' => '18 cm',
+                                        'b' => '15 cm',
+                                        'c' => '21 cm',
+                                        'd' => '12 cm',
+                                        'e' => '24 cm'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Berapakah luas jajar genjang dengan alas 8 cm dan tinggi 3 cm?",
+                                    'jawaban' => [
+                                        'a' => '24 cm²',
+                                        'b' => '20 cm²',
+                                        'c' => '28 cm²',
+                                        'd' => '16 cm²',
+                                        'e' => '32 cm²'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Keliling trapesium dengan sisi 4 cm, 6 cm, 5 cm, dan 7 cm adalah...",
+                                    'jawaban' => [
+                                        'a' => '22 cm',
+                                        'b' => '20 cm',
+                                        'c' => '24 cm',
+                                        'd' => '18 cm',
+                                        'e' => '26 cm'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Simetri') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Persegi memiliki berapa simetri lipat?",
+                                    'jawaban' => [
+                                        'a' => '4',
+                                        'b' => '2',
+                                        'c' => '3',
+                                        'd' => '5',
+                                        'e' => '6'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Bangun datar yang hanya memiliki satu simetri lipat adalah...",
+                                    'jawaban' => [
+                                        'a' => 'Segitiga sama kaki',
+                                        'b' => 'Persegi',
+                                        'c' => 'Lingkaran',
+                                        'd' => 'Persegi panjang',
+                                        'e' => 'Jajar genjang'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Persegi panjang memiliki berapa simetri lipat?",
+                                    'jawaban' => [
+                                        'a' => '2',
+                                        'b' => '4',
+                                        'c' => '1',
+                                        'd' => '3',
+                                        'e' => '5'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Lingkaran memiliki berapa simetri lipat?",
+                                    'jawaban' => [
+                                        'a' => 'Tak terhingga',
+                                        'b' => '4',
+                                        'c' => '8',
+                                        'd' => '10',
+                                        'e' => '12'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Segitiga sama sisi memiliki berapa simetri lipat?",
+                                    'jawaban' => [
+                                        'a' => '3',
+                                        'b' => '2',
+                                        'c' => '1',
+                                        'd' => '4',
+                                        'e' => '6'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Simetri putar adalah simetri yang terjadi jika bangun datar...",
+                                    'jawaban' => [
+                                        'a' => 'Diputar pada titik pusat',
+                                        'b' => 'Dilipat pada garis',
+                                        'c' => 'Digeser ke samping',
+                                        'd' => 'Diperbesar',
+                                        'e' => 'Diperkecil'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Persegi memiliki simetri putar tingkat...",
+                                    'jawaban' => [
+                                        'a' => '4',
+                                        'b' => '2',
+                                        'c' => '3',
+                                        'd' => '1',
+                                        'e' => '5'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Lingkaran memiliki simetri putar tingkat...",
+                                    'jawaban' => [
+                                        'a' => 'Tak terhingga',
+                                        'b' => '4',
+                                        'c' => '8',
+                                        'd' => '10',
+                                        'e' => '12'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Bangun Ruang') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Bangun ruang yang memiliki 6 sisi sama besar adalah...",
+                                    'jawaban' => [
+                                        'a' => 'Kubus',
+                                        'b' => 'Balok',
+                                        'c' => 'Tabung',
+                                        'd' => 'Kerucut',
+                                        'e' => 'Limas'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Bangun ruang yang memiliki alas dan tutup berbentuk lingkaran adalah...",
+                                    'jawaban' => [
+                                        'a' => 'Tabung',
+                                        'b' => 'Kubus',
+                                        'c' => 'Balok',
+                                        'd' => 'Kerucut',
+                                        'e' => 'Limas'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Bangun ruang yang memiliki alas berbentuk lingkaran dan puncak berbentuk titik adalah...",
+                                    'jawaban' => [
+                                        'a' => 'Kerucut',
+                                        'b' => 'Tabung',
+                                        'c' => 'Kubus',
+                                        'd' => 'Balok',
+                                        'e' => 'Limas'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Bangun ruang yang memiliki alas berbentuk segitiga dan puncak berbentuk titik adalah...",
+                                    'jawaban' => [
+                                        'a' => 'Limas segitiga',
+                                        'b' => 'Prisma segitiga',
+                                        'c' => 'Kubus',
+                                        'd' => 'Balok',
+                                        'e' => 'Tabung'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Bangun ruang yang memiliki alas berbentuk persegi dan puncak berbentuk titik adalah...",
+                                    'jawaban' => [
+                                        'a' => 'Limas segiempat',
+                                        'b' => 'Prisma segiempat',
+                                        'c' => 'Kubus',
+                                        'd' => 'Balok',
+                                        'e' => 'Tabung'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Bangun ruang yang memiliki alas berbentuk lingkaran dan semua titik pada alas berjarak sama dari pusat adalah...",
+                                    'jawaban' => [
+                                        'a' => 'Bola',
+                                        'b' => 'Tabung',
+                                        'c' => 'Kerucut',
+                                        'd' => 'Limas',
+                                        'e' => 'Prisma'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Bangun ruang yang memiliki 6 sisi dengan 3 pasang sisi sejajar dan sama besar adalah...",
+                                    'jawaban' => [
+                                        'a' => 'Balok',
+                                        'b' => 'Kubus',
+                                        'c' => 'Tabung',
+                                        'd' => 'Kerucut',
+                                        'e' => 'Limas'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Bangun ruang yang memiliki alas berbentuk segitiga dan tutup berbentuk segitiga adalah...",
+                                    'jawaban' => [
+                                        'a' => 'Prisma segitiga',
+                                        'b' => 'Limas segitiga',
+                                        'c' => 'Kubus',
+                                        'd' => 'Balok',
+                                        'e' => 'Tabung'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Volume') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Volume kubus dengan panjang rusuk 3 cm adalah...",
+                                    'jawaban' => [
+                                        'a' => '27 cm³',
+                                        'b' => '9 cm³',
+                                        'c' => '18 cm³',
+                                        'd' => '12 cm³',
+                                        'e' => '36 cm³'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Volume balok dengan panjang 4 cm, lebar 3 cm, dan tinggi 2 cm adalah...",
+                                    'jawaban' => [
+                                        'a' => '24 cm³',
+                                        'b' => '12 cm³',
+                                        'c' => '18 cm³',
+                                        'd' => '20 cm³',
+                                        'e' => '30 cm³'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Volume kubus dengan panjang rusuk 5 cm adalah...",
+                                    'jawaban' => [
+                                        'a' => '125 cm³',
+                                        'b' => '100 cm³',
+                                        'c' => '150 cm³',
+                                        'd' => '75 cm³',
+                                        'e' => '200 cm³'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Volume balok dengan panjang 6 cm, lebar 4 cm, dan tinggi 3 cm adalah...",
+                                    'jawaban' => [
+                                        'a' => '72 cm³',
+                                        'b' => '60 cm³',
+                                        'c' => '84 cm³',
+                                        'd' => '48 cm³',
+                                        'e' => '96 cm³'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Volume tabung dengan jari-jari 3 cm dan tinggi 4 cm adalah...",
+                                    'jawaban' => [
+                                        'a' => '36π cm³',
+                                        'b' => '24π cm³',
+                                        'c' => '48π cm³',
+                                        'd' => '12π cm³',
+                                        'e' => '60π cm³'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Volume kerucut dengan jari-jari 2 cm dan tinggi 6 cm adalah...",
+                                    'jawaban' => [
+                                        'a' => '8π cm³',
+                                        'b' => '6π cm³',
+                                        'c' => '12π cm³',
+                                        'd' => '4π cm³',
+                                        'e' => '16π cm³'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Volume bola dengan jari-jari 4 cm adalah...",
+                                    'jawaban' => [
+                                        'a' => '256π/3 cm³',
+                                        'b' => '64π cm³',
+                                        'c' => '128π/3 cm³',
+                                        'd' => '32π cm³',
+                                        'e' => '512π/3 cm³'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Volume prisma segitiga dengan luas alas 12 cm² dan tinggi 5 cm adalah...",
+                                    'jawaban' => [
+                                        'a' => '60 cm³',
+                                        'b' => '50 cm³',
+                                        'c' => '70 cm³',
+                                        'd' => '40 cm³',
+                                        'e' => '80 cm³'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                }
+                break;
+            case 'Pengukuran':
+                if ($subTopik == 'Satuan Luas') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "1 are sama dengan berapa meter persegi?",
+                                    'jawaban' => [
+                                        'a' => '100 m²',
+                                        'b' => '10 m²',
+                                        'c' => '1000 m²',
+                                        'd' => '10000 m²',
+                                        'e' => '1 m²'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "1 hektar sama dengan berapa are?",
+                                    'jawaban' => [
+                                        'a' => '100 are',
+                                        'b' => '10 are',
+                                        'c' => '1000 are',
+                                        'd' => '10000 are',
+                                        'e' => '1 are'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Satuan Volume') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "1 liter sama dengan berapa mililiter?",
+                                    'jawaban' => [
+                                        'a' => '1000 ml',
+                                        'b' => '100 ml',
+                                        'c' => '10 ml',
+                                        'd' => '500 ml',
+                                        'e' => '2000 ml'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "1 m³ sama dengan berapa liter?",
+                                    'jawaban' => [
+                                        'a' => '1000 liter',
+                                        'b' => '100 liter',
+                                        'c' => '10 liter',
+                                        'd' => '500 liter',
+                                        'e' => '2000 liter'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Satuan Debit') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Debit air 2 liter per menit, berapa liter air yang keluar dalam 5 menit?",
+                                    'jawaban' => [
+                                        'a' => '10',
+                                        'b' => '5',
+                                        'c' => '7',
+                                        'd' => '12',
+                                        'e' => '15'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Debit air 3 liter per menit, berapa liter air yang keluar dalam 10 menit?",
+                                    'jawaban' => [
+                                        'a' => '30',
+                                        'b' => '13',
+                                        'c' => '20',
+                                        'd' => '25',
+                                        'e' => '15'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Debit air 5 liter per menit, berapa liter air yang keluar dalam 8 menit?",
+                                    'jawaban' => [
+                                        'a' => '40',
+                                        'b' => '35',
+                                        'c' => '45',
+                                        'd' => '30',
+                                        'e' => '50'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Debit air 1,5 liter per menit, berapa liter air yang keluar dalam 12 menit?",
+                                    'jawaban' => [
+                                        'a' => '18',
+                                        'b' => '15',
+                                        'c' => '20',
+                                        'd' => '12',
+                                        'e' => '22'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Satuan Panjang') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "1 meter sama dengan berapa sentimeter?",
+                                    'jawaban' => [
+                                        'a' => '100 cm',
+                                        'b' => '10 cm',
+                                        'c' => '1000 cm',
+                                        'd' => '50 cm',
+                                        'e' => '200 cm'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "1 kilometer sama dengan berapa meter?",
+                                    'jawaban' => [
+                                        'a' => '1000 m',
+                                        'b' => '100 m',
+                                        'c' => '10 m',
+                                        'd' => '500 m',
+                                        'e' => '2000 m'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "1 meter sama dengan berapa milimeter?",
+                                    'jawaban' => [
+                                        'a' => '1000 mm',
+                                        'b' => '100 mm',
+                                        'c' => '10 mm',
+                                        'd' => '500 mm',
+                                        'e' => '2000 mm'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "1 desimeter sama dengan berapa sentimeter?",
+                                    'jawaban' => [
+                                        'a' => '10 cm',
+                                        'b' => '1 cm',
+                                        'c' => '100 cm',
+                                        'd' => '5 cm',
+                                        'e' => '20 cm'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
                 } elseif ($subTopik == 'Satuan Berat') {
                     switch ($jenjang) {
                         case 'SD':
-                            $template['soal'] = "1 kilogram sama dengan berapa gram?";
-                            $template['jawaban'] = [
-                                'a' => '1000 gram',
-                                'b' => '100 gram',
-                                'c' => '10 gram',
-                                'd' => '500 gram',
-                                'e' => '2000 gram'
+                            $questions = [
+                                [
+                                    'soal' => "1 kilogram sama dengan berapa gram?",
+                                    'jawaban' => [
+                                        'a' => '1000 gram',
+                                        'b' => '100 gram',
+                                        'c' => '10 gram',
+                                        'd' => '500 gram',
+                                        'e' => '2000 gram'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "1 ton sama dengan berapa kilogram?",
+                                    'jawaban' => [
+                                        'a' => '1000 kg',
+                                        'b' => '100 kg',
+                                        'c' => '10 kg',
+                                        'd' => '500 kg',
+                                        'e' => '2000 kg'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "1 gram sama dengan berapa miligram?",
+                                    'jawaban' => [
+                                        'a' => '1000 mg',
+                                        'b' => '100 mg',
+                                        'c' => '10 mg',
+                                        'd' => '500 mg',
+                                        'e' => '2000 mg'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "1 kuintal sama dengan berapa kilogram?",
+                                    'jawaban' => [
+                                        'a' => '100 kg',
+                                        'b' => '10 kg',
+                                        'c' => '1000 kg',
+                                        'd' => '50 kg',
+                                        'e' => '200 kg'
+                                    ],
+                                    'benar' => 'a'
+                                ]
                             ];
-                            $template['benar'] = 'a';
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
                 } elseif ($subTopik == 'Satuan Waktu') {
                     switch ($jenjang) {
                         case 'SD':
-                            $template['soal'] = "1 jam sama dengan berapa menit?";
-                            $template['jawaban'] = [
-                                'a' => '60 menit',
-                                'b' => '30 menit',
-                                'c' => '45 menit',
-                                'd' => '90 menit',
-                                'e' => '120 menit'
+                            $questions = [
+                                [
+                                    'soal' => "1 jam sama dengan berapa menit?",
+                                    'jawaban' => [
+                                        'a' => '60 menit',
+                                        'b' => '30 menit',
+                                        'c' => '100 menit',
+                                        'd' => '50 menit',
+                                        'e' => '120 menit'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "1 menit sama dengan berapa detik?",
+                                    'jawaban' => [
+                                        'a' => '60 detik',
+                                        'b' => '30 detik',
+                                        'c' => '100 detik',
+                                        'd' => '50 detik',
+                                        'e' => '120 detik'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "1 hari sama dengan berapa jam?",
+                                    'jawaban' => [
+                                        'a' => '24 jam',
+                                        'b' => '12 jam',
+                                        'c' => '48 jam',
+                                        'd' => '20 jam',
+                                        'e' => '36 jam'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "1 minggu sama dengan berapa hari?",
+                                    'jawaban' => [
+                                        'a' => '7 hari',
+                                        'b' => '5 hari',
+                                        'c' => '10 hari',
+                                        'd' => '6 hari',
+                                        'e' => '8 hari'
+                                    ],
+                                    'benar' => 'a'
+                                ]
                             ];
-                            $template['benar'] = 'a';
-                            break;
-                    }
-                } elseif ($subTopik == 'Satuan Luas') {
-                    switch ($jenjang) {
-                        case 'SD':
-                            $template['soal'] = "1 hektar sama dengan berapa meter persegi?";
-                            $template['jawaban'] = [
-                                'a' => '10000 m²',
-                                'b' => '1000 m²',
-                                'c' => '100 m²',
-                                'd' => '100000 m²',
-                                'e' => '1000000 m²'
-                            ];
-                            $template['benar'] = 'a';
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
                 }
                 break;
             case 'Statistika':
-                if ($subTopik == 'Pengumpulan Data') {
+                if ($subTopik == 'Rata-rata') {
                     switch ($jenjang) {
                         case 'SD':
-                            $template['soal'] = "Berikut adalah data nilai ulangan matematika: 7, 8, 6, 9, 7, 8, 7. Berapakah nilai yang paling sering muncul?";
-                            $template['jawaban'] = [
-                                'a' => '7',
-                                'b' => '8',
-                                'c' => '6',
-                                'd' => '9',
-                                'e' => '5'
+                            $questions = [
+                                [
+                                    'soal' => "Rata-rata dari 6, 8, 10 adalah...",
+                                    'jawaban' => [
+                                        'a' => '8',
+                                        'b' => '6',
+                                        'c' => '7',
+                                        'd' => '9',
+                                        'e' => '10'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Rata-rata dari 5, 7, 9, 11 adalah...",
+                                    'jawaban' => [
+                                        'a' => '8',
+                                        'b' => '7',
+                                        'c' => '9',
+                                        'd' => '10',
+                                        'e' => '6'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Rata-rata dari 12, 15, 18, 21 adalah...",
+                                    'jawaban' => [
+                                        'a' => '16,5',
+                                        'b' => '15',
+                                        'c' => '17',
+                                        'd' => '16',
+                                        'e' => '18'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Rata-rata dari 4, 6, 8, 10, 12 adalah...",
+                                    'jawaban' => [
+                                        'a' => '8',
+                                        'b' => '7',
+                                        'c' => '9',
+                                        'd' => '6',
+                                        'e' => '10'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Rata-rata dari 20, 25, 30, 35, 40 adalah...",
+                                    'jawaban' => [
+                                        'a' => '30',
+                                        'b' => '25',
+                                        'c' => '35',
+                                        'd' => '28',
+                                        'e' => '32'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Rata-rata dari 3, 5, 7, 9, 11, 13 adalah...",
+                                    'jawaban' => [
+                                        'a' => '8',
+                                        'b' => '7',
+                                        'c' => '9',
+                                        'd' => '6',
+                                        'e' => '10'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Rata-rata dari 10, 12, 14, 16, 18, 20, 22 adalah...",
+                                    'jawaban' => [
+                                        'a' => '16',
+                                        'b' => '15',
+                                        'c' => '17',
+                                        'd' => '14',
+                                        'e' => '18'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Rata-rata dari 25, 30, 35, 40, 45 adalah...",
+                                    'jawaban' => [
+                                        'a' => '35',
+                                        'b' => '30',
+                                        'c' => '40',
+                                        'd' => '32',
+                                        'e' => '38'
+                                    ],
+                                    'benar' => 'a'
+                                ]
                             ];
-                            $template['benar'] = 'a';
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Modus') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Modus dari data 2, 3, 3, 5, 7 adalah...",
+                                    'jawaban' => [
+                                        'a' => '3',
+                                        'b' => '2',
+                                        'c' => '5',
+                                        'd' => '7',
+                                        'e' => '4'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Modus dari data 1, 2, 2, 2, 3, 4 adalah...",
+                                    'jawaban' => [
+                                        'a' => '2',
+                                        'b' => '1',
+                                        'c' => '3',
+                                        'd' => '4',
+                                        'e' => '5'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Modus dari data 5, 6, 6, 7, 8, 8, 8 adalah...",
+                                    'jawaban' => [
+                                        'a' => '8',
+                                        'b' => '6',
+                                        'c' => '7',
+                                        'd' => '5',
+                                        'e' => '9'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Modus dari data 10, 12, 12, 15, 15, 15, 18 adalah...",
+                                    'jawaban' => [
+                                        'a' => '15',
+                                        'b' => '12',
+                                        'c' => '10',
+                                        'd' => '18',
+                                        'e' => '13'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Pengumpulan Data') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Cara mengumpulkan data dengan mengamati langsung disebut...",
+                                    'jawaban' => [
+                                        'a' => 'Observasi',
+                                        'b' => 'Wawancara',
+                                        'c' => 'Angket',
+                                        'd' => 'Dokumentasi',
+                                        'e' => 'Tes'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Data yang disajikan dalam bentuk tabel disebut...",
+                                    'jawaban' => [
+                                        'a' => 'Tabel frekuensi',
+                                        'b' => 'Diagram batang',
+                                        'c' => 'Grafik garis',
+                                        'd' => 'Piktogram',
+                                        'e' => 'Histogram'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Cara mengumpulkan data dengan bertanya langsung disebut...",
+                                    'jawaban' => [
+                                        'a' => 'Wawancara',
+                                        'b' => 'Observasi',
+                                        'c' => 'Angket',
+                                        'd' => 'Dokumentasi',
+                                        'e' => 'Tes'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Data yang dikumpulkan dari dokumen atau catatan disebut...",
+                                    'jawaban' => [
+                                        'a' => 'Dokumentasi',
+                                        'b' => 'Observasi',
+                                        'c' => 'Wawancara',
+                                        'd' => 'Angket',
+                                        'e' => 'Tes'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
                 } elseif ($subTopik == 'Diagram') {
                     switch ($jenjang) {
                         case 'SD':
-                            $template['soal'] = "Diagram yang menggunakan batang untuk menyajikan data disebut...";
-                            $template['jawaban'] = [
-                                'a' => 'Diagram batang',
-                                'b' => 'Diagram garis',
-                                'c' => 'Diagram lingkaran',
-                                'd' => 'Diagram gambar',
-                                'e' => 'Diagram tabel'
+                            $questions = [
+                                [
+                                    'soal' => "Diagram yang menggunakan gambar untuk menyajikan data disebut...",
+                                    'jawaban' => [
+                                        'a' => 'Diagram gambar',
+                                        'b' => 'Diagram batang',
+                                        'c' => 'Diagram garis',
+                                        'd' => 'Diagram lingkaran',
+                                        'e' => 'Histogram'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Diagram yang menggunakan batang untuk menyajikan data disebut...",
+                                    'jawaban' => [
+                                        'a' => 'Diagram batang',
+                                        'b' => 'Diagram gambar',
+                                        'c' => 'Diagram garis',
+                                        'd' => 'Diagram lingkaran',
+                                        'e' => 'Histogram'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Diagram yang paling cocok untuk menampilkan perbandingan adalah...",
+                                    'jawaban' => [
+                                        'a' => 'Diagram batang',
+                                        'b' => 'Diagram garis',
+                                        'c' => 'Diagram gambar',
+                                        'd' => 'Histogram',
+                                        'e' => 'Piktogram'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Diagram yang menggunakan garis untuk menghubungkan titik-titik data disebut...",
+                                    'jawaban' => [
+                                        'a' => 'Diagram garis',
+                                        'b' => 'Diagram batang',
+                                        'c' => 'Diagram gambar',
+                                        'd' => 'Diagram lingkaran',
+                                        'e' => 'Histogram'
+                                    ],
+                                    'benar' => 'a'
+                                ]
                             ];
-                            $template['benar'] = 'a';
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                }
+                break;
+            case 'Geometri':
+                if ($subTopik == 'Bangun Datar') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Berapakah jumlah sisi pada persegi?",
+                                    'jawaban' => [
+                                        'a' => '4',
+                                        'b' => '3',
+                                        'c' => '5',
+                                        'd' => '6',
+                                        'e' => '8'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Bangun datar yang memiliki tiga sisi adalah...",
+                                    'jawaban' => [
+                                        'a' => 'Segitiga',
+                                        'b' => 'Persegi',
+                                        'c' => 'Lingkaran',
+                                        'd' => 'Persegi panjang',
+                                        'e' => 'Jajar genjang'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Luas dan Keliling') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Berapakah luas persegi dengan sisi 4 cm?",
+                                    'jawaban' => [
+                                        'a' => '16 cm²',
+                                        'b' => '8 cm²',
+                                        'c' => '12 cm²',
+                                        'd' => '20 cm²',
+                                        'e' => '24 cm²'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Keliling persegi panjang dengan panjang 6 cm dan lebar 4 cm adalah...",
+                                    'jawaban' => [
+                                        'a' => '20 cm',
+                                        'b' => '24 cm',
+                                        'c' => '18 cm',
+                                        'd' => '16 cm',
+                                        'e' => '22 cm'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Simetri') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Persegi memiliki berapa simetri lipat?",
+                                    'jawaban' => [
+                                        'a' => '4',
+                                        'b' => '2',
+                                        'c' => '3',
+                                        'd' => '5',
+                                        'e' => '6'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Bangun datar yang hanya memiliki satu simetri lipat adalah...",
+                                    'jawaban' => [
+                                        'a' => 'Segitiga sama kaki',
+                                        'b' => 'Persegi',
+                                        'c' => 'Lingkaran',
+                                        'd' => 'Persegi panjang',
+                                        'e' => 'Jajar genjang'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Bangun Ruang') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Bangun ruang yang memiliki 6 sisi sama besar adalah...",
+                                    'jawaban' => [
+                                        'a' => 'Kubus',
+                                        'b' => 'Balok',
+                                        'c' => 'Tabung',
+                                        'd' => 'Kerucut',
+                                        'e' => 'Limas'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Bangun ruang yang memiliki alas dan tutup berbentuk lingkaran adalah...",
+                                    'jawaban' => [
+                                        'a' => 'Tabung',
+                                        'b' => 'Kubus',
+                                        'c' => 'Balok',
+                                        'd' => 'Kerucut',
+                                        'e' => 'Limas'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Volume') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Volume kubus dengan panjang rusuk 3 cm adalah...",
+                                    'jawaban' => [
+                                        'a' => '27 cm³',
+                                        'b' => '9 cm³',
+                                        'c' => '18 cm³',
+                                        'd' => '12 cm³',
+                                        'e' => '36 cm³'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Volume balok dengan panjang 4 cm, lebar 3 cm, dan tinggi 2 cm adalah...",
+                                    'jawaban' => [
+                                        'a' => '24 cm³',
+                                        'b' => '12 cm³',
+                                        'c' => '18 cm³',
+                                        'd' => '20 cm³',
+                                        'e' => '30 cm³'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                }
+                break;
+            case 'Pengukuran':
+                if ($subTopik == 'Satuan Luas') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "1 are sama dengan berapa meter persegi?",
+                                    'jawaban' => [
+                                        'a' => '100 m²',
+                                        'b' => '10 m²',
+                                        'c' => '1000 m²',
+                                        'd' => '10000 m²',
+                                        'e' => '1 m²'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "1 hektar sama dengan berapa are?",
+                                    'jawaban' => [
+                                        'a' => '100 are',
+                                        'b' => '10 are',
+                                        'c' => '1000 are',
+                                        'd' => '10000 are',
+                                        'e' => '1 are'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Satuan Volume') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "1 liter sama dengan berapa mililiter?",
+                                    'jawaban' => [
+                                        'a' => '1000 ml',
+                                        'b' => '100 ml',
+                                        'c' => '10 ml',
+                                        'd' => '500 ml',
+                                        'e' => '2000 ml'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "1 m³ sama dengan berapa liter?",
+                                    'jawaban' => [
+                                        'a' => '1000 liter',
+                                        'b' => '100 liter',
+                                        'c' => '10 liter',
+                                        'd' => '500 liter',
+                                        'e' => '2000 liter'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Satuan Debit') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Debit air 2 liter per menit, berapa liter air yang keluar dalam 5 menit?",
+                                    'jawaban' => [
+                                        'a' => '10',
+                                        'b' => '5',
+                                        'c' => '7',
+                                        'd' => '12',
+                                        'e' => '15'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Debit air 3 liter per menit, berapa liter air yang keluar dalam 10 menit?",
+                                    'jawaban' => [
+                                        'a' => '30',
+                                        'b' => '13',
+                                        'c' => '20',
+                                        'd' => '25',
+                                        'e' => '15'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                }
+                break;
+            case 'Statistika':
+                if ($subTopik == 'Rata-rata') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Rata-rata dari 6, 8, 10 adalah...",
+                                    'jawaban' => [
+                                        'a' => '8',
+                                        'b' => '6',
+                                        'c' => '7',
+                                        'd' => '9',
+                                        'e' => '10'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Rata-rata dari 5, 7, 9, 11 adalah...",
+                                    'jawaban' => [
+                                        'a' => '8',
+                                        'b' => '7',
+                                        'c' => '9',
+                                        'd' => '10',
+                                        'e' => '6'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Modus') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Modus dari data 2, 3, 3, 5, 7 adalah...",
+                                    'jawaban' => [
+                                        'a' => '3',
+                                        'b' => '2',
+                                        'c' => '5',
+                                        'd' => '7',
+                                        'e' => '4'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Modus dari data 1, 2, 2, 2, 3, 4 adalah...",
+                                    'jawaban' => [
+                                        'a' => '2',
+                                        'b' => '1',
+                                        'c' => '3',
+                                        'd' => '4',
+                                        'e' => '5'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                }
+                break;
+            case 'Geometri':
+                if ($subTopik == 'Bangun Datar') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Berapakah jumlah sisi pada persegi?",
+                                    'jawaban' => [
+                                        'a' => '4',
+                                        'b' => '3',
+                                        'c' => '5',
+                                        'd' => '6',
+                                        'e' => '8'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Bangun datar yang memiliki tiga sisi adalah...",
+                                    'jawaban' => [
+                                        'a' => 'Segitiga',
+                                        'b' => 'Persegi',
+                                        'c' => 'Lingkaran',
+                                        'd' => 'Persegi panjang',
+                                        'e' => 'Jajar genjang'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Luas dan Keliling') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Berapakah luas persegi dengan sisi 4 cm?",
+                                    'jawaban' => [
+                                        'a' => '16 cm²',
+                                        'b' => '8 cm²',
+                                        'c' => '12 cm²',
+                                        'd' => '20 cm²',
+                                        'e' => '24 cm²'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Keliling persegi panjang dengan panjang 6 cm dan lebar 4 cm adalah...",
+                                    'jawaban' => [
+                                        'a' => '20 cm',
+                                        'b' => '24 cm',
+                                        'c' => '18 cm',
+                                        'd' => '16 cm',
+                                        'e' => '22 cm'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Simetri') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Persegi memiliki berapa simetri lipat?",
+                                    'jawaban' => [
+                                        'a' => '4',
+                                        'b' => '2',
+                                        'c' => '3',
+                                        'd' => '5',
+                                        'e' => '6'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Bangun datar yang hanya memiliki satu simetri lipat adalah...",
+                                    'jawaban' => [
+                                        'a' => 'Segitiga sama kaki',
+                                        'b' => 'Persegi',
+                                        'c' => 'Lingkaran',
+                                        'd' => 'Persegi panjang',
+                                        'e' => 'Jajar genjang'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Bangun Ruang') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Bangun ruang yang memiliki 6 sisi sama besar adalah...",
+                                    'jawaban' => [
+                                        'a' => 'Kubus',
+                                        'b' => 'Balok',
+                                        'c' => 'Tabung',
+                                        'd' => 'Kerucut',
+                                        'e' => 'Limas'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Bangun ruang yang memiliki alas dan tutup berbentuk lingkaran adalah...",
+                                    'jawaban' => [
+                                        'a' => 'Tabung',
+                                        'b' => 'Kubus',
+                                        'c' => 'Balok',
+                                        'd' => 'Kerucut',
+                                        'e' => 'Limas'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Volume') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Volume kubus dengan panjang rusuk 3 cm adalah...",
+                                    'jawaban' => [
+                                        'a' => '27 cm³',
+                                        'b' => '9 cm³',
+                                        'c' => '18 cm³',
+                                        'd' => '12 cm³',
+                                        'e' => '36 cm³'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Volume balok dengan panjang 4 cm, lebar 3 cm, dan tinggi 2 cm adalah...",
+                                    'jawaban' => [
+                                        'a' => '24 cm³',
+                                        'b' => '12 cm³',
+                                        'c' => '18 cm³',
+                                        'd' => '20 cm³',
+                                        'e' => '30 cm³'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                }
+                break;
+            case 'Pengukuran':
+                if ($subTopik == 'Satuan Luas') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "1 are sama dengan berapa meter persegi?",
+                                    'jawaban' => [
+                                        'a' => '100 m²',
+                                        'b' => '10 m²',
+                                        'c' => '1000 m²',
+                                        'd' => '10000 m²',
+                                        'e' => '1 m²'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "1 hektar sama dengan berapa are?",
+                                    'jawaban' => [
+                                        'a' => '100 are',
+                                        'b' => '10 are',
+                                        'c' => '1000 are',
+                                        'd' => '10000 are',
+                                        'e' => '1 are'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Satuan Volume') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "1 liter sama dengan berapa mililiter?",
+                                    'jawaban' => [
+                                        'a' => '1000 ml',
+                                        'b' => '100 ml',
+                                        'c' => '10 ml',
+                                        'd' => '500 ml',
+                                        'e' => '2000 ml'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "1 m³ sama dengan berapa liter?",
+                                    'jawaban' => [
+                                        'a' => '1000 liter',
+                                        'b' => '100 liter',
+                                        'c' => '10 liter',
+                                        'd' => '500 liter',
+                                        'e' => '2000 liter'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Satuan Debit') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Debit air 2 liter per menit, berapa liter air yang keluar dalam 5 menit?",
+                                    'jawaban' => [
+                                        'a' => '10',
+                                        'b' => '5',
+                                        'c' => '7',
+                                        'd' => '12',
+                                        'e' => '15'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Debit air 3 liter per menit, berapa liter air yang keluar dalam 10 menit?",
+                                    'jawaban' => [
+                                        'a' => '30',
+                                        'b' => '13',
+                                        'c' => '20',
+                                        'd' => '25',
+                                        'e' => '15'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                }
+                break;
+            case 'Statistika':
+                if ($subTopik == 'Rata-rata') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Rata-rata dari 6, 8, 10 adalah...",
+                                    'jawaban' => [
+                                        'a' => '8',
+                                        'b' => '6',
+                                        'c' => '7',
+                                        'd' => '9',
+                                        'e' => '10'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Rata-rata dari 5, 7, 9, 11 adalah...",
+                                    'jawaban' => [
+                                        'a' => '8',
+                                        'b' => '7',
+                                        'c' => '9',
+                                        'd' => '10',
+                                        'e' => '6'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Modus') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Modus dari data 2, 3, 3, 5, 7 adalah...",
+                                    'jawaban' => [
+                                        'a' => '3',
+                                        'b' => '2',
+                                        'c' => '5',
+                                        'd' => '7',
+                                        'e' => '4'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Modus dari data 1, 2, 2, 2, 3, 4 adalah...",
+                                    'jawaban' => [
+                                        'a' => '2',
+                                        'b' => '1',
+                                        'c' => '3',
+                                        'd' => '4',
+                                        'e' => '5'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                }
+                break;
+            case 'Geometri':
+                if ($subTopik == 'Bangun Datar') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Berapakah jumlah sisi pada persegi?",
+                                    'jawaban' => [
+                                        'a' => '4',
+                                        'b' => '3',
+                                        'c' => '5',
+                                        'd' => '6',
+                                        'e' => '8'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Bangun datar yang memiliki tiga sisi adalah...",
+                                    'jawaban' => [
+                                        'a' => 'Segitiga',
+                                        'b' => 'Persegi',
+                                        'c' => 'Lingkaran',
+                                        'd' => 'Persegi panjang',
+                                        'e' => 'Jajar genjang'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Luas dan Keliling') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Berapakah luas persegi dengan sisi 4 cm?",
+                                    'jawaban' => [
+                                        'a' => '16 cm²',
+                                        'b' => '8 cm²',
+                                        'c' => '12 cm²',
+                                        'd' => '20 cm²',
+                                        'e' => '24 cm²'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Keliling persegi panjang dengan panjang 6 cm dan lebar 4 cm adalah...",
+                                    'jawaban' => [
+                                        'a' => '20 cm',
+                                        'b' => '24 cm',
+                                        'c' => '18 cm',
+                                        'd' => '16 cm',
+                                        'e' => '22 cm'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Simetri') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Persegi memiliki berapa simetri lipat?",
+                                    'jawaban' => [
+                                        'a' => '4',
+                                        'b' => '2',
+                                        'c' => '3',
+                                        'd' => '5',
+                                        'e' => '6'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Bangun datar yang hanya memiliki satu simetri lipat adalah...",
+                                    'jawaban' => [
+                                        'a' => 'Segitiga sama kaki',
+                                        'b' => 'Persegi',
+                                        'c' => 'Lingkaran',
+                                        'd' => 'Persegi panjang',
+                                        'e' => 'Jajar genjang'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Bangun Ruang') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Bangun ruang yang memiliki 6 sisi sama besar adalah...",
+                                    'jawaban' => [
+                                        'a' => 'Kubus',
+                                        'b' => 'Balok',
+                                        'c' => 'Tabung',
+                                        'd' => 'Kerucut',
+                                        'e' => 'Limas'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Bangun ruang yang memiliki alas dan tutup berbentuk lingkaran adalah...",
+                                    'jawaban' => [
+                                        'a' => 'Tabung',
+                                        'b' => 'Kubus',
+                                        'c' => 'Balok',
+                                        'd' => 'Kerucut',
+                                        'e' => 'Limas'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Volume') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Volume kubus dengan panjang rusuk 3 cm adalah...",
+                                    'jawaban' => [
+                                        'a' => '27 cm³',
+                                        'b' => '9 cm³',
+                                        'c' => '18 cm³',
+                                        'd' => '12 cm³',
+                                        'e' => '36 cm³'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Volume balok dengan panjang 4 cm, lebar 3 cm, dan tinggi 2 cm adalah...",
+                                    'jawaban' => [
+                                        'a' => '24 cm³',
+                                        'b' => '12 cm³',
+                                        'c' => '18 cm³',
+                                        'd' => '20 cm³',
+                                        'e' => '30 cm³'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                }
+                break;
+            case 'Pengukuran':
+                if ($subTopik == 'Satuan Luas') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "1 are sama dengan berapa meter persegi?",
+                                    'jawaban' => [
+                                        'a' => '100 m²',
+                                        'b' => '10 m²',
+                                        'c' => '1000 m²',
+                                        'd' => '10000 m²',
+                                        'e' => '1 m²'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "1 hektar sama dengan berapa are?",
+                                    'jawaban' => [
+                                        'a' => '100 are',
+                                        'b' => '10 are',
+                                        'c' => '1000 are',
+                                        'd' => '10000 are',
+                                        'e' => '1 are'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Satuan Volume') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "1 liter sama dengan berapa mililiter?",
+                                    'jawaban' => [
+                                        'a' => '1000 ml',
+                                        'b' => '100 ml',
+                                        'c' => '10 ml',
+                                        'd' => '500 ml',
+                                        'e' => '2000 ml'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "1 m³ sama dengan berapa liter?",
+                                    'jawaban' => [
+                                        'a' => '1000 liter',
+                                        'b' => '100 liter',
+                                        'c' => '10 liter',
+                                        'd' => '500 liter',
+                                        'e' => '2000 liter'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Satuan Debit') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Debit air 2 liter per menit, berapa liter air yang keluar dalam 5 menit?",
+                                    'jawaban' => [
+                                        'a' => '10',
+                                        'b' => '5',
+                                        'c' => '7',
+                                        'd' => '12',
+                                        'e' => '15'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Debit air 3 liter per menit, berapa liter air yang keluar dalam 10 menit?",
+                                    'jawaban' => [
+                                        'a' => '30',
+                                        'b' => '13',
+                                        'c' => '20',
+                                        'd' => '25',
+                                        'e' => '15'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                }
+                break;
+            case 'Statistika':
+                if ($subTopik == 'Rata-rata') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Rata-rata dari 6, 8, 10 adalah...",
+                                    'jawaban' => [
+                                        'a' => '8',
+                                        'b' => '6',
+                                        'c' => '7',
+                                        'd' => '9',
+                                        'e' => '10'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Rata-rata dari 5, 7, 9, 11 adalah...",
+                                    'jawaban' => [
+                                        'a' => '8',
+                                        'b' => '7',
+                                        'c' => '9',
+                                        'd' => '10',
+                                        'e' => '6'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
+                            break;
+                    }
+                } elseif ($subTopik == 'Modus') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $questions = [
+                                [
+                                    'soal' => "Modus dari data 2, 3, 3, 5, 7 adalah...",
+                                    'jawaban' => [
+                                        'a' => '3',
+                                        'b' => '2',
+                                        'c' => '5',
+                                        'd' => '7',
+                                        'e' => '4'
+                                    ],
+                                    'benar' => 'a'
+                                ],
+                                [
+                                    'soal' => "Modus dari data 1, 2, 2, 2, 3, 4 adalah...",
+                                    'jawaban' => [
+                                        'a' => '2',
+                                        'b' => '1',
+                                        'c' => '3',
+                                        'd' => '4',
+                                        'e' => '5'
+                                    ],
+                                    'benar' => 'a'
+                                ]
+                            ];
+                            $selectedQuestion = $questions[array_rand($questions)];
+                            $template['soal'] = $selectedQuestion['soal'];
+                            $template['jawaban'] = $selectedQuestion['jawaban'];
+                            $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
                 }
@@ -784,42 +3103,402 @@ class PaketSoalSeeder extends Seeder
                 if ($subTopik == 'Membaca Nyaring') {
                     switch ($jenjang) {
                         case 'SD':
-                            $template['soal'] = "Berikut ini yang merupakan contoh kalimat yang baik untuk dibaca nyaring adalah...";
-                            $template['jawaban'] = [
-                                'a' => 'Ani pergi ke sekolah dengan riang gembira.',
-                                'b' => 'Ani pergi ke sekolah dengan riang gembira!',
-                                'c' => 'Ani pergi ke sekolah dengan riang gembira?',
-                                'd' => 'Ani pergi ke sekolah dengan riang gembira...',
-                                'e' => 'Ani pergi ke sekolah dengan riang gembira;'
+                            $soalVariasi = [
+                                "Berikut ini yang merupakan contoh kalimat yang baik untuk dibaca nyaring adalah...",
+                                "Kalimat yang tepat untuk dibaca nyaring dengan intonasi yang baik adalah...",
+                                "Contoh kalimat yang dapat dibaca nyaring dengan lafal yang jelas adalah...",
+                                "Kalimat yang cocok untuk latihan membaca nyaring adalah...",
+                                "Berikut ini kalimat yang baik untuk dibaca nyaring di depan kelas adalah..."
                             ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Ani pergi ke sekolah dengan riang gembira.',
+                                    'b' => 'Ani pergi ke sekolah dengan riang gembira!',
+                                    'c' => 'Ani pergi ke sekolah dengan riang gembira?',
+                                    'd' => 'Ani pergi ke sekolah dengan riang gembira...',
+                                    'e' => 'Ani pergi ke sekolah dengan riang gembira;'
+                                ],
+                                [
+                                    'a' => 'Budi belajar dengan tekun setiap hari.',
+                                    'b' => 'Budi belajar dengan tekun setiap hari!',
+                                    'c' => 'Budi belajar dengan tekun setiap hari?',
+                                    'd' => 'Budi belajar dengan tekun setiap hari...',
+                                    'e' => 'Budi belajar dengan tekun setiap hari;'
+                                ],
+                                [
+                                    'a' => 'Ibu memasak nasi goreng yang enak.',
+                                    'b' => 'Ibu memasak nasi goreng yang enak!',
+                                    'c' => 'Ibu memasak nasi goreng yang enak?',
+                                    'd' => 'Ibu memasak nasi goreng yang enak...',
+                                    'e' => 'Ibu memasak nasi goreng yang enak;'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
                             $template['benar'] = 'a';
                             break;
                     }
                 } elseif ($subTopik == 'Membaca Pemahaman') {
                     switch ($jenjang) {
                         case 'SD':
-                            $template['soal'] = "Budi sedang bermain bola di lapangan. Tiba-tiba hujan turun. Budi segera pulang ke rumah.\n\nApa yang dilakukan Budi ketika hujan turun?";
-                            $template['jawaban'] = [
-                                'a' => 'Pulang ke rumah',
-                                'b' => 'Terus bermain bola',
-                                'c' => 'Bermain di bawah pohon',
-                                'd' => 'Menunggu hujan reda',
-                                'e' => 'Mencari tempat berteduh'
+                            $teksVariasi = [
+                                "Budi sedang bermain bola di lapangan. Tiba-tiba hujan turun. Budi segera pulang ke rumah.",
+                                "Ani suka berkebun. Setiap pagi ia menyiram bunga. Bunga-bunganya tumbuh subur dan indah.",
+                                "Pak Guru mengajar matematika. Siswa-siswa mendengarkan dengan tekun. Mereka mengerjakan soal bersama-sama.",
+                                "Ibu membeli sayuran di pasar. Ia memilih sayuran yang segar. Sayuran itu untuk makan siang keluarga.",
+                                "Rina suka membaca buku cerita. Setiap malam sebelum tidur, ia membaca cerita. Buku favoritnya adalah dongeng."
                             ];
+                            $teks = $teksVariasi[array_rand($teksVariasi)];
+                            
+                            $pertanyaanVariasi = [
+                                "Apa yang dilakukan Budi ketika hujan turun?",
+                                "Kapan Ani menyiram bunga?",
+                                "Bagaimana sikap siswa-siswa saat belajar?",
+                                "Di mana Ibu membeli sayuran?",
+                                "Kapan Rina membaca buku cerita?"
+                            ];
+                            $pertanyaan = $pertanyaanVariasi[array_rand($pertanyaanVariasi)];
+                            
+                            $template['soal'] = $teks . "\n\n" . $pertanyaan;
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Pulang ke rumah',
+                                    'b' => 'Terus bermain bola',
+                                    'c' => 'Bermain di bawah pohon',
+                                    'd' => 'Menunggu hujan reda',
+                                    'e' => 'Mencari tempat berteduh'
+                                ],
+                                [
+                                    'a' => 'Setiap pagi',
+                                    'b' => 'Setiap sore',
+                                    'c' => 'Setiap malam',
+                                    'd' => 'Setiap siang',
+                                    'e' => 'Setiap minggu'
+                                ],
+                                [
+                                    'a' => 'Dengan tekun',
+                                    'b' => 'Dengan malas',
+                                    'c' => 'Dengan bosan',
+                                    'd' => 'Dengan marah',
+                                    'e' => 'Dengan sedih'
+                                ],
+                                [
+                                    'a' => 'Di pasar',
+                                    'b' => 'Di toko',
+                                    'c' => 'Di mall',
+                                    'd' => 'Di warung',
+                                    'e' => 'Di supermarket'
+                                ],
+                                [
+                                    'a' => 'Setiap malam sebelum tidur',
+                                    'b' => 'Setiap pagi',
+                                    'c' => 'Setiap siang',
+                                    'd' => 'Setiap sore',
+                                    'e' => 'Setiap minggu'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMP':
+                            $soalVariasi = [
+                                "Berikut ini yang merupakan teknik membaca cepat adalah...",
+                                "Cara membaca cepat yang benar adalah...",
+                                "Teknik yang digunakan untuk membaca cepat adalah...",
+                                "Berikut ini cara membaca dengan kecepatan tinggi adalah...",
+                                "Teknik membaca yang dapat meningkatkan kecepatan adalah..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Membaca dengan skimming dan scanning',
+                                    'b' => 'Membaca dengan suara keras',
+                                    'c' => 'Membaca dengan jari',
+                                    'd' => 'Membaca dengan menggerakkan kepala',
+                                    'e' => 'Membaca dengan menggerakkan bibir'
+                                ],
+                                [
+                                    'a' => 'Membaca dengan fokus pada kata kunci',
+                                    'b' => 'Membaca dengan suara pelan',
+                                    'c' => 'Membaca dengan mengulang kata',
+                                    'd' => 'Membaca dengan menunjuk huruf',
+                                    'e' => 'Membaca dengan menggerakkan bibir'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
                             $template['benar'] = 'a';
                             break;
                     }
                 } elseif ($subTopik == 'Membaca Cepat') {
                     switch ($jenjang) {
                         case 'SD':
-                            $template['soal'] = "Berikut ini yang merupakan teknik membaca cepat adalah...";
-                            $template['jawaban'] = [
-                                'a' => 'Membaca dengan gerakan mata yang cepat',
-                                'b' => 'Membaca dengan suara keras',
-                                'c' => 'Membaca dengan jari',
-                                'd' => 'Membaca dengan menggerakkan kepala',
-                                'e' => 'Membaca dengan menggerakkan bibir'
+                            $soalVariasi = [
+                                "Berikut ini yang merupakan teknik membaca cepat adalah...",
+                                "Cara membaca cepat yang benar adalah...",
+                                "Teknik yang digunakan untuk membaca cepat adalah...",
+                                "Berikut ini cara membaca dengan kecepatan tinggi adalah...",
+                                "Teknik membaca yang dapat meningkatkan kecepatan adalah..."
                             ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Membaca dengan gerakan mata yang cepat',
+                                    'b' => 'Membaca dengan suara keras',
+                                    'c' => 'Membaca dengan jari',
+                                    'd' => 'Membaca dengan menggerakkan kepala',
+                                    'e' => 'Membaca dengan menggerakkan bibir'
+                                ],
+                                [
+                                    'a' => 'Membaca dengan skimming dan scanning',
+                                    'b' => 'Membaca dengan suara pelan',
+                                    'c' => 'Membaca dengan mengulang kata',
+                                    'd' => 'Membaca dengan menunjuk huruf',
+                                    'e' => 'Membaca dengan menggerakkan bibir'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMP':
+                            $soalVariasi = [
+                                "Berikut ini yang merupakan teknik membaca cepat adalah...",
+                                "Cara membaca cepat yang benar adalah...",
+                                "Teknik yang digunakan untuk membaca cepat adalah...",
+                                "Berikut ini cara membaca dengan kecepatan tinggi adalah...",
+                                "Teknik membaca yang dapat meningkatkan kecepatan adalah..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Membaca dengan skimming dan scanning',
+                                    'b' => 'Membaca dengan suara keras',
+                                    'c' => 'Membaca dengan jari',
+                                    'd' => 'Membaca dengan menggerakkan kepala',
+                                    'e' => 'Membaca dengan menggerakkan bibir'
+                                ],
+                                [
+                                    'a' => 'Membaca dengan fokus pada kata kunci',
+                                    'b' => 'Membaca dengan suara pelan',
+                                    'c' => 'Membaca dengan mengulang kata',
+                                    'd' => 'Membaca dengan menunjuk huruf',
+                                    'e' => 'Membaca dengan menggerakkan bibir'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMP':
+                            $soalVariasi = [
+                                "Membaca intensif bertujuan untuk...",
+                                "Tujuan membaca dengan teliti dan mendalam adalah...",
+                                "Membaca intensif dilakukan untuk...",
+                                "Kapan kita perlu membaca intensif?",
+                                "Membaca intensif berguna untuk..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Menganalisis teks secara mendalam',
+                                    'b' => 'Membaca dengan cepat',
+                                    'c' => 'Membaca sambil lalu',
+                                    'd' => 'Membaca tanpa memahami',
+                                    'e' => 'Membaca dengan terburu-buru'
+                                ],
+                                [
+                                    'a' => 'Mengidentifikasi unsur-unsur teks',
+                                    'b' => 'Menyelesaikan bacaan dengan cepat',
+                                    'c' => 'Membaca tanpa konsentrasi',
+                                    'd' => 'Membaca sambil bermain',
+                                    'e' => 'Membaca tanpa tujuan'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                    }
+                } elseif ($subTopik == 'Membaca Intensif') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $soalVariasi = [
+                                "Membaca intensif bertujuan untuk...",
+                                "Tujuan membaca dengan teliti dan mendalam adalah...",
+                                "Membaca intensif dilakukan untuk...",
+                                "Kapan kita perlu membaca intensif?",
+                                "Membaca intensif berguna untuk..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Memahami isi bacaan dengan mendalam',
+                                    'b' => 'Membaca dengan cepat',
+                                    'c' => 'Membaca sambil lalu',
+                                    'd' => 'Membaca tanpa memahami',
+                                    'e' => 'Membaca dengan terburu-buru'
+                                ],
+                                [
+                                    'a' => 'Mendapatkan pemahaman yang lengkap',
+                                    'b' => 'Menyelesaikan bacaan dengan cepat',
+                                    'c' => 'Membaca tanpa konsentrasi',
+                                    'd' => 'Membaca sambil bermain',
+                                    'e' => 'Membaca tanpa tujuan'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMP':
+                            $soalVariasi = [
+                                "Membaca intensif bertujuan untuk...",
+                                "Tujuan membaca dengan teliti dan mendalam adalah...",
+                                "Membaca intensif dilakukan untuk...",
+                                "Kapan kita perlu membaca intensif?",
+                                "Membaca intensif berguna untuk..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Menganalisis teks secara mendalam',
+                                    'b' => 'Membaca dengan cepat',
+                                    'c' => 'Membaca sambil lalu',
+                                    'd' => 'Membaca tanpa memahami',
+                                    'e' => 'Membaca dengan terburu-buru'
+                                ],
+                                [
+                                    'a' => 'Mengidentifikasi unsur-unsur teks',
+                                    'b' => 'Menyelesaikan bacaan dengan cepat',
+                                    'c' => 'Membaca tanpa konsentrasi',
+                                    'd' => 'Membaca sambil bermain',
+                                    'e' => 'Membaca tanpa tujuan'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $soalVariasi = [
+                                "Membaca ekstensif bertujuan untuk...",
+                                "Tujuan membaca banyak buku adalah...",
+                                "Membaca ekstensif berguna untuk...",
+                                "Manfaat membaca berbagai jenis buku adalah...",
+                                "Membaca ekstensif dapat..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Mengembangkan kemampuan analisis mendalam',
+                                    'b' => 'Membaca dengan cepat',
+                                    'c' => 'Membaca tanpa memahami',
+                                    'd' => 'Membaca sambil lalu',
+                                    'e' => 'Membaca tanpa tujuan'
+                                ],
+                                [
+                                    'a' => 'Meningkatkan kemampuan evaluasi kritis',
+                                    'b' => 'Menyelesaikan tugas dengan cepat',
+                                    'c' => 'Membaca tanpa konsentrasi',
+                                    'd' => 'Membaca sambil bermain',
+                                    'e' => 'Membaca tanpa manfaat'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                    }
+                } elseif ($subTopik == 'Membaca Ekstensif') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $soalVariasi = [
+                                "Membaca ekstensif bertujuan untuk...",
+                                "Tujuan membaca banyak buku adalah...",
+                                "Membaca ekstensif berguna untuk...",
+                                "Manfaat membaca berbagai jenis buku adalah...",
+                                "Membaca ekstensif dapat..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Memperluas wawasan dan pengetahuan',
+                                    'b' => 'Membaca dengan cepat',
+                                    'c' => 'Membaca tanpa memahami',
+                                    'd' => 'Membaca sambil lalu',
+                                    'e' => 'Membaca tanpa tujuan'
+                                ],
+                                [
+                                    'a' => 'Menambah ilmu pengetahuan',
+                                    'b' => 'Menyelesaikan tugas dengan cepat',
+                                    'c' => 'Membaca tanpa konsentrasi',
+                                    'd' => 'Membaca sambil bermain',
+                                    'e' => 'Membaca tanpa manfaat'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMP':
+                            $soalVariasi = [
+                                "Membaca ekstensif bertujuan untuk...",
+                                "Tujuan membaca banyak buku adalah...",
+                                "Membaca ekstensif berguna untuk...",
+                                "Manfaat membaca berbagai jenis buku adalah...",
+                                "Membaca ekstensif dapat..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Memperluas wawasan dan pengetahuan',
+                                    'b' => 'Membaca dengan cepat',
+                                    'c' => 'Membaca tanpa memahami',
+                                    'd' => 'Membaca sambil lalu',
+                                    'e' => 'Membaca tanpa tujuan'
+                                ],
+                                [
+                                    'a' => 'Mengembangkan kemampuan berpikir kritis',
+                                    'b' => 'Menyelesaikan tugas dengan cepat',
+                                    'c' => 'Membaca tanpa konsentrasi',
+                                    'd' => 'Membaca sambil bermain',
+                                    'e' => 'Membaca tanpa manfaat'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $soalVariasi = [
+                                "Membaca ekstensif bertujuan untuk...",
+                                "Tujuan membaca banyak buku adalah...",
+                                "Membaca ekstensif berguna untuk...",
+                                "Manfaat membaca berbagai jenis buku adalah...",
+                                "Membaca ekstensif dapat..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Mengembangkan kemampuan analisis mendalam',
+                                    'b' => 'Membaca dengan cepat',
+                                    'c' => 'Membaca tanpa memahami',
+                                    'd' => 'Membaca sambil lalu',
+                                    'e' => 'Membaca tanpa tujuan'
+                                ],
+                                [
+                                    'a' => 'Meningkatkan kemampuan evaluasi kritis',
+                                    'b' => 'Menyelesaikan tugas dengan cepat',
+                                    'c' => 'Membaca tanpa konsentrasi',
+                                    'd' => 'Membaca sambil bermain',
+                                    'e' => 'Membaca tanpa manfaat'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
                             $template['benar'] = 'a';
                             break;
                     }
@@ -829,42 +3508,392 @@ class PaketSoalSeeder extends Seeder
                 if ($subTopik == 'Menulis Karangan') {
                     switch ($jenjang) {
                         case 'SD':
-                            $template['soal'] = "Berikut ini yang merupakan bagian pembuka dalam karangan adalah...";
-                            $template['jawaban'] = [
-                                'a' => 'Pendahuluan',
-                                'b' => 'Kesimpulan',
-                                'c' => 'Penutup',
-                                'd' => 'Daftar pustaka',
-                                'e' => 'Lampiran'
+                            $soalVariasi = [
+                                "Berikut ini yang merupakan bagian pembuka dalam karangan adalah...",
+                                "Bagian awal karangan yang berisi pengantar adalah...",
+                                "Bagian karangan yang mengawali tulisan adalah...",
+                                "Struktur karangan yang berisi pendahuluan adalah...",
+                                "Bagian karangan yang memperkenalkan topik adalah..."
                             ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Pendahuluan',
+                                    'b' => 'Kesimpulan',
+                                    'c' => 'Penutup',
+                                    'd' => 'Daftar pustaka',
+                                    'e' => 'Lampiran'
+                                ],
+                                [
+                                    'a' => 'Pembuka',
+                                    'b' => 'Penutup',
+                                    'c' => 'Isi',
+                                    'd' => 'Kesimpulan',
+                                    'e' => 'Daftar pustaka'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMP':
+                            $soalVariasi = [
+                                "Berikut ini yang merupakan bagian pembuka dalam karangan adalah...",
+                                "Bagian awal karangan yang berisi pengantar adalah...",
+                                "Bagian karangan yang mengawali tulisan adalah...",
+                                "Struktur karangan yang berisi pendahuluan adalah...",
+                                "Bagian karangan yang memperkenalkan topik adalah..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Pendahuluan yang menarik',
+                                    'b' => 'Kesimpulan',
+                                    'c' => 'Penutup',
+                                    'd' => 'Daftar pustaka',
+                                    'e' => 'Lampiran'
+                                ],
+                                [
+                                    'a' => 'Pembuka yang informatif',
+                                    'b' => 'Penutup',
+                                    'c' => 'Isi',
+                                    'd' => 'Kesimpulan',
+                                    'e' => 'Daftar pustaka'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $soalVariasi = [
+                                "Berikut ini yang merupakan bagian pembuka dalam karangan adalah...",
+                                "Bagian awal karangan yang berisi pengantar adalah...",
+                                "Bagian karangan yang mengawali tulisan adalah...",
+                                "Struktur karangan yang berisi pendahuluan adalah...",
+                                "Bagian karangan yang memperkenalkan topik adalah..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Pendahuluan yang argumentatif',
+                                    'b' => 'Kesimpulan',
+                                    'c' => 'Penutup',
+                                    'd' => 'Daftar pustaka',
+                                    'e' => 'Lampiran'
+                                ],
+                                [
+                                    'a' => 'Pembuka yang analitis',
+                                    'b' => 'Penutup',
+                                    'c' => 'Isi',
+                                    'd' => 'Kesimpulan',
+                                    'e' => 'Daftar pustaka'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
                             $template['benar'] = 'a';
                             break;
                     }
                 } elseif ($subTopik == 'Menulis Surat') {
                     switch ($jenjang) {
                         case 'SD':
-                            $template['soal'] = "Bagian surat yang berisi tanggal surat adalah...";
-                            $template['jawaban'] = [
-                                'a' => 'Kepala surat',
-                                'b' => 'Pembuka surat',
-                                'c' => 'Isi surat',
-                                'd' => 'Penutup surat',
-                                'e' => 'Tanda tangan'
+                            $soalVariasi = [
+                                "Bagian surat yang berisi tanggal surat adalah...",
+                                "Tempat menulis tanggal dalam surat adalah...",
+                                "Bagian surat yang menunjukkan waktu penulisan adalah...",
+                                "Di mana kita menulis tanggal surat?",
+                                "Bagian surat yang berisi waktu adalah..."
                             ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Kepala surat',
+                                    'b' => 'Pembuka surat',
+                                    'c' => 'Isi surat',
+                                    'd' => 'Penutup surat',
+                                    'e' => 'Tanda tangan'
+                                ],
+                                [
+                                    'a' => 'Bagian atas surat',
+                                    'b' => 'Bagian tengah surat',
+                                    'c' => 'Bagian bawah surat',
+                                    'd' => 'Bagian samping surat',
+                                    'e' => 'Bagian belakang surat'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMP':
+                            $soalVariasi = [
+                                "Bagian surat yang berisi tanggal surat adalah...",
+                                "Tempat menulis tanggal dalam surat adalah...",
+                                "Bagian surat yang menunjukkan waktu penulisan adalah...",
+                                "Di mana kita menulis tanggal surat?",
+                                "Bagian surat yang berisi waktu adalah..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Kepala surat yang lengkap',
+                                    'b' => 'Pembuka surat',
+                                    'c' => 'Isi surat',
+                                    'd' => 'Penutup surat',
+                                    'e' => 'Tanda tangan'
+                                ],
+                                [
+                                    'a' => 'Bagian atas surat yang formal',
+                                    'b' => 'Bagian tengah surat',
+                                    'c' => 'Bagian bawah surat',
+                                    'd' => 'Bagian samping surat',
+                                    'e' => 'Bagian belakang surat'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $soalVariasi = [
+                                "Bagian surat yang berisi tanggal surat adalah...",
+                                "Tempat menulis tanggal dalam surat adalah...",
+                                "Bagian surat yang menunjukkan waktu penulisan adalah...",
+                                "Di mana kita menulis tanggal surat?",
+                                "Bagian surat yang berisi waktu adalah..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Kepala surat yang formal',
+                                    'b' => 'Pembuka surat',
+                                    'c' => 'Isi surat',
+                                    'd' => 'Penutup surat',
+                                    'e' => 'Tanda tangan'
+                                ],
+                                [
+                                    'a' => 'Bagian atas surat yang resmi',
+                                    'b' => 'Bagian tengah surat',
+                                    'c' => 'Bagian bawah surat',
+                                    'd' => 'Bagian samping surat',
+                                    'e' => 'Bagian belakang surat'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
                             $template['benar'] = 'a';
                             break;
                     }
                 } elseif ($subTopik == 'Menulis Puisi') {
                     switch ($jenjang) {
                         case 'SD':
-                            $template['soal'] = "Berikut ini yang merupakan ciri-ciri puisi adalah...";
-                            $template['jawaban'] = [
-                                'a' => 'Menggunakan bahasa yang indah',
-                                'b' => 'Menggunakan bahasa yang panjang',
-                                'c' => 'Menggunakan bahasa yang sulit',
-                                'd' => 'Menggunakan bahasa yang formal',
-                                'e' => 'Menggunakan bahasa yang kaku'
+                            $soalVariasi = [
+                                "Berikut ini yang merupakan ciri-ciri puisi adalah...",
+                                "Ciri khas puisi yang membedakannya dengan prosa adalah...",
+                                "Karakteristik puisi yang utama adalah...",
+                                "Yang membuat puisi berbeda dari tulisan lain adalah...",
+                                "Ciri-ciri khusus puisi adalah..."
                             ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Menggunakan bahasa yang indah',
+                                    'b' => 'Menggunakan bahasa yang panjang',
+                                    'c' => 'Menggunakan bahasa yang sulit',
+                                    'd' => 'Menggunakan bahasa yang formal',
+                                    'e' => 'Menggunakan bahasa yang kaku'
+                                ],
+                                [
+                                    'a' => 'Menggunakan rima dan irama',
+                                    'b' => 'Menggunakan bahasa yang panjang',
+                                    'c' => 'Menggunakan bahasa yang sulit',
+                                    'd' => 'Menggunakan bahasa yang kaku',
+                                    'e' => 'Menggunakan bahasa yang formal'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMP':
+                            $soalVariasi = [
+                                "Berikut ini yang merupakan ciri-ciri puisi adalah...",
+                                "Ciri khas puisi yang membedakannya dengan prosa adalah...",
+                                "Karakteristik puisi yang utama adalah...",
+                                "Yang membuat puisi berbeda dari tulisan lain adalah...",
+                                "Ciri-ciri khusus puisi adalah..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Menggunakan bahasa yang indah dan kiasan',
+                                    'b' => 'Menggunakan bahasa yang panjang',
+                                    'c' => 'Menggunakan bahasa yang sulit',
+                                    'd' => 'Menggunakan bahasa yang formal',
+                                    'e' => 'Menggunakan bahasa yang kaku'
+                                ],
+                                [
+                                    'a' => 'Menggunakan rima, irama, dan majas',
+                                    'b' => 'Menggunakan bahasa yang panjang',
+                                    'c' => 'Menggunakan bahasa yang sulit',
+                                    'd' => 'Menggunakan bahasa yang kaku',
+                                    'e' => 'Menggunakan bahasa yang formal'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $soalVariasi = [
+                                "Berikut ini yang merupakan ciri-ciri puisi adalah...",
+                                "Ciri khas puisi yang membedakannya dengan prosa adalah...",
+                                "Karakteristik puisi yang utama adalah...",
+                                "Yang membuat puisi berbeda dari tulisan lain adalah...",
+                                "Ciri-ciri khusus puisi adalah..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Menggunakan bahasa yang indah dan simbolik',
+                                    'b' => 'Menggunakan bahasa yang panjang',
+                                    'c' => 'Menggunakan bahasa yang sulit',
+                                    'd' => 'Menggunakan bahasa yang formal',
+                                    'e' => 'Menggunakan bahasa yang kaku'
+                                ],
+                                [
+                                    'a' => 'Menggunakan rima, irama, dan metafora kompleks',
+                                    'b' => 'Menggunakan bahasa yang panjang',
+                                    'c' => 'Menggunakan bahasa yang sulit',
+                                    'd' => 'Menggunakan bahasa yang kaku',
+                                    'e' => 'Menggunakan bahasa yang formal'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                    }
+                } elseif ($subTopik == 'Menulis Cerita') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $soalVariasi = [
+                                "Berikut ini yang merupakan unsur cerita adalah...",
+                                "Bagian cerita yang berisi tokoh dan latar adalah...",
+                                "Unsur cerita yang penting adalah...",
+                                "Yang harus ada dalam cerita adalah...",
+                                "Komponen cerita yang utama adalah..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Tokoh, latar, dan alur',
+                                    'b' => 'Judul dan penulis',
+                                    'c' => 'Tanggal dan waktu',
+                                    'd' => 'Tanda tangan dan stempel',
+                                    'e' => 'Alamat dan nomor'
+                                ],
+                                [
+                                    'a' => 'Karakter, setting, dan plot',
+                                    'b' => 'Nama dan umur',
+                                    'c' => 'Tempat dan tanggal',
+                                    'd' => 'Tanda tangan dan cap',
+                                    'e' => 'Alamat dan telepon'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMP':
+                            $soalVariasi = [
+                                "Berikut ini yang merupakan unsur cerita adalah...",
+                                "Bagian cerita yang berisi tokoh dan latar adalah...",
+                                "Unsur cerita yang penting adalah...",
+                                "Yang harus ada dalam cerita adalah...",
+                                "Komponen cerita yang utama adalah..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Tokoh, latar, alur, dan tema',
+                                    'b' => 'Judul dan penulis',
+                                    'c' => 'Tanggal dan waktu',
+                                    'd' => 'Tanda tangan dan stempel',
+                                    'e' => 'Alamat dan nomor'
+                                ],
+                                [
+                                    'a' => 'Karakter, setting, plot, dan konflik',
+                                    'b' => 'Nama dan umur',
+                                    'c' => 'Tempat dan tanggal',
+                                    'd' => 'Tanda tangan dan cap',
+                                    'e' => 'Alamat dan telepon'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $soalVariasi = [
+                                "Berikut ini yang merupakan unsur cerita adalah...",
+                                "Bagian cerita yang berisi tokoh dan latar adalah...",
+                                "Unsur cerita yang penting adalah...",
+                                "Yang harus ada dalam cerita adalah...",
+                                "Komponen cerita yang utama adalah..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Tokoh, latar, alur, tema, dan amanat',
+                                    'b' => 'Judul dan penulis',
+                                    'c' => 'Tanggal dan waktu',
+                                    'd' => 'Tanda tangan dan stempel',
+                                    'e' => 'Alamat dan nomor'
+                                ],
+                                [
+                                    'a' => 'Karakter, setting, plot, konflik, dan resolusi',
+                                    'b' => 'Nama dan umur',
+                                    'c' => 'Tempat dan tanggal',
+                                    'd' => 'Tanda tangan dan cap',
+                                    'e' => 'Alamat dan telepon'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                    }
+                } elseif ($subTopik == 'Menulis Laporan') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $soalVariasi = [
+                                "Berikut ini yang merupakan bagian laporan adalah...",
+                                "Struktur laporan yang benar adalah...",
+                                "Bagian laporan yang berisi hasil kegiatan adalah...",
+                                "Yang harus ada dalam laporan adalah...",
+                                "Komponen laporan yang penting adalah..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Judul, pendahuluan, isi, dan penutup',
+                                    'b' => 'Nama dan alamat',
+                                    'c' => 'Tanggal dan waktu',
+                                    'd' => 'Tanda tangan dan stempel',
+                                    'e' => 'Nomor dan kode'
+                                ],
+                                [
+                                    'a' => 'Pembuka, isi, dan kesimpulan',
+                                    'b' => 'Nama dan umur',
+                                    'c' => 'Tempat dan tanggal',
+                                    'd' => 'Tanda tangan dan cap',
+                                    'e' => 'Alamat dan telepon'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
                             $template['benar'] = 'a';
                             break;
                     }
@@ -874,42 +3903,225 @@ class PaketSoalSeeder extends Seeder
                 if ($subTopik == 'Berbicara di Depan Kelas') {
                     switch ($jenjang) {
                         case 'SD':
-                            $template['soal'] = "Berikut ini yang merupakan sikap yang baik saat berbicara di depan kelas adalah...";
-                            $template['jawaban'] = [
-                                'a' => 'Berdiri tegak dan menatap audiens',
-                                'b' => 'Berdiri sambil bersandar',
-                                'c' => 'Berdiri sambil menggerakkan kaki',
-                                'd' => 'Berdiri sambil menunduk',
-                                'e' => 'Berdiri sambil memainkan tangan'
+                            $soalVariasi = [
+                                "Berikut ini yang merupakan sikap yang baik saat berbicara di depan kelas adalah...",
+                                "Cara berbicara yang baik di depan kelas adalah...",
+                                "Sikap yang tepat saat presentasi di kelas adalah...",
+                                "Yang harus dilakukan saat berbicara di depan adalah...",
+                                "Cara berdiri yang baik saat berbicara adalah..."
                             ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Berdiri tegak dan menatap audiens',
+                                    'b' => 'Berdiri sambil bersandar',
+                                    'c' => 'Berdiri sambil menggerakkan kaki',
+                                    'd' => 'Berdiri sambil menunduk',
+                                    'e' => 'Berdiri sambil memainkan tangan'
+                                ],
+                                [
+                                    'a' => 'Berdiri dengan percaya diri',
+                                    'b' => 'Berdiri sambil bergoyang',
+                                    'c' => 'Berdiri sambil menggaruk kepala',
+                                    'd' => 'Berdiri sambil melihat ke bawah',
+                                    'e' => 'Berdiri sambil memainkan jari'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
                             $template['benar'] = 'a';
                             break;
                     }
                 } elseif ($subTopik == 'Berdiskusi') {
                     switch ($jenjang) {
                         case 'SD':
-                            $template['soal'] = "Berikut ini yang merupakan sikap yang baik dalam berdiskusi adalah...";
-                            $template['jawaban'] = [
-                                'a' => 'Menghargai pendapat teman',
-                                'b' => 'Memotong pembicaraan teman',
-                                'c' => 'Mengabaikan pendapat teman',
-                                'd' => 'Memaksa teman setuju',
-                                'e' => 'Mengolok-olok pendapat teman'
+                            $soalVariasi = [
+                                "Berikut ini yang merupakan sikap yang baik dalam berdiskusi adalah...",
+                                "Cara berdiskusi yang baik adalah...",
+                                "Sikap yang tepat dalam diskusi kelompok adalah...",
+                                "Yang harus dilakukan saat berdiskusi adalah...",
+                                "Cara menghargai teman dalam diskusi adalah..."
                             ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Menghargai pendapat teman',
+                                    'b' => 'Memotong pembicaraan teman',
+                                    'c' => 'Mengabaikan pendapat teman',
+                                    'd' => 'Memaksa teman setuju',
+                                    'e' => 'Mengolok-olok pendapat teman'
+                                ],
+                                [
+                                    'a' => 'Mendengarkan dengan baik',
+                                    'b' => 'Berbicara terus menerus',
+                                    'c' => 'Mengabaikan pembicaraan',
+                                    'd' => 'Memaksa pendapat sendiri',
+                                    'e' => 'Mengejek pendapat lain'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
                             $template['benar'] = 'a';
                             break;
                     }
                 } elseif ($subTopik == 'Bercerita') {
                     switch ($jenjang) {
                         case 'SD':
-                            $template['soal'] = "Berikut ini yang merupakan ciri-ciri cerita yang baik adalah...";
-                            $template['jawaban'] = [
-                                'a' => 'Menggunakan bahasa yang mudah dipahami',
-                                'b' => 'Menggunakan bahasa yang sulit',
-                                'c' => 'Menggunakan bahasa yang panjang',
-                                'd' => 'Menggunakan bahasa yang kaku',
-                                'e' => 'Menggunakan bahasa yang formal'
+                            $soalVariasi = [
+                                "Berikut ini yang merupakan ciri-ciri cerita yang baik adalah...",
+                                "Cara bercerita yang menarik adalah...",
+                                "Yang membuat cerita menjadi menarik adalah...",
+                                "Ciri-ciri cerita yang bagus adalah...",
+                                "Yang harus ada dalam cerita yang baik adalah..."
                             ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Menggunakan bahasa yang mudah dipahami',
+                                    'b' => 'Menggunakan bahasa yang sulit',
+                                    'c' => 'Menggunakan bahasa yang panjang',
+                                    'd' => 'Menggunakan bahasa yang kaku',
+                                    'e' => 'Menggunakan bahasa yang formal'
+                                ],
+                                [
+                                    'a' => 'Menggunakan intonasi yang menarik',
+                                    'b' => 'Berbicara dengan monoton',
+                                    'c' => 'Berbicara dengan cepat',
+                                    'd' => 'Berbicara dengan pelan',
+                                    'e' => 'Berbicara tanpa ekspresi'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                    }
+                } elseif ($subTopik == 'Berwawancara') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $soalVariasi = [
+                                "Berikut ini yang merupakan sikap yang baik saat wawancara adalah...",
+                                "Cara melakukan wawancara yang baik adalah...",
+                                "Yang harus dilakukan saat wawancara adalah...",
+                                "Sikap yang tepat saat bertanya adalah...",
+                                "Cara menghormati narasumber adalah..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Mendengarkan dengan baik',
+                                    'b' => 'Memotong pembicaraan',
+                                    'c' => 'Mengabaikan jawaban',
+                                    'd' => 'Bertanya dengan kasar',
+                                    'e' => 'Mengejek jawaban'
+                                ],
+                                [
+                                    'a' => 'Bertanya dengan sopan',
+                                    'b' => 'Bertanya dengan kasar',
+                                    'c' => 'Bertanya dengan terburu-buru',
+                                    'd' => 'Bertanya tanpa tujuan',
+                                    'e' => 'Bertanya sambil bermain'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                    }
+                } elseif ($subTopik == 'Berpidato') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $soalVariasi = [
+                                "Berikut ini yang merupakan bagian pidato adalah...",
+                                "Struktur pidato yang benar adalah...",
+                                "Bagian pidato yang berisi salam pembuka adalah...",
+                                "Yang harus ada dalam pidato adalah...",
+                                "Komponen pidato yang penting adalah..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Pembuka, isi, dan penutup',
+                                    'b' => 'Nama dan alamat',
+                                    'c' => 'Tanggal dan waktu',
+                                    'd' => 'Tanda tangan dan stempel',
+                                    'e' => 'Nomor dan kode'
+                                ],
+                                [
+                                    'a' => 'Salam, pendahuluan, dan kesimpulan',
+                                    'b' => 'Nama dan umur',
+                                    'c' => 'Tempat dan tanggal',
+                                    'd' => 'Tanda tangan dan cap',
+                                    'e' => 'Alamat dan telepon'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMP':
+                            $soalVariasi = [
+                                "Berikut ini yang merupakan teknik berpidato yang baik adalah...",
+                                "Cara berpidato yang efektif adalah...",
+                                "Teknik yang digunakan dalam berpidato adalah...",
+                                "Yang harus diperhatikan saat berpidato adalah...",
+                                "Komponen pidato yang harus dikuasai adalah..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Menggunakan bahasa yang jelas dan mudah dipahami',
+                                    'b' => 'Berbicara dengan cepat dan terburu-buru',
+                                    'c' => 'Menggunakan bahasa yang sulit dan formal',
+                                    'd' => 'Berbicara tanpa persiapan',
+                                    'e' => 'Mengabaikan audiens'
+                                ],
+                                [
+                                    'a' => 'Menggunakan gestur dan ekspresi yang tepat',
+                                    'b' => 'Berdiri kaku tanpa gerakan',
+                                    'c' => 'Menggunakan gerakan yang berlebihan',
+                                    'd' => 'Tidak melihat ke audiens',
+                                    'e' => 'Berbicara sambil bermain-main'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $soalVariasi = [
+                                "Berikut ini yang merupakan teknik berpidato tingkat lanjut adalah...",
+                                "Cara berpidato yang persuasif dan argumentatif adalah...",
+                                "Teknik retorika yang digunakan dalam berpidato adalah...",
+                                "Yang harus dikuasai dalam berpidato tingkat SMA adalah...",
+                                "Komponen pidato yang menunjukkan kematangan adalah..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Menggunakan argumentasi yang logis dan sistematis',
+                                    'b' => 'Berbicara tanpa struktur yang jelas',
+                                    'c' => 'Menggunakan bahasa yang sederhana saja',
+                                    'd' => 'Tidak memperhatikan logika berpikir',
+                                    'e' => 'Berbicara tanpa tujuan yang jelas'
+                                ],
+                                [
+                                    'a' => 'Menggunakan teknik retorika dan persuasi',
+                                    'b' => 'Berbicara monoton tanpa variasi',
+                                    'c' => 'Tidak menggunakan contoh dan ilustrasi',
+                                    'd' => 'Mengabaikan aspek psikologis audiens',
+                                    'e' => 'Berbicara tanpa memperhatikan konteks'
+                                ],
+                                [
+                                    'a' => 'Menggunakan data dan fakta yang akurat',
+                                    'b' => 'Berbicara berdasarkan asumsi saja',
+                                    'c' => 'Tidak menggunakan referensi yang valid',
+                                    'd' => 'Menggunakan informasi yang tidak terverifikasi',
+                                    'e' => 'Berbicara tanpa dasar yang kuat'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
                             $template['benar'] = 'a';
                             break;
                     }
@@ -919,13 +4131,96 @@ class PaketSoalSeeder extends Seeder
                 if ($subTopik == 'Kata Baku') {
                     switch ($jenjang) {
                         case 'SD':
-                            $template['soal'] = "Berikut ini yang merupakan kata baku adalah...";
+                            $kataBakuVariasi = [
+                                ['karier', 'karir', 'kariir', 'karier', 'karierr'],
+                                ['apotek', 'apotik', 'apotik', 'apotek', 'apotik'],
+                                ['sistem', 'sistim', 'sistem', 'sistim', 'sistem'],
+                                ['objek', 'obyek', 'objek', 'obyek', 'objek'],
+                                ['praktek', 'praktik', 'praktek', 'praktik', 'praktek']
+                            ];
+                            $kataBaku = $kataBakuVariasi[array_rand($kataBakuVariasi)];
+                            
+                            $soalVariasi = [
+                                "Berikut ini yang merupakan kata baku adalah...",
+                                "Kata yang penulisannya benar adalah...",
+                                "Kata yang sesuai dengan EYD adalah...",
+                                "Kata yang baku adalah...",
+                                "Kata yang penulisannya tepat adalah..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
                             $template['jawaban'] = [
-                                'a' => 'karier',
-                                'b' => 'karir',
-                                'c' => 'kariir',
-                                'd' => 'karier',
-                                'e' => 'karierr'
+                                'a' => $kataBaku[0],
+                                'b' => $kataBaku[1],
+                                'c' => $kataBaku[2],
+                                'd' => $kataBaku[3],
+                                'e' => $kataBaku[4]
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMP':
+                            $kataBakuVariasi = [
+                                ['karier', 'karir', 'kariir', 'karier', 'karierr'],
+                                ['apotek', 'apotik', 'apotik', 'apotek', 'apotik'],
+                                ['sistem', 'sistim', 'sistem', 'sistim', 'sistem'],
+                                ['objek', 'obyek', 'objek', 'obyek', 'objek'],
+                                ['praktek', 'praktik', 'praktek', 'praktik', 'praktek'],
+                                ['ekstrem', 'ekstrim', 'ekstrem', 'ekstrim', 'ekstrem'],
+                                ['kompleks', 'komplek', 'kompleks', 'komplek', 'kompleks'],
+                                ['standar', 'standard', 'standar', 'standard', 'standar']
+                            ];
+                            $kataBaku = $kataBakuVariasi[array_rand($kataBakuVariasi)];
+                            
+                            $soalVariasi = [
+                                "Berikut ini yang merupakan kata baku adalah...",
+                                "Kata yang penulisannya benar adalah...",
+                                "Kata yang sesuai dengan EYD adalah...",
+                                "Kata yang baku adalah...",
+                                "Kata yang penulisannya tepat adalah..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $template['jawaban'] = [
+                                'a' => $kataBaku[0],
+                                'b' => $kataBaku[1],
+                                'c' => $kataBaku[2],
+                                'd' => $kataBaku[3],
+                                'e' => $kataBaku[4]
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $kataBakuVariasi = [
+                                ['karier', 'karir', 'kariir', 'karier', 'karierr'],
+                                ['apotek', 'apotik', 'apotik', 'apotek', 'apotik'],
+                                ['sistem', 'sistim', 'sistem', 'sistim', 'sistem'],
+                                ['objek', 'obyek', 'objek', 'obyek', 'objek'],
+                                ['praktek', 'praktik', 'praktek', 'praktik', 'praktek'],
+                                ['ekstrem', 'ekstrim', 'ekstrem', 'ekstrim', 'ekstrem'],
+                                ['kompleks', 'komplek', 'kompleks', 'komplek', 'kompleks'],
+                                ['standar', 'standard', 'standar', 'standard', 'standar'],
+                                ['konsisten', 'konsisten', 'konsisten', 'konsisten', 'konsisten'],
+                                ['efisien', 'efisien', 'efisien', 'efisien', 'efisien'],
+                                ['kreatif', 'kreatif', 'kreatif', 'kreatif', 'kreatif'],
+                                ['produktif', 'produktif', 'produktif', 'produktif', 'produktif']
+                            ];
+                            $kataBaku = $kataBakuVariasi[array_rand($kataBakuVariasi)];
+                            
+                            $soalVariasi = [
+                                "Berikut ini yang merupakan kata baku adalah...",
+                                "Kata yang penulisannya benar adalah...",
+                                "Kata yang sesuai dengan EYD adalah...",
+                                "Kata yang baku adalah...",
+                                "Kata yang penulisannya tepat adalah..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $template['jawaban'] = [
+                                'a' => $kataBaku[0],
+                                'b' => $kataBaku[1],
+                                'c' => $kataBaku[2],
+                                'd' => $kataBaku[3],
+                                'e' => $kataBaku[4]
                             ];
                             $template['benar'] = 'a';
                             break;
@@ -933,28 +4228,388 @@ class PaketSoalSeeder extends Seeder
                 } elseif ($subTopik == 'Ejaan') {
                     switch ($jenjang) {
                         case 'SD':
-                            $template['soal'] = "Penulisan huruf kapital yang benar terdapat pada kalimat...";
-                            $template['jawaban'] = [
-                                'a' => 'Saya pergi ke Jakarta.',
-                                'b' => 'saya pergi ke jakarta.',
-                                'c' => 'Saya pergi ke jakarta.',
-                                'd' => 'saya pergi ke Jakarta.',
-                                'e' => 'SAYA PERGI KE JAKARTA.'
+                            $soalVariasi = [
+                                "Penulisan huruf kapital yang benar terdapat pada kalimat...",
+                                "Kalimat yang menggunakan huruf kapital dengan benar adalah...",
+                                "Penulisan huruf besar yang tepat terdapat pada...",
+                                "Kalimat yang ejaannya benar adalah...",
+                                "Penggunaan huruf kapital yang benar adalah..."
                             ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Saya pergi ke Jakarta.',
+                                    'b' => 'saya pergi ke jakarta.',
+                                    'c' => 'Saya pergi ke jakarta.',
+                                    'd' => 'saya pergi ke Jakarta.',
+                                    'e' => 'SAYA PERGI KE JAKARTA.'
+                                ],
+                                [
+                                    'a' => 'Budi belajar di Sekolah Dasar.',
+                                    'b' => 'budi belajar di sekolah dasar.',
+                                    'c' => 'Budi belajar di sekolah dasar.',
+                                    'd' => 'budi belajar di Sekolah Dasar.',
+                                    'e' => 'BUDI BELAJAR DI SEKOLAH DASAR.'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMP':
+                            $soalVariasi = [
+                                "Penulisan huruf kapital yang benar terdapat pada kalimat...",
+                                "Kalimat yang menggunakan huruf kapital dengan benar adalah...",
+                                "Penulisan huruf besar yang tepat terdapat pada...",
+                                "Kalimat yang ejaannya benar adalah...",
+                                "Penggunaan huruf kapital yang benar adalah..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Presiden Joko Widodo berkunjung ke Bandung.',
+                                    'b' => 'presiden joko widodo berkunjung ke bandung.',
+                                    'c' => 'Presiden joko widodo berkunjung ke bandung.',
+                                    'd' => 'presiden Joko Widodo berkunjung ke Bandung.',
+                                    'e' => 'PRESIDEN JOKO WIDODO BERKUNJUNG KE BANDUNG.'
+                                ],
+                                [
+                                    'a' => 'Menteri Pendidikan Nadiem Makarim memberikan sambutan.',
+                                    'b' => 'menteri pendidikan nadiem makarim memberikan sambutan.',
+                                    'c' => 'Menteri pendidikan nadiem makarim memberikan sambutan.',
+                                    'd' => 'menteri Pendidikan Nadiem Makarim memberikan sambutan.',
+                                    'e' => 'MENTERI PENDIDIKAN NADIEM MAKARIM MEMBERIKAN SAMBUTAN.'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $soalVariasi = [
+                                "Penulisan huruf kapital yang benar terdapat pada kalimat...",
+                                "Kalimat yang menggunakan huruf kapital dengan benar adalah...",
+                                "Penulisan huruf besar yang tepat terdapat pada...",
+                                "Kalimat yang ejaannya benar adalah...",
+                                "Penggunaan huruf kapital yang benar adalah..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Undang-Undang Dasar 1945 mengatur hak asasi manusia.',
+                                    'b' => 'undang-undang dasar 1945 mengatur hak asasi manusia.',
+                                    'c' => 'Undang-undang Dasar 1945 mengatur hak asasi manusia.',
+                                    'd' => 'undang-Undang Dasar 1945 mengatur hak asasi manusia.',
+                                    'e' => 'UNDANG-UNDANG DASAR 1945 MENGATUR HAK ASASI MANUSIA.'
+                                ],
+                                [
+                                    'a' => 'Deklarasi Universal Hak Asasi Manusia disahkan pada tahun 1948.',
+                                    'b' => 'deklarasi universal hak asasi manusia disahkan pada tahun 1948.',
+                                    'c' => 'Deklarasi universal hak asasi manusia disahkan pada tahun 1948.',
+                                    'd' => 'deklarasi Universal Hak Asasi Manusia disahkan pada tahun 1948.',
+                                    'e' => 'DEKLARASI UNIVERSAL HAK ASASI MANUSIA DISAHKAN PADA TAHUN 1948.'
+                                ],
+                                [
+                                    'a' => 'Konferensi Asia-Afrika diselenggarakan di Bandung pada tahun 1955.',
+                                    'b' => 'konferensi asia-afrika diselenggarakan di bandung pada tahun 1955.',
+                                    'c' => 'Konferensi asia-afrika diselenggarakan di bandung pada tahun 1955.',
+                                    'd' => 'konferensi Asia-Afrika diselenggarakan di Bandung pada tahun 1955.',
+                                    'e' => 'KONFERENSI ASIA-AFRIKA DISELENGGARAKAN DI BANDUNG PADA TAHUN 1955.'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
                             $template['benar'] = 'a';
                             break;
                     }
                 } elseif ($subTopik == 'Tanda Baca') {
                     switch ($jenjang) {
                         case 'SD':
-                            $template['soal'] = "Penggunaan tanda baca yang benar terdapat pada kalimat...";
-                            $template['jawaban'] = [
-                                'a' => 'Ayah membeli buku, pensil, dan penggaris.',
-                                'b' => 'Ayah membeli buku pensil dan penggaris.',
-                                'c' => 'Ayah membeli buku, pensil dan penggaris.',
-                                'd' => 'Ayah membeli buku pensil, dan penggaris.',
-                                'e' => 'Ayah membeli buku, pensil, dan, penggaris.'
+                            $soalVariasi = [
+                                "Penggunaan tanda baca yang benar terdapat pada kalimat...",
+                                "Kalimat yang menggunakan tanda baca dengan benar adalah...",
+                                "Penulisan tanda baca yang tepat terdapat pada...",
+                                "Kalimat yang tanda bacanya benar adalah...",
+                                "Penggunaan tanda baca yang tepat adalah..."
                             ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Ayah membeli buku, pensil, dan penggaris.',
+                                    'b' => 'Ayah membeli buku pensil dan penggaris.',
+                                    'c' => 'Ayah membeli buku, pensil dan penggaris.',
+                                    'd' => 'Ayah membeli buku pensil, dan penggaris.',
+                                    'e' => 'Ayah membeli buku, pensil, dan, penggaris.'
+                                ],
+                                [
+                                    'a' => 'Ibu memasak nasi, sayur, dan lauk.',
+                                    'b' => 'Ibu memasak nasi sayur dan lauk.',
+                                    'c' => 'Ibu memasak nasi, sayur dan lauk.',
+                                    'd' => 'Ibu memasak nasi sayur, dan lauk.',
+                                    'e' => 'Ibu memasak nasi, sayur, dan, lauk.'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMP':
+                            $soalVariasi = [
+                                "Penggunaan tanda baca yang benar terdapat pada kalimat...",
+                                "Kalimat yang menggunakan tanda baca dengan benar adalah...",
+                                "Penulisan tanda baca yang tepat terdapat pada...",
+                                "Kalimat yang tanda bacanya benar adalah...",
+                                "Penggunaan tanda baca yang tepat adalah..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Indonesia terdiri dari pulau Jawa, Sumatera, Kalimantan, dan Sulawesi.',
+                                    'b' => 'Indonesia terdiri dari pulau Jawa Sumatera Kalimantan dan Sulawesi.',
+                                    'c' => 'Indonesia terdiri dari pulau Jawa, Sumatera, Kalimantan dan Sulawesi.',
+                                    'd' => 'Indonesia terdiri dari pulau Jawa Sumatera, Kalimantan, dan Sulawesi.',
+                                    'e' => 'Indonesia terdiri dari pulau Jawa, Sumatera, Kalimantan, dan, Sulawesi.'
+                                ],
+                                [
+                                    'a' => 'Presiden berkata, "Kita harus bersatu untuk kemajuan bangsa."',
+                                    'b' => 'Presiden berkata "Kita harus bersatu untuk kemajuan bangsa."',
+                                    'c' => 'Presiden berkata, Kita harus bersatu untuk kemajuan bangsa.',
+                                    'd' => 'Presiden berkata: "Kita harus bersatu untuk kemajuan bangsa."',
+                                    'e' => 'Presiden berkata; "Kita harus bersatu untuk kemajuan bangsa."'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $soalVariasi = [
+                                "Penggunaan tanda baca yang benar terdapat pada kalimat...",
+                                "Kalimat yang menggunakan tanda baca dengan benar adalah...",
+                                "Penulisan tanda baca yang tepat terdapat pada...",
+                                "Kalimat yang tanda bacanya benar adalah...",
+                                "Penggunaan tanda baca yang tepat adalah..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Menurut Undang-Undang Dasar 1945, "Setiap warga negara berhak atas pendidikan."',
+                                    'b' => 'Menurut Undang-Undang Dasar 1945 "Setiap warga negara berhak atas pendidikan."',
+                                    'c' => 'Menurut Undang-Undang Dasar 1945, Setiap warga negara berhak atas pendidikan.',
+                                    'd' => 'Menurut Undang-Undang Dasar 1945: "Setiap warga negara berhak atas pendidikan."',
+                                    'e' => 'Menurut Undang-Undang Dasar 1945; "Setiap warga negara berhak atas pendidikan."'
+                                ],
+                                [
+                                    'a' => 'Deklarasi Universal Hak Asasi Manusia (DUHAM) disahkan pada tahun 1948.',
+                                    'b' => 'Deklarasi Universal Hak Asasi Manusia DUHAM disahkan pada tahun 1948.',
+                                    'c' => 'Deklarasi Universal Hak Asasi Manusia, DUHAM, disahkan pada tahun 1948.',
+                                    'd' => 'Deklarasi Universal Hak Asasi Manusia: DUHAM disahkan pada tahun 1948.',
+                                    'e' => 'Deklarasi Universal Hak Asasi Manusia; DUHAM disahkan pada tahun 1948.'
+                                ],
+                                [
+                                    'a' => 'Konferensi Asia-Afrika (KAA) diselenggarakan di Bandung pada tahun 1955.',
+                                    'b' => 'Konferensi Asia-Afrika KAA diselenggarakan di Bandung pada tahun 1955.',
+                                    'c' => 'Konferensi Asia-Afrika, KAA, diselenggarakan di Bandung pada tahun 1955.',
+                                    'd' => 'Konferensi Asia-Afrika: KAA diselenggarakan di Bandung pada tahun 1955.',
+                                    'e' => 'Konferensi Asia-Afrika; KAA diselenggarakan di Bandung pada tahun 1955.'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                    }
+                } elseif ($subTopik == 'Kalimat') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $soalVariasi = [
+                                "Berikut ini yang merupakan kalimat yang benar adalah...",
+                                "Kalimat yang strukturnya tepat adalah...",
+                                "Kalimat yang susunannya benar adalah...",
+                                "Yang merupakan kalimat yang baik adalah...",
+                                "Kalimat yang gramatikalnya benar adalah..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Budi pergi ke sekolah.',
+                                    'b' => 'Budi pergi sekolah.',
+                                    'c' => 'Budi ke sekolah pergi.',
+                                    'd' => 'Pergi Budi ke sekolah.',
+                                    'e' => 'Sekolah Budi pergi ke.'
+                                ],
+                                [
+                                    'a' => 'Ani membaca buku cerita.',
+                                    'b' => 'Ani membaca cerita.',
+                                    'c' => 'Ani cerita membaca buku.',
+                                    'd' => 'Membaca Ani buku cerita.',
+                                    'e' => 'Buku Ani membaca cerita.'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMP':
+                            $soalVariasi = [
+                                "Berikut ini yang merupakan kalimat yang benar adalah...",
+                                "Kalimat yang strukturnya tepat adalah...",
+                                "Kalimat yang susunannya benar adalah...",
+                                "Yang merupakan kalimat yang baik adalah...",
+                                "Kalimat yang gramatikalnya benar adalah..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Presiden memberikan sambutan di acara tersebut.',
+                                    'b' => 'Presiden memberikan sambutan di acara tersebut.',
+                                    'c' => 'Presiden memberikan sambutan di acara tersebut.',
+                                    'd' => 'Presiden memberikan sambutan di acara tersebut.',
+                                    'e' => 'Presiden memberikan sambutan di acara tersebut.'
+                                ],
+                                [
+                                    'a' => 'Menteri Pendidikan menjelaskan kebijakan baru.',
+                                    'b' => 'Menteri Pendidikan menjelaskan kebijakan baru.',
+                                    'c' => 'Menteri Pendidikan menjelaskan kebijakan baru.',
+                                    'd' => 'Menteri Pendidikan menjelaskan kebijakan baru.',
+                                    'e' => 'Menteri Pendidikan menjelaskan kebijakan baru.'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $soalVariasi = [
+                                "Berikut ini yang merupakan kalimat yang benar adalah...",
+                                "Kalimat yang strukturnya tepat adalah...",
+                                "Kalimat yang susunannya benar adalah...",
+                                "Yang merupakan kalimat yang baik adalah...",
+                                "Kalimat yang gramatikalnya benar adalah..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Undang-Undang Dasar 1945 mengatur hak dan kewajiban warga negara.',
+                                    'b' => 'Undang-Undang Dasar 1945 mengatur hak dan kewajiban warga negara.',
+                                    'c' => 'Undang-Undang Dasar 1945 mengatur hak dan kewajiban warga negara.',
+                                    'd' => 'Undang-Undang Dasar 1945 mengatur hak dan kewajiban warga negara.',
+                                    'e' => 'Undang-Undang Dasar 1945 mengatur hak dan kewajiban warga negara.'
+                                ],
+                                [
+                                    'a' => 'Deklarasi Universal Hak Asasi Manusia menjamin kebebasan berpendapat.',
+                                    'b' => 'Deklarasi Universal Hak Asasi Manusia menjamin kebebasan berpendapat.',
+                                    'c' => 'Deklarasi Universal Hak Asasi Manusia menjamin kebebasan berpendapat.',
+                                    'd' => 'Deklarasi Universal Hak Asasi Manusia menjamin kebebasan berpendapat.',
+                                    'e' => 'Deklarasi Universal Hak Asasi Manusia menjamin kebebasan berpendapat.'
+                                ],
+                                [
+                                    'a' => 'Konferensi Asia-Afrika menghasilkan Dasasila Bandung.',
+                                    'b' => 'Konferensi Asia-Afrika menghasilkan Dasasila Bandung.',
+                                    'c' => 'Konferensi Asia-Afrika menghasilkan Dasasila Bandung.',
+                                    'd' => 'Konferensi Asia-Afrika menghasilkan Dasasila Bandung.',
+                                    'e' => 'Konferensi Asia-Afrika menghasilkan Dasasila Bandung.'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                    }
+                } elseif ($subTopik == 'Paragraf') {
+                    switch ($jenjang) {
+                        case 'SD':
+                            $soalVariasi = [
+                                "Berikut ini yang merupakan paragraf yang baik adalah...",
+                                "Paragraf yang strukturnya benar adalah...",
+                                "Paragraf yang susunannya tepat adalah...",
+                                "Yang merupakan paragraf yang koheren adalah...",
+                                "Paragraf yang pengembangannya baik adalah..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Paragraf yang memiliki satu gagasan utama',
+                                    'b' => 'Paragraf yang memiliki banyak gagasan',
+                                    'c' => 'Paragraf yang tidak memiliki gagasan',
+                                    'd' => 'Paragraf yang acak-acakan',
+                                    'e' => 'Paragraf yang tidak terstruktur'
+                                ],
+                                [
+                                    'a' => 'Paragraf yang kalimatnya saling berkaitan',
+                                    'b' => 'Paragraf yang kalimatnya terpisah',
+                                    'c' => 'Paragraf yang kalimatnya tidak nyambung',
+                                    'd' => 'Paragraf yang kalimatnya acak',
+                                    'e' => 'Paragraf yang kalimatnya tidak jelas'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMP':
+                            $soalVariasi = [
+                                "Berikut ini yang merupakan paragraf yang baik adalah...",
+                                "Paragraf yang strukturnya benar adalah...",
+                                "Paragraf yang susunannya tepat adalah...",
+                                "Yang merupakan paragraf yang koheren adalah...",
+                                "Paragraf yang pengembangannya baik adalah..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Paragraf yang memiliki gagasan utama yang jelas',
+                                    'b' => 'Paragraf yang memiliki banyak gagasan yang tidak terkait',
+                                    'c' => 'Paragraf yang tidak memiliki gagasan utama',
+                                    'd' => 'Paragraf yang gagasannya tidak jelas',
+                                    'e' => 'Paragraf yang tidak memiliki struktur'
+                                ],
+                                [
+                                    'a' => 'Paragraf yang menggunakan transisi antar kalimat',
+                                    'b' => 'Paragraf yang kalimatnya tidak saling terkait',
+                                    'c' => 'Paragraf yang tidak menggunakan konjungsi',
+                                    'd' => 'Paragraf yang kalimatnya acak',
+                                    'e' => 'Paragraf yang tidak memiliki koherensi'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $soalVariasi = [
+                                "Berikut ini yang merupakan paragraf yang baik adalah...",
+                                "Paragraf yang strukturnya benar adalah...",
+                                "Paragraf yang susunannya tepat adalah...",
+                                "Yang merupakan paragraf yang koheren adalah...",
+                                "Paragraf yang pengembangannya baik adalah..."
+                            ];
+                            $template['soal'] = $soalVariasi[array_rand($soalVariasi)];
+                            
+                            $jawabanVariasi = [
+                                [
+                                    'a' => 'Paragraf yang memiliki gagasan utama yang argumentatif',
+                                    'b' => 'Paragraf yang memiliki gagasan yang tidak logis',
+                                    'c' => 'Paragraf yang tidak memiliki argumentasi',
+                                    'd' => 'Paragraf yang gagasannya tidak sistematis',
+                                    'e' => 'Paragraf yang tidak memiliki struktur yang jelas'
+                                ],
+                                [
+                                    'a' => 'Paragraf yang menggunakan teknik pengembangan yang sistematis',
+                                    'b' => 'Paragraf yang tidak menggunakan teknik pengembangan',
+                                    'c' => 'Paragraf yang pengembangannya tidak terstruktur',
+                                    'd' => 'Paragraf yang tidak memiliki koherensi logis',
+                                    'e' => 'Paragraf yang tidak menggunakan transisi yang tepat'
+                                ],
+                                [
+                                    'a' => 'Paragraf yang menggunakan data dan fakta yang akurat',
+                                    'b' => 'Paragraf yang tidak menggunakan data pendukung',
+                                    'c' => 'Paragraf yang menggunakan informasi yang tidak valid',
+                                    'd' => 'Paragraf yang tidak memiliki referensi yang jelas',
+                                    'e' => 'Paragraf yang tidak menggunakan sumber yang terpercaya'
+                                ]
+                            ];
+                            $template['jawaban'] = $jawabanVariasi[array_rand($jawabanVariasi)];
                             $template['benar'] = 'a';
                             break;
                     }
@@ -1223,6 +4878,28 @@ class PaketSoalSeeder extends Seeder
                             ];
                             $template['benar'] = 'a';
                             break;
+                        case 'SMP':
+                            $template['soal'] = "Berikut ini yang merupakan ciri-ciri makhluk hidup tingkat lanjut adalah...";
+                            $template['jawaban'] = [
+                                'a' => 'Bernapas, bergerak, berkembang biak, dan beradaptasi',
+                                'b' => 'Diam, tidak bergerak, dan tidak bernapas',
+                                'c' => 'Tidak berkembang biak dan tidak bergerak',
+                                'd' => 'Tidak bernapas dan tidak berkembang biak',
+                                'e' => 'Diam dan tidak bernapas'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "Berikut ini yang merupakan ciri-ciri makhluk hidup tingkat tinggi adalah...";
+                            $template['jawaban'] = [
+                                'a' => 'Bernapas, bergerak, berkembang biak, beradaptasi, dan berevolusi',
+                                'b' => 'Diam, tidak bergerak, dan tidak bernapas',
+                                'c' => 'Tidak berkembang biak dan tidak bergerak',
+                                'd' => 'Tidak bernapas dan tidak berkembang biak',
+                                'e' => 'Diam dan tidak bernapas'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
                     }
                 } elseif ($subTopik == 'Pertumbuhan') {
                     switch ($jenjang) {
@@ -1237,6 +4914,28 @@ class PaketSoalSeeder extends Seeder
                             ];
                             $template['benar'] = 'a';
                             break;
+                        case 'SMP':
+                            $template['soal'] = "Berikut ini yang merupakan contoh pertumbuhan dan perkembangan adalah...";
+                            $template['jawaban'] = [
+                                'a' => 'Tinggi badan bertambah dan kemampuan berpikir meningkat',
+                                'b' => 'Berat badan berkurang dan kemampuan menurun',
+                                'c' => 'Rambut memutih dan kemampuan menurun',
+                                'd' => 'Kulit mengeriput dan kemampuan menurun',
+                                'e' => 'Gigi tanggal dan kemampuan menurun'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "Berikut ini yang merupakan contoh pertumbuhan, perkembangan, dan diferensiasi adalah...";
+                            $template['jawaban'] = [
+                                'a' => 'Tinggi badan bertambah, kemampuan berpikir meningkat, dan sel terspesialisasi',
+                                'b' => 'Berat badan berkurang dan kemampuan menurun',
+                                'c' => 'Rambut memutih dan kemampuan menurun',
+                                'd' => 'Kulit mengeriput dan kemampuan menurun',
+                                'e' => 'Gigi tanggal dan kemampuan menurun'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
                     }
                 } elseif ($subTopik == 'Adaptasi') {
                     switch ($jenjang) {
@@ -1248,6 +4947,28 @@ class PaketSoalSeeder extends Seeder
                                 'c' => 'Anjing memiliki telinga tegak',
                                 'd' => 'Kelinci memiliki mata merah',
                                 'e' => 'Burung memiliki sayap'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMP':
+                            $template['soal'] = "Berikut ini yang merupakan contoh adaptasi morfologi adalah...";
+                            $template['jawaban'] = [
+                                'a' => 'Unta memiliki punuk untuk menyimpan air',
+                                'b' => 'Kucing memiliki ekor panjang',
+                                'c' => 'Anjing memiliki telinga tegak',
+                                'd' => 'Kelinci memiliki mata merah',
+                                'e' => 'Burung memiliki sayap'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "Berikut ini yang merupakan contoh adaptasi fisiologi adalah...";
+                            $template['jawaban'] = [
+                                'a' => 'Kelenjar keringat untuk mengatur suhu tubuh',
+                                'b' => 'Unta memiliki punuk untuk menyimpan air',
+                                'c' => 'Kucing memiliki ekor panjang',
+                                'd' => 'Anjing memiliki telinga tegak',
+                                'e' => 'Kelinci memiliki mata merah'
                             ];
                             $template['benar'] = 'a';
                             break;
@@ -1268,6 +4989,28 @@ class PaketSoalSeeder extends Seeder
                             ];
                             $template['benar'] = 'a';
                             break;
+                        case 'SMP':
+                            $template['soal'] = "Berikut ini yang merupakan sifat benda cair adalah...";
+                            $template['jawaban'] = [
+                                'a' => 'Bentuk berubah dan volume tetap',
+                                'b' => 'Bentuk dan volume tetap',
+                                'c' => 'Bentuk dan volume berubah',
+                                'd' => 'Bentuk tetap dan volume berubah',
+                                'e' => 'Bentuk dan volume tidak tetap'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "Berikut ini yang merupakan sifat benda gas adalah...";
+                            $template['jawaban'] = [
+                                'a' => 'Bentuk dan volume berubah',
+                                'b' => 'Bentuk tetap dan volume tetap',
+                                'c' => 'Bentuk berubah dan volume tetap',
+                                'd' => 'Bentuk tetap dan volume berubah',
+                                'e' => 'Bentuk dan volume tidak berubah'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
                     }
                 } elseif ($subTopik == 'Perubahan Wujud') {
                     switch ($jenjang) {
@@ -1282,6 +5025,28 @@ class PaketSoalSeeder extends Seeder
                             ];
                             $template['benar'] = 'a';
                             break;
+                        case 'SMP':
+                            $template['soal'] = "Perubahan wujud dari cair menjadi gas disebut...";
+                            $template['jawaban'] = [
+                                'a' => 'Menguap',
+                                'b' => 'Mencair',
+                                'c' => 'Membeku',
+                                'd' => 'Mengembun',
+                                'e' => 'Menyublim'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "Perubahan wujud dari padat langsung menjadi gas disebut...";
+                            $template['jawaban'] = [
+                                'a' => 'Menyublim',
+                                'b' => 'Mencair',
+                                'c' => 'Membeku',
+                                'd' => 'Menguap',
+                                'e' => 'Mengembun'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
                     }
                 } elseif ($subTopik == 'Energi') {
                     switch ($jenjang) {
@@ -1293,6 +5058,28 @@ class PaketSoalSeeder extends Seeder
                                 'c' => 'Radio yang berbunyi',
                                 'd' => 'Televisi yang menyala',
                                 'e' => 'Komputer yang menyala'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMP':
+                            $template['soal'] = "Berikut ini yang merupakan contoh energi potensial adalah...";
+                            $template['jawaban'] = [
+                                'a' => 'Batu di atas bukit',
+                                'b' => 'Kipas angin yang berputar',
+                                'c' => 'Lampu yang menyala',
+                                'd' => 'Radio yang berbunyi',
+                                'e' => 'Televisi yang menyala'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "Berikut ini yang merupakan contoh energi kinetik adalah...";
+                            $template['jawaban'] = [
+                                'a' => 'Mobil yang bergerak',
+                                'b' => 'Batu di atas bukit',
+                                'c' => 'Lampu yang menyala',
+                                'd' => 'Radio yang berbunyi',
+                                'e' => 'Televisi yang menyala'
                             ];
                             $template['benar'] = 'a';
                             break;
@@ -1313,6 +5100,28 @@ class PaketSoalSeeder extends Seeder
                             ];
                             $template['benar'] = 'a';
                             break;
+                        case 'SMP':
+                            $template['soal'] = "Planet yang memiliki cincin adalah...";
+                            $template['jawaban'] = [
+                                'a' => 'Saturnus',
+                                'b' => 'Jupiter',
+                                'c' => 'Uranus',
+                                'd' => 'Neptunus',
+                                'e' => 'Mars'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "Planet yang memiliki atmosfer tipis dan permukaan berbatu adalah...";
+                            $template['jawaban'] = [
+                                'a' => 'Mars',
+                                'b' => 'Jupiter',
+                                'c' => 'Saturnus',
+                                'd' => 'Uranus',
+                                'e' => 'Neptunus'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
                     }
                 } elseif ($subTopik == 'Cuaca') {
                     switch ($jenjang) {
@@ -1322,6 +5131,28 @@ class PaketSoalSeeder extends Seeder
                                 'a' => 'Termometer',
                                 'b' => 'Barometer',
                                 'c' => 'Hygrometer',
+                                'd' => 'Anemometer',
+                                'e' => 'Altimeter'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMP':
+                            $template['soal'] = "Alat untuk mengukur tekanan udara adalah...";
+                            $template['jawaban'] = [
+                                'a' => 'Barometer',
+                                'b' => 'Termometer',
+                                'c' => 'Hygrometer',
+                                'd' => 'Anemometer',
+                                'e' => 'Altimeter'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "Alat untuk mengukur kelembaban udara adalah...";
+                            $template['jawaban'] = [
+                                'a' => 'Hygrometer',
+                                'b' => 'Termometer',
+                                'c' => 'Barometer',
                                 'd' => 'Anemometer',
                                 'e' => 'Altimeter'
                             ];
@@ -1338,6 +5169,28 @@ class PaketSoalSeeder extends Seeder
                                 'c' => 'Menebang pohon di hutan',
                                 'd' => 'Membuat bangunan di bantaran sungai',
                                 'e' => 'Menggunakan air secara berlebihan'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMP':
+                            $template['soal'] = "Berikut ini yang merupakan cara penanggulangan tanah longsor adalah...";
+                            $template['jawaban'] = [
+                                'a' => 'Menanam pohon di lereng bukit',
+                                'b' => 'Menebang pohon di lereng bukit',
+                                'c' => 'Membuat bangunan di lereng bukit',
+                                'd' => 'Menggali tanah di lereng bukit',
+                                'e' => 'Membuat jalan di lereng bukit'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "Berikut ini yang merupakan cara penanggulangan gempa bumi adalah...";
+                            $template['jawaban'] = [
+                                'a' => 'Membangun rumah tahan gempa',
+                                'b' => 'Membangun rumah di dekat gunung',
+                                'c' => 'Membangun rumah di dekat pantai',
+                                'd' => 'Membangun rumah di dekat sungai',
+                                'e' => 'Membangun rumah di dekat danau'
                             ];
                             $template['benar'] = 'a';
                             break;
@@ -2328,11 +6181,55 @@ class PaketSoalSeeder extends Seeder
                             ];
                             $template['benar'] = 'a';
                             break;
+                        case 'SMP':
+                            $template['soal'] = "Peristiwa Rengasdengklok terjadi pada tanggal...";
+                            $template['jawaban'] = [
+                                'a' => '16 Agustus 1945',
+                                'b' => '17 Agustus 1945',
+                                'c' => '15 Agustus 1945',
+                                'd' => '18 Agustus 1945',
+                                'e' => '19 Agustus 1945'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "Perjanjian Linggarjati ditandatangani pada tanggal...";
+                            $template['jawaban'] = [
+                                'a' => '25 Maret 1947',
+                                'b' => '25 Maret 1946',
+                                'c' => '25 Maret 1948',
+                                'd' => '25 Maret 1949',
+                                'e' => '25 Maret 1950'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
                     }
                 } elseif ($subTopik == 'Peninggalan Sejarah') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Candi Borobudur merupakan peninggalan sejarah dari kerajaan...";
+                            $template['jawaban'] = [
+                                'a' => 'Mataram Kuno',
+                                'b' => 'Majapahit',
+                                'c' => 'Sriwijaya',
+                                'd' => 'Singasari',
+                                'e' => 'Kediri'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMP':
+                            $template['soal'] = "Candi Prambanan merupakan peninggalan sejarah dari kerajaan...";
+                            $template['jawaban'] = [
+                                'a' => 'Mataram Kuno',
+                                'b' => 'Majapahit',
+                                'c' => 'Sriwijaya',
+                                'd' => 'Singasari',
+                                'e' => 'Kediri'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "Candi Sewu merupakan peninggalan sejarah dari kerajaan...";
                             $template['jawaban'] = [
                                 'a' => 'Mataram Kuno',
                                 'b' => 'Majapahit',
@@ -2359,6 +6256,28 @@ class PaketSoalSeeder extends Seeder
                             ];
                             $template['benar'] = 'a';
                             break;
+                        case 'SMP':
+                            $template['soal'] = "Berikut ini yang merupakan kenampakan alam perairan adalah...";
+                            $template['jawaban'] = [
+                                'a' => 'Laut',
+                                'b' => 'Gunung',
+                                'c' => 'Bukit',
+                                'd' => 'Dataran tinggi',
+                                'e' => 'Dataran rendah'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "Berikut ini yang merupakan kenampakan alam buatan adalah...";
+                            $template['jawaban'] = [
+                                'a' => 'Waduk',
+                                'b' => 'Gunung',
+                                'c' => 'Laut',
+                                'd' => 'Sungai',
+                                'e' => 'Danau'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
                     }
                 } elseif ($subTopik == 'Peta') {
                     switch ($jenjang) {
@@ -2368,6 +6287,28 @@ class PaketSoalSeeder extends Seeder
                                 'a' => 'Perairan',
                                 'b' => 'Pegunungan',
                                 'c' => 'Hutan',
+                                'd' => 'Jalan',
+                                'e' => 'Kota'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMP':
+                            $template['soal'] = "Simbol berwarna hijau pada peta biasanya menunjukkan...";
+                            $template['jawaban'] = [
+                                'a' => 'Dataran rendah',
+                                'b' => 'Perairan',
+                                'c' => 'Pegunungan',
+                                'd' => 'Jalan',
+                                'e' => 'Kota'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "Simbol berwarna coklat pada peta biasanya menunjukkan...";
+                            $template['jawaban'] = [
+                                'a' => 'Pegunungan',
+                                'b' => 'Perairan',
+                                'c' => 'Dataran rendah',
                                 'd' => 'Jalan',
                                 'e' => 'Kota'
                             ];
@@ -2390,6 +6331,28 @@ class PaketSoalSeeder extends Seeder
                             ];
                             $template['benar'] = 'a';
                             break;
+                        case 'SMP':
+                            $template['soal'] = "Berikut ini yang merupakan contoh kegiatan distribusi adalah...";
+                            $template['jawaban'] = [
+                                'a' => 'Menjual barang dari produsen ke konsumen',
+                                'b' => 'Membuat barang',
+                                'c' => 'Menggunakan barang',
+                                'd' => 'Menyimpan barang',
+                                'e' => 'Membeli barang'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "Berikut ini yang merupakan contoh kegiatan konsumsi adalah...";
+                            $template['jawaban'] = [
+                                'a' => 'Menggunakan barang untuk memenuhi kebutuhan',
+                                'b' => 'Membuat barang',
+                                'c' => 'Menjual barang',
+                                'd' => 'Menyimpan barang',
+                                'e' => 'Mengangkut barang'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
                     }
                 } elseif ($subTopik == 'Uang') {
                     switch ($jenjang) {
@@ -2401,6 +6364,28 @@ class PaketSoalSeeder extends Seeder
                                 'c' => 'Alat hiasan',
                                 'd' => 'Alat pancing',
                                 'e' => 'Alat masak'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMP':
+                            $template['soal'] = "Berikut ini yang merupakan fungsi uang sebagai alat satuan hitung adalah...";
+                            $template['jawaban'] = [
+                                'a' => 'Mengukur nilai barang dan jasa',
+                                'b' => 'Alat tukar',
+                                'c' => 'Alat penyimpan kekayaan',
+                                'd' => 'Alat pembayaran',
+                                'e' => 'Alat investasi'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "Berikut ini yang merupakan fungsi uang sebagai alat penyimpan kekayaan adalah...";
+                            $template['jawaban'] = [
+                                'a' => 'Menyimpan nilai untuk masa depan',
+                                'b' => 'Alat tukar',
+                                'c' => 'Alat satuan hitung',
+                                'd' => 'Alat pembayaran',
+                                'e' => 'Alat investasi'
                             ];
                             $template['benar'] = 'a';
                             break;
@@ -2421,6 +6406,28 @@ class PaketSoalSeeder extends Seeder
                             ];
                             $template['benar'] = 'a';
                             break;
+                        case 'SMP':
+                            $template['soal'] = "Berikut ini yang merupakan contoh norma hukum adalah...";
+                            $template['jawaban'] = [
+                                'a' => 'Membayar pajak',
+                                'b' => 'Mengucapkan salam saat bertemu',
+                                'c' => 'Beribadah',
+                                'd' => 'Belajar',
+                                'e' => 'Membantu orang lain'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "Berikut ini yang merupakan contoh norma agama adalah...";
+                            $template['jawaban'] = [
+                                'a' => 'Beribadah',
+                                'b' => 'Mengucapkan salam saat bertemu',
+                                'c' => 'Membayar pajak',
+                                'd' => 'Belajar',
+                                'e' => 'Membantu orang lain'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
                     }
                 } elseif ($subTopik == 'Kebudayaan') {
                     switch ($jenjang) {
@@ -2432,6 +6439,28 @@ class PaketSoalSeeder extends Seeder
                                 'c' => 'Pakaian modern',
                                 'd' => 'Kendaraan bermotor',
                                 'e' => 'Gadget'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMP':
+                            $template['soal'] = "Berikut ini yang merupakan contoh kebudayaan material adalah...";
+                            $template['jawaban'] = [
+                                'a' => 'Rumah adat',
+                                'b' => 'Tarian tradisional',
+                                'c' => 'Lagu daerah',
+                                'd' => 'Upacara adat',
+                                'e' => 'Cerita rakyat'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "Berikut ini yang merupakan contoh kebudayaan non-material adalah...";
+                            $template['jawaban'] = [
+                                'a' => 'Sistem nilai',
+                                'b' => 'Rumah adat',
+                                'c' => 'Pakaian tradisional',
+                                'd' => 'Senjata tradisional',
+                                'e' => 'Alat musik tradisional'
                             ];
                             $template['benar'] = 'a';
                             break;
@@ -3198,6 +7227,28 @@ class PaketSoalSeeder extends Seeder
                             ];
                             $template['benar'] = 'a';
                             break;
+                        case 'SMP':
+                            $template['soal'] = "Read the text below!\n\nSarah is a high school student. She studies hard every day because she wants to be a doctor. She likes reading medical books and watching documentaries about medicine. Her dream is to help people who are sick.\n\nWhat is Sarah's dream?";
+                            $template['jawaban'] = [
+                                'a' => 'To be a doctor',
+                                'b' => 'To be a teacher',
+                                'c' => 'To be a nurse',
+                                'd' => 'To be a lawyer',
+                                'e' => 'To be an engineer'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "Read the text below!\n\nClimate change is one of the most pressing issues facing humanity today. Scientists have found overwhelming evidence that human activities, particularly the burning of fossil fuels, are causing global temperatures to rise. This has led to more frequent extreme weather events, rising sea levels, and threats to biodiversity.\n\nWhat is the main cause of climate change according to the text?";
+                            $template['jawaban'] = [
+                                'a' => 'Burning of fossil fuels',
+                                'b' => 'Natural disasters',
+                                'c' => 'Volcanic eruptions',
+                                'd' => 'Solar activity',
+                                'e' => 'Ocean currents'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
                     }
                 } elseif ($subTopik == 'Vocabulary') {
                     switch ($jenjang) {
@@ -3209,6 +7260,28 @@ class PaketSoalSeeder extends Seeder
                                 'c' => 'Long',
                                 'd' => 'Wide',
                                 'e' => 'High'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMP':
+                            $template['soal'] = "The synonym of 'happy' is...";
+                            $template['jawaban'] = [
+                                'a' => 'Joyful',
+                                'b' => 'Sad',
+                                'c' => 'Angry',
+                                'd' => 'Tired',
+                                'e' => 'Worried'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "The word 'sustainable' means...";
+                            $template['jawaban'] = [
+                                'a' => 'Able to be maintained',
+                                'b' => 'Expensive',
+                                'c' => 'Difficult',
+                                'd' => 'Temporary',
+                                'e' => 'Impossible'
                             ];
                             $template['benar'] = 'a';
                             break;
@@ -3229,6 +7302,28 @@ class PaketSoalSeeder extends Seeder
                             ];
                             $template['benar'] = 'a';
                             break;
+                        case 'SMP':
+                            $template['soal'] = "Choose the correct form of the verb!";
+                            $template['jawaban'] = [
+                                'a' => 'She has been studying',
+                                'b' => 'She have been studying',
+                                'c' => 'She has been study',
+                                'd' => 'She have been study',
+                                'e' => 'She has studying'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "Choose the correct conditional sentence!";
+                            $template['jawaban'] = [
+                                'a' => 'If I had studied harder, I would have passed the exam',
+                                'b' => 'If I study harder, I would have passed the exam',
+                                'c' => 'If I had studied harder, I will pass the exam',
+                                'd' => 'If I study harder, I will have passed the exam',
+                                'e' => 'If I had studied harder, I pass the exam'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
                     }
                 } elseif ($subTopik == 'Sentence Structure') {
                     switch ($jenjang) {
@@ -3240,6 +7335,28 @@ class PaketSoalSeeder extends Seeder
                                 'c' => '4-2-5-3-1',
                                 'd' => '4-5-2-3-1',
                                 'e' => '4-3-5-2-1'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMP':
+                            $template['soal'] = "Arrange these words into a good sentence!\n\n(1) library (2) to (3) going (4) She (5) is (6) the";
+                            $template['jawaban'] = [
+                                'a' => '4-5-3-2-6-1',
+                                'b' => '4-3-5-2-6-1',
+                                'c' => '4-5-2-6-3-1',
+                                'd' => '4-3-2-6-5-1',
+                                'e' => '4-2-6-5-3-1'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "Arrange these words into a good sentence!\n\n(1) research (2) conducting (3) scientists (4) are (5) important (6) an";
+                            $template['jawaban'] = [
+                                'a' => '3-4-2-6-5-1',
+                                'b' => '3-2-4-6-5-1',
+                                'c' => '3-4-6-5-2-1',
+                                'd' => '3-2-6-5-4-1',
+                                'e' => '3-6-5-4-2-1'
                             ];
                             $template['benar'] = 'a';
                             break;
@@ -3260,6 +7377,28 @@ class PaketSoalSeeder extends Seeder
                             ];
                             $template['benar'] = 'a';
                             break;
+                        case 'SMP':
+                            $template['soal'] = "What do you say when you meet someone for the first time?";
+                            $template['jawaban'] = [
+                                'a' => 'Nice to meet you',
+                                'b' => 'Goodbye',
+                                'c' => 'Thank you',
+                                'd' => 'Excuse me',
+                                'e' => 'You are welcome'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "What do you say when you want to express disagreement politely?";
+                            $template['jawaban'] = [
+                                'a' => 'I respectfully disagree',
+                                'b' => 'You are wrong',
+                                'c' => 'That is stupid',
+                                'd' => 'I do not care',
+                                'e' => 'Whatever'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
                     }
                 } elseif ($subTopik == 'Introduction') {
                     switch ($jenjang) {
@@ -3271,6 +7410,28 @@ class PaketSoalSeeder extends Seeder
                                 'c' => 'His name is...',
                                 'd' => 'Her name is...',
                                 'e' => 'Their name is...'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMP':
+                            $template['soal'] = "What do you say when you want to introduce someone else?";
+                            $template['jawaban'] = [
+                                'a' => 'This is...',
+                                'b' => 'I am...',
+                                'c' => 'You are...',
+                                'd' => 'He is...',
+                                'e' => 'She is...'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "What do you say when you want to give a formal presentation?";
+                            $template['jawaban'] = [
+                                'a' => 'Good morning, ladies and gentlemen',
+                                'b' => 'Hi everyone',
+                                'c' => 'Hello there',
+                                'd' => 'Hey guys',
+                                'e' => 'What\'s up'
                             ];
                             $template['benar'] = 'a';
                             break;
@@ -3291,6 +7452,28 @@ class PaketSoalSeeder extends Seeder
                             ];
                             $template['benar'] = 'a';
                             break;
+                        case 'SMP':
+                            $template['soal'] = "Listen to the number and choose the correct answer!\n\n(Number: 1,250)";
+                            $template['jawaban'] = [
+                                'a' => 'One thousand two hundred fifty',
+                                'b' => 'One thousand two hundred fifteen',
+                                'c' => 'One thousand two hundred five',
+                                'd' => 'One thousand two hundred',
+                                'e' => 'One thousand two hundred fifty five'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "Listen to the number and choose the correct answer!\n\n(Number: 2,500,000)";
+                            $template['jawaban'] = [
+                                'a' => 'Two million five hundred thousand',
+                                'b' => 'Two million fifty thousand',
+                                'c' => 'Two million five thousand',
+                                'd' => 'Two million five hundred',
+                                'e' => 'Two million five hundred thousand five hundred'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
                     }
                 } elseif ($subTopik == 'Colors') {
                     switch ($jenjang) {
@@ -3302,6 +7485,28 @@ class PaketSoalSeeder extends Seeder
                                 'c' => 'Kuning',
                                 'd' => 'Hijau',
                                 'e' => 'Hitam'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMP':
+                            $template['soal'] = "Listen to the color and choose the correct answer!\n\n(Color: Turquoise)";
+                            $template['jawaban'] = [
+                                'a' => 'Biru kehijauan',
+                                'b' => 'Merah muda',
+                                'c' => 'Ungu',
+                                'd' => 'Oranye',
+                                'e' => 'Coklat'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "Listen to the color and choose the correct answer!\n\n(Color: Maroon)";
+                            $template['jawaban'] = [
+                                'a' => 'Merah tua',
+                                'b' => 'Merah muda',
+                                'c' => 'Merah terang',
+                                'd' => 'Merah jambu',
+                                'e' => 'Merah oranye'
                             ];
                             $template['benar'] = 'a';
                             break;
@@ -3337,6 +7542,28 @@ class PaketSoalSeeder extends Seeder
                             ];
                             $template['benar'] = 'a';
                             break;
+                        case 'SMP':
+                            $template['soal'] = "Sila Pancasila yang berbunyi 'Persatuan Indonesia' adalah sila ke...";
+                            $template['jawaban'] = [
+                                'a' => 'Tiga',
+                                'b' => 'Satu',
+                                'c' => 'Dua',
+                                'd' => 'Empat',
+                                'e' => 'Lima'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "Sila Pancasila yang berbunyi 'Keadilan Sosial bagi Seluruh Rakyat Indonesia' adalah sila ke...";
+                            $template['jawaban'] = [
+                                'a' => 'Lima',
+                                'b' => 'Satu',
+                                'c' => 'Dua',
+                                'd' => 'Tiga',
+                                'e' => 'Empat'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
                     }
                 } elseif ($subTopik == 'Lambang Pancasila') {
                     switch ($jenjang) {
@@ -3346,6 +7573,28 @@ class PaketSoalSeeder extends Seeder
                                 'a' => 'Bintang',
                                 'b' => 'Rantai',
                                 'c' => 'Pohon Beringin',
+                                'd' => 'Kepala Banteng',
+                                'e' => 'Padi dan Kapas'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMP':
+                            $template['soal'] = "Lambang sila kedua Pancasila adalah...";
+                            $template['jawaban'] = [
+                                'a' => 'Rantai',
+                                'b' => 'Bintang',
+                                'c' => 'Pohon Beringin',
+                                'd' => 'Kepala Banteng',
+                                'e' => 'Padi dan Kapas'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "Lambang sila ketiga Pancasila adalah...";
+                            $template['jawaban'] = [
+                                'a' => 'Pohon Beringin',
+                                'b' => 'Bintang',
+                                'c' => 'Rantai',
                                 'd' => 'Kepala Banteng',
                                 'e' => 'Padi dan Kapas'
                             ];
@@ -3368,6 +7617,28 @@ class PaketSoalSeeder extends Seeder
                             ];
                             $template['benar'] = 'a';
                             break;
+                        case 'SMP':
+                            $template['soal'] = "Alinea pertama Pembukaan UUD 1945 berisi tentang...";
+                            $template['jawaban'] = [
+                                'a' => 'Kemerdekaan adalah hak segala bangsa',
+                                'b' => 'Perjuangan pergerakan kemerdekaan Indonesia',
+                                'c' => 'Atas berkat rahmat Allah Yang Maha Kuasa',
+                                'd' => 'Maka disusunlah Kemerdekaan Kebangsaan Indonesia',
+                                'e' => 'Dalam suatu Undang-Undang Dasar Negara Indonesia'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "Alinea kedua Pembukaan UUD 1945 berisi tentang...";
+                            $template['jawaban'] = [
+                                'a' => 'Perjuangan pergerakan kemerdekaan Indonesia',
+                                'b' => 'Kemerdekaan adalah hak segala bangsa',
+                                'c' => 'Atas berkat rahmat Allah Yang Maha Kuasa',
+                                'd' => 'Maka disusunlah Kemerdekaan Kebangsaan Indonesia',
+                                'e' => 'Dalam suatu Undang-Undang Dasar Negara Indonesia'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
                     }
                 } elseif ($subTopik == 'Batang Tubuh') {
                     switch ($jenjang) {
@@ -3379,6 +7650,28 @@ class PaketSoalSeeder extends Seeder
                                 'c' => '17',
                                 'd' => '18',
                                 'e' => '19'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMP':
+                            $template['soal'] = "Bab I UUD 1945 berisi tentang...";
+                            $template['jawaban'] = [
+                                'a' => 'Bentuk dan Kedaulatan',
+                                'b' => 'Majelis Permusyawaratan Rakyat',
+                                'c' => 'Kekuasaan Pemerintahan Negara',
+                                'd' => 'Dewan Perwakilan Rakyat',
+                                'e' => 'Pemerintahan Daerah'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "Bab II UUD 1945 berisi tentang...";
+                            $template['jawaban'] = [
+                                'a' => 'Majelis Permusyawaratan Rakyat',
+                                'b' => 'Bentuk dan Kedaulatan',
+                                'c' => 'Kekuasaan Pemerintahan Negara',
+                                'd' => 'Dewan Perwakilan Rakyat',
+                                'e' => 'Pemerintahan Daerah'
                             ];
                             $template['benar'] = 'a';
                             break;
@@ -3399,6 +7692,28 @@ class PaketSoalSeeder extends Seeder
                             ];
                             $template['benar'] = 'a';
                             break;
+                        case 'SMP':
+                            $template['soal'] = "Jumlah bulu pada sayap Garuda Pancasila adalah...";
+                            $template['jawaban'] = [
+                                'a' => '17',
+                                'b' => '16',
+                                'c' => '18',
+                                'd' => '19',
+                                'e' => '20'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "Jumlah bulu pada ekor Garuda Pancasila adalah...";
+                            $template['jawaban'] = [
+                                'a' => '8',
+                                'b' => '7',
+                                'c' => '9',
+                                'd' => '10',
+                                'e' => '11'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
                     }
                 } elseif ($subTopik == 'Bendera') {
                     switch ($jenjang) {
@@ -3410,6 +7725,28 @@ class PaketSoalSeeder extends Seeder
                                 'c' => 'Merah dan Kuning',
                                 'd' => 'Merah dan Hitam',
                                 'e' => 'Merah dan Hijau'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMP':
+                            $template['soal'] = "Perbandingan ukuran bendera Indonesia adalah...";
+                            $template['jawaban'] = [
+                                'a' => '2:3',
+                                'b' => '1:2',
+                                'c' => '3:4',
+                                'd' => '4:5',
+                                'e' => '5:6'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "Warna merah pada bendera Indonesia melambangkan...";
+                            $template['jawaban'] = [
+                                'a' => 'Keberanian',
+                                'b' => 'Kesucian',
+                                'c' => 'Kemakmuran',
+                                'd' => 'Kedamaian',
+                                'e' => 'Persatuan'
                             ];
                             $template['benar'] = 'a';
                             break;
@@ -3430,6 +7767,28 @@ class PaketSoalSeeder extends Seeder
                             ];
                             $template['benar'] = 'a';
                             break;
+                        case 'SMP':
+                            $template['soal'] = "Lembaga negara yang memegang kekuasaan kehakiman adalah...";
+                            $template['jawaban'] = [
+                                'a' => 'MA dan MK',
+                                'b' => 'DPR dan MPR',
+                                'c' => 'Presiden dan Wakil Presiden',
+                                'd' => 'BPK dan KY',
+                                'e' => 'DPD dan DPR'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "Lembaga negara yang berwenang menguji undang-undang terhadap UUD 1945 adalah...";
+                            $template['jawaban'] = [
+                                'a' => 'Mahkamah Konstitusi',
+                                'b' => 'Mahkamah Agung',
+                                'c' => 'Dewan Perwakilan Rakyat',
+                                'd' => 'Majelis Permusyawaratan Rakyat',
+                                'e' => 'Badan Pemeriksa Keuangan'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
                     }
                 } elseif ($subTopik == 'Pemilu') {
                     switch ($jenjang) {
@@ -3441,6 +7800,28 @@ class PaketSoalSeeder extends Seeder
                                 'c' => '6',
                                 'd' => '7',
                                 'e' => '8'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMP':
+                            $template['soal'] = "Pemilu untuk memilih anggota DPR dilaksanakan pada tahun...";
+                            $template['jawaban'] = [
+                                'a' => '2024',
+                                'b' => '2023',
+                                'c' => '2025',
+                                'd' => '2026',
+                                'e' => '2027'
+                            ];
+                            $template['benar'] = 'a';
+                            break;
+                        case 'SMA':
+                            $template['soal'] = "Pemilu untuk memilih Presiden dan Wakil Presiden dilaksanakan pada tahun...";
+                            $template['jawaban'] = [
+                                'a' => '2024',
+                                'b' => '2023',
+                                'c' => '2025',
+                                'd' => '2026',
+                                'e' => '2027'
                             ];
                             $template['benar'] = 'a';
                             break;
@@ -4466,29 +8847,190 @@ class PaketSoalSeeder extends Seeder
                 if ($subTopik == 'Konfigurasi Elektron') {
                     switch ($jenjang) {
                         case 'SMA':
-                            $template['soal'] = "Jumlah elektron maksimum pada kulit K adalah...";
-                            $template['jawaban'] = [
-                                'a' => '2',
-                                'b' => '8',
-                                'c' => '18',
-                                'd' => '32',
-                                'e' => '50'
-                            ];
-                            $template['benar'] = 'a';
+                            $variasi = rand(1, 5);
+                            switch ($variasi) {
+                                case 1:
+                                    $template['soal'] = "Jumlah elektron maksimum pada kulit K adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => '2',
+                                        'b' => '8',
+                                        'c' => '18',
+                                        'd' => '32',
+                                        'e' => '50'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 2:
+                                    $template['soal'] = "Jumlah elektron maksimum pada kulit L adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => '8',
+                                        'b' => '2',
+                                        'c' => '18',
+                                        'd' => '32',
+                                        'e' => '50'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 3:
+                                    $template['soal'] = "Konfigurasi elektron atom natrium (Na) adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => '2, 8, 1',
+                                        'b' => '2, 8, 2',
+                                        'c' => '2, 8, 8, 1',
+                                        'd' => '2, 8, 8, 2',
+                                        'e' => '2, 8, 8, 8, 1'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 4:
+                                    $template['soal'] = "Elektron valensi adalah elektron yang berada di...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Kulit terluar',
+                                        'b' => 'Kulit terdalam',
+                                        'c' => 'Kulit tengah',
+                                        'd' => 'Inti atom',
+                                        'e' => 'Orbital s'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 5:
+                                    $template['soal'] = "Jumlah elektron maksimum pada kulit M adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => '18',
+                                        'b' => '8',
+                                        'c' => '32',
+                                        'd' => '2',
+                                        'e' => '50'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                            }
                             break;
                     }
                 } elseif ($subTopik == 'Sistem Periodik') {
                     switch ($jenjang) {
                         case 'SMA':
-                            $template['soal'] = "Unsur yang memiliki nomor atom 1 adalah...";
-                            $template['jawaban'] = [
-                                'a' => 'Hidrogen',
-                                'b' => 'Helium',
-                                'c' => 'Litium',
-                                'd' => 'Berilium',
-                                'e' => 'Boron'
-                            ];
-                            $template['benar'] = 'a';
+                            $variasi = rand(1, 5);
+                            switch ($variasi) {
+                                case 1:
+                                    $template['soal'] = "Unsur yang memiliki nomor atom 1 adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Hidrogen',
+                                        'b' => 'Helium',
+                                        'c' => 'Litium',
+                                        'd' => 'Berilium',
+                                        'e' => 'Boron'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 2:
+                                    $template['soal'] = "Unsur yang memiliki nomor atom 2 adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Helium',
+                                        'b' => 'Hidrogen',
+                                        'c' => 'Litium',
+                                        'd' => 'Berilium',
+                                        'e' => 'Boron'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 3:
+                                    $template['soal'] = "Golongan alkali tanah berada di golongan...";
+                                    $template['jawaban'] = [
+                                        'a' => 'IIA',
+                                        'b' => 'IA',
+                                        'c' => 'IIIA',
+                                        'd' => 'IVA',
+                                        'e' => 'VA'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 4:
+                                    $template['soal'] = "Golongan halogen berada di golongan...";
+                                    $template['jawaban'] = [
+                                        'a' => 'VIIA',
+                                        'b' => 'VIA',
+                                        'c' => 'VIIIA',
+                                        'd' => 'VA',
+                                        'e' => 'IVA'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 5:
+                                    $template['soal'] = "Golongan gas mulia berada di golongan...";
+                                    $template['jawaban'] = [
+                                        'a' => 'VIIIA',
+                                        'b' => 'VIIA',
+                                        'c' => 'VIA',
+                                        'd' => 'VA',
+                                        'e' => 'IVA'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                            }
+                            break;
+                    }
+                } elseif ($subTopik == 'Ikatan Kimia') {
+                    switch ($jenjang) {
+                        case 'SMA':
+                            $variasi = rand(1, 5);
+                            switch ($variasi) {
+                                case 1:
+                                    $template['soal'] = "Ikatan yang terjadi karena serah terima elektron disebut...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Ikatan ion',
+                                        'b' => 'Ikatan kovalen',
+                                        'c' => 'Ikatan hidrogen',
+                                        'd' => 'Ikatan van der Waals',
+                                        'e' => 'Ikatan logam'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 2:
+                                    $template['soal'] = "Ikatan yang terjadi karena penggunaan bersama pasangan elektron disebut...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Ikatan kovalen',
+                                        'b' => 'Ikatan ion',
+                                        'c' => 'Ikatan hidrogen',
+                                        'd' => 'Ikatan van der Waals',
+                                        'e' => 'Ikatan logam'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 3:
+                                    $template['soal'] = "Molekul H₂O memiliki ikatan...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Kovalen polar',
+                                        'b' => 'Kovalen nonpolar',
+                                        'c' => 'Ion',
+                                        'd' => 'Hidrogen',
+                                        'e' => 'Van der Waals'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 4:
+                                    $template['soal'] = "Molekul O₂ memiliki ikatan...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Kovalen nonpolar',
+                                        'b' => 'Kovalen polar',
+                                        'c' => 'Ion',
+                                        'd' => 'Hidrogen',
+                                        'e' => 'Van der Waals'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 5:
+                                    $template['soal'] = "Ikatan yang terjadi antara atom H dan O dalam air disebut...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Ikatan hidrogen',
+                                        'b' => 'Ikatan kovalen',
+                                        'c' => 'Ikatan ion',
+                                        'd' => 'Ikatan van der Waals',
+                                        'e' => 'Ikatan logam'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                            }
                             break;
                     }
                 }
@@ -4497,29 +9039,319 @@ class PaketSoalSeeder extends Seeder
                 if ($subTopik == 'Persamaan Reaksi') {
                     switch ($jenjang) {
                         case 'SMA':
-                            $template['soal'] = "Rumus kimia untuk air adalah...";
-                            $template['jawaban'] = [
-                                'a' => 'H₂O',
-                                'b' => 'CO₂',
-                                'c' => 'O₂',
-                                'd' => 'H₂',
-                                'e' => 'H₂O₂'
-                            ];
-                            $template['benar'] = 'a';
+                            $variasi = rand(1, 5);
+                            switch ($variasi) {
+                                case 1:
+                                    $template['soal'] = "Rumus kimia untuk air adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'H₂O',
+                                        'b' => 'CO₂',
+                                        'c' => 'O₂',
+                                        'd' => 'H₂',
+                                        'e' => 'H₂O₂'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 2:
+                                    $template['soal'] = "Rumus kimia untuk karbon dioksida adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'CO₂',
+                                        'b' => 'H₂O',
+                                        'c' => 'O₂',
+                                        'd' => 'H₂',
+                                        'e' => 'CO'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 3:
+                                    $template['soal'] = "Rumus kimia untuk asam sulfat adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'H₂SO₄',
+                                        'b' => 'HCl',
+                                        'c' => 'HNO₃',
+                                        'd' => 'H₃PO₄',
+                                        'e' => 'H₂CO₃'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 4:
+                                    $template['soal'] = "Rumus kimia untuk natrium hidroksida adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'NaOH',
+                                        'b' => 'KOH',
+                                        'c' => 'Ca(OH)₂',
+                                        'd' => 'Mg(OH)₂',
+                                        'e' => 'Al(OH)₃'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 5:
+                                    $template['soal'] = "Rumus kimia untuk natrium klorida adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'NaCl',
+                                        'b' => 'KCl',
+                                        'c' => 'CaCl₂',
+                                        'd' => 'MgCl₂',
+                                        'e' => 'AlCl₃'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                            }
                             break;
                     }
                 } elseif ($subTopik == 'Stoikiometri') {
                     switch ($jenjang) {
                         case 'SMA':
-                            $template['soal'] = "Satuan untuk jumlah zat dalam SI adalah...";
-                            $template['jawaban'] = [
-                                'a' => 'Mol',
-                                'b' => 'Gram',
-                                'c' => 'Liter',
-                                'd' => 'Meter',
-                                'e' => 'Detik'
-                            ];
-                            $template['benar'] = 'a';
+                            $variasi = rand(1, 5);
+                            switch ($variasi) {
+                                case 1:
+                                    $template['soal'] = "Satuan untuk jumlah zat dalam SI adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Mol',
+                                        'b' => 'Gram',
+                                        'c' => 'Liter',
+                                        'd' => 'Meter',
+                                        'e' => 'Detik'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 2:
+                                    $template['soal'] = "Bilangan Avogadro adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => '6,02 × 10²³',
+                                        'b' => '6,02 × 10²²',
+                                        'c' => '6,02 × 10²⁴',
+                                        'd' => '6,02 × 10²¹',
+                                        'e' => '6,02 × 10²⁰'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 3:
+                                    $template['soal'] = "Massa molar adalah massa...";
+                                    $template['jawaban'] = [
+                                        'a' => '1 mol zat',
+                                        'b' => '1 gram zat',
+                                        'c' => '1 liter zat',
+                                        'd' => '1 atom zat',
+                                        'e' => '1 molekul zat'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 4:
+                                    $template['soal'] = "Volume molar gas pada STP adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => '22,4 L',
+                                        'b' => '24,5 L',
+                                        'c' => '20,0 L',
+                                        'd' => '25,0 L',
+                                        'e' => '21,0 L'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 5:
+                                    $template['soal'] = "Rumus untuk menghitung jumlah mol adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'n = m/Mr',
+                                        'b' => 'n = m/V',
+                                        'c' => 'n = V/22,4',
+                                        'd' => 'n = P/RT',
+                                        'e' => 'n = cV'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                            }
+                            break;
+                    }
+                } elseif ($subTopik == 'Laju Reaksi') {
+                    switch ($jenjang) {
+                        case 'SMA':
+                            $variasi = rand(1, 5);
+                            switch ($variasi) {
+                                case 1:
+                                    $template['soal'] = "Faktor yang mempengaruhi laju reaksi adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Konsentrasi pereaksi',
+                                        'b' => 'Warna pereaksi',
+                                        'c' => 'Bentuk wadah',
+                                        'd' => 'Ukuran wadah',
+                                        'e' => 'Jenis wadah'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 2:
+                                    $template['soal'] = "Katalis adalah zat yang...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Mempercepat reaksi tanpa ikut bereaksi',
+                                        'b' => 'Memperlambat reaksi',
+                                        'c' => 'Menghentikan reaksi',
+                                        'd' => 'Mengubah hasil reaksi',
+                                        'e' => 'Mengurangi hasil reaksi'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 3:
+                                    $template['soal'] = "Semakin tinggi suhu, laju reaksi akan...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Semakin cepat',
+                                        'b' => 'Semakin lambat',
+                                        'c' => 'Tetap',
+                                        'd' => 'Tidak teratur',
+                                        'e' => 'Berhenti'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 4:
+                                    $template['soal'] = "Semakin besar luas permukaan, laju reaksi akan...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Semakin cepat',
+                                        'b' => 'Semakin lambat',
+                                        'c' => 'Tetap',
+                                        'd' => 'Tidak teratur',
+                                        'e' => 'Berhenti'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 5:
+                                    $template['soal'] = "Satuan laju reaksi adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'M/s',
+                                        'b' => 'M/s²',
+                                        'c' => 'M²/s',
+                                        'd' => 'M/s³',
+                                        'e' => 'M³/s'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                            }
+                            break;
+                    }
+                }
+                break;
+            case 'Larutan':
+                if ($subTopik == 'Konsentrasi Larutan') {
+                    switch ($jenjang) {
+                        case 'SMA':
+                            $variasi = rand(1, 5);
+                            switch ($variasi) {
+                                case 1:
+                                    $template['soal'] = "Konsentrasi molar adalah jumlah mol zat terlarut dalam...";
+                                    $template['jawaban'] = [
+                                        'a' => '1 liter larutan',
+                                        'b' => '1 liter pelarut',
+                                        'c' => '1 kg larutan',
+                                        'd' => '1 kg pelarut',
+                                        'e' => '1 mol pelarut'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 2:
+                                    $template['soal'] = "Satuan konsentrasi molar adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Molar (M)',
+                                        'b' => 'Molal (m)',
+                                        'c' => 'Normal (N)',
+                                        'd' => 'Persen (%)',
+                                        'e' => 'Ppm'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 3:
+                                    $template['soal'] = "Konsentrasi molal adalah jumlah mol zat terlarut dalam...";
+                                    $template['jawaban'] = [
+                                        'a' => '1 kg pelarut',
+                                        'b' => '1 liter larutan',
+                                        'c' => '1 liter pelarut',
+                                        'd' => '1 kg larutan',
+                                        'e' => '1 mol pelarut'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 4:
+                                    $template['soal'] = "Rumus untuk menghitung molaritas adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'M = n/V',
+                                        'b' => 'M = m/V',
+                                        'c' => 'M = n/m',
+                                        'd' => 'M = V/n',
+                                        'e' => 'M = m/n'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 5:
+                                    $template['soal'] = "Rumus untuk menghitung molalitas adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'm = n/kg pelarut',
+                                        'b' => 'm = n/V',
+                                        'c' => 'm = m/V',
+                                        'd' => 'm = V/n',
+                                        'e' => 'm = kg pelarut/n'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                            }
+                            break;
+                    }
+                } elseif ($subTopik == 'Asam Basa') {
+                    switch ($jenjang) {
+                        case 'SMA':
+                            $variasi = rand(1, 5);
+                            switch ($variasi) {
+                                case 1:
+                                    $template['soal'] = "pH larutan asam adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Kurang dari 7',
+                                        'b' => 'Lebih dari 7',
+                                        'c' => 'Sama dengan 7',
+                                        'd' => 'Sama dengan 0',
+                                        'e' => 'Sama dengan 14'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 2:
+                                    $template['soal'] = "pH larutan basa adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Lebih dari 7',
+                                        'b' => 'Kurang dari 7',
+                                        'c' => 'Sama dengan 7',
+                                        'd' => 'Sama dengan 0',
+                                        'e' => 'Sama dengan 14'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 3:
+                                    $template['soal'] = "pH larutan netral adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => '7',
+                                        'b' => '0',
+                                        'c' => '14',
+                                        'd' => '1',
+                                        'e' => '13'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 4:
+                                    $template['soal'] = "Rumus pH adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'pH = -log[H⁺]',
+                                        'b' => 'pH = log[H⁺]',
+                                        'c' => 'pH = [H⁺]',
+                                        'd' => 'pH = 1/[H⁺]',
+                                        'e' => 'pH = [H⁺]²'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 5:
+                                    $template['soal'] = "Rumus pOH adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'pOH = -log[OH⁻]',
+                                        'b' => 'pOH = log[OH⁻]',
+                                        'c' => 'pOH = [OH⁻]',
+                                        'd' => 'pOH = 1/[OH⁻]',
+                                        'e' => 'pOH = [OH⁻]²'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                            }
                             break;
                     }
                 }
@@ -4543,29 +9375,190 @@ class PaketSoalSeeder extends Seeder
                 if ($subTopik == 'Struktur dan fungsi sel') {
                     switch ($jenjang) {
                         case 'SMA':
-                            $template['soal'] = "Organel sel yang berfungsi sebagai tempat respirasi sel adalah...";
-                            $template['jawaban'] = [
-                                'a' => 'Mitokondria',
-                                'b' => 'Ribosom',
-                                'c' => 'Lisosom',
-                                'd' => 'Vakuola',
-                                'e' => 'Nukleus'
-                            ];
-                            $template['benar'] = 'a';
+                            $variasi = rand(1, 5);
+                            switch ($variasi) {
+                                case 1:
+                                    $template['soal'] = "Organel sel yang berfungsi sebagai tempat respirasi sel adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Mitokondria',
+                                        'b' => 'Ribosom',
+                                        'c' => 'Lisosom',
+                                        'd' => 'Vakuola',
+                                        'e' => 'Nukleus'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 2:
+                                    $template['soal'] = "Organel sel yang berfungsi sebagai tempat sintesis protein adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Ribosom',
+                                        'b' => 'Mitokondria',
+                                        'c' => 'Lisosom',
+                                        'd' => 'Vakuola',
+                                        'e' => 'Nukleus'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 3:
+                                    $template['soal'] = "Organel sel yang berfungsi sebagai pusat kendali sel adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Nukleus',
+                                        'b' => 'Mitokondria',
+                                        'c' => 'Ribosom',
+                                        'd' => 'Lisosom',
+                                        'e' => 'Vakuola'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 4:
+                                    $template['soal'] = "Organel sel yang berfungsi sebagai sistem pencernaan sel adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Lisosom',
+                                        'b' => 'Mitokondria',
+                                        'c' => 'Ribosom',
+                                        'd' => 'Vakuola',
+                                        'e' => 'Nukleus'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 5:
+                                    $template['soal'] = "Organel sel yang berfungsi sebagai tempat penyimpanan adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Vakuola',
+                                        'b' => 'Mitokondria',
+                                        'c' => 'Ribosom',
+                                        'd' => 'Lisosom',
+                                        'e' => 'Nukleus'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                            }
                             break;
                     }
                 } elseif ($subTopik == 'Pembelahan sel') {
                     switch ($jenjang) {
                         case 'SMA':
-                            $template['soal'] = "Pembelahan sel yang menghasilkan dua sel anak yang identik disebut...";
-                            $template['jawaban'] = [
-                                'a' => 'Mitosis',
-                                'b' => 'Meiosis',
-                                'c' => 'Amitosis',
-                                'd' => 'Endomitosis',
-                                'e' => 'Politen'
-                            ];
-                            $template['benar'] = 'a';
+                            $variasi = rand(1, 5);
+                            switch ($variasi) {
+                                case 1:
+                                    $template['soal'] = "Pembelahan sel yang menghasilkan dua sel anak yang identik disebut...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Mitosis',
+                                        'b' => 'Meiosis',
+                                        'c' => 'Amitosis',
+                                        'd' => 'Endomitosis',
+                                        'e' => 'Politen'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 2:
+                                    $template['soal'] = "Pembelahan sel yang menghasilkan empat sel anak dengan setengah kromosom disebut...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Meiosis',
+                                        'b' => 'Mitosis',
+                                        'c' => 'Amitosis',
+                                        'd' => 'Endomitosis',
+                                        'e' => 'Politen'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 3:
+                                    $template['soal'] = "Tahap pembelahan sel dimana kromosom menebal dan memendek disebut...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Profase',
+                                        'b' => 'Metafase',
+                                        'c' => 'Anafase',
+                                        'd' => 'Telofase',
+                                        'e' => 'Interfase'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 4:
+                                    $template['soal'] = "Tahap pembelahan sel dimana kromosom berjajar di bidang ekuator disebut...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Metafase',
+                                        'b' => 'Profase',
+                                        'c' => 'Anafase',
+                                        'd' => 'Telofase',
+                                        'e' => 'Interfase'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 5:
+                                    $template['soal'] = "Tahap pembelahan sel dimana kromatid berpisah ke kutub berlawanan disebut...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Anafase',
+                                        'b' => 'Profase',
+                                        'c' => 'Metafase',
+                                        'd' => 'Telofase',
+                                        'e' => 'Interfase'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                            }
+                            break;
+                    }
+                } elseif ($subTopik == 'Transportasi sel') {
+                    switch ($jenjang) {
+                        case 'SMA':
+                            $variasi = rand(1, 5);
+                            switch ($variasi) {
+                                case 1:
+                                    $template['soal'] = "Transportasi yang memerlukan energi disebut...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Transportasi aktif',
+                                        'b' => 'Transportasi pasif',
+                                        'c' => 'Difusi',
+                                        'd' => 'Osmosis',
+                                        'e' => 'Endositosis'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 2:
+                                    $template['soal'] = "Perpindahan zat dari konsentrasi tinggi ke rendah disebut...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Difusi',
+                                        'b' => 'Osmosis',
+                                        'c' => 'Transportasi aktif',
+                                        'd' => 'Endositosis',
+                                        'e' => 'Eksositosis'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 3:
+                                    $template['soal'] = "Perpindahan air melalui membran semipermeabel disebut...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Osmosis',
+                                        'b' => 'Difusi',
+                                        'c' => 'Transportasi aktif',
+                                        'd' => 'Endositosis',
+                                        'e' => 'Eksositosis'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 4:
+                                    $template['soal'] = "Proses memasukkan zat ke dalam sel dengan membentuk vesikel disebut...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Endositosis',
+                                        'b' => 'Eksositosis',
+                                        'c' => 'Difusi',
+                                        'd' => 'Osmosis',
+                                        'e' => 'Transportasi aktif'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 5:
+                                    $template['soal'] = "Proses mengeluarkan zat dari sel dengan vesikel disebut...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Eksositosis',
+                                        'b' => 'Endositosis',
+                                        'c' => 'Difusi',
+                                        'd' => 'Osmosis',
+                                        'e' => 'Transportasi aktif'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                            }
                             break;
                     }
                 }
@@ -4574,29 +9567,448 @@ class PaketSoalSeeder extends Seeder
                 if ($subTopik == 'Fotosintesis') {
                     switch ($jenjang) {
                         case 'SMA':
-                            $template['soal'] = "Pigmen yang berperan dalam fotosintesis adalah...";
-                            $template['jawaban'] = [
-                                'a' => 'Klorofil',
-                                'b' => 'Hemoglobin',
-                                'c' => 'Melanin',
-                                'd' => 'Karoten',
-                                'e' => 'Xantofil'
-                            ];
-                            $template['benar'] = 'a';
+                            $variasi = rand(1, 5);
+                            switch ($variasi) {
+                                case 1:
+                                    $template['soal'] = "Pigmen yang berperan dalam fotosintesis adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Klorofil',
+                                        'b' => 'Hemoglobin',
+                                        'c' => 'Melanin',
+                                        'd' => 'Karoten',
+                                        'e' => 'Xantofil'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 2:
+                                    $template['soal'] = "Reaksi terang fotosintesis terjadi di...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Grana',
+                                        'b' => 'Stroma',
+                                        'c' => 'Membran tilakoid',
+                                        'd' => 'Matriks',
+                                        'e' => 'Krista'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 3:
+                                    $template['soal'] = "Reaksi gelap fotosintesis terjadi di...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Stroma',
+                                        'b' => 'Grana',
+                                        'c' => 'Membran tilakoid',
+                                        'd' => 'Matriks',
+                                        'e' => 'Krista'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 4:
+                                    $template['soal'] = "Hasil akhir fotosintesis adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Glukosa dan oksigen',
+                                        'b' => 'Karbon dioksida dan air',
+                                        'c' => 'ATP dan NADPH',
+                                        'd' => 'Asam piruvat',
+                                        'e' => 'Etanol'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 5:
+                                    $template['soal'] = "Faktor yang mempengaruhi fotosintesis adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Intensitas cahaya',
+                                        'b' => 'Warna daun',
+                                        'c' => 'Ukuran daun',
+                                        'd' => 'Bentuk daun',
+                                        'e' => 'Tekstur daun'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                            }
                             break;
                     }
                 } elseif ($subTopik == 'Respirasi') {
                     switch ($jenjang) {
                         case 'SMA':
-                            $template['soal'] = "Proses respirasi yang membutuhkan oksigen disebut...";
-                            $template['jawaban'] = [
-                                'a' => 'Aerob',
-                                'b' => 'Anaerob',
-                                'c' => 'Fermentasi',
-                                'd' => 'Glikolisis',
-                                'e' => 'Siklus Krebs'
-                            ];
-                            $template['benar'] = 'a';
+                            $variasi = rand(1, 5);
+                            switch ($variasi) {
+                                case 1:
+                                    $template['soal'] = "Proses respirasi yang membutuhkan oksigen disebut...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Aerob',
+                                        'b' => 'Anaerob',
+                                        'c' => 'Fermentasi',
+                                        'd' => 'Glikolisis',
+                                        'e' => 'Siklus Krebs'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 2:
+                                    $template['soal'] = "Proses respirasi yang tidak membutuhkan oksigen disebut...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Anaerob',
+                                        'b' => 'Aerob',
+                                        'c' => 'Oksidasi',
+                                        'd' => 'Reduksi',
+                                        'e' => 'Fosforilasi'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 3:
+                                    $template['soal'] = "Tahap pertama respirasi sel adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Glikolisis',
+                                        'b' => 'Siklus Krebs',
+                                        'c' => 'Rantai transpor elektron',
+                                        'd' => 'Dekarboksilasi oksidatif',
+                                        'e' => 'Fosforilasi oksidatif'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 4:
+                                    $template['soal'] = "Tahap respirasi yang menghasilkan ATP terbanyak adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Rantai transpor elektron',
+                                        'b' => 'Glikolisis',
+                                        'c' => 'Siklus Krebs',
+                                        'd' => 'Dekarboksilasi oksidatif',
+                                        'e' => 'Fermentasi'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 5:
+                                    $template['soal'] = "Hasil akhir respirasi aerob adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'CO₂, H₂O, dan ATP',
+                                        'b' => 'CO₂, H₂O, dan NADH',
+                                        'c' => 'Asam laktat dan ATP',
+                                        'd' => 'Etanol dan CO₂',
+                                        'e' => 'Asam piruvat'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                            }
+                            break;
+                    }
+                } elseif ($subTopik == 'Enzim') {
+                    switch ($jenjang) {
+                        case 'SMA':
+                            $variasi = rand(1, 5);
+                            switch ($variasi) {
+                                case 1:
+                                    $template['soal'] = "Enzim adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Biokatalisator',
+                                        'b' => 'Hormon',
+                                        'c' => 'Vitamin',
+                                        'd' => 'Mineral',
+                                        'e' => 'Protein struktural'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 2:
+                                    $template['soal'] = "Bagian enzim yang berikatan dengan substrat disebut...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Sisi aktif',
+                                        'b' => 'Kofaktor',
+                                        'c' => 'Koenzim',
+                                        'd' => 'Apoenzim',
+                                        'e' => 'Holoenzim'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 3:
+                                    $template['soal'] = "Faktor yang mempengaruhi kerja enzim adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Suhu',
+                                        'b' => 'Warna substrat',
+                                        'c' => 'Bentuk substrat',
+                                        'd' => 'Ukuran substrat',
+                                        'e' => 'Tekstur substrat'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 4:
+                                    $template['soal'] = "Suhu optimum enzim manusia adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => '37°C',
+                                        'b' => '25°C',
+                                        'c' => '50°C',
+                                        'd' => '0°C',
+                                        'e' => '100°C'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 5:
+                                    $template['soal'] = "pH optimum enzim pepsin adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => '2',
+                                        'b' => '7',
+                                        'c' => '8',
+                                        'd' => '10',
+                                        'e' => '12'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                            }
+                            break;
+                    }
+                }
+                break;
+            case 'Genetika':
+                if ($subTopik == 'Hukum Mendel') {
+                    switch ($jenjang) {
+                        case 'SMA':
+                            $variasi = rand(1, 5);
+                            switch ($variasi) {
+                                case 1:
+                                    $template['soal'] = "Hukum Mendel I menyatakan tentang...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Pemisahan alel',
+                                        'b' => 'Pengelompokan bebas',
+                                        'c' => 'Dominansi',
+                                        'd' => 'Resesivitas',
+                                        'e' => 'Kodominansi'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 2:
+                                    $template['soal'] = "Hukum Mendel II menyatakan tentang...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Pengelompokan bebas',
+                                        'b' => 'Pemisahan alel',
+                                        'c' => 'Dominansi',
+                                        'd' => 'Resesivitas',
+                                        'e' => 'Kodominansi'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 3:
+                                    $template['soal'] = "Genotipe homozigot dominan ditulis...";
+                                    $template['jawaban'] = [
+                                        'a' => 'AA',
+                                        'b' => 'Aa',
+                                        'c' => 'aa',
+                                        'd' => 'AB',
+                                        'e' => 'AO'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 4:
+                                    $template['soal'] = "Genotipe heterozigot ditulis...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Aa',
+                                        'b' => 'AA',
+                                        'c' => 'aa',
+                                        'd' => 'AB',
+                                        'e' => 'AO'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 5:
+                                    $template['soal'] = "Genotipe homozigot resesif ditulis...";
+                                    $template['jawaban'] = [
+                                        'a' => 'aa',
+                                        'b' => 'AA',
+                                        'c' => 'Aa',
+                                        'd' => 'AB',
+                                        'e' => 'AO'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                            }
+                            break;
+                    }
+                } elseif ($subTopik == 'DNA dan RNA') {
+                    switch ($jenjang) {
+                        case 'SMA':
+                            $variasi = rand(1, 5);
+                            switch ($variasi) {
+                                case 1:
+                                    $template['soal'] = "Basa nitrogen yang terdapat dalam DNA adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Adenin, Timin, Guanin, Sitosin',
+                                        'b' => 'Adenin, Urasil, Guanin, Sitosin',
+                                        'c' => 'Adenin, Timin, Guanin, Urasil',
+                                        'd' => 'Timin, Urasil, Guanin, Sitosin',
+                                        'e' => 'Adenin, Timin, Urasil, Sitosin'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 2:
+                                    $template['soal'] = "Basa nitrogen yang terdapat dalam RNA adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Adenin, Urasil, Guanin, Sitosin',
+                                        'b' => 'Adenin, Timin, Guanin, Sitosin',
+                                        'c' => 'Adenin, Timin, Guanin, Urasil',
+                                        'd' => 'Timin, Urasil, Guanin, Sitosin',
+                                        'e' => 'Adenin, Timin, Urasil, Sitosin'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 3:
+                                    $template['soal'] = "Struktur DNA berbentuk...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Double helix',
+                                        'b' => 'Single strand',
+                                        'c' => 'Triple helix',
+                                        'd' => 'Circular',
+                                        'e' => 'Linear'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 4:
+                                    $template['soal'] = "Proses sintesis protein terjadi di...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Ribosom',
+                                        'b' => 'Nukleus',
+                                        'c' => 'Mitokondria',
+                                        'd' => 'Lisosom',
+                                        'e' => 'Vakuola'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 5:
+                                    $template['soal'] = "Proses transkripsi terjadi di...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Nukleus',
+                                        'b' => 'Ribosom',
+                                        'c' => 'Sitoplasma',
+                                        'd' => 'Mitokondria',
+                                        'e' => 'Lisosom'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                            }
+                            break;
+                    }
+                }
+                break;
+            case 'Evolusi':
+                if ($subTopik == 'Teori Evolusi') {
+                    switch ($jenjang) {
+                        case 'SMA':
+                            $variasi = rand(1, 5);
+                            switch ($variasi) {
+                                case 1:
+                                    $template['soal'] = "Bapak teori evolusi adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Charles Darwin',
+                                        'b' => 'Jean Lamarck',
+                                        'c' => 'Alfred Wallace',
+                                        'd' => 'Gregor Mendel',
+                                        'e' => 'Louis Pasteur'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 2:
+                                    $template['soal'] = "Mekanisme evolusi yang utama adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Seleksi alam',
+                                        'b' => 'Mutasi',
+                                        'c' => 'Migrasi',
+                                        'd' => 'Genetic drift',
+                                        'e' => 'Non-random mating'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 3:
+                                    $template['soal'] = "Perubahan frekuensi gen dalam populasi disebut...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Evolusi',
+                                        'b' => 'Adaptasi',
+                                        'c' => 'Variasi',
+                                        'd' => 'Mutasi',
+                                        'e' => 'Seleksi'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 4:
+                                    $template['soal'] = "Bukti evolusi dari struktur tubuh adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Homologi',
+                                        'b' => 'Analog',
+                                        'c' => 'Vestigial',
+                                        'd' => 'Embriologi',
+                                        'e' => 'Fosil'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 5:
+                                    $template['soal'] = "Organ yang tidak berfungsi disebut...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Organ vestigial',
+                                        'b' => 'Organ homolog',
+                                        'c' => 'Organ analog',
+                                        'd' => 'Organ rudimenter',
+                                        'e' => 'Organ atavistik'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                            }
+                            break;
+                    }
+                } elseif ($subTopik == 'Adaptasi') {
+                    switch ($jenjang) {
+                        case 'SMA':
+                            $variasi = rand(1, 5);
+                            switch ($variasi) {
+                                case 1:
+                                    $template['soal'] = "Adaptasi morfologi adalah penyesuaian bentuk...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Tubuh',
+                                        'b' => 'Fungsi',
+                                        'c' => 'Perilaku',
+                                        'd' => 'Fisiologi',
+                                        'e' => 'Biokimia'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 2:
+                                    $template['soal'] = "Adaptasi fisiologi adalah penyesuaian...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Fungsi organ',
+                                        'b' => 'Bentuk tubuh',
+                                        'c' => 'Perilaku',
+                                        'd' => 'Struktur',
+                                        'e' => 'Anatomi'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 3:
+                                    $template['soal'] = "Adaptasi tingkah laku adalah penyesuaian...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Perilaku',
+                                        'b' => 'Bentuk tubuh',
+                                        'c' => 'Fungsi organ',
+                                        'd' => 'Struktur',
+                                        'e' => 'Anatomi'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 4:
+                                    $template['soal'] = "Contoh adaptasi morfologi adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Paruh burung',
+                                        'b' => 'Kemampuan berkamuflase',
+                                        'c' => 'Kemampuan berhibernasi',
+                                        'd' => 'Kemampuan mimikri',
+                                        'e' => 'Kemampuan estivasi'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                                case 5:
+                                    $template['soal'] = "Contoh adaptasi fisiologi adalah...";
+                                    $template['jawaban'] = [
+                                        'a' => 'Kemampuan berhibernasi',
+                                        'b' => 'Paruh burung',
+                                        'c' => 'Kemampuan berkamuflase',
+                                        'd' => 'Kemampuan mimikri',
+                                        'e' => 'Kemampuan estivasi'
+                                    ];
+                                    $template['benar'] = 'a';
+                                    break;
+                            }
                             break;
                     }
                 }
