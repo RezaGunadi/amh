@@ -3089,7 +3089,7 @@ class PaketSoalSeeder extends Seeder
         return $template;
     }
 
-    private function generateSoalBahasaIndonesia($jenjang, $topik, $subTopik)
+    private function generateSoalBahasaIndonesia($jenjang, $topik, $key, $subTopik)
     {
         $template = [
             'soal' => '',
