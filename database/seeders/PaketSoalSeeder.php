@@ -155,7 +155,7 @@ class PaketSoalSeeder extends Seeder
                 $jumlahSoal = min($soalPerSubTopik, $soalTersisa);
                 
                 // Process soal dalam chunk
-                $this->processSoalChunk($paketId, $mapel, $jenjang, $topik, $key, $jumlahSoal, $soalChunkSize);
+                $this->processSoalChunk($paketId, $mapel, $jenjang, $topik, $key,$subTopik, $jumlahSoal, $soalChunkSize);
                 
                 $soalTersisa -= $jumlahSoal;
             }
@@ -165,7 +165,7 @@ class PaketSoalSeeder extends Seeder
     /**
      * Process chunk soal
      */
-    private function processSoalChunk($paketId, $mapel, $jenjang, $topik, $subTopik, $jumlahSoal, $chunkSize)
+    private function processSoalChunk($paketId, $mapel, $jenjang, $topik, $key, $subTopik, $jumlahSoal, $chunkSize)
     {
         $chunks = ceil($jumlahSoal / $chunkSize);
         
@@ -175,7 +175,7 @@ class PaketSoalSeeder extends Seeder
             
             for ($i = $startIndex; $i < $endIndex; $i++) {
                 // Generate template soal menggunakan fungsi asli yang kaya variasi
-                $template = $this->generateTemplateSoal($mapel, $jenjang, $topik, $subTopik);
+                $template = $this->generateTemplateSoal($mapel, $jenjang, $topik, $key, $subTopik);
 
                 // Create the soal
                 $this->createSoal($paketId, $template);
@@ -186,7 +186,7 @@ class PaketSoalSeeder extends Seeder
         }
     }
 
-    private function generateTemplateSoal($mapel, $jenjang, $topik, $subTopik)
+    private function generateTemplateSoal($mapel, $jenjang, $topik, $key, $subTopik)
     {
         // Template dasar untuk setiap jenis soal
         $template = [
@@ -199,52 +199,52 @@ class PaketSoalSeeder extends Seeder
         // Generate soal berdasarkan topik dan sub-topik
         switch ($mapel) {
             case 'Matematika':
-                $template = $this->generateSoalMatematika($jenjang, $topik, $subTopik);
+                $template = $this->generateSoalMatematika($jenjang, $topik, $key, $subTopik);
                 break;
             case 'Bahasa Indonesia':
-                $template = $this->generateSoalBahasaIndonesia($jenjang, $topik, $subTopik);
+                $template = $this->generateSoalBahasaIndonesia($jenjang, $topik, $key, $subTopik);
                 break;
             case 'IPA':
-                $template = $this->generateSoalIPA($jenjang, $topik, $subTopik);
+                $template = $this->generateSoalIPA($jenjang, $topik, $key, $subTopik);
                 break;
             case 'IPS':
-                $template = $this->generateSoalIPS($jenjang, $topik, $subTopik);
+                $template = $this->generateSoalIPS($jenjang, $topik, $key, $subTopik);
                 break;
             case 'Bahasa Inggris':
-                $template = $this->generateSoalBahasaInggris($jenjang, $topik, $subTopik);
+                $template = $this->generateSoalBahasaInggris($jenjang, $topik, $key, $subTopik);
                 break;
             case 'PKn':
-                $template = $this->generateSoalPKn($jenjang, $topik, $subTopik);
+                $template = $this->generateSoalPKn($jenjang, $topik, $key, $subTopik);
                 break;
             case 'Seni Budaya':
-                $template = $this->generateSoalSeniBudaya($jenjang, $topik, $subTopik);
+                $template = $this->generateSoalSeniBudaya($jenjang, $topik, $key, $subTopik);
                 break;
             case 'PJOK':
-                $template = $this->generateSoalPJOK($jenjang, $topik, $subTopik);
+                $template = $this->generateSoalPJOK($jenjang, $topik, $key, $subTopik);
                 break;
             case 'Fisika':
-                $template = $this->generateSoalFisika($jenjang, $topik, $subTopik);
+                $template = $this->generateSoalFisika($jenjang, $topik, $key, $subTopik);
                 break;
             case 'Kimia':
-                $template = $this->generateSoalKimia($jenjang, $topik, $subTopik);
+                $template = $this->generateSoalKimia($jenjang, $topik, $key, $subTopik);
                 break;
             case 'Biologi':
-                $template = $this->generateSoalBiologi($jenjang, $topik, $subTopik);
+                $template = $this->generateSoalBiologi($jenjang, $topik, $key, $subTopik);
                 break;
             case 'Sejarah':
-                $template = $this->generateSoalSejarah($jenjang, $topik, $subTopik);
+                $template = $this->generateSoalSejarah($jenjang, $topik, $key, $subTopik);
                 break;
             case 'Geografi':
-                $template = $this->generateSoalGeografi($jenjang, $topik, $subTopik);
+                $template = $this->generateSoalGeografi($jenjang, $topik, $key, $subTopik);
                 break;
             case 'Ekonomi':
-                $template = $this->generateSoalEkonomi($jenjang, $topik, $subTopik);
+                $template = $this->generateSoalEkonomi($jenjang, $topik, $key, $subTopik);
                 break;
             case 'Sosiologi':
-                $template = $this->generateSoalSosiologi($jenjang, $topik, $subTopik);
+                $template = $this->generateSoalSosiologi($jenjang, $topik, $key, $subTopik);
                 break;
             case 'Geometri':
-                if ($subTopik == 'Bangun Datar') {
+                if ($subTopik == 'Bangun Datar' ||$key == 'Bangun Datar') {
                     switch ($jenjang) {
                         case 'SMP':
                             $questions = [
@@ -277,7 +277,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Bangun Ruang') {
+                } elseif ($subTopik == 'Bangun Ruang' || $key == 'Bangun Ruang') {
                     switch ($jenjang) {
                         case 'SMP':
                             $questions = [
@@ -313,7 +313,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Kalkulus':
-                if ($subTopik == 'Limit') {
+                if ($subTopik == 'Limit' || $key == 'Limit') {
                     switch ($jenjang) {
                         case 'SMA':
                             $questions = [
@@ -357,7 +357,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Turunan') {
+                } elseif ($subTopik == 'Turunan' || $key == 'Turunan') {
                     switch ($jenjang) {
                         case 'SMA':
                             $questions = [
@@ -401,7 +401,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Integral') {
+                } elseif ($subTopik == 'Integral' || $key == 'Integral') {
                     switch ($jenjang) {
                         case 'SMA':
                             $questions = [
@@ -445,7 +445,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Aplikasi') {
+                } elseif ($subTopik == 'Aplikasi' || $key == 'Aplikasi' ) {
                     switch ($jenjang) {
                         case 'SMA':
                             $questions = [
@@ -527,7 +527,7 @@ class PaketSoalSeeder extends Seeder
         return $soalTemplates[array_rand($soalTemplates)];
     }
 
-    private function generateSoalMatematika($jenjang, $topik, $subTopik)
+    private function generateSoalMatematika($jenjang, $topik, $key, $subTopik)
     {
         $template = [
             'soal' => '',
@@ -538,7 +538,7 @@ class PaketSoalSeeder extends Seeder
 
         switch ($topik) {
             case 'Bilangan':
-                if ($subTopik == 'Operasi hitung bilangan cacah sampai 1000') {
+                if ($subTopik == 'Operasi hitung bilangan cacah sampai 1000' || $key == 'Operasi hitung bilangan cacah sampai 1000') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -604,7 +604,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Operasi hitung bilangan bulat dan sifat-sifatnya') {
+                } elseif ($subTopik == 'Operasi hitung bilangan bulat dan sifat-sifatnya' || $key == 'Operasi hitung bilangan bulat dan sifat-sifatnya') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -648,7 +648,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Pecahan sederhana dan operasi hitung pecahan') {
+                } elseif ($subTopik == 'Pecahan sederhana dan operasi hitung pecahan' || $key == 'Pecahan sederhana dan operasi hitung pecahan') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -692,7 +692,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Kelipatan Persekutuan Terkecil dan Faktor Persekutuan Terbesar') {
+                } elseif ($subTopik == 'Kelipatan Persekutuan Terkecil dan Faktor Persekutuan Terbesar' || $key == 'Kelipatan Persekutuan Terkecil dan Faktor Persekutuan Terbesar' ) {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -791,7 +791,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Bilangan desimal dan operasi hitungnya') {
+                } elseif ($subTopik == 'Bilangan desimal dan operasi hitungnya' || $key == 'Bilangan desimal dan operasi hitungnya') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -835,7 +835,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Bilangan Romawi dan konversinya') {
+                } elseif ($subTopik == 'Bilangan Romawi dan konversinya' || $key == 'Bilangan Romawi dan konversinya') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -879,7 +879,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Operasi hitung bilangan bulat dan sifat-sifatnya') {
+                } elseif ($subTopik == 'Operasi hitung bilangan bulat dan sifat-sifatnya' || $key == 'Operasi hitung bilangan bulat dan sifat-sifatnya') {
                     switch ($jenjang) {
                         case 'SMP':
                             $questions = [
@@ -912,7 +912,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Operasi hitung pecahan dan desimal') {
+                } elseif ($subTopik == 'Operasi hitung pecahan dan desimal' || $key == 'Operasi hitung pecahan dan desimal') {
                     switch ($jenjang) {
                         case 'SMP':
                             $questions = [
@@ -945,7 +945,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Bilangan berpangkat dan bentuk akar') {
+                } elseif ($subTopik == 'Bilangan berpangkat dan bentuk akar' || $key == 'Bilangan berpangkat dan bentuk akar') {
                     switch ($jenjang) {
                         case 'SMP':
                             $questions = [
@@ -978,7 +978,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Perbandingan senilai dan berbalik nilai') {
+                } elseif ($subTopik == 'Perbandingan senilai dan berbalik nilai' || $key == 'Perbandingan senilai dan berbalik nilai'   ) {
                     switch ($jenjang) {
                         case 'SMP':
                             $questions = [
@@ -1011,7 +1011,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Bilangan rasional dan irasional') {
+                } elseif ($subTopik == 'Bilangan rasional dan irasional' || $key == 'Bilangan rasional dan irasional') {
                     switch ($jenjang) {
                         case 'SMP':
                             $questions = [
@@ -1044,7 +1044,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Sistem bilangan real') {
+                } elseif ($subTopik == 'Sistem bilangan real' || $key == 'Sistem bilangan real') {
                     switch ($jenjang) {
                         case 'SMP':
                             $questions = [
@@ -1080,7 +1080,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Geometri':
-                if ($subTopik == 'Bangun Datar') {
+                if ($subTopik == 'Bangun Datar' || $key == 'Bangun Datar') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -1113,7 +1113,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Luas dan Keliling') {
+                } elseif ($subTopik == 'Luas dan Keliling' || $key == 'Luas dan Keliling') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -1212,7 +1212,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Simetri') {
+                } elseif ($subTopik == 'Simetri' || $key == 'Simetri'   ) {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -1311,7 +1311,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Bangun Ruang') {
+                } elseif ($subTopik == 'Bangun Ruang' || $key == 'Bangun Ruang') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -1410,7 +1410,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Volume') {
+                } elseif ($subTopik == 'Volume' || $key == 'Volume' ) {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -1512,7 +1512,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Pengukuran':
-                if ($subTopik == 'Satuan Luas') {
+                if ($subTopik == 'Satuan Luas' || $key == 'Satuan Luas') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -1545,7 +1545,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Satuan Volume') {
+                } elseif ($subTopik == 'Satuan Volume' || $key == 'Satuan Volume') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -1578,7 +1578,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Satuan Debit') {
+                } elseif ($subTopik == 'Satuan Debit' || $key == 'Satuan Debit') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -1633,7 +1633,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Satuan Panjang') {
+                } elseif ($subTopik == 'Satuan Panjang' || $key == 'Satuan Panjang') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -1688,7 +1688,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Satuan Berat') {
+                } elseif ($subTopik == 'Satuan Berat' || $key == 'Satuan Berat') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -1743,7 +1743,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Satuan Waktu') {
+                } elseif ($subTopik == 'Satuan Waktu' || $key == 'Satuan Waktu') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -1801,7 +1801,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Statistika':
-                if ($subTopik == 'Rata-rata') {
+                if ($subTopik == 'Rata-rata' || $key == 'Rata-rata') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -1900,7 +1900,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Modus') {
+                } elseif ($subTopik == 'Modus' || $key == 'Modus'   ) {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -1955,7 +1955,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Pengumpulan Data') {
+                } elseif ($subTopik == 'Pengumpulan Data' || $key == 'Pengumpulan Data') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -2010,7 +2010,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Diagram') {
+                } elseif ($subTopik == 'Diagram' || $key == 'Diagram') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -2068,7 +2068,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Geometri':
-                if ($subTopik == 'Bangun Datar') {
+                if ($subTopik == 'Bangun Datar' || $key == 'Bangun Datar') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -2101,7 +2101,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Luas dan Keliling') {
+                } elseif ($subTopik == 'Luas dan Keliling' || $key == 'Luas dan Keliling') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -2134,7 +2134,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Simetri') {
+                } elseif ($subTopik == 'Simetri' || $key == 'Simetri') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -2167,7 +2167,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Bangun Ruang') {
+                } elseif ($subTopik == 'Bangun Ruang' || $key == 'Bangun Ruang' ) {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -2200,7 +2200,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Volume') {
+                } elseif ($subTopik == 'Volume' || $key == 'Volume') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -2236,7 +2236,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Pengukuran':
-                if ($subTopik == 'Satuan Luas') {
+                if ($subTopik == 'Satuan Luas' || $key == 'Satuan Luas') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -2269,7 +2269,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Satuan Volume') {
+                } elseif ($subTopik == 'Satuan Volume' || $key == 'Satuan Volume') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -2302,7 +2302,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Satuan Debit') {
+                } elseif ($subTopik == 'Satuan Debit' || $key == 'Satuan Debit') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -2338,7 +2338,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Statistika':
-                if ($subTopik == 'Rata-rata') {
+                if ($subTopik == 'Rata-rata' || $key == 'Rata-rata') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -2371,7 +2371,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Modus') {
+                } elseif ($subTopik == 'Modus' || $key == 'Modus') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -2407,7 +2407,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Geometri':
-                if ($subTopik == 'Bangun Datar') {
+                if ($subTopik == 'Bangun Datar' || $key == 'Bangun Datar') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -2440,7 +2440,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Luas dan Keliling') {
+                } elseif ($subTopik == 'Luas dan Keliling' || $key == 'Luas dan Keliling'   ) {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -2473,7 +2473,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Simetri') {
+                } elseif ($subTopik == 'Simetri' || $key == 'Simetri') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -2506,7 +2506,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Bangun Ruang') {
+                } elseif ($subTopik == 'Bangun Ruang' || $key == 'Bangun Ruang') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -2539,7 +2539,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Volume') {
+                } elseif ($subTopik == 'Volume' || $key == 'Volume') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -2575,7 +2575,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Pengukuran':
-                if ($subTopik == 'Satuan Luas') {
+                if ($subTopik == 'Satuan Luas' || $key == 'Satuan Luas') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -2608,7 +2608,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Satuan Volume') {
+                } elseif ($subTopik == 'Satuan Volume' || $key == 'Satuan Volume') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -2641,7 +2641,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Satuan Debit') {
+                } elseif ($subTopik == 'Satuan Debit' || $key == 'Satuan Debit') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -2677,7 +2677,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Statistika':
-                if ($subTopik == 'Rata-rata') {
+                if ($subTopik == 'Rata-rata' || $key == 'Rata-rata') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -2710,7 +2710,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Modus') {
+                } elseif ($subTopik == 'Modus' || $key == 'Modus'   ) {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -2746,7 +2746,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Geometri':
-                if ($subTopik == 'Bangun Datar') {
+                if ($subTopik == 'Bangun Datar' || $key == 'Bangun Datar') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -2779,7 +2779,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Luas dan Keliling') {
+                } elseif ($subTopik == 'Luas dan Keliling' || $key == 'Luas dan Keliling') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -2812,7 +2812,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Simetri') {
+                } elseif ($subTopik == 'Simetri' || $key == 'Simetri') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -2845,7 +2845,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Bangun Ruang') {
+                } elseif ($subTopik == 'Bangun Ruang' || $key == 'Bangun Ruang') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -2878,7 +2878,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Volume') {
+                } elseif ($subTopik == 'Volume' || $key == 'Volume') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -2914,7 +2914,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Pengukuran':
-                if ($subTopik == 'Satuan Luas') {
+                if ($subTopik == 'Satuan Luas' || $key == 'Satuan Luas') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -2947,7 +2947,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Satuan Volume') {
+                } elseif ($subTopik == 'Satuan Volume' || $key == 'Satuan Volume') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -2980,7 +2980,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Satuan Debit') {
+                } elseif ($subTopik == 'Satuan Debit' || $key == 'Satuan Debit' ) {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -3016,7 +3016,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Statistika':
-                if ($subTopik == 'Rata-rata') {
+                if ($subTopik == 'Rata-rata' || $key == 'Rata-rata') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -3049,7 +3049,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Modus') {
+                } elseif ($subTopik == 'Modus' || $key == 'Modus') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -3100,7 +3100,7 @@ class PaketSoalSeeder extends Seeder
 
         switch ($topik) {
             case 'Membaca':
-                if ($subTopik == 'Membaca Nyaring') {
+                if ($subTopik == 'Membaca Nyaring' || $key == 'Membaca Nyaring') {
                     switch ($jenjang) {
                         case 'SD':
                             $soalVariasi = [
@@ -3139,7 +3139,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Membaca Pemahaman') {
+                } elseif ($subTopik == 'Membaca Pemahaman' || $key == 'Membaca Pemahaman') {
                     switch ($jenjang) {
                         case 'SD':
                             $teksVariasi = [
@@ -3232,7 +3232,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Membaca Cepat') {
+                } elseif ($subTopik == 'Membaca Cepat' || $key == 'Membaca Cepat'   ) {
                     switch ($jenjang) {
                         case 'SD':
                             $soalVariasi = [
@@ -3322,7 +3322,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Membaca Intensif') {
+                } elseif ($subTopik == 'Membaca Intensif' || $key == 'Membaca Intensif') {
                     switch ($jenjang) {
                         case 'SD':
                             $soalVariasi = [
@@ -3412,7 +3412,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Membaca Ekstensif') {
+                } elseif ($subTopik == 'Membaca Ekstensif' || $key == 'Membaca Ekstensif'   ) {
                     switch ($jenjang) {
                         case 'SD':
                             $soalVariasi = [
@@ -3505,7 +3505,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Menulis':
-                if ($subTopik == 'Menulis Karangan') {
+                if ($subTopik == 'Menulis Karangan' || $key == 'Menulis Karangan') {
                     switch ($jenjang) {
                         case 'SD':
                             $soalVariasi = [
@@ -3595,7 +3595,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Menulis Surat') {
+                } elseif ($subTopik == 'Menulis Surat' || $key == 'Menulis Surat'   ) {
                     switch ($jenjang) {
                         case 'SD':
                             $soalVariasi = [
@@ -3685,7 +3685,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Menulis Puisi') {
+                } elseif ($subTopik == 'Menulis Puisi' || $key == 'Menulis Puisi'   ) {
                     switch ($jenjang) {
                         case 'SD':
                             $soalVariasi = [
@@ -3775,7 +3775,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Menulis Cerita') {
+                } elseif ($subTopik == 'Menulis Cerita' || $key == 'Menulis Cerita'     ) {
                     switch ($jenjang) {
                         case 'SD':
                             $soalVariasi = [
@@ -3865,7 +3865,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Menulis Laporan') {
+                } elseif ($subTopik == 'Menulis Laporan' || $key == 'Menulis Laporan'   ) {
                     switch ($jenjang) {
                         case 'SD':
                             $soalVariasi = [
@@ -3900,7 +3900,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Berbicara':
-                if ($subTopik == 'Berbicara di Depan Kelas') {
+                if ($subTopik == 'Berbicara di Depan Kelas' || $key == 'Berbicara di Depan Kelas'   ) {
                     switch ($jenjang) {
                         case 'SD':
                             $soalVariasi = [
@@ -3932,7 +3932,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Berdiskusi') {
+                } elseif ($subTopik == 'Berdiskusi' || $key == 'Berdiskusi'   ) {
                     switch ($jenjang) {
                         case 'SD':
                             $soalVariasi = [
@@ -3964,7 +3964,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Bercerita') {
+                } elseif ($subTopik == 'Bercerita' || $key == 'Bercerita'   ) {
                     switch ($jenjang) {
                         case 'SD':
                             $soalVariasi = [
@@ -3996,7 +3996,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Berwawancara') {
+                } elseif ($subTopik == 'Berwawancara' || $key == 'Berwawancara'   ) {
                     switch ($jenjang) {
                         case 'SD':
                             $soalVariasi = [
@@ -4028,7 +4028,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Berpidato') {
+                } elseif ($subTopik == 'Berpidato' || $key == 'Berpidato'       ) {
                     switch ($jenjang) {
                         case 'SD':
                             $soalVariasi = [
@@ -4128,7 +4128,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Kebahasaan':
-                if ($subTopik == 'Kata Baku') {
+                if ($subTopik == 'Kata Baku' || $key == 'Kata Baku') {
                     switch ($jenjang) {
                         case 'SD':
                             $kataBakuVariasi = [
@@ -4225,7 +4225,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Ejaan') {
+                } elseif ($subTopik == 'Ejaan' || $key == 'Ejaan'       ) {
                     switch ($jenjang) {
                         case 'SD':
                             $soalVariasi = [
@@ -4322,7 +4322,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Tanda Baca') {
+                } elseif ($subTopik == 'Tanda Baca' || $key == 'Tanda Baca'     ) {
                     switch ($jenjang) {
                         case 'SD':
                             $soalVariasi = [
@@ -4419,7 +4419,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Kalimat') {
+                } elseif ($subTopik == 'Kalimat' || $key == 'Kalimat'     ) {
                     switch ($jenjang) {
                         case 'SD':
                             $soalVariasi = [
@@ -4516,7 +4516,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Paragraf') {
+                } elseif ($subTopik == 'Paragraf' || $key == 'Paragraf' ) {
                     switch ($jenjang) {
                         case 'SD':
                             $soalVariasi = [
@@ -4854,7 +4854,7 @@ class PaketSoalSeeder extends Seeder
         ];
     }
 
-    private function generateSoalIPA($jenjang, $topik, $subTopik)
+    private function generateSoalIPA($jenjang, $topik, $key, $subTopik)
     {
         $template = [
             'soal' => '',
@@ -4865,7 +4865,7 @@ class PaketSoalSeeder extends Seeder
 
         switch ($topik) {
             case 'Makhluk Hidup':
-                if ($subTopik == 'Ciri-ciri Makhluk Hidup') {
+                if ($subTopik == 'Ciri-ciri Makhluk Hidup' || $key == 'Ciri-ciri Makhluk Hidup') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Berikut ini yang merupakan ciri-ciri makhluk hidup adalah...";
@@ -4901,7 +4901,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Pertumbuhan') {
+                } elseif ($subTopik == 'Pertumbuhan' || $key == 'Pertumbuhan') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Berikut ini yang merupakan contoh pertumbuhan pada makhluk hidup adalah...";
@@ -4937,7 +4937,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Adaptasi') {
+                } elseif ($subTopik == 'Adaptasi' || $key == 'Adaptasi') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Berikut ini yang merupakan contoh adaptasi hewan adalah...";
@@ -4976,7 +4976,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Benda dan Sifatnya':
-                if ($subTopik == 'Sifat Benda') {
+                if ($subTopik == 'Sifat Benda' || $key == 'Sifat Benda') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Berikut ini yang merupakan sifat benda padat adalah...";
@@ -5012,7 +5012,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Perubahan Wujud') {
+                } elseif ($subTopik == 'Perubahan Wujud' || $key == 'Perubahan Wujud') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Perubahan wujud dari padat menjadi cair disebut...";
@@ -5048,7 +5048,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Energi') {
+                } elseif ($subTopik == 'Energi' || $key == 'Energi') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Berikut ini yang merupakan contoh energi gerak adalah...";
@@ -5087,7 +5087,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Bumi dan Alam Semesta':
-                if ($subTopik == 'Tata Surya') {
+                if ($subTopik == 'Tata Surya' || $key == 'Tata Surya'   ) {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Planet terbesar dalam tata surya adalah...";
@@ -5123,7 +5123,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Cuaca') {
+                } elseif ($subTopik == 'Cuaca' || $key == 'Cuaca') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Alat untuk mengukur suhu udara adalah...";
@@ -5159,7 +5159,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Bencana Alam') {
+                } elseif ($subTopik == 'Bencana Alam' || $key == 'Bencana Alam' ) {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Berikut ini yang merupakan cara penanggulangan banjir adalah...";
@@ -6157,7 +6157,7 @@ class PaketSoalSeeder extends Seeder
         ]);
     }
 
-    private function generateSoalIPS($jenjang, $topik, $subTopik)
+    private function generateSoalIPS($jenjang, $topik, $key, $subTopik)
     {
         $template = [
             'soal' => '',
@@ -6168,7 +6168,7 @@ class PaketSoalSeeder extends Seeder
 
         switch ($topik) {
             case 'Sejarah':
-                if ($subTopik == 'Perjuangan Kemerdekaan') {
+                if ($subTopik == 'Perjuangan Kemerdekaan' || $key == 'Perjuangan Kemerdekaan') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Siapa yang membacakan teks proklamasi kemerdekaan Indonesia?";
@@ -6204,7 +6204,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Peninggalan Sejarah') {
+                } elseif ($subTopik == 'Peninggalan Sejarah' || $key == 'Peninggalan Sejarah') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Candi Borobudur merupakan peninggalan sejarah dari kerajaan...";
@@ -6243,7 +6243,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Geografi':
-                if ($subTopik == 'Kenampakan Alam') {
+                if ($subTopik == 'Kenampakan Alam' || $key == 'Kenampakan Alam') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Berikut ini yang merupakan kenampakan alam daratan adalah...";
@@ -6279,7 +6279,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Peta') {
+                } elseif ($subTopik == 'Peta' || $key == 'Peta') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Simbol berwarna biru pada peta biasanya menunjukkan...";
@@ -6318,7 +6318,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Ekonomi':
-                if ($subTopik == 'Kegiatan Ekonomi') {
+                if ($subTopik == 'Kegiatan Ekonomi' || $key == 'Kegiatan Ekonomi') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Berikut ini yang merupakan contoh kegiatan produksi adalah...";
@@ -6354,7 +6354,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Uang') {
+                } elseif ($subTopik == 'Uang' || $key == 'Uang') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Berikut ini yang merupakan fungsi uang adalah...";
@@ -6393,7 +6393,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Sosiologi':
-                if ($subTopik == 'Norma') {
+                if ($subTopik == 'Norma' || $key == 'Norma') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Berikut ini yang merupakan contoh norma kesopanan adalah...";
@@ -6429,7 +6429,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Kebudayaan') {
+                } elseif ($subTopik == 'Kebudayaan' || $key == 'Kebudayaan' ) {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Berikut ini yang merupakan contoh kebudayaan adalah...";
@@ -7203,7 +7203,7 @@ class PaketSoalSeeder extends Seeder
         ];
     }
 
-    private function generateSoalBahasaInggris($jenjang, $topik, $subTopik)
+    private function generateSoalBahasaInggris($jenjang, $topik, $key, $subTopik)
     {
         $template = [
             'soal' => '',
@@ -7214,7 +7214,7 @@ class PaketSoalSeeder extends Seeder
 
         switch ($topik) {
             case 'Reading':
-                if ($subTopik == 'Reading Comprehension') {
+                if ($subTopik == 'Reading Comprehension' || $key == 'Reading Comprehension') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Read the text below!\n\nTom is a student. He goes to school every day. He likes to play football with his friends. His favorite color is blue.\n\nWhat does Tom like to do?";
@@ -7250,7 +7250,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Vocabulary') {
+                } elseif ($subTopik == 'Vocabulary' || $key == 'Vocabulary') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "The opposite of 'big' is...";
@@ -7289,7 +7289,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Writing':
-                if ($subTopik == 'Grammar') {
+                if ($subTopik == 'Grammar' || $key == 'Grammar') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Choose the correct sentence!";
@@ -7325,7 +7325,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Sentence Structure') {
+                } elseif ($subTopik == 'Sentence Structure' || $key == 'Sentence Structure') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Arrange these words into a good sentence!\n\n(1) book (2) is (3) reading (4) She (5) a";
@@ -7364,7 +7364,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Speaking':
-                if ($subTopik == 'Greeting') {
+                if ($subTopik == 'Greeting' || $key == 'Greeting') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "What do you say when you meet someone in the morning?";
@@ -7400,7 +7400,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Introduction') {
+                } elseif ($subTopik == 'Introduction' || $key == 'Introduction') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "What do you say when you want to introduce yourself?";
@@ -7439,7 +7439,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Listening':
-                if ($subTopik == 'Numbers') {
+                if ($subTopik == 'Numbers' || $key == 'Numbers') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Listen to the number and choose the correct answer!\n\n(Number: 15)";
@@ -7475,7 +7475,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Colors') {
+                } elseif ($subTopik == 'Colors' || $key == 'Colors'         ) {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Listen to the color and choose the correct answer!\n\n(Color: Red)";
@@ -7518,7 +7518,7 @@ class PaketSoalSeeder extends Seeder
         return $template;
     }
 
-    private function generateSoalPKn($jenjang, $topik, $subTopik)
+    private function generateSoalPKn($jenjang, $topik, $key, $subTopik)
     {
         $template = [
             'soal' => '',
@@ -7529,7 +7529,7 @@ class PaketSoalSeeder extends Seeder
 
         switch ($topik) {
             case 'Pancasila':
-                if ($subTopik == 'Sila Pancasila') {
+                if ($subTopik == 'Sila Pancasila' || $key == 'Sila Pancasila') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Sila Pancasila yang berbunyi 'Kemanusiaan yang Adil dan Beradab' adalah sila ke...";
@@ -7565,7 +7565,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Lambang Pancasila') {
+                } elseif ($subTopik == 'Lambang Pancasila' || $key == 'Lambang Pancasila') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Lambang sila pertama Pancasila adalah...";
@@ -7604,7 +7604,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'UUD 1945':
-                if ($subTopik == 'Pembukaan') {
+                if ($subTopik == 'Pembukaan' || $key == 'Pembukaan') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Pembukaan UUD 1945 terdiri dari... alinea";
@@ -7640,7 +7640,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Batang Tubuh') {
+                } elseif ($subTopik == 'Batang Tubuh' || $key == 'Batang Tubuh') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Batang tubuh UUD 1945 terdiri dari... bab";
@@ -7679,7 +7679,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'NKRI':
-                if ($subTopik == 'Lambang Negara') {
+                if ($subTopik == 'Lambang Negara' || $key == 'Lambang Negara') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Lambang negara Indonesia adalah...";
@@ -7715,7 +7715,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Bendera') {
+                } elseif ($subTopik == 'Bendera' || $key == 'Bendera'       ) {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Bendera negara Indonesia berwarna...";
@@ -7754,7 +7754,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Pemerintahan':
-                if ($subTopik == 'Lembaga Negara') {
+                if ($subTopik == 'Lembaga Negara' || $key == 'Lembaga Negara') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Lembaga negara yang memegang kekuasaan membentuk undang-undang adalah...";
@@ -7790,7 +7790,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Pemilu') {
+                } elseif ($subTopik == 'Pemilu' || $key == 'Pemilu') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Pemilu dilaksanakan setiap... tahun sekali";
@@ -7833,7 +7833,7 @@ class PaketSoalSeeder extends Seeder
         return $template;
     }
 
-    private function generateSoalSeniBudaya($jenjang, $topik, $subTopik)
+    private function generateSoalSeniBudaya($jenjang, $topik, $key, $subTopik)
     {
         $template = [
             'soal' => '',
@@ -7844,7 +7844,7 @@ class PaketSoalSeeder extends Seeder
 
         switch ($topik) {
             case 'Seni Rupa':
-                if ($subTopik == 'Unsur Seni Rupa') {
+                if ($subTopik == 'Unsur Seni Rupa' || $key == 'Unsur Seni Rupa') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Berikut ini yang merupakan unsur seni rupa adalah...";
@@ -7858,7 +7858,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Teknik Menggambar') {
+                } elseif ($subTopik == 'Teknik Menggambar' || $key == 'Teknik Menggambar') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Teknik menggambar dengan cara menorehkan pensil secara berulang-ulang disebut...";
@@ -7875,7 +7875,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Seni Musik':
-                if ($subTopik == 'Alat Musik') {
+                if ($subTopik == 'Alat Musik' || $key == 'Alat Musik') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Berikut ini yang merupakan alat musik tiup adalah...";
@@ -7889,7 +7889,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Notasi') {
+                } elseif ($subTopik == 'Notasi' || $key == 'Notasi') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Notasi yang berbunyi 'do' ditulis dengan huruf...";
@@ -7906,7 +7906,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Seni Tari':
-                if ($subTopik == 'Gerak Tari') {
+                if ($subTopik == 'Gerak Tari' || $key == 'Gerak Tari') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Gerakan mengangkat tangan ke atas termasuk gerak tari...";
@@ -7920,7 +7920,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Tari Daerah') {
+                } elseif ($subTopik == 'Tari Daerah' || $key == 'Tari Daerah') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Tari Saman berasal dari provinsi...";
@@ -7937,7 +7937,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Seni Teater':
-                if ($subTopik == 'Unsur Teater') {
+                if ($subTopik == 'Unsur Teater' || $key == 'Unsur Teater') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Berikut ini yang merupakan unsur teater adalah...";
@@ -7951,7 +7951,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Drama') {
+                } elseif ($subTopik == 'Drama' || $key == 'Drama') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Orang yang memerankan tokoh dalam drama disebut...";
@@ -7972,7 +7972,7 @@ class PaketSoalSeeder extends Seeder
         return $template;
     }
 
-    private function generateSoalPJOK($jenjang, $topik, $subTopik)
+    private function generateSoalPJOK($jenjang, $topik, $key, $subTopik)
     {
         $template = [
             'soal' => '',
@@ -7983,7 +7983,7 @@ class PaketSoalSeeder extends Seeder
 
         switch ($topik) {
             case 'Olahraga':
-                if ($subTopik == 'Sepak Bola') {
+                if ($subTopik == 'Sepak Bola' || $key == 'Sepak Bola') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Dalam permainan sepak bola, jumlah pemain dalam satu tim adalah...";
@@ -7997,7 +7997,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Basket') {
+                } elseif ($subTopik == 'Basket' || $key == 'Basket') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Dalam permainan basket, jumlah pemain dalam satu tim adalah...";
@@ -8014,7 +8014,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Kesehatan':
-                if ($subTopik == 'Makanan Sehat') {
+                if ($subTopik == 'Makanan Sehat' || $key == 'Makanan Sehat') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Berikut ini yang merupakan contoh makanan sehat adalah...";
@@ -8028,7 +8028,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Kebersihan') {
+                } elseif ($subTopik == 'Kebersihan' || $key == 'Kebersihan') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Berikut ini yang merupakan cara menjaga kebersihan adalah...";
@@ -8045,7 +8045,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Kebugaran':
-                if ($subTopik == 'Senam') {
+                if ($subTopik == 'Senam' || $key == 'Senam') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Berikut ini yang merupakan gerakan senam lantai adalah...";
@@ -8059,7 +8059,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Pemanasan') {
+                } elseif ($subTopik == 'Pemanasan' || $key == 'Pemanasan') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Berikut ini yang merupakan gerakan pemanasan adalah...";
@@ -8076,7 +8076,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Renang':
-                if ($subTopik == 'Gaya Renang') {
+                if ($subTopik == 'Gaya Renang' || $key == 'Gaya Renang') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Berikut ini yang merupakan gaya renang adalah...";
@@ -8090,7 +8090,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Perlengkapan') {
+                } elseif ($subTopik == 'Perlengkapan' || $key == 'Perlengkapan') {
                     switch ($jenjang) {
                         case 'SD':
                             $template['soal'] = "Berikut ini yang merupakan perlengkapan renang adalah...";
@@ -8111,7 +8111,7 @@ class PaketSoalSeeder extends Seeder
         return $template;
     }
 
-    private function generateSoalEkonomi($jenjang, $topik, $subTopik)
+    private function generateSoalEkonomi($jenjang, $topik, $key, $subTopik)
     {
         $template = [
             'soal' => '',
@@ -8122,7 +8122,7 @@ class PaketSoalSeeder extends Seeder
 
         switch ($topik) {
             case 'Konsep':
-                if ($subTopik == 'Konsep dasar ilmu ekonomi') {
+                if ($subTopik == 'Konsep dasar ilmu ekonomi' || $key == 'Konsep dasar ilmu ekonomi') {
                     switch ($jenjang) {
                         case 'SMA':
                             $template['soal'] = "Ilmu ekonomi yang mempelajari perilaku ekonomi secara keseluruhan disebut...";
@@ -8139,7 +8139,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Pasar':
-                if ($subTopik == 'Pasar dan harga') {
+                if ($subTopik == 'Pasar dan harga' || $key == 'Pasar dan harga') {
                     switch ($jenjang) {
                         case 'SMA':
                             $template['soal'] = "Pasar yang memperjualbelikan surat berharga disebut...";
@@ -8156,7 +8156,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Kebijakan':
-                if ($subTopik == 'Kebijakan moneter dan fiskal') {
+                if ($subTopik == 'Kebijakan moneter dan fiskal' || $key == 'Kebijakan moneter dan fiskal') {
                     switch ($jenjang) {
                         case 'SMA':
                             $template['soal'] = "Kebijakan moneter yang dilakukan dengan menjual SBI disebut...";
@@ -8177,7 +8177,7 @@ class PaketSoalSeeder extends Seeder
         return $template;
     }
 
-    private function generateSoalSosiologi($jenjang, $topik, $subTopik)
+    private function generateSoalSosiologi($jenjang, $topik, $key, $subTopik)
     {
         $template = [
             'soal' => '',
@@ -8188,7 +8188,7 @@ class PaketSoalSeeder extends Seeder
 
         switch ($topik) {
             case 'Struktur':
-                if ($subTopik == 'Struktur sosial dan diferensiasi') {
+                if ($subTopik == 'Struktur sosial dan diferensiasi' || $key == 'Struktur sosial dan diferensiasi') {
                     switch ($jenjang) {
                         case 'SMA':
                             $template['soal'] = "Pengelompokan masyarakat berdasarkan profesi disebut...";
@@ -8205,7 +8205,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Konflik':
-                if ($subTopik == 'Konflik dan integrasi sosial') {
+                if ($subTopik == 'Konflik dan integrasi sosial' || $key == 'Konflik dan integrasi sosial') {
                     switch ($jenjang) {
                         case 'SMA':
                             $template['soal'] = "Konflik yang terjadi antar kelompok disebut...";
@@ -8222,7 +8222,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Perubahan':
-                if ($subTopik == 'Perubahan sosial dan modernisasi') {
+                if ($subTopik == 'Perubahan sosial dan modernisasi' || $key == 'Perubahan sosial dan modernisasi') {
                     switch ($jenjang) {
                         case 'SMA':
                             $template['soal'] = "Perubahan sosial yang terjadi secara cepat disebut...";
@@ -8243,7 +8243,7 @@ class PaketSoalSeeder extends Seeder
         return $template;
     }
 
-    private function generateSoalFisika($jenjang, $topik, $subTopik)
+    private function generateSoalFisika($jenjang, $topik, $key, $subTopik)
     {
         $template = [
             'soal' => '',
@@ -8254,7 +8254,7 @@ class PaketSoalSeeder extends Seeder
 
         switch ($topik) {
             case 'Mekanika':
-                if ($subTopik == 'Kinematika') {
+                if ($subTopik == 'Kinematika' || $key == 'Kinematika') {
                     switch ($jenjang) {
                         case 'SMA':
                             $questions = [
@@ -8298,7 +8298,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Dinamika') {
+                } elseif ($subTopik == 'Dinamika' || $key == 'Dinamika') {
                     switch ($jenjang) {
                         case 'SMA':
                             $questions = [
@@ -8342,7 +8342,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Energi') {
+                } elseif ($subTopik == 'Energi' || $key == 'Energi') {
                     switch ($jenjang) {
                         case 'SMA':
                             $questions = [
@@ -8386,7 +8386,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Momentum') {
+                } elseif ($subTopik == 'Momentum' || $key == 'Momentum') {
                     switch ($jenjang) {
                         case 'SMA':
                             $questions = [
@@ -8430,7 +8430,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Tumbukan') {
+                } elseif ($subTopik == 'Tumbukan' || $key == 'Tumbukan') {
                     switch ($jenjang) {
                         case 'SMA':
                             $questions = [
@@ -8463,7 +8463,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Gerak Melingkar') {
+                } elseif ($subTopik == 'Gerak Melingkar' || $key == 'Gerak Melingkar') {
                     switch ($jenjang) {
                         case 'SMA':
                             $questions = [
@@ -8496,7 +8496,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Gravitasi') {
+                } elseif ($subTopik == 'Gravitasi' || $key == 'Gravitasi') {
                     switch ($jenjang) {
                         case 'SMA':
                             $questions = [
@@ -8529,7 +8529,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Usaha') {
+                } elseif ($subTopik == 'Usaha' || $key == 'Usaha') {
                     switch ($jenjang) {
                         case 'SMA':
                             $questions = [
@@ -8565,7 +8565,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Fluida':
-                if ($subTopik == 'Tekanan') {
+                if ($subTopik == 'Tekanan' || $key == 'Tekanan' ) {
                     switch ($jenjang) {
                         case 'SMA':
                             $questions = [
@@ -8598,7 +8598,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Hukum Pascal') {
+                } elseif ($subTopik == 'Hukum Pascal' || $key == 'Hukum Pascal') {
                     switch ($jenjang) {
                         case 'SMA':
                             $template['soal'] = "Hukum Pascal menyatakan bahwa...";
@@ -8612,7 +8612,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Hukum Archimedes') {
+                } elseif ($subTopik == 'Hukum Archimedes' || $key == 'Hukum Archimedes') {
                     switch ($jenjang) {
                         case 'SMA':
                             $template['soal'] = "Hukum Archimedes menyatakan bahwa...";
@@ -8629,7 +8629,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Termodinamika':
-                if ($subTopik == 'Suhu') {
+                if ($subTopik == 'Suhu' || $key == 'Suhu') {
                     switch ($jenjang) {
                         case 'SMA':
                             $questions = [
@@ -8662,7 +8662,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Hukum Termodinamika') {
+                } elseif ($subTopik == 'Hukum Termodinamika' || $key == 'Hukum Termodinamika') {
                     switch ($jenjang) {
                         case 'SMA':
                             $questions = [
@@ -8698,7 +8698,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Gelombang':
-                if ($subTopik == 'Gelombang Mekanik') {
+                if ($subTopik == 'Gelombang Mekanik' || $key == 'Gelombang Mekanik') {
                     switch ($jenjang) {
                         case 'SMA':
                             $questions = [
@@ -8734,7 +8734,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Listrik':
-                if ($subTopik == 'Arus Listrik') {
+                if ($subTopik == 'Arus Listrik' || $key == 'Arus Listrik') {
                     switch ($jenjang) {
                         case 'SMA':
                             $template['soal'] = "Satuan SI untuk kuat arus listrik adalah...";
@@ -8748,7 +8748,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Tegangan') {
+                } elseif ($subTopik == 'Tegangan' || $key == 'Tegangan') {
                     switch ($jenjang) {
                         case 'SMA':
                             $template['soal'] = "Satuan SI untuk tegangan listrik adalah...";
@@ -8762,7 +8762,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Hambatan') {
+                } elseif ($subTopik == 'Hambatan' || $key == 'Hambatan') {
                     switch ($jenjang) {
                         case 'SMA':
                             $questions = [
@@ -8798,7 +8798,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Fisika Modern':
-                if ($subTopik == 'Relativitas') {
+                if ($subTopik == 'Relativitas' || $key == 'Relativitas') {
                     switch ($jenjang) {
                         case 'SMA':
                             $template['soal'] = "Teori relativitas Einstein menyatakan bahwa...";
@@ -8812,7 +8812,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Foton') {
+                } elseif ($subTopik == 'Foton' || $key == 'Foton'   ) {
                     switch ($jenjang) {
                         case 'SMA':
                             $template['soal'] = "Rumus untuk menghitung energi foton adalah...";
@@ -8833,7 +8833,7 @@ class PaketSoalSeeder extends Seeder
         return $template;
     }
 
-    private function generateSoalKimia($jenjang, $topik, $subTopik)
+    private function generateSoalKimia($jenjang, $topik, $key, $subTopik)
     {
         $template = [
             'soal' => '',
@@ -8844,7 +8844,7 @@ class PaketSoalSeeder extends Seeder
 
         switch ($topik) {
             case 'Struktur Atom':
-                if ($subTopik == 'Konfigurasi Elektron') {
+                if ($subTopik == 'Konfigurasi Elektron' || $key == 'Konfigurasi Elektron') {
                     switch ($jenjang) {
                         case 'SMA':
                             $variasi = rand(1, 5);
@@ -8907,7 +8907,7 @@ class PaketSoalSeeder extends Seeder
                             }
                             break;
                     }
-                } elseif ($subTopik == 'Sistem Periodik') {
+                } elseif ($subTopik == 'Sistem Periodik' || $key == 'Sistem Periodik') {
                     switch ($jenjang) {
                         case 'SMA':
                             $variasi = rand(1, 5);
@@ -8970,7 +8970,7 @@ class PaketSoalSeeder extends Seeder
                             }
                             break;
                     }
-                } elseif ($subTopik == 'Ikatan Kimia') {
+                } elseif ($subTopik == 'Ikatan Kimia' || $key == 'Ikatan Kimia') {
                     switch ($jenjang) {
                         case 'SMA':
                             $variasi = rand(1, 5);
@@ -9036,7 +9036,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Reaksi Kimia':
-                if ($subTopik == 'Persamaan Reaksi') {
+                if ($subTopik == 'Persamaan Reaksi' || $key == 'Persamaan Reaksi'   ) {
                     switch ($jenjang) {
                         case 'SMA':
                             $variasi = rand(1, 5);
@@ -9099,7 +9099,7 @@ class PaketSoalSeeder extends Seeder
                             }
                             break;
                     }
-                } elseif ($subTopik == 'Stoikiometri') {
+                } elseif ($subTopik == 'Stoikiometri' || $key == 'Stoikiometri') {
                     switch ($jenjang) {
                         case 'SMA':
                             $variasi = rand(1, 5);
@@ -9162,7 +9162,7 @@ class PaketSoalSeeder extends Seeder
                             }
                             break;
                     }
-                } elseif ($subTopik == 'Laju Reaksi') {
+                } elseif ($subTopik == 'Laju Reaksi' || $key == 'Laju Reaksi') {
                     switch ($jenjang) {
                         case 'SMA':
                             $variasi = rand(1, 5);
@@ -9228,7 +9228,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Larutan':
-                if ($subTopik == 'Konsentrasi Larutan') {
+                if ($subTopik == 'Konsentrasi Larutan' || $key == 'Konsentrasi Larutan') {
                     switch ($jenjang) {
                         case 'SMA':
                             $variasi = rand(1, 5);
@@ -9291,7 +9291,7 @@ class PaketSoalSeeder extends Seeder
                             }
                             break;
                     }
-                } elseif ($subTopik == 'Asam Basa') {
+                } elseif ($subTopik == 'Asam Basa' || $key == 'Asam Basa'   ) {
                     switch ($jenjang) {
                         case 'SMA':
                             $variasi = rand(1, 5);
@@ -9361,7 +9361,7 @@ class PaketSoalSeeder extends Seeder
         return $template;
     }
 
-    private function generateSoalBiologi($jenjang, $topik, $subTopik)
+    private function generateSoalBiologi($jenjang, $topik, $key, $subTopik)
     {
         $template = [
             'soal' => '',
@@ -9372,7 +9372,7 @@ class PaketSoalSeeder extends Seeder
 
         switch ($topik) {
             case 'Sel':
-                if ($subTopik == 'Struktur dan fungsi sel') {
+                if ($subTopik == 'Struktur dan fungsi sel' || $key == 'Struktur dan fungsi sel') {
                     switch ($jenjang) {
                         case 'SMA':
                             $variasi = rand(1, 5);
@@ -9435,7 +9435,7 @@ class PaketSoalSeeder extends Seeder
                             }
                             break;
                     }
-                } elseif ($subTopik == 'Pembelahan sel') {
+                } elseif ($subTopik == 'Pembelahan sel' || $key == 'Pembelahan sel') {
                     switch ($jenjang) {
                         case 'SMA':
                             $variasi = rand(1, 5);
@@ -9498,7 +9498,7 @@ class PaketSoalSeeder extends Seeder
                             }
                             break;
                     }
-                } elseif ($subTopik == 'Transportasi sel') {
+                } elseif ($subTopik == 'Transportasi sel' || $key == 'Transportasi sel') {
                     switch ($jenjang) {
                         case 'SMA':
                             $variasi = rand(1, 5);
@@ -9564,7 +9564,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Metabolisme':
-                if ($subTopik == 'Fotosintesis') {
+                if ($subTopik == 'Fotosintesis' || $key == 'Fotosintesis'   ) {
                     switch ($jenjang) {
                         case 'SMA':
                             $variasi = rand(1, 5);
@@ -9627,7 +9627,7 @@ class PaketSoalSeeder extends Seeder
                             }
                             break;
                     }
-                } elseif ($subTopik == 'Respirasi') {
+                } elseif ($subTopik == 'Respirasi' || $key == 'Respirasi') {
                     switch ($jenjang) {
                         case 'SMA':
                             $variasi = rand(1, 5);
@@ -9690,7 +9690,7 @@ class PaketSoalSeeder extends Seeder
                             }
                             break;
                     }
-                } elseif ($subTopik == 'Enzim') {
+                } elseif ($subTopik == 'Enzim' || $key == 'Enzim') {
                     switch ($jenjang) {
                         case 'SMA':
                             $variasi = rand(1, 5);
@@ -9756,7 +9756,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Genetika':
-                if ($subTopik == 'Hukum Mendel') {
+                if ($subTopik == 'Hukum Mendel' || $key == 'Hukum Mendel') {
                     switch ($jenjang) {
                         case 'SMA':
                             $variasi = rand(1, 5);
@@ -9819,7 +9819,7 @@ class PaketSoalSeeder extends Seeder
                             }
                             break;
                     }
-                } elseif ($subTopik == 'DNA dan RNA') {
+                } elseif ($subTopik == 'DNA dan RNA' || $key == 'DNA dan RNA'   ) {
                     switch ($jenjang) {
                         case 'SMA':
                             $variasi = rand(1, 5);
@@ -9885,7 +9885,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Evolusi':
-                if ($subTopik == 'Teori Evolusi') {
+                if ($subTopik == 'Teori Evolusi' || $key == 'Teori Evolusi') {
                     switch ($jenjang) {
                         case 'SMA':
                             $variasi = rand(1, 5);
@@ -9948,7 +9948,7 @@ class PaketSoalSeeder extends Seeder
                             }
                             break;
                     }
-                } elseif ($subTopik == 'Adaptasi') {
+                } elseif ($subTopik == 'Adaptasi' || $key == 'Adaptasi') {
                     switch ($jenjang) {
                         case 'SMA':
                             $variasi = rand(1, 5);
@@ -10018,7 +10018,7 @@ class PaketSoalSeeder extends Seeder
         return $template;
     }
 
-    private function generateSoalSejarah($jenjang, $topik, $subTopik)
+    private function generateSoalSejarah($jenjang, $topik, $key, $subTopik)
     {
         $template = [
             'soal' => '',
@@ -10029,7 +10029,7 @@ class PaketSoalSeeder extends Seeder
 
         switch ($topik) {
             case 'Peradaban':
-                if ($subTopik == 'Peradaban awal dunia') {
+                if ($subTopik == 'Peradaban awal dunia' || $key == 'Peradaban awal dunia') {
                     switch ($jenjang) {
                         case 'SMA':
                             $template['soal'] = "Peradaban Mesopotamia berkembang di antara sungai...";
@@ -10043,7 +10043,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Peradaban kuno') {
+                } elseif ($subTopik == 'Peradaban kuno' || $key == 'Peradaban kuno') {
                     switch ($jenjang) {
                         case 'SMA':
                             $template['soal'] = "Peradaban kuno yang terkenal dengan piramidanya adalah...";
@@ -10060,7 +10060,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Kolonialisme':
-                if ($subTopik == 'Kolonialisme dan imperialisme') {
+                if ($subTopik == 'Kolonialisme dan imperialisme' || $key == 'Kolonialisme dan imperialisme') {
                     switch ($jenjang) {
                         case 'SMA':
                             $template['soal'] = "VOC dibubarkan pada tahun...";
@@ -10074,7 +10074,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Perlawanan') {
+                } elseif ($subTopik == 'Perlawanan' || $key == 'Perlawanan') {
                     switch ($jenjang) {
                         case 'SMA':
                             $template['soal'] = "Perang Diponegoro terjadi pada tahun...";
@@ -10095,7 +10095,7 @@ class PaketSoalSeeder extends Seeder
         return $template;
     }
 
-    private function generateSoalGeografi($jenjang, $topik, $subTopik)
+    private function generateSoalGeografi($jenjang, $topik, $key, $subTopik)
     {
         $template = [
             'soal' => '',
@@ -10106,7 +10106,7 @@ class PaketSoalSeeder extends Seeder
 
         switch ($topik) {
             case 'Litosfer':
-                if ($subTopik == 'Litosfer dan pedosfer') {
+                if ($subTopik == 'Litosfer dan pedosfer' || $key == 'Litosfer dan pedosfer') {
                     switch ($jenjang) {
                         case 'SMA':
                             $template['soal'] = "Batuan yang terbentuk dari proses pendinginan magma disebut...";
@@ -10120,7 +10120,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Tenaga endogen') {
+                } elseif ($subTopik == 'Tenaga endogen' || $key == 'Tenaga endogen') {
                     switch ($jenjang) {
                         case 'SMA':
                             $template['soal'] = "Tenaga yang berasal dari dalam bumi disebut...";
@@ -10137,7 +10137,7 @@ class PaketSoalSeeder extends Seeder
                 }
                 break;
             case 'Atmosfer':
-                if ($subTopik == 'Atmosfer dan hidrosfer') {
+                if ($subTopik == 'Atmosfer dan hidrosfer' || $key == 'Atmosfer dan hidrosfer') {
                     switch ($jenjang) {
                         case 'SMA':
                             $template['soal'] = "Lapisan atmosfer yang mengandung ozon adalah...";
@@ -10151,7 +10151,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = 'a';
                             break;
                     }
-                } elseif ($subTopik == 'Cuaca dan iklim') {
+                } elseif ($subTopik == 'Cuaca dan iklim' || $key == 'Cuaca dan iklim'  ) {
                     switch ($jenjang) {
                         case 'SMA':
                             $template['soal'] = "Alat untuk mengukur kelembaban udara adalah...";
