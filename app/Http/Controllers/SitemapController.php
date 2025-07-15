@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\news;
 use App\Models\Materi;
-use App\Models\Soal;
+use App\Models\soal;
 use App\Models\BlogPost;
 use App\Models\BlogCategory;
 use Carbon\Carbon;
@@ -270,7 +270,7 @@ class SitemapController extends Controller
         $baseUrl = config('app.url');
         
         // Ambil semua soal yang aktif
-        $soal = Soal::where('is_deleted', 0)->get();
+        $soal = soal::where('is_deleted', 0)->get();
         
         foreach ($soal as $item) {
             $urls[] = [
