@@ -59,7 +59,7 @@
         <div class="floating-orb"></div>
         <div class="floating-orb"></div>
         <div class="floating-orb"></div>
-        <div class="glass-overlay"></div>
+        {{-- <div class="glass-overlay"></div> --}}
     </section>
 
     <!-- Prestasi Section -->
