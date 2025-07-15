@@ -35,6 +35,21 @@
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            important: true,
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
@@ -46,6 +61,55 @@
     
     <!-- Custom CSS -->
     <style>
+        /* Reset Tailwind untuk menghindari konflik dengan Bootstrap */
+        .container {
+            max-width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+        
+        @media (min-width: 640px) {
+            .container {
+                max-width: 640px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .container {
+                max-width: 768px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 1024px;
+            }
+        }
+        
+        @media (min-width: 1280px) {
+            .container {
+                max-width: 1280px;
+            }
+        }
+        
+        /* Override Bootstrap untuk blog pages */
+        .blog-page .container {
+            max-width: 100%;
+        }
+        
+        .blog-page .row {
+            margin-left: 0;
+            margin-right: 0;
+        }
+        
+        .blog-page .col,
+        .blog-page .col-md,
+        .blog-page .col-lg {
+            padding-left: 0;
+            padding-right: 0;
+        }
 
         
         /* Floating Orbs */

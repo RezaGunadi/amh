@@ -41,6 +41,29 @@ class NewsController extends Controller
 
         // Get paginated results
         $articles = $query->orderBy('created_at', 'desc')->paginate(10);
+        
+        // Convert articles to array format with slug
+        $articlesArray = $articles->getCollection()->map(function($article) {
+            return [
+                'id' => $article->id,
+                'title' => $article->title,
+                'slug' => $article->slug,
+                'category' => $article->category,
+                'description' => $article->description,
+                'author' => $article->created_by,
+                'time' => $article->created_at->diffForHumans(),
+                'image' => 'tips-ptn.svg' // Default image
+            ];
+        });
+        
+        // Create new paginator with array data
+        $articles = new \Illuminate\Pagination\LengthAwarePaginator(
+            $articlesArray,
+            $articles->total(),
+            $articles->perPage(),
+            $articles->currentPage(),
+            ['path' => request()->url()]
+        );
 
         // Get featured article (first article with is_home = 1)
         $featuredArticle = news::where('is_deleted', 0)
@@ -54,6 +77,7 @@ class NewsController extends Controller
             $featuredArticleArray = [
                 'id' => $featuredArticle->id,
                 'title' => $featuredArticle->title,
+                'slug' => $featuredArticle->slug,
                 'category' => $featuredArticle->category,
                 'description' => $featuredArticle->description,
                 'author' => $featuredArticle->created_by,

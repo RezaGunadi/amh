@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('content')
+<div class="blog-page">
+
 @section('title', $post->title . ' - Kelas Privat')
 
 @section('meta')
@@ -236,6 +239,7 @@
             @endif
         </div>
     </div>
+</div>
 </div>
 
 <style>

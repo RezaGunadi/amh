@@ -37,6 +37,13 @@ class ScraperController extends Controller
      */
     public function scrape(Request $request)
     {
+        // Debug: Log the request
+        \Log::info('Scraper request received', [
+            'method' => $request->method(),
+            'url' => $request->url(),
+            'all' => $request->all()
+        ]);
+
         $request->validate([
             'limit' => 'integer|min:1|max:50',
             'save' => 'boolean'

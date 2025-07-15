@@ -538,7 +538,7 @@ class PaketSoalSeeder extends Seeder
 
         switch ($topik) {
             case 'Bilangan':
-                if ($subTopik == 'Operasi hitung bilangan cacah sampai 1000' || $key == 'Operasi hitung bilangan cacah sampai 1000') {
+                if ($subTopik == 'Bilangan Cacah' || $key == 'Bilangan Cacah') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -604,7 +604,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Operasi hitung bilangan bulat dan sifat-sifatnya' || $key == 'Operasi hitung bilangan bulat dan sifat-sifatnya') {
+                } elseif ($subTopik == 'Bilangan Bulat' || $key == 'Bilangan Bulat') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -648,7 +648,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Pecahan sederhana dan operasi hitung pecahan' || $key == 'Pecahan sederhana dan operasi hitung pecahan') {
+                } elseif ($subTopik == 'Pecahan' || $key == 'Pecahan') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -692,7 +692,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Kelipatan Persekutuan Terkecil dan Faktor Persekutuan Terbesar' || $key == 'Kelipatan Persekutuan Terkecil dan Faktor Persekutuan Terbesar' ) {
+                } elseif ($subTopik == 'KPK dan FPB' || $key == 'KPK dan FPB') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -791,7 +791,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Bilangan desimal dan operasi hitungnya' || $key == 'Bilangan desimal dan operasi hitungnya') {
+                } elseif ($subTopik == 'Bilangan Desimal' || $key == 'Bilangan Desimal' ) {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -835,7 +835,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Bilangan Romawi dan konversinya' || $key == 'Bilangan Romawi dan konversinya') {
+                } elseif ($subTopik == 'Bilangan Romawi' || $key == 'Bilangan Romawi') {
                     switch ($jenjang) {
                         case 'SD':
                             $questions = [
@@ -879,7 +879,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Operasi hitung bilangan bulat dan sifat-sifatnya' || $key == 'Operasi hitung bilangan bulat dan sifat-sifatnya') {
+                } elseif ($subTopik == 'Bilangan Bulat' || $key == 'Bilangan Bulat') {
                     switch ($jenjang) {
                         case 'SMP':
                             $questions = [
@@ -912,7 +912,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Operasi hitung pecahan dan desimal' || $key == 'Operasi hitung pecahan dan desimal') {
+                } elseif ($subTopik == 'Bilangan Pecahan' || $key == 'Bilangan Pecahan') {
                     switch ($jenjang) {
                         case 'SMP':
                             $questions = [
@@ -945,7 +945,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Bilangan berpangkat dan bentuk akar' || $key == 'Bilangan berpangkat dan bentuk akar') {
+                } elseif ($subTopik == 'Bilangan Berpangkat' || $key == 'Bilangan Berpangkat') {
                     switch ($jenjang) {
                         case 'SMP':
                             $questions = [
@@ -978,7 +978,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Perbandingan senilai dan berbalik nilai' || $key == 'Perbandingan senilai dan berbalik nilai'   ) {
+                } elseif ($subTopik == 'Perbandingan' || $key == 'Perbandingan') {
                     switch ($jenjang) {
                         case 'SMP':
                             $questions = [
@@ -1011,7 +1011,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Bilangan rasional dan irasional' || $key == 'Bilangan rasional dan irasional') {
+                } elseif ($subTopik == 'Bilangan Rasional' || $key == 'Bilangan Rasional') {
                     switch ($jenjang) {
                         case 'SMP':
                             $questions = [
@@ -1044,7 +1044,7 @@ class PaketSoalSeeder extends Seeder
                             $template['benar'] = $selectedQuestion['benar'];
                             break;
                     }
-                } elseif ($subTopik == 'Sistem bilangan real' || $key == 'Sistem bilangan real') {
+                } elseif ($subTopik == 'Bilangan Real' || $key == 'Bilangan Real'   ) {
                     switch ($jenjang) {
                         case 'SMP':
                             $questions = [
