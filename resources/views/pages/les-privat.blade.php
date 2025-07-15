@@ -7,146 +7,166 @@
 @section('content')
 <div class="bg-white">
     <!-- Hero Section -->
-    <div class="relative bg-gradient-to-r from-blue-600 to-indigo-700">
-        <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
-                    Les Privat Online Terbaik di Indonesia
-                </h1>
-                <p class="mt-6 text-xl text-indigo-100 max-w-3xl mx-auto">
-                    Tingkatkan prestasi akademik dengan program les privat online yang dipandu oleh guru-guru berpengalaman. Metode pembelajaran interaktif dan bank soal gratis untuk SD, SMP, dan SMA.
-                </p>
-                <div class="mt-10">
-                    <a href="/register" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-white hover:bg-indigo-50">
-                        Mulai Les Privat Online
-                    </a>
+    <div class="gradient-primary">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 text-center">
+                    <h1 class="display-3 fw-bold text-white mb-4">
+                        Les Privat Online Terbaik di Indonesia
+                    </h1>
+                    <p class="lead text-white-50 mb-5">
+                        Tingkatkan prestasi akademik dengan program les privat online yang dipandu oleh guru-guru berpengalaman. Metode pembelajaran interaktif dan bank soal gratis untuk SD, SMP, dan SMA.
+                    </p>
+                    <div class="mt-4">
+                        <a href="/register" class="btn btn-light btn-lg px-5">
+                            Mulai Les Privat Online
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Why Choose Us Section -->
-    <div class="py-16 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+    <div class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold text-dark mb-3">
                     Mengapa Memilih Les Privat Online Kami?
                 </h2>
-                <p class="mt-4 text-lg text-gray-600">
+                <p class="lead text-muted">
                     Kami menawarkan solusi pembelajaran terbaik untuk meningkatkan prestasi akademik siswa
                 </p>
             </div>
 
-            <div class="mt-12 grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            <div class="row g-4">
                 <!-- Feature 1 -->
-                <div class="bg-white rounded-lg shadow-lg p-6">
-                    <div class="text-indigo-600 text-4xl mb-4">
-                        <i class="fas fa-chalkboard-teacher"></i>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="text-primary mb-3">
+                                <i class="fas fa-chalkboard-teacher fa-3x"></i>
+                            </div>
+                            <h3 class="h4 fw-bold text-dark mb-3">Guru Berpengalaman</h3>
+                            <p class="text-muted">
+                                Tim pengajar kami terdiri dari guru-guru profesional dengan pengalaman mengajar minimal 5 tahun dan lulusan universitas terbaik.
+                            </p>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Guru Berpengalaman</h3>
-                    <p class="text-gray-600">
-                        Tim pengajar kami terdiri dari guru-guru profesional dengan pengalaman mengajar minimal 5 tahun dan lulusan universitas terbaik.
-                    </p>
                 </div>
 
                 <!-- Feature 2 -->
-                <div class="bg-white rounded-lg shadow-lg p-6">
-                    <div class="text-indigo-600 text-4xl mb-4">
-                        <i class="fas fa-laptop"></i>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="text-primary mb-3">
+                                <i class="fas fa-laptop fa-3x"></i>
+                            </div>
+                            <h3 class="h4 fw-bold text-dark mb-3">Pembelajaran Interaktif</h3>
+                            <p class="text-muted">
+                                Metode pembelajaran yang menyenangkan dan interaktif menggunakan teknologi modern untuk memaksimalkan pemahaman siswa.
+                            </p>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Pembelajaran Interaktif</h3>
-                    <p class="text-gray-600">
-                        Metode pembelajaran yang menyenangkan dan interaktif menggunakan teknologi modern untuk memaksimalkan pemahaman siswa.
-                    </p>
                 </div>
 
                 <!-- Feature 3 -->
-                <div class="bg-white rounded-lg shadow-lg p-6">
-                    <div class="text-indigo-600 text-4xl mb-4">
-                        <i class="fas fa-book"></i>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="text-primary mb-3">
+                                <i class="fas fa-book fa-3x"></i>
+                            </div>
+                            <h3 class="h4 fw-bold text-dark mb-3">Bank Soal Gratis</h3>
+                            <p class="text-muted">
+                                Akses ribuan soal latihan gratis untuk semua mata pelajaran, membantu siswa berlatih dan meningkatkan kemampuan akademik.
+                            </p>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Bank Soal Gratis</h3>
-                    <p class="text-gray-600">
-                        Akses ribuan soal latihan gratis untuk semua mata pelajaran, membantu siswa berlatih dan meningkatkan kemampuan akademik.
-                    </p>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Program Section -->
-    <div class="py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+    <div class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold text-dark mb-3">
                     Program Les Privat Online
                 </h2>
-                <p class="mt-4 text-lg text-gray-600">
+                <p class="lead text-muted">
                     Program les privat online yang dirancang khusus untuk setiap jenjang pendidikan
                 </p>
             </div>
 
-            <div class="mt-12 space-y-12">
+            <div class="row g-4">
                 <!-- SD Program -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                    <div class="px-6 py-8">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Les Privat SD</h3>
-                        <ul class="space-y-4 text-gray-600">
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span>Mata pelajaran: Matematika, IPA, Bahasa Indonesia, Bahasa Inggris</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span>Metode pembelajaran yang menyenangkan dan mudah dipahami</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span>Latihan soal sesuai kurikulum terbaru</span>
-                            </li>
-                        </ul>
+                <div class="col-12">
+                    <div class="card shadow-sm">
+                        <div class="card-body p-4">
+                            <h3 class="h3 fw-bold text-dark mb-4">Les Privat SD</h3>
+                            <ul class="list-unstyled">
+                                <li class="d-flex align-items-start mb-3">
+                                    <i class="fas fa-check text-success mt-1 me-3"></i>
+                                    <span class="text-muted">Mata pelajaran: Matematika, IPA, Bahasa Indonesia, Bahasa Inggris</span>
+                                </li>
+                                <li class="d-flex align-items-start mb-3">
+                                    <i class="fas fa-check text-success mt-1 me-3"></i>
+                                    <span class="text-muted">Metode pembelajaran yang menyenangkan dan mudah dipahami</span>
+                                </li>
+                                <li class="d-flex align-items-start mb-3">
+                                    <i class="fas fa-check text-success mt-1 me-3"></i>
+                                    <span class="text-muted">Latihan soal sesuai kurikulum terbaru</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
                 <!-- SMP Program -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                    <div class="px-6 py-8">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Les Privat SMP</h3>
-                        <ul class="space-y-4 text-gray-600">
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span>Mata pelajaran: Matematika, IPA, Bahasa Indonesia, Bahasa Inggris, IPS</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span>Persiapan Ujian Nasional dan Ujian Sekolah</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span>Bank soal lengkap dengan pembahasan</span>
-                            </li>
-                        </ul>
+                <div class="col-12">
+                    <div class="card shadow-sm">
+                        <div class="card-body p-4">
+                            <h3 class="h3 fw-bold text-dark mb-4">Les Privat SMP</h3>
+                            <ul class="list-unstyled">
+                                <li class="d-flex align-items-start mb-3">
+                                    <i class="fas fa-check text-success mt-1 me-3"></i>
+                                    <span class="text-muted">Mata pelajaran: Matematika, IPA, Bahasa Indonesia, Bahasa Inggris, IPS</span>
+                                </li>
+                                <li class="d-flex align-items-start mb-3">
+                                    <i class="fas fa-check text-success mt-1 me-3"></i>
+                                    <span class="text-muted">Persiapan Ujian Nasional dan Ujian Sekolah</span>
+                                </li>
+                                <li class="d-flex align-items-start mb-3">
+                                    <i class="fas fa-check text-success mt-1 me-3"></i>
+                                    <span class="text-muted">Bank soal lengkap dengan pembahasan</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
                 <!-- SMA Program -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                    <div class="px-6 py-8">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Les Privat SMA</h3>
-                        <ul class="space-y-4 text-gray-600">
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span>Program IPA: Matematika, Fisika, Kimia, Biologi</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span>Program IPS: Ekonomi, Geografi, Sejarah, Sosiologi</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span>Persiapan UTBK dan Ujian Mandiri</span>
-                            </li>
-                        </ul>
+                <div class="col-12">
+                    <div class="card shadow-sm">
+                        <div class="card-body p-4">
+                            <h3 class="h3 fw-bold text-dark mb-4">Les Privat SMA</h3>
+                            <ul class="list-unstyled">
+                                <li class="d-flex align-items-start mb-3">
+                                    <i class="fas fa-check text-success mt-1 me-3"></i>
+                                    <span class="text-muted">Program IPA: Matematika, Fisika, Kimia, Biologi</span>
+                                </li>
+                                <li class="d-flex align-items-start mb-3">
+                                    <i class="fas fa-check text-success mt-1 me-3"></i>
+                                    <span class="text-muted">Program IPS: Ekonomi, Geografi, Sejarah, Sosiologi</span>
+                                </li>
+                                <li class="d-flex align-items-start mb-3">
+                                    <i class="fas fa-check text-success mt-1 me-3"></i>
+                                    <span class="text-muted">Persiapan UTBK dan Ujian Mandiri</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -154,22 +174,24 @@
     </div>
 
     <!-- CTA Section -->
-    <div class="bg-indigo-700">
-        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
-            <h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-                <span class="block">Siap untuk meningkatkan prestasi akademik?</span>
-                <span class="block text-indigo-200">Daftar sekarang dan dapatkan konsultasi gratis!</span>
-            </h2>
-            <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
-                <div class="inline-flex rounded-md shadow">
-                    <a href="/register" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50">
-                        Daftar Sekarang
-                    </a>
+    <div class="gradient-dark">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h2 class="display-6 fw-bold text-white mb-3">
+                        <span class="d-block">Siap untuk meningkatkan prestasi akademik?</span>
+                        <span class="d-block text-white-50">Daftar sekarang dan dapatkan konsultasi gratis!</span>
+                    </h2>
                 </div>
-                <div class="ml-3 inline-flex rounded-md shadow">
-                    <a href="/contact" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
-                        Hubungi Kami
-                    </a>
+                <div class="col-lg-4 text-lg-end">
+                    <div class="d-flex flex-column flex-sm-row gap-3">
+                        <a href="/register" class="btn btn-light btn-lg">
+                            Daftar Sekarang
+                        </a>
+                        <a href="/contact" class="btn btn-outline-light btn-lg">
+                            Hubungi Kami
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

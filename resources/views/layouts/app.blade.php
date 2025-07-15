@@ -35,21 +35,7 @@
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            important: false,
-            prefix: 'tw-',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        'sans': ['Plus Jakarta Sans', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
+
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -62,109 +48,265 @@
     
     <!-- Custom CSS -->
     <style>
-        /* Reset Tailwind untuk menghindari konflik dengan Bootstrap */
-        .container {
-            max-width: 100%;
-            margin-left: auto;
-            margin-right: auto;
-            padding-left: 1rem;
-            padding-right: 1rem;
+        /* Custom Bootstrap Enhancements */
+        :root {
+            --primary-color: #2563EB;
+            --primary-dark: #1D4ED8;
+            --primary-light: #60A5FA;
+            --secondary-color: #0F172A;
+            --accent-color: #3B82F6;
+            --success-color: #059669;
+            --warning-color: #D97706;
+            --danger-color: #DC2626;
+            --dark-color: #1E293B;
+            --light-color: #F8FAFC;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-400: #9CA3AF;
+            --gray-500: #6B7280;
+            --gray-600: #4B5563;
+            --gray-700: #374151;
+            --gray-800: #1F2937;
+            --gray-900: #111827;
         }
         
-        @media (min-width: 640px) {
-            .container {
-                max-width: 640px;
-            }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--dark-color);
+            background-color: var(--light-color);
         }
         
-        @media (min-width: 768px) {
-            .container {
-                max-width: 768px;
-            }
-        }
-        
-        @media (min-width: 1024px) {
-            .container {
-                max-width: 1024px;
-            }
-        }
-        
-        @media (min-width: 1280px) {
-            .container {
-                max-width: 1280px;
-            }
-        }
-        
-        /* Override Bootstrap untuk blog pages */
-        .blog-page .container {
-            max-width: 100%;
-        }
-        
-        .blog-page .row {
-            margin-left: 0;
-            margin-right: 0;
-        }
-        
-        .blog-page .col,
-        .blog-page .col-md,
-        .blog-page .col-lg {
-            padding-left: 0;
-            padding-right: 0;
-        }
-
-        /* Fix navbar visibility issues */
+        /* Enhanced Navbar */
         .navbar {
-            display: flex !important;
-            visibility: visible !important;
-            opacity: 1 !important;
+            background: rgba(255, 255, 255, 0.98) !important;
+            backdrop-filter: blur(10px) !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+            padding: 1rem 0 !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
             z-index: 1030 !important;
             width: 100% !important;
             min-height: 70px !important;
         }
         
         .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             display: inline-block !important;
             visibility: visible !important;
             opacity: 1 !important;
         }
         
+        .nav-link {
+            font-weight: 500;
+            color: var(--dark-color);
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Enhanced Buttons */
         .btn {
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
             display: inline-block !important;
             visibility: visible !important;
             opacity: 1 !important;
         }
         
-        .navbar-nav {
-            display: flex !important;
-            flex-direction: row !important;
-            list-style: none !important;
-            margin: 0 !important;
-            padding: 0 !important;
+        .btn-primary {
+            background: var(--primary-color);
+            border: none;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
         }
         
-        .navbar-nav .nav-item {
-            display: block !important;
-            margin: 0 !important;
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px -3px rgba(37, 99, 235, 0.3);
         }
         
-        .navbar-nav .nav-link {
-            display: block !important;
-            padding: 0.5rem 1rem !important;
-            text-decoration: none !important;
-            color: inherit !important;
+        .btn-outline-primary {
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
         }
         
-        .navbar-collapse {
-            display: flex !important;
-            flex-basis: 100% !important;
-            flex-grow: 1 !important;
-            align-items: center !important;
+        .btn-outline-primary:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
         }
         
-        .navbar-toggler {
-            display: none !important;
+        /* Enhanced Footer */
+        .footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 5rem 0 2rem;
+            position: relative;
+            overflow: hidden;
         }
         
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+        
+        .footer-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .footer-link:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+            margin: 0 0.5rem;
+        }
+        
+        .social-icon:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px) rotate(360deg);
+        }
+        
+        /* Enhanced Cards */
+        .card {
+            border: none;
+            border-radius: 1rem;
+            background: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+                        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 
+                        0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        /* Enhanced Form Controls */
+        .form-control {
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            border: 2px solid var(--gray-200);
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+        
+        /* Gradients */
+        .gradient-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+        }
+        
+        .gradient-dark {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--dark-color) 100%);
+        }
+        
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .slide-up {
+            animation: slideUp 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        /* Hover Effects */
+        .hover-lift {
+            transition: transform 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-5px);
+        }
+        
+        .hover-glow {
+            transition: box-shadow 0.3s ease;
+        }
+        
+        .hover-glow:hover {
+            box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
+        }
+        
+        /* Mobile Responsive */
         @media (max-width: 991.98px) {
             .navbar-toggler {
                 display: block !important;
@@ -611,7 +753,7 @@
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="display: flex !important; visibility: visible !important; opacity: 1 !important;">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
             <a class="navbar-brand" href="/">
                 <i class="fas fa-graduation-cap me-2"></i>KelasPrivat.id
@@ -619,28 +761,28 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav" style="display: flex !important;">
-                <ul class="navbar-nav ms-auto" style="display: flex !important; flex-direction: row !important;">
-                    <li class="nav-item" style="display: block !important;">
-                        <a class="nav-link" href="/" style="display: block !important;">Beranda</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Beranda</a>
                     </li>
                     <!-- <li class="nav-item">
                         <a class="nav-link" href="/les-privat">Les Privat</a>
                     </li> -->
-                    <li class="nav-item" style="display: block !important;">
-                        <a class="nav-link" href="/bank-soal" style="display: block !important;">Bank Soal</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/bank-soal">Bank Soal</a>
                     </li>
                     {{-- <li class="nav-item">
                         <a class="nav-link" href="/materi">Materi</a>
                     </li> --}}
-                    <li class="nav-item" style="display: block !important;">
-                        <a class="nav-link" href="/news" style="display: block !important;">Berita</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/news">Berita</a>
                     </li>
                 </ul>
-                <div class="ms-lg-3" style="display: flex !important; align-items: center !important;">
+                <div class="ms-lg-3">
                     @auth
-                        <div class="dropdown" style="display: block !important;">
-                            <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" style="display: inline-block !important;">
+                        <div class="dropdown">
+                            <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
                                 <i class="fas fa-user-circle me-1"></i>{{ Auth::user()->name }}
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
@@ -662,8 +804,8 @@
                             </ul>
                         </div>
                     @else
-                        <a href="/login" class="btn btn-outline-primary me-2" style="display: inline-block !important;">Masuk</a>
-                        <a href="/register" class="btn btn-primary" style="display: inline-block !important;">Daftar</a>
+                        <a href="/login" class="btn btn-outline-primary me-2">Masuk</a>
+                        <a href="/register" class="btn btn-primary">Daftar</a>
                     @endauth
                 </div>
             </div>
@@ -671,7 +813,7 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="pt-5" style="padding-top: 100px !important;">
+    <main class="pt-5" style="padding-top: 100px;">
         @yield('content')
         
     </main>

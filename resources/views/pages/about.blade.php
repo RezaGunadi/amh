@@ -6,7 +6,7 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="hero-section bg-gradient-primary text-white py-5" data-aos="fade-up">
+<section class="hero-section gradient-primary text-white py-5" data-aos="fade-up">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6">

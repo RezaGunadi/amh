@@ -1,129 +1,176 @@
 @extends('layouts.app')
 
-@section('title', 'Blog Kategori: ' . ($categoryInfo->name ?? $category) . ' - Kelas Privat')
-
-@section('meta')
-<meta name="description" content="Artikel blog kategori {{ $categoryInfo->name ?? $category }} - Tips belajar, pendidikan, dan informasi terkini untuk siswa dan guru.">
-<meta name="keywords" content="blog, {{ $categoryInfo->name ?? $category }}, pendidikan, tips belajar">
-@endsection
+@section('title', $category->name . ' - Blog | KelasPrivat.id')
+@section('meta_description', 'Artikel dan berita tentang ' . $category->name . ' dari KelasPrivat.id')
+@section('meta_keywords', 'blog, artikel, ' . $category->name . ', pendidikan, les privat')
 
 @section('content')
-<div class="container mx-auto px-4 py-8">
-    <!-- Breadcrumb -->
-    <nav class="text-sm text-gray-600 mb-6">
-        <ol class="list-none p-0 inline-flex">
-            <li class="flex items-center">
-                <a href="{{ route('home') }}" class="hover:text-blue-600">Beranda</a>
-                <svg class="fill-current w-3 h-3 mx-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                    <path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/>
-                </svg>
-            </li>
-            <li class="flex items-center">
-                <a href="{{ route('blog') }}" class="hover:text-blue-600">Blog</a>
-                <svg class="fill-current w-3 h-3 mx-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                    <path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/>
-                </svg>
-            </li>
-            <li class="flex items-center">
-                <span class="text-gray-900">{{ $categoryInfo->name ?? $category }}</span>
-            </li>
-        </ol>
-    </nav>
+<div class="bg-light min-vh-100">
+    <div class="container py-5">
+        <!-- Breadcrumb -->
+        <nav class="mb-4" aria-label="breadcrumb">
+            <ol class="breadcrumb text-muted small">
+                <li class="breadcrumb-item">
+                    <a href="{{ route('home') }}" class="text-decoration-none">
+                        <i class="fas fa-home me-1"></i>
+                        Beranda
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ route('blog') }}" class="text-decoration-none">Blog</a>
+                </li>
+                <li class="breadcrumb-item active">{{ $category->name }}</li>
+            </ol>
+        </nav>
 
-    <div class="max-w-6xl mx-auto">
-        <!-- Category Header -->
-        <header class="text-center mb-12">
-            <h1 class="text-4xl font-bold text-gray-900 mb-4">
-                Kategori: {{ $categoryInfo->name ?? $category }}
-            </h1>
-            @if($categoryInfo && $categoryInfo->description)
-            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                {{ $categoryInfo->description }}
-            </p>
-            @endif
-            <div class="mt-4">
-                <span class="inline-block bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">
-                    {{ $posts->total() }} artikel
-                </span>
-            </div>
-        </header>
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Category Header -->
+                <header class="card shadow-sm mb-4">
+                    <div class="card-body p-4 text-center">
+                        <h1 class="h2 fw-bold text-dark mb-3">{{ $category->name }}</h1>
+                        <p class="text-muted mb-0">{{ $category->description ?? 'Artikel dan berita terkini tentang ' . $category->name }}</p>
+                    </div>
+                </header>
 
-        <!-- Articles Grid -->
-        @if($posts->count() > 0)
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            @foreach($posts as $post)
-            <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                @if($post->featured_image)
-                <img src="{{ asset($post->featured_image) }}" 
-                     alt="{{ $post->title }}" 
-                     class="w-full h-48 object-cover">
+                <!-- Articles Grid -->
+                @if($posts->count() > 0)
+                <div class="row g-4 mb-5">
+                    @foreach($posts as $post)
+                    <div class="col-lg-4 col-md-6">
+                        <article class="card h-100 hover-shadow">
+                            @if($post->featured_image)
+                            <img src="{{ asset($post->featured_image) }}" 
+                                 alt="{{ $post->title }}" 
+                                 class="card-img-top" style="height: 200px; object-fit: cover;">
+                            @else
+                            <div class="card-img-top d-flex align-items-center justify-content-center gradient-primary" style="height: 200px;">
+                                <div class="text-center text-white opacity-75">
+                                    <i class="fas fa-image fa-3x"></i>
+                                </div>
+                            </div>
+                            @endif
+                            <div class="card-body">
+                                <span class="badge bg-primary bg-opacity-10 text-primary mb-2">
+                                    {{ $post->category->name ?? $post->category }}
+                                </span>
+                                <h5 class="card-title fw-semibold text-dark mb-3">
+                                    <a href="{{ route('blog.show', $post->slug) }}" class="text-decoration-none">
+                                        {{ Str::limit($post->title, 60) }}
+                                    </a>
+                                </h5>
+                                <p class="card-text text-muted small mb-3">
+                                    {{ Str::limit($post->excerpt, 100) }}
+                                </p>
+                                <div class="d-flex align-items-center justify-content-between text-muted small">
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center text-white small me-2" style="width: 24px; height: 24px;">
+                                            {{ strtoupper(substr($post->author_name, 0, 1)) }}
+                                        </div>
+                                        <span>{{ $post->author_name }}</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-3">
+                                        <span>{{ $post->published_at ? $post->published_at->format('d M Y') : $post->created_at->format('d M Y') }}</span>
+                                        <span>•</span>
+                                        <span class="d-flex align-items-center">
+                                            <i class="fas fa-clock me-1"></i>
+                                            {{ $post->reading_time }} menit
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    @endforeach
+                </div>
+
+                <!-- Pagination -->
+                <div class="d-flex justify-content-center">
+                    {{ $posts->links() }}
+                </div>
                 @else
-                <div class="w-full h-48 bg-gradient-to-br from-blue-400 to-purple-600 flex items-center justify-center">
-                    <svg class="w-16 h-16 text-white opacity-50" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"/>
-                    </svg>
+                <div class="card shadow-sm">
+                    <div class="card-body p-5 text-center">
+                        <i class="fas fa-newspaper fa-4x text-muted mb-4"></i>
+                        <h3 class="h4 fw-bold text-dark mb-3">Belum Ada Artikel</h3>
+                        <p class="text-muted mb-4">Belum ada artikel dalam kategori ini. Silakan cek kembali nanti.</p>
+                        <a href="{{ route('blog') }}" class="btn btn-primary">
+                            Kembali ke Blog
+                        </a>
+                    </div>
                 </div>
                 @endif
-                
-                <div class="p-6">
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="inline-block bg-blue-100 text-blue-800 text-xs font-medium px-2 py-1 rounded-full">
-                            {{ $post->category->name ?? $post->category }}
-                        </span>
-                        @if($post->is_featured)
-                        <span class="inline-block bg-yellow-100 text-yellow-800 text-xs font-medium px-2 py-1 rounded-full">
-                            Featured
-                        </span>
-                        @endif
-                    </div>
-                    
-                    <h2 class="text-xl font-semibold text-gray-900 mb-3 leading-tight">
-                        <a href="{{ route('blog.show', $post->slug) }}" class="hover:text-blue-600">
-                            {{ $post->title }}
-                        </a>
-                    </h2>
-                    
-                    <p class="text-gray-600 text-sm mb-4 leading-relaxed">
-                        {{ Str::limit($post->excerpt, 120) }}
-                    </p>
-                    
-                    <div class="flex items-center justify-between text-gray-500 text-xs">
-                        <div class="flex items-center">
-                            <img src="{{ asset($post->author_avatar ?? 'assets/img/avatar-default.jpg') }}" 
-                                 alt="{{ $post->author_name }}" 
-                                 class="w-6 h-6 rounded-full mr-2">
-                            <span>{{ $post->author_name }}</span>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <span>{{ $post->published_at ? $post->published_at->format('d M Y') : $post->created_at->format('d M Y') }}</span>
-                            <span>•</span>
-                            <span>{{ $post->reading_time }} menit</span>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Category Info -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold text-dark mb-3">Tentang Kategori</h5>
+                        <p class="text-muted mb-3">{{ $category->description ?? 'Artikel dan berita terkini tentang ' . $category->name }}</p>
+                        <div class="d-flex align-items-center text-muted small">
+                            <i class="fas fa-file-alt me-2"></i>
+                            <span>{{ $posts->total() }} artikel</span>
                         </div>
                     </div>
                 </div>
-            </article>
-            @endforeach
-        </div>
 
-        <!-- Pagination -->
-        <div class="flex justify-center">
-            {{ $posts->links() }}
+                <!-- Recent Posts -->
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold text-dark mb-3">Artikel Terbaru</h5>
+                        @foreach($recentPosts ?? [] as $recentPost)
+                        <div class="d-flex align-items-start mb-3">
+                            @if($recentPost->featured_image)
+                            <img src="{{ asset($recentPost->featured_image) }}" 
+                                 alt="{{ $recentPost->title }}" 
+                                 class="rounded me-3" style="width: 60px; height: 60px; object-fit: cover;">
+                            @else
+                            <div class="bg-primary bg-opacity-10 rounded d-flex align-items-center justify-content-center me-3" style="width: 60px; height: 60px;">
+                                <i class="fas fa-image text-primary"></i>
+                            </div>
+                            @endif
+                            <div class="flex-grow-1">
+                                <h6 class="fw-semibold text-dark mb-1">
+                                    <a href="{{ route('blog.show', $recentPost->slug) }}" class="text-decoration-none">
+                                        {{ Str::limit($recentPost->title, 50) }}
+                                    </a>
+                                </h6>
+                                <small class="text-muted">{{ $recentPost->published_at ? $recentPost->published_at->format('d M Y') : $recentPost->created_at->format('d M Y') }}</small>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <!-- Categories -->
+                <div class="card shadow-sm">
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold text-dark mb-3">Kategori Lainnya</h5>
+                        @foreach($categories ?? [] as $cat)
+                        <a href="{{ route('blog.category', $cat->slug) }}" 
+                           class="d-flex justify-content-between align-items-center p-2 rounded text-decoration-none {{ $cat->id === $category->id ? 'bg-primary bg-opacity-10 text-primary' : 'text-muted' }}">
+                            <span>{{ $cat->name }}</span>
+                            <span class="badge bg-secondary bg-opacity-10 text-secondary">{{ $cat->posts_count ?? 0 }}</span>
+                        </a>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
         </div>
-        @else
-        <div class="text-center py-12">
-            <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
-            </svg>
-            <h3 class="text-lg font-medium text-gray-900 mb-2">Belum ada artikel</h3>
-            <p class="text-gray-600 mb-6">
-                Belum ada artikel dalam kategori ini. Silakan cek kategori lain atau kembali ke halaman blog.
-            </p>
-            <a href="{{ route('blog') }}" 
-               class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
-                Kembali ke Blog
-            </a>
-        </div>
-        @endif
     </div>
 </div>
+
+<style>
+.hover-shadow {
+    transition: all 0.3s ease;
+}
+
+.hover-shadow:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 
+                0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+</style>
 @endsection 

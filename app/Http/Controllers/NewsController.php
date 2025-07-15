@@ -41,7 +41,7 @@ class NewsController extends Controller
 
         // Get paginated results
         $articles = $query->orderBy('created_at', 'desc')->paginate(10);
-        
+
         // Convert articles to array format with slug
         $articlesArray = $articles->getCollection()->map(function($article) {
             return [

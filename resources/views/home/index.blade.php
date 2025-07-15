@@ -6,7 +6,7 @@
 
 @section('content')
     <!-- Hero Section -->
-    <section class="py-5 bg-gradient-primary text-white position-relative overflow-hidden">
+    <section class="py-5 gradient-primary text-white position-relative overflow-hidden">
         <div class="container py-5">
             <div class="row align-items-center">
                 <div class="col-lg-6" data-aos="fade-right">
