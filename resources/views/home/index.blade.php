@@ -400,21 +400,21 @@
                     Testimoni dari siswa yang telah berhasil meraih prestasi akademik terbaik
                 </p>
             </div>
-            <div class="row g-4">
+            <div class="row g-4 justify-content-center">
                 <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="card h-100 border-0 shadow-sm">
                         <div class="card-body p-4">
                             <div class="d-flex align-items-center mb-3">
-                                <img src="{{ asset('assets/svg/success-story.svg') }}" alt="Testimoni" class="rounded-circle me-3" width="80">
+                                <img src="{{ asset('murid/Ghaniya_Elmira-ipb.jpg') }}" alt="Testimoni" class="rounded-circle me-3" width="80">
                                 <div>
-                                    <h5 class="card-title mb-0">Ahmad Rizki</h5>
-                                    <p class="text-muted mb-0">Mahasiswa UI</p>
+                                    <h5 class="card-title mb-0">Ghaniya Elmira</h5>
+                                    <p class="text-muted mb-0">Mahasiswa IPB</p>
                                 </div>
                             </div>
-                            <p class="card-text">"Berhasil masuk UI jurusan Kedokteran berkat bimbingan tutor yang sangat profesional. Metode pembelajarannya sangat efektif dan mudah dipahami."</p>
+                            <p class="card-text">"Saya sangat terbantu dengan program les privat ini. Tutornya sabar dalam menjelaskan dan selalu memberikan tips-tips yang berguna untuk memahami materi dengan lebih baik."</p>
                             <div class="d-flex gap-2">
-                                <span class="badge bg-primary">UI</span>
-                                <span class="badge bg-primary">Kedokteran</span>
+                                <span class="badge bg-primary">IPB</span>
+                                <span class="badge bg-primary">IPB</span>
                             </div>
                         </div>
                     </div>
@@ -423,16 +423,34 @@
                     <div class="card h-100 border-0 shadow-sm">
                         <div class="card-body p-4">
                             <div class="d-flex align-items-center mb-3">
-                                <img src="{{ asset('assets/svg/success-story.svg') }}" alt="Testimoni" class="rounded-circle me-3" width="80">
+                                <img src="{{ asset('murid/adila_putri-teknik_sipi_undip.jpg') }}" alt="Testimoni" class="rounded-circle me-3" width="80">
                                 <div>
-                                    <h5 class="card-title mb-0">Sarah Putri</h5>
-                                    <p class="text-muted mb-0">Mahasiswa ITB</p>
+                                    <h5 class="card-title mb-0">Adila Putri</h5>
+                                    <p class="text-muted mb-0">Mahasiswa Teknik Sipil Undip</p>
                                 </div>
                             </div>
-                            <p class="card-text">"Tutor di sini sangat membantu saya memahami konsep matematika dan fisika yang sulit. Sekarang saya bisa kuliah di ITB jurusan Teknik Informatika."</p>
+                            <p class="card-text">"Berkat bimbingan intensif dari tutor Kelas Privat, saya berhasil meraih nilai tertinggi di kelas dan diterima di jurusan impian. Program belajar yang disesuaikan dengan kebutuhan membuat saya lebih mudah memahami materi."</p>
                             <div class="d-flex gap-2">
-                                <span class="badge bg-primary">ITB</span>
-                                <span class="badge bg-primary">Teknik Informatika</span>
+                                <span class="badge bg-primary">Teknik Sipil Undip</span>
+                                <span class="badge bg-primary">Teknik Sipil</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="{{ asset('murid/radiktio_arso-ui_hubungan_internasional.jpg') }}" alt="Testimoni" class="rounded-circle me-3" width="80">
+                                <div>
+                                    <h5 class="card-title mb-0">Radiktio Arso</h5>
+                                    <p class="text-muted mb-0">Mahasiswa UI Hubungan Internasional</p>
+                                </div>
+                            </div>
+                            <p class="card-text">"Saya sangat terkesan dengan kualitas bimbingan di Kelas Privat. Tutor tidak hanya menjelaskan materi dengan jelas, tapi juga memberikan strategi belajar yang membantu saya memahami konsep-konsep sulit dengan lebih baik."</p>
+                            <div class="d-flex gap-2">
+                                <span class="badge bg-primary">UI</span>
+                                <span class="badge bg-primary">Hubungan Internasional</span>
                             </div>
                         </div>
                     </div>
@@ -441,16 +459,34 @@
                     <div class="card h-100 border-0 shadow-sm">
                         <div class="card-body p-4">
                             <div class="d-flex align-items-center mb-3">
-                                <img src="{{ asset('assets/svg/success-story.svg') }}" alt="Testimoni" class="rounded-circle me-3" width="80">
+                                <img src="{{ asset('murid/Kayla-IUP_UNDIP.jpg') }}" alt="Testimoni" class="rounded-circle me-3" width="80">
                                 <div>
-                                    <h5 class="card-title mb-0">Budi Santoso</h5>
-                                    <p class="text-muted mb-0">Mahasiswa UGM</p>
+                                    <h5 class="card-title mb-0">Kayla</h5>
+                                    <p class="text-muted mb-0">Mahasiswa IUP Undip</p>
                                 </div>
                             </div>
-                            <p class="card-text">"Program les privat di sini sangat terstruktur dan sesuai dengan kebutuhan saya. Berhasil masuk UGM jurusan Teknik Mesin dengan nilai yang memuaskan."</p>
+                            <p class="card-text">"Bimbingan tutor yang sangat profesional. Metode pembelajarannya sangat efektif dan mudah dipahami."</p>
                             <div class="d-flex gap-2">
-                                <span class="badge bg-primary">UGM</span>
-                                <span class="badge bg-primary">Teknik Mesin</span>
+                                <span class="badge bg-primary">IUP Undip</span>
+                                <span class="badge bg-primary">Sastra Inggris</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="{{ asset('murid/Khalila_Radhrina-Antropologi_UI.jpg') }}" alt="Testimoni" class="rounded-circle me-3" width="80">
+                                <div>
+                                    <h5 class="card-title mb-0">Khalila Radhrina</h5>
+                                    <p class="text-muted mb-0">Mahasiswa Antropologi UI</p>
+                                </div>
+                            </div>
+                            <p class="card-text">"Saya sangat berterima kasih kepada tutor Kelas Privat yang telah membantu saya mempersiapkan UTBK dengan baik. Penjelasan yang detail dan latihan soal yang diberikan sangat membantu dalam memahami materi."</p>
+                            <div class="d-flex gap-2">
+                                <span class="badge bg-primary">UI</span>
+                                <span class="badge bg-primary">Antropologi</span>
                             </div>
                         </div>
                     </div>

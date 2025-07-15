@@ -265,13 +265,13 @@
                 <div class="card h-100 border-0 shadow-sm hover-card">
                     <div class="card-body p-4">
                         <div class="d-flex align-items-center mb-3">
-                            <img src="{{ asset('assets/img/avatar-1.jpg') }}" alt="Testimoni Siswa" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                            <img src="{{ asset('murid/Kayla-IUP_UNDIP.jpg') }}" alt="Testimoni Siswa" class="rounded-circle me-3" style="width: 50px; height: 50px;">
                             <div>
-                                <h5 class="mb-0">Sarah Putri</h5>
-                                <small class="text-muted">Siswa SMA</small>
+                                <h5 class="mb-0">Kayla</h5>
+                                <small class="text-muted">Mahasiswa IUP Undip</small>
                             </div>
                         </div>
-                        <p class="text-muted mb-0">"Berhasil masuk UI berkat bimbingan tutor yang sabar dan metode pembelajaran yang efektif."</p>
+                        <p class="text-muted mb-0">"Bimbingan tutor yang sangat profesional. Metode pembelajarannya sangat efektif dan mudah dipahami."</p>
                     </div>
                 </div>
             </div>
@@ -279,13 +279,13 @@
                 <div class="card h-100 border-0 shadow-sm hover-card">
                     <div class="card-body p-4">
                         <div class="d-flex align-items-center mb-3">
-                            <img src="{{ asset('assets/img/avatar-2.jpg') }}" alt="Testimoni Orang Tua" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                            <img src="{{ asset('murid/adila_putri-teknik_sipi_undip.jpg') }}" alt="Testimoni Orang Tua" class="rounded-circle me-3" style="width: 50px; height: 50px;">
                             <div>
-                                <h5 class="mb-0">Budi Santoso</h5>
-                                <small class="text-muted">Orang Tua Siswa SMP</small>
+                                <h5 class="mb-0">Adila Putri</h5>
+                                <small class="text-muted">Mahasiswa Teknik Sipil Undip</small>
                             </div>
                         </div>
-                        <p class="text-muted mb-0">"Konsultasi rutin membantu kami memahami perkembangan belajar anak dan memberikan solusi yang tepat."</p>
+                        <p class="text-muted mb-0">"Berkat bimbingan intensif dari tutor Kelas Privat, saya berhasil meraih nilai tertinggi di kelas dan diterima di jurusan impian. Program belajar yang disesuaikan dengan kebutuhan membuat saya lebih mudah memahami materi."</p>
                     </div>
                 </div>
             </div>
@@ -293,13 +293,13 @@
                 <div class="card h-100 border-0 shadow-sm hover-card">
                     <div class="card-body p-4">
                         <div class="d-flex align-items-center mb-3">
-                            <img src="{{ asset('assets/img/avatar-3.jpg') }}" alt="Testimoni Siswa" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                            <img src="{{ asset('murid/Ghaniya_Elmira-ipb.jpg') }}" alt="Testimoni Siswa" class="rounded-circle me-3" style="width: 50px; height: 50px;">
                             <div>
-                                <h5 class="mb-0">Rina Wijaya</h5>
-                                <small class="text-muted">Siswa SD</small>
+                                <h5 class="mb-0">Ghina Elmira</h5>
+                                <small class="text-muted">Mahasiswa IPB</small>
                             </div>
                         </div>
-                        <p class="text-muted mb-0">"Belajar jadi menyenangkan dengan tutor yang ramah dan metode pembelajaran yang menarik."</p>
+                        <p class="text-muted mb-0">"Saya sangat terbantu dengan program les privat ini. Tutornya sabar dalam menjelaskan dan selalu memberikan tips-tips yang berguna untuk memahami materi dengan lebih baik."</p>
                     </div>
                 </div>
             </div>
