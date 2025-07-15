@@ -321,7 +321,7 @@
                         </div>
                         <p class="text-muted mb-3">"Les privat online ini sangat membantu. Pengajarnya menjelaskan dengan jelas dan sabar. Nilai matematika saya naik dari 75 jadi 90!"</p>
                         <div class="d-flex align-items-center">
-                            <img src="{{ asset('assets/img/avatar-default.jpg') }}" alt="Student" class="rounded-circle me-3" width="48" height="48">
+                            <img src="https://randomuser.me/api/portraits/women/31.jpg" alt="Student" class="rounded-circle me-3" width="48" height="48">
                             <div>
                                 <h6 class="fw-bold mb-0">Rina, 14 tahun</h6>
                                 <small class="text-muted">Siswa kelas 8 SMP</small>
@@ -344,7 +344,7 @@
                         </div>
                         <p class="text-muted mb-3">"Belajar dari rumah jadi lebih nyaman. Pengajar selalu memberikan latihan soal yang sesuai dengan materi sekolah."</p>
                         <div class="d-flex align-items-center">
-                            <img src="{{ asset('assets/img/avatar-default.jpg') }}" alt="Student" class="rounded-circle me-3" width="48" height="48">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Student" class="rounded-circle me-3" width="48" height="48">
                             <div>
                                 <h6 class="fw-bold mb-0">Ahmad, 15 tahun</h6>
                                 <small class="text-muted">Siswa kelas 9 SMP</small>
@@ -367,7 +367,7 @@
                         </div>
                         <p class="text-muted mb-3">"Jadwal les yang fleksibel sangat membantu. Bisa belajar setelah pulang sekolah tanpa perlu keluar rumah lagi."</p>
                         <div class="d-flex align-items-center">
-                            <img src="{{ asset('assets/img/avatar-default.jpg') }}" alt="Student" class="rounded-circle me-3" width="48" height="48">
+                            <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Student" class="rounded-circle me-3" width="48" height="48">
                             <div>
                                 <h6 class="fw-bold mb-0">Sari, 13 tahun</h6>
                                 <small class="text-muted">Siswa kelas 7 SMP</small>

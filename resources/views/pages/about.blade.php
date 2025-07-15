@@ -179,8 +179,8 @@
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
                 <div class="card border-0 shadow-sm text-center">
                     <div class="card-body p-4">
-                        <img src="{{ asset('assets/img/avatar-default.jpg') }}" alt="CEO" class="rounded-circle mb-3" width="120" height="120">
-                        <h5 class="fw-bold mb-1">Ahmad Rizki</h5>
+                        <img src="{{ asset('murid/Ahmad_Rizki-ui_hubungan_internasional.jpg') }}" alt="CEO" class="rounded-circle mb-3" width="120" height="120">
+                        <h5 class="fw-bold mb-1">Tasya Uktifillah</h5>
                         <p class="text-primary mb-3">CEO & Founder</p>
                         <p class="text-muted">Pendiri KelasPrivat.id dengan pengalaman 10+ tahun di bidang pendidikan dan teknologi.</p>
                     </div>
@@ -189,8 +189,8 @@
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
                 <div class="card border-0 shadow-sm text-center">
                     <div class="card-body p-4">
-                        <img src="{{ asset('assets/img/avatar-default.jpg') }}" alt="CTO" class="rounded-circle mb-3" width="120" height="120">
-                        <h5 class="fw-bold mb-1">Sarah Putri</h5>
+                        <img src="https://randomuser.me/api/portraits/women/66.jpg" alt="CTO" class="rounded-circle mb-3" width="120" height="120">
+                        <h5 class="fw-bold mb-1">Reza Gunadi</h5>
                         <p class="text-primary mb-3">CTO</p>
                         <p class="text-muted">Ahli teknologi dengan fokus pada pengembangan platform pendidikan yang user-friendly.</p>
                     </div>
@@ -199,8 +199,8 @@
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
                 <div class="card border-0 shadow-sm text-center">
                     <div class="card-body p-4">
-                        <img src="{{ asset('assets/img/avatar-default.jpg') }}" alt="Head of Education" class="rounded-circle mb-3" width="120" height="120">
-                        <h5 class="fw-bold mb-1">Budi Santoso</h5>
+                        <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Head of Education" class="rounded-circle mb-3" width="120" height="120">
+                        <h5 class="fw-bold mb-1">Muhammad Ghazi Al Fatih</h5>
                         <p class="text-primary mb-3">Head of Education</p>
                         <p class="text-muted">Mantan guru dengan pengalaman 15 tahun dalam mengembangkan kurikulum dan metode pembelajaran.</p>
                     </div>
