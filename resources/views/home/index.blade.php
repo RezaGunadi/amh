@@ -441,7 +441,7 @@
                     <div class="card h-100 border-0 shadow-sm">
                         <div class="card-body p-4">
                             <div class="d-flex align-items-center mb-3">
-                                <img src="{{ asset('murid/radiktio_arso-ui_hubungan_internasional.jpeg') }}" alt="Testimoni" class="rounded-circle me-3" style=" height: 80px; object-fit: cover;" width="80">
+                                <img src="{{ asset('murid/radiktio_arso-ui_hubungan_internasional.jpeg') }}" alt="Testimoni" class="rounded-circle me-3" style="width: 80px; height: 80px; object-fit: cover;" width="80">
                                 <div>
                                     <h5 class="card-title mb-0">Radiktio Arso</h5>
                                     <p class="text-muted mb-0">Mahasiswa UI Hubungan Internasional</p>
