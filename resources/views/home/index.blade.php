@@ -405,7 +405,7 @@
                     <div class="card h-100 border-0 shadow-sm">
                         <div class="card-body p-4">
                             <div class="d-flex align-items-center mb-3">
-                                <img src="{{ asset('murid/Ghaniya_Elmira-ipb.jpg') }}" alt="Testimoni" class="rounded-circle me-3" style="width: 80px; height: 80px;" width="80">
+                                <img src="{{ asset('murid/Ghaniya_Elmira-ipb.jpg') }}" alt="Testimoni" class="rounded-circle me-3" style="width: 80px; height: 80px; object-fit: cover;" width="80">
                                 <div>
                                     <h5 class="card-title mb-0">Ghaniya Elmira</h5>
                                     <p class="text-muted mb-0">Mahasiswa IPB</p>
@@ -423,7 +423,7 @@
                     <div class="card h-100 border-0 shadow-sm">
                         <div class="card-body p-4">
                             <div class="d-flex align-items-center mb-3">
-                                <img src="{{ asset('murid/adila_putri-teknik_sipi_undip.jpg') }}" alt="Testimoni" class="rounded-circle me-3" style="width: 80px; height: 80px;" width="80">
+                                <img src="{{ asset('murid/adila_putri-teknik_sipi_undip.jpg') }}" alt="Testimoni" class="rounded-circle me-3" style="width: 80px; height: 80px; object-fit: cover;" width="80">
                                 <div>
                                     <h5 class="card-title mb-0">Adila Putri</h5>
                                     <p class="text-muted mb-0">Mahasiswa Teknik Sipil Undip</p>
@@ -441,7 +441,7 @@
                     <div class="card h-100 border-0 shadow-sm">
                         <div class="card-body p-4">
                             <div class="d-flex align-items-center mb-3">
-                                <img src="{{ asset('murid/radiktio_arso-ui_hubungan_internasional.jpeg') }}" alt="Testimoni" class="rounded-circle me-3" style="width: 80px; height: 80px;" width="80">
+                                <img src="{{ asset('murid/radiktio_arso-ui_hubungan_internasional.jpeg') }}" alt="Testimoni" class="rounded-circle me-3" style="width: 80px; height: 80px; object-fit: cover;" width="80">
                                 <div>
                                     <h5 class="card-title mb-0">Radiktio Arso</h5>
                                     <p class="text-muted mb-0">Mahasiswa UI Hubungan Internasional</p>
@@ -459,7 +459,7 @@
                     <div class="card h-100 border-0 shadow-sm">
                         <div class="card-body p-4">
                             <div class="d-flex align-items-center mb-3">
-                                <img src="{{ asset('murid/Kayla-IUP_UNDIP.jpg') }}" alt="Testimoni" class="rounded-circle me-3" style="width: 80px; height: 80px;" width="80">
+                                <img src="{{ asset('murid/Kayla-IUP_UNDIP.jpg') }}" alt="Testimoni" class="rounded-circle me-3" style="width: 80px; height: 80px; object-fit: cover;" width="80">
                                 <div>
                                     <h5 class="card-title mb-0">Kayla</h5>
                                     <p class="text-muted mb-0">Mahasiswa IUP Undip</p>
@@ -477,7 +477,7 @@
                     <div class="card h-100 border-0 shadow-sm">
                         <div class="card-body p-4">
                             <div class="d-flex align-items-center mb-3">
-                                <img src="{{ asset('murid/Khalila_Radhrina-Antropologi_UI.jpg') }}" alt="Testimoni" class="rounded-circle me-3" style="width: 80px; height: 80px;" width="80">
+                                <img src="{{ asset('murid/Khalila_Radhrina-Antropologi_U.jpg') }}" alt="Testimoni" class="rounded-circle me-3" style="width: 80px; height: 80px; object-fit: cover;" width="80">
                                 <div>
                                     <h5 class="card-title mb-0">Khalila Radhrina</h5>
                                     <p class="text-muted mb-0">Mahasiswa Antropologi UI</p>

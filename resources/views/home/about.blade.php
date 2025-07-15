@@ -265,7 +265,7 @@
                 <div class="card h-100 border-0 shadow-sm hover-card">
                     <div class="card-body p-4">
                         <div class="d-flex align-items-center mb-3">
-                            <img src="{{ asset('murid/Kayla-IUP_UNDIP.jpg') }}" alt="Testimoni Siswa" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                            <img src="{{ asset('murid/Kayla-IUP_UNDIP.jpg') }}" alt="Testimoni Siswa" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;">
                             <div>
                                 <h5 class="mb-0">Kayla</h5>
                                 <small class="text-muted">Mahasiswa IUP Undip</small>
@@ -279,7 +279,7 @@
                 <div class="card h-100 border-0 shadow-sm hover-card">
                     <div class="card-body p-4">
                         <div class="d-flex align-items-center mb-3">
-                            <img src="{{ asset('murid/adila_putri-teknik_sipi_undip.jpg') }}" alt="Testimoni Orang Tua" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                            <img src="{{ asset('murid/adila_putri-teknik_sipi_undip.jpg') }}" alt="Testimoni Orang Tua" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;">
                             <div>
                                 <h5 class="mb-0">Adila Putri</h5>
                                 <small class="text-muted">Mahasiswa Teknik Sipil Undip</small>
@@ -293,7 +293,7 @@
                 <div class="card h-100 border-0 shadow-sm hover-card">
                     <div class="card-body p-4">
                         <div class="d-flex align-items-center mb-3">
-                            <img src="{{ asset('murid/Ghaniya_Elmira-ipb.jpg') }}" alt="Testimoni Siswa" class="rounded-circle me-3" style="width: 50px; height: 50px;">
+                            <img src="{{ asset('murid/Ghaniya_Elmira-ipb.jpg') }}" alt="Testimoni Siswa" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;">
                             <div>
                                 <h5 class="mb-0">Ghina Elmira</h5>
                                 <small class="text-muted">Mahasiswa IPB</small>
