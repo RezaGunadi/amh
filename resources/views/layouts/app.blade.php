@@ -39,7 +39,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-            important: true,
+            important: false,
+            prefix: 'tw-',
             theme: {
                 extend: {
                     fontFamily: {
@@ -109,6 +110,91 @@
         .blog-page .col-lg {
             padding-left: 0;
             padding-right: 0;
+        }
+
+        /* Fix navbar visibility issues */
+        .navbar {
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            z-index: 1030 !important;
+            width: 100% !important;
+            min-height: 70px !important;
+        }
+        
+        .navbar-brand {
+            display: inline-block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        .btn {
+            display: inline-block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        .navbar-nav {
+            display: flex !important;
+            flex-direction: row !important;
+            list-style: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        
+        .navbar-nav .nav-item {
+            display: block !important;
+            margin: 0 !important;
+        }
+        
+        .navbar-nav .nav-link {
+            display: block !important;
+            padding: 0.5rem 1rem !important;
+            text-decoration: none !important;
+            color: inherit !important;
+        }
+        
+        .navbar-collapse {
+            display: flex !important;
+            flex-basis: 100% !important;
+            flex-grow: 1 !important;
+            align-items: center !important;
+        }
+        
+        .navbar-toggler {
+            display: none !important;
+        }
+        
+        @media (max-width: 991.98px) {
+            .navbar-toggler {
+                display: block !important;
+            }
+            
+            .navbar-collapse {
+                display: none !important;
+            }
+            
+            .navbar-collapse.show {
+                display: flex !important;
+                flex-direction: column !important;
+                position: absolute !important;
+                top: 100% !important;
+                left: 0 !important;
+                right: 0 !important;
+                background: white !important;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+                padding: 1rem !important;
+            }
+            
+            .navbar-nav {
+                flex-direction: column !important;
+                width: 100% !important;
+            }
+            
+            .navbar-nav .nav-item {
+                width: 100% !important;
+                margin-bottom: 0.5rem !important;
+            }
         }
 
         
@@ -204,10 +290,15 @@
         }
         
         .navbar {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            padding: 1rem 0;
+            background: rgba(255, 255, 255, 0.98) !important;
+            backdrop-filter: blur(10px) !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+            padding: 1rem 0 !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            z-index: 1030 !important;
         }
         
         .navbar.scrolled {
@@ -520,7 +611,7 @@
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="display: flex !important; visibility: visible !important; opacity: 1 !important;">
         <div class="container">
             <a class="navbar-brand" href="/">
                 <i class="fas fa-graduation-cap me-2"></i>KelasPrivat.id
@@ -528,28 +619,28 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Beranda</a>
+            <div class="collapse navbar-collapse" id="navbarNav" style="display: flex !important;">
+                <ul class="navbar-nav ms-auto" style="display: flex !important; flex-direction: row !important;">
+                    <li class="nav-item" style="display: block !important;">
+                        <a class="nav-link" href="/" style="display: block !important;">Beranda</a>
                     </li>
                     <!-- <li class="nav-item">
                         <a class="nav-link" href="/les-privat">Les Privat</a>
                     </li> -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/bank-soal">Bank Soal</a>
+                    <li class="nav-item" style="display: block !important;">
+                        <a class="nav-link" href="/bank-soal" style="display: block !important;">Bank Soal</a>
                     </li>
                     {{-- <li class="nav-item">
                         <a class="nav-link" href="/materi">Materi</a>
                     </li> --}}
-                    <li class="nav-item">
-                        <a class="nav-link" href="/news">Berita</a>
+                    <li class="nav-item" style="display: block !important;">
+                        <a class="nav-link" href="/news" style="display: block !important;">Berita</a>
                     </li>
                 </ul>
-                <div class="ms-lg-3">
+                <div class="ms-lg-3" style="display: flex !important; align-items: center !important;">
                     @auth
-                        <div class="dropdown">
-                            <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <div class="dropdown" style="display: block !important;">
+                            <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" style="display: inline-block !important;">
                                 <i class="fas fa-user-circle me-1"></i>{{ Auth::user()->name }}
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">
@@ -571,8 +662,8 @@
                             </ul>
                         </div>
                     @else
-                        <a href="/login" class="btn btn-outline-primary me-2">Masuk</a>
-                        <a href="/register" class="btn btn-primary">Daftar</a>
+                        <a href="/login" class="btn btn-outline-primary me-2" style="display: inline-block !important;">Masuk</a>
+                        <a href="/register" class="btn btn-primary" style="display: inline-block !important;">Daftar</a>
                     @endauth
                 </div>
             </div>
@@ -580,7 +671,7 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="pt-5">
+    <main class="pt-5" style="padding-top: 100px !important;">
         @yield('content')
         
     </main>
@@ -666,6 +757,34 @@
             } else {
                 navbar.classList.remove('scrolled');
             }
+        });
+        
+        // Ensure navbar is visible
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbar = document.querySelector('.navbar');
+            const navbarNav = document.querySelector('.navbar-collapse');
+            const navbarBrand = document.querySelector('.navbar-brand');
+            const buttons = document.querySelectorAll('.btn');
+            
+            if (navbar) {
+                navbar.style.display = 'flex';
+                navbar.style.visibility = 'visible';
+                navbar.style.opacity = '1';
+            }
+            
+            if (navbarNav) {
+                navbarNav.style.display = 'flex';
+            }
+            
+            if (navbarBrand) {
+                navbarBrand.style.display = 'inline-block';
+                navbarBrand.style.visibility = 'visible';
+            }
+            
+            buttons.forEach(button => {
+                button.style.display = 'inline-block';
+                button.style.visibility = 'visible';
+            });
         });
         
         // Service Worker Registration
