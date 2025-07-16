@@ -321,7 +321,7 @@
                         </div>
                         <p class="text-muted mb-3">"Anak saya jadi lebih semangat belajar matematika. Pengajarnya sabar dan metode belajarnya menyenangkan. Nilai matematika naik dari 70 jadi 90!"</p>
                         <div class="d-flex align-items-center">
-                            <img src="https://randomuser.me/api/portraits/women/21.jpg" alt="Parent" class="rounded-circle me-3" width="48" height="48">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=IbuSari&backgroundColor=lightblue" alt="Parent" class="rounded-circle me-3" width="48" height="48">
                             <div>
                                 <h6 class="fw-bold mb-0">Ibu Sari</h6>
                                 <small class="text-muted">Orang tua siswa kelas 4 SD</small>
@@ -344,7 +344,7 @@
                         </div>
                         <p class="text-muted mb-3">"Les privat online ini sangat praktis. Anak bisa belajar di rumah dengan nyaman. Pengajar juga selalu memberikan laporan progress yang detail."</p>
                         <div class="d-flex align-items-center">
-                            <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Parent" class="rounded-circle me-3" width="48" height="48">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=BapakAhmad&backgroundColor=lightblue" alt="Parent" class="rounded-circle me-3" width="48" height="48">
                             <div>
                                 <h6 class="fw-bold mb-0">Bapak Ahmad</h6>
                                 <small class="text-muted">Orang tua siswa kelas 2 SD</small>
@@ -367,7 +367,7 @@
                         </div>
                         <p class="text-muted mb-3">"Anak saya yang tadinya malas belajar bahasa Inggris sekarang jadi suka. Metode belajarnya fun dengan games dan lagu."</p>
                         <div class="d-flex align-items-center">
-                            <img src="https://randomuser.me/api/portraits/women/23.jpg" alt="Parent" class="rounded-circle me-3" width="48" height="48">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=IbuMaya&backgroundColor=lightblue" alt="Parent" class="rounded-circle me-3" width="48" height="48">
                             <div>
                                 <h6 class="fw-bold mb-0">Ibu Maya</h6>
                                 <small class="text-muted">Orang tua siswa kelas 5 SD</small>

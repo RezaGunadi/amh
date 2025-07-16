@@ -70,11 +70,7 @@ Route::match(['get', 'post'], '/materi/image-upload', [App\Http\Controllers\Mate
 // Route::post('/soal', [App\Http\Controllers\SoalController::class, 'show'])->name('goto_soal');
 
 
-Route::get('/about-us', function () {
-    return view('home.about', [
-        'title' => 'About Kelas Privat',
-    ]);
-});
+
 Route::get('/tnc-child-care', function () {
     return view('tnc.child_care', [
         'title' => 'T&C Child Care',
@@ -153,10 +149,15 @@ Route::post('/soal/{id}/answer/{index}', [App\Http\Controllers\SoalController::c
 Route::post('/soal/{id}/save-temp', [App\Http\Controllers\SoalController::class, 'saveTempAnswers'])->name('save_temp_answers');
 Route::get('/soal/{id}/result', [App\Http\Controllers\SoalController::class, 'showResult'])->name('soal.result');
 
-// About Route
+// About Route - Redirect to about-us
 Route::get('/about', function () {
-    return view('pages.about');
+    return redirect('/about-us');
 })->name('about');
+
+// About Us Route - Main route
+Route::get('/about-us', function () {
+    return view('pages.about-us');
+})->name('about-us');
 
 // Careers Route
 Route::get('/careers', function () {
