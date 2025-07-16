@@ -11,7 +11,7 @@
         <div class="row align-items-center">
             <div class="col-lg-6" data-aos="fade-right">
                 <h1 class="display-4 fw-bold mb-4">Les Privat Terbaik di Indonesia</h1>
-                <p class="lead mb-4">Lembaga pendidikan les privat yang berfokus pada perkembangan belajar siswa dengan metode pembelajaran yang efektif dan tutor berpengalaman dari PTN/PTS ternama.</p>
+                <p class="lead mb-4" style="text-align: justify; color: white;">Lembaga pendidikan les privat yang berfokus pada perkembangan belajar siswa dengan metode pembelajaran yang efektif dan tutor berpengalaman dari PTN/PTS ternama.</p>
                 <div class="d-flex gap-3">
                     <a href="https://api.whatsapp.com/send?phone=6281211006445&text=Halo%20nama%20saya%20......%20saya,%20mau%20tanya%20terkait" class="btn btn-light btn-lg px-4">
                         <i class="fab fa-whatsapp me-2"></i>Konsultasi Gratis
