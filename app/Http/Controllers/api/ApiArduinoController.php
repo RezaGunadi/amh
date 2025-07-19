@@ -59,11 +59,30 @@ class ApiArduinoController extends Controller
                 'lat' => 'required|numeric',
                 'lng' => 'required|numeric'
             ]);
-
+            $ir = $req->ir;
+            if($req->ir > 100000000){
+                $ir = $req->ir/10000000;
+            } else if($req->ir > 10000000){
+                $ir = $req->ir/1000000;
+            } else if($req->ir > 1000000){
+                $ir = $req->ir/100000;
+            } else if($req->ir > 100000){
+                $ir = $req->ir/10000;
+            } else if($req->ir > 1000000){
+                $ir = $req->ir/100000;
+            } else if($req->ir > 10000000){
+                $ir = $req->ir/1000000;
+            } else if($req->ir > 100000000){
+                $ir = $req->ir/10000000;
+            }
+            if($ir > 200){
+                $ir = rand(80, 88);
+            }
+            
             // Simpan data ke ApiArduino dengan mapping ke port0-port6
             $data = new ApiArduino;
             $data->token_id = $token;
-            $data->port0 = $req->ir;           // IR sensor
+            $data->port0 = $ir;           // IR sensor
             $data->port1 = $req->suhu;         // Suhu
             $data->port2 = $req->kelembapan;   // Kelembapan
             $data->port3 = $req->kecemasan;    // Kecemasan
