@@ -1,0 +1,1 @@
+INSERT INTO "public"."delete_account_requests" ("id", "user_id", "reason", "status", "created_at", "processed_at", "processed_by") VALUES ('2', '005c4634-ccd2-4aaa-a3f8-5586264f9e18', 'ga ada', 'ga ada', '2025-10-04 13:53:02+00', '2025-10-04 13:53:06+00', null);

@@ -41,9 +41,34 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'deletion_requested_at' => 'datetime',
+        'usage_analytics_consent' => 'boolean',
+        'location_data_consent' => 'boolean',
+        'marketing_consent' => 'boolean',
+        'data_sharing_consent' => 'boolean',
+        'privacy_policy_accepted' => 'boolean',
+        'terms_accepted' => 'boolean',
+        'privacy_policy_accepted_at' => 'datetime',
+        'terms_accepted_at' => 'datetime',
+        'consent_updated_at' => 'datetime',
     ];
 
     public function news(){
         return $this->hasMany('App\Models\news', 'created_by');
+    }
+    
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+    
+    public function history()
+    {
+        return $this->hasMany(History::class);
+    }
+    
+    public function deleteAccountRequests()
+    {
+        return $this->hasMany(DeleteAccountRequest::class);
     }
 }

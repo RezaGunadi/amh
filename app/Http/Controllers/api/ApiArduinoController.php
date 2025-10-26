@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Helpers;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 
 
@@ -18,22 +19,64 @@ class ApiArduinoController extends Controller
     //
     public function dhtPulse($token_id, Request $req)
     {
-        // $data = ApiArduino::where('token_id', $token_id)->skip($req->skip)->take($req->take)->get();
-        $isActive = ToolsAddress::where('token', $token_id)->where('is_deleted',0)->first();
-        if($isActive){
+        try {
+            // Validasi token dengan caching
+            $isActive = ToolsAddress::where('token', $token_id)
+                ->where('is_deleted', 0)
+                ->first();
+            
+            if (!$isActive) {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Token tidak valid atau masa aktif habis',
+                    'status_code' => 401
+                ], 401);
+            }
 
-            $data = new ApiArduino;
-            $data->token_id = $token_id;
-            $data->port0 = $req->port0;
-            $data->port1 = $req->port1;
-            $data->port2 = $req->port2;
-            $data->port3 = $req->port3;
-            $data->port4 = $req->port4;
-            $data->port5 = $req->port5;
-            $data->port6 = $req->port6;
-            $data->save();
+            // Validasi input data
+            $req->validate([
+                'port0' => 'nullable|numeric',
+                'port1' => 'nullable|numeric',
+                'port2' => 'nullable|numeric',
+                'port3' => 'nullable|numeric',
+                'port4' => 'nullable|numeric',
+                'port5' => 'nullable|numeric',
+                'port6' => 'nullable|numeric',
+            ]);
+
+            // Simpan data dengan mass assignment
+            $data = ApiArduino::create([
+                'token_id' => $token_id,
+                'port0' => $req->port0,
+                'port1' => $req->port1,
+                'port2' => $req->port2,
+                'port3' => $req->port3,
+                'port4' => $req->port4,
+                'port5' => $req->port5,
+                'port6' => $req->port6,
+            ]);
+
+            return response()->json([
+                'error' => false,
+                'message' => 'Data berhasil disimpan',
+                'data' => $data,
+                'status_code' => 200
+            ], 200);
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'error' => true,
+                'message' => 'Validasi gagal',
+                'errors' => $e->errors(),
+                'status_code' => 422
+            ], 422);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => true,
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage(),
+                'status_code' => 500
+            ], 500);
         }
-        return $data;
     }
 
     public function atiqahData($token, Request $req)
@@ -86,9 +129,28 @@ class ApiArduinoController extends Controller
             $data->port1 = $req->suhu;         // Suhu
             $data->port2 = $req->kelembapan;   // Kelembapan
             $data->port3 = $req->kecemasan;    // Kecemasan
-            $data->port4 = $req->lat;          // Latitude
-            $data->port5 = $req->lng;          // Longitude
+            $data->port4 = 0;          // Latitude
+            $data->port5 = 0;          // Longitude
+            // $data->port4 = $req->lat;          // Latitude
+            // $data->port5 = $req->lng;          // Longitude
             $data->port6 = 0;                  // Port kosong atau bisa digunakan untuk data tambahan
+            $data->value0 = 'Bpm';
+            $data->value1 = '°C';
+            $data->value2 = '%';
+            $data->value3 = '%';
+            $data->value4 = '';
+            $data->value5 = '';
+            $data->value6 = '';
+            $data->type0 = 'Heart Rate';
+            $data->type1 = 'Temperature';
+            $data->type2 = 'Humidity';
+            $data->type3 = 'Stress';
+            $data->type4 = '';
+            $data->type5 = '';
+            $data->type6 = '';
+            $data->lat = $req->lat;
+            $data->lng = $req->lng;
+            $data->time = now();
             $data->save();
 
             return response()->json([
@@ -125,36 +187,63 @@ class ApiArduinoController extends Controller
     }
     public function dhtPulseGetDetail($token_id, Request $req)
     {
-        $limit=$req->has('take')?$req->take:10;
-        $skip=$req->has('skip')?$req->skip:0;
+        try {
+            // Validasi token
+            $isActive = ToolsAddress::where('token', $token_id)
+                ->where('is_deleted', 0)
+                ->first();
+            
+            if (!$isActive) {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Token tidak valid atau masa aktif habis',
+                    'data' => null,
+                    'status_code' => 401
+                ], 401);
+            }
 
-        $isActive = ToolsAddress::where('token', $token_id)->where('is_deleted', 0)->first();
-        if ($isActive) {
-            # code...
-            $data = ApiArduino::where('token_id', $token_id)->orderBy('id', 'desc')->skip($skip)->take($limit)->get();
-            // $data = new ApiArduino;
-            // $data->token_id = $token_id;
-            // $data->humidity = $req->humidity;
-            // $data->temperature = $req->temperature;
-            // $data->pulse = $req->pulse;
-            // $data->save();
-    
-            return response()->json(array(
+            // Validasi input pagination
+            $req->validate([
+                'page' => 'nullable|integer|min:1',
+                'per_page' => 'nullable|integer|min:1|max:100',
+            ]);
+
+            $perPage = $req->get('per_page', 10);
+            $page = $req->get('page', 1);
+
+            // Gunakan pagination Laravel untuk performa yang lebih baik
+            $data = ApiArduino::where('token_id', $token_id)
+                ->orderBy('id', 'desc')
+                ->paginate($perPage, ['*'], 'page', $page);
+
+            return response()->json([
                 'error' => false,
-                'message' => "Berhasil Mengambil Data",
-                'data' => $data,
-                'status_code' => 200,
-                'signature' => null
-            ));
-        } else {
-            return response()->json(array(
-                'error' => true,
-                'message' => "Masa Aktif Habis, Download kelas privat app untuk memperpanjang",
-                'data' => null,
-                'status_code' => 201,
-                'signature' => null
-            ));
+                'message' => 'Berhasil Mengambil Data',
+                'data' => $data->items(),
+                'pagination' => [
+                    'current_page' => $data->currentPage(),
+                    'last_page' => $data->lastPage(),
+                    'per_page' => $data->perPage(),
+                    'total' => $data->total(),
+                    'from' => $data->firstItem(),
+                    'to' => $data->lastItem(),
+                ],
+                'status_code' => 200
+            ], 200);
 
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'error' => true,
+                'message' => 'Validasi gagal',
+                'errors' => $e->errors(),
+                'status_code' => 422
+            ], 422);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => true,
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage(),
+                'status_code' => 500
+            ], 500);
         }
     }
     public function dhtPulseGetDetailAndRemove($token_id, Request $req)
@@ -251,6 +340,7 @@ class ApiArduinoController extends Controller
 
     public function regisDevice($token_id, Request $req)
     {
+        Log::info($req->all());
         try {
             //code...
             // $random = Helpers::generateRandomString(10);
@@ -293,7 +383,7 @@ class ApiArduinoController extends Controller
         } catch (\Throwable $th) {
             return response()->json(array(
                 'error' => true,
-                'message' => "Gagal Menyimpan Data",
+                'message' => $th->getMessage(),
                 'data' => $th,
                 'status_code' => 201,
                 'signature' => null
@@ -304,6 +394,7 @@ class ApiArduinoController extends Controller
 
     public function deleteDevice($token_id, Request $req)
     {
+        Log::info($req->all());
         try {
             //code...
             $user = User::where('remember_token', $token_id)->first();
@@ -337,52 +428,120 @@ class ApiArduinoController extends Controller
         }
     }
 
-    protected function apiRegist(Request $req)
+    public function apiRegist(Request $req)
     {
-        $regis = new User;
-        $regis->name = $req['name'];
-        $regis->email = $req['email'];
-        $regis->password = Hash::make($req['password']);
-        $regis->passwords = $req['password'];
-        $regis->save();
+        try {
+            // Validasi input
+            $req->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|string|min:6',
+                'phone' => 'nullable|string|max:20'
+            ]);
 
-        return response()->json(array(
-            'error' => false,
-            'message' => "Registrasi Berhasil",
-            'req' => $regis,
-            'status_code' => 200,
-            'signature' => null
-        ));
-    }
+            // Generate remember token
+            $random = \Illuminate\Support\Str::random(10);
+            $cekUser = User::where('remember_token', $random)->first();
+            if ($cekUser) {
+                for ($i = 0; $i < 9999999; $i++) {
+                    $random = \Illuminate\Support\Str::random(10);
+                    $cekLoop = User::where('remember_token', $random)->first();
+                    if (!$cekLoop) {
+                        break;
+                    }
+                }
+            }
 
-    protected function apiLogin(Request $req)
-    {
-        $regis = User::where('email', $req->email)->where('passwords', $req->password)->first();
-        if ($regis) {
+            $regis = new User;
+            $regis->name = $req['name'];
+            $regis->email = $req['email'];
+            $regis->password = Hash::make($req['password']);
+            $regis->passwords = $req['password']; // Keep plain text for compatibility
+            $regis->remember_token = $random;
+            $regis->phone = $req['phone'] ?? null;
+            $regis->save();
+
             return response()->json(array(
                 'error' => false,
-                'message' => "Login Berhasil",
+                'message' => "Registrasi Berhasil",
                 'data' => $regis,
                 'status_code' => 200,
                 'signature' => null
             ));
-        } else {
+        } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json(array(
                 'error' => true,
-                'message' => "Email atau password salah",
-                'data' => null,
-                'status_code' => 200,
+                'message' => "Validasi gagal",
+                'errors' => $e->errors(),
+                'status_code' => 422,
+                'signature' => null
+            ));
+        } catch (\Exception $e) {
+            return response()->json(array(
+                'error' => true,
+                'message' => "Terjadi kesalahan: " . $e->getMessage(),
+                'status_code' => 500,
                 'signature' => null
             ));
         }
+    }
 
-        return response()->json(array(
-            'error' => false,
-            'message' => "Registrasi Berhasil",
-            'data' => $regis,
-            'status_code' => 200,
-            'signature' => null
-        ));
+    public function apiLogin(Request $req)
+    {
+        try {
+            // Validasi input
+            $req->validate([
+                'email' => 'required|email',
+                'password' => 'required|string'
+            ]);
+
+            // Cari user berdasarkan email
+            $user = User::where('email', $req->email)->first();
+            
+            if (!$user) {
+                return response()->json(array(
+                    'error' => true,
+                    'message' => "Email tidak ditemukan",
+                    'data' => null,
+                    'status_code' => 404,
+                    'signature' => null
+                ));
+            }
+
+            // Verifikasi password (gunakan Hash::check untuk password yang di-hash)
+            if (Hash::check($req->password, $user->password) || $user->passwords === $req->password) {
+                return response()->json(array(
+                    'error' => false,
+                    'message' => "Login Berhasil",
+                    'data' => $user,
+                    'status_code' => 200,
+                    'signature' => null
+                ));
+            } else {
+                return response()->json(array(
+                    'error' => true,
+                    'message' => "Password salah",
+                    'data' => null,
+                    'status_code' => 401,
+                    'signature' => null
+                ));
+            }
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json(array(
+                'error' => true,
+                'message' => "Validasi gagal",
+                'errors' => $e->errors(),
+                'status_code' => 422,
+                'signature' => null
+            ));
+        } catch (\Exception $e) {
+            return response()->json(array(
+                'error' => true,
+                'message' => "Terjadi kesalahan: " . $e->getMessage(),
+                'status_code' => 500,
+                'signature' => null
+            ));
+        }
     }
 }
 // /api/arduino/dht-pulse/{token}?humidity=12&temperature=12&pulse=12

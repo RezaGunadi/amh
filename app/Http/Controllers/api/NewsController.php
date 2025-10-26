@@ -123,7 +123,14 @@ class NewsController extends Controller
 
     public function helpRequest(Request $req)
     {
-        $user = User::where('remember_token', $req->mobile_token)->where('role', "ADMIN")->first();
+        $reqData = $req->all();
+        $remember_token = '';
+        if (array_key_exists('mobile_token', $reqData)) {
+            $remember_token = $reqData['mobile_token'];
+        } else {
+            $remember_token = $reqData['remember_token'];
+        }
+        $user = User::where('remember_token', $remember_token)->where('role', "ADMIN")->first();
         if (!$user) {
             return response()->json(array(
                 'error' => true,

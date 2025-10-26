@@ -20,14 +20,14 @@
             <p class="text-muted mb-0">
                 {{ $paket->mapel }} - {{ $paket->jenjang }}
             </p>
-  </div>
+        </div>
         <div class="d-flex align-items-center">
             <div class="me-3">
                 <span class="badge bg-primary bg-opacity-10 text-primary">
                     <i class="fas fa-clock me-1"></i>
                     <span id="timer">00:00:00</span>
                 </span>
-          </div>
+            </div>
             <div class="dropdown">
                 <button class="btn btn-outline-secondary" type="button" data-bs-toggle="dropdown">
                     <i class="fas fa-ellipsis-v"></i>
@@ -39,7 +39,7 @@
                         </a>
                     </li>
                 </ul>
-      </div>
+            </div>
         </div>
     </div>
 
@@ -69,23 +69,22 @@
                 <div class="progress-bar bg-success" role="progressbar" style="width: 0%" id="progressBar"></div>
             </div>
         </div>
-        </div>
+    </div>
 
     <!-- Question Navigation -->
     <div class="card shadow-sm mb-4">
         <div class="card-body">
             <div class="d-flex flex-wrap gap-2" id="questionNav">
                 @for($i = 0; $i < $allSoal->count(); $i++)
-                    <button type="button" 
-                            class="btn btn-sm question-nav-btn {{ $i === (int)$currentIndex ? 'active' : '' }} {{ isset($answers[$i]) && $answers[$i] !== '' ? 'answered' : '' }} {{ isset($flagged[$i]) && $flagged[$i] ? 'flagged' : '' }}"
-                            data-index="{{ $i }}"
-                            onclick="navigateToQuestion({{ $i }})">
+                    <button type="button"
+                        class="btn btn-sm question-nav-btn {{ $i === (int)$currentIndex ? 'active' : '' }} {{ isset($answers[$i]) && $answers[$i] !== '' ? 'answered' : '' }} {{ isset($flagged[$i]) && $flagged[$i] ? 'flagged' : '' }}"
+                        data-index="{{ $i }}" onclick="navigateToQuestion({{ $i }})">
                         {{ $i + 1 }}
                     </button>
-                @endfor
+                    @endfor
+            </div>
         </div>
-        </div>
-      </div>
+    </div>
 
     <!-- Question Container -->
     <div class="card shadow-sm mb-4">
@@ -94,107 +93,94 @@
                 @csrf
                 <input type="hidden" name="paket" value="{{ $paket->id }}">
                 <input type="hidden" name="index" value="{{ (int)$currentIndex }}">
-                <input type="hidden" name="answers[{{ (int)$currentIndex }}]" id="selectedAnswer" value="{{ isset($answers[(int)$currentIndex]) ? $answers[(int)$currentIndex] : '' }}">
-                
+                <input type="hidden" name="answers[{{ (int)$currentIndex }}]" id="selectedAnswer"
+                    value="{{ isset($answers[(int)$currentIndex]) ? $answers[(int)$currentIndex] : '' }}">
+
                 <!-- Question Number and Text -->
                 <div class="mb-4">
                     <div class="d-flex justify-content-between align-items-start mb-3">
                         <span class="badge bg-primary bg-opacity-10 text-primary">
                             Soal {{ (int)$currentIndex + 1 }}
                         </span>
-                        <button type="button" 
-                                class="btn btn-sm btn-outline-warning flag-btn"
-                                data-index="{{ (int)$currentIndex }}"
-                                data-flagged="{{ isset($flagged[(int)$currentIndex]) && $flagged[(int)$currentIndex] ? 'true' : 'false' }}">
+                        <button type="button" class="btn btn-sm btn-outline-warning flag-btn"
+                            data-index="{{ (int)$currentIndex }}"
+                            data-flagged="{{ isset($flagged[(int)$currentIndex]) && $flagged[(int)$currentIndex] ? 'true' : 'false' }}">
                             <i class="fas fa-flag me-2"></i>
                             Tandai
                         </button>
                     </div>
                     <h3 class="h4 mb-3">{{ $soal->soal }}</h3>
-                    
+
                     @if($soal->image_soal)
-                        <div class="mb-4">
-                            <img src="{{ URL::To($soal->image_soal) }}" 
-                                 alt="Gambar Soal" 
-                                 class="img-fluid rounded"
-                                 style="max-height: 300px;"
-                                 loading="lazy">
-                        </div>
+                    <div class="mb-4">
+                        <img src="{{ URL::To($soal->image_soal) }}" alt="Gambar Soal" class="img-fluid rounded"
+                            style="max-height: 300px;" loading="lazy">
+                    </div>
                     @endif
                 </div>
 
                 <!-- Answer Options -->
                 <div class="mb-4">
                     @php
-                        $options = [
-                            'A' => ['text' => $soal->jawaban_a, 'image' => $soal->image_a],
-                            'B' => ['text' => $soal->jawaban_b, 'image' => $soal->image_b],
-                            'C' => ['text' => $soal->jawaban_c, 'image' => $soal->image_c],
-                            'D' => ['text' => $soal->jawaban_d, 'image' => $soal->image_d],
-                            'E' => ['text' => $soal->jawaban_e, 'image' => $soal->image_e]
-                        ];
+                    $options = [
+                    'A' => ['text' => $soal->jawaban_a, 'image' => $soal->image_a],
+                    'B' => ['text' => $soal->jawaban_b, 'image' => $soal->image_b],
+                    'C' => ['text' => $soal->jawaban_c, 'image' => $soal->image_c],
+                    'D' => ['text' => $soal->jawaban_d, 'image' => $soal->image_d],
+                    'E' => ['text' => $soal->jawaban_e, 'image' => $soal->image_e]
+                    ];
                     @endphp
 
                     @foreach($options as $key => $option)
-                        <div class="form-check custom-option mb-3">
-                            <input type="radio" 
-                                   name="answer_radio" 
-                                   value="{{ $key }}" 
-                                   id="answer_{{ $key }}"
-                                   class="form-check-input"
-                                   {{ isset($answers[(int)$currentIndex]) && $answers[(int)$currentIndex] == $key ? 'checked' : '' }}>
-                            <label class="form-check-label w-100" for="answer_{{ $key }}">
-                                <div class="card h-100">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center">
-                                            <span class="badge bg-light text-dark me-3">{{ $key }}</span>
-                                            <span>{{ $option['text'] }}</span>
-                                        </div>
-                                        @if($option['image'])
-                                            <div class="mt-2">
-                                                <img src="{{ URL::To($option['image']) }}" 
-                                                     alt="Gambar Jawaban" 
-                                                     class="img-fluid rounded"
-                                                     style="max-height: 100px;"
-                                                     loading="lazy">
-                                            </div>
-                                        @endif
+                    <div class="form-check custom-option mb-3">
+                        <input type="radio" name="answer_radio" value="{{ $key }}" id="answer_{{ $key }}"
+                            class="form-check-input"
+                            {{ isset($answers[(int)$currentIndex]) && $answers[(int)$currentIndex] == $key ? 'checked' : '' }}>
+                        <label class="form-check-label w-100" for="answer_{{ $key }}">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <span class="badge bg-light text-dark me-3">{{ $key }}</span>
+                                        <span>{{ $option['text'] }}</span>
                                     </div>
+                                    @if($option['image'])
+                                    <div class="mt-2">
+                                        <img src="{{ URL::To($option['image']) }}" alt="Gambar Jawaban"
+                                            class="img-fluid rounded" style="max-height: 100px;" loading="lazy">
+                                    </div>
+                                    @endif
                                 </div>
-                            </label>
-                        </div>
+                            </div>
+                        </label>
+                    </div>
                     @endforeach
                 </div>
 
                 <!-- Navigation Buttons -->
                 <div class="d-flex justify-content-between">
                     @if((int)$currentIndex > 0)
-                        <button type="button" 
-                                class="btn btn-outline-primary"
-                                onclick="navigateToQuestion({{ (int)$currentIndex - 1 }})">
-                            <i class="fas fa-arrow-left me-2"></i>Soal Sebelumnya
-                        </button>
-          @else
-                        <div></div>
+                    <button type="button" class="btn btn-outline-primary"
+                        onclick="navigateToQuestion({{ (int)$currentIndex - 1 }})">
+                        <i class="fas fa-arrow-left me-2"></i>Soal Sebelumnya
+                    </button>
+                    @else
+                    <div></div>
                     @endif
 
                     @if((int)$currentIndex < $allSoal->count() - 1)
-                        <button type="button" 
-                                class="btn btn-primary"
-                                onclick="navigateToQuestion({{ (int)$currentIndex + 1 }})">
+                        <button type="button" class="btn btn-primary"
+                            onclick="navigateToQuestion({{ (int)$currentIndex + 1 }})">
                             Soal Selanjutnya
                             <i class="fas fa-arrow-right ms-2"></i>
                         </button>
-                    @else
-                        <button type="button" 
-                                class="btn btn-success"
-                                onclick="submitFinalAnswer()">
+                        @else
+                        <button type="button" class="btn btn-success" onclick="submitFinalAnswer()">
                             Simpan & Lihat Hasil
                             <i class="fas fa-check ms-2"></i>
                         </button>
-          @endif
+                        @endif
                 </div>
-    </form>
+            </form>
         </div>
     </div>
 </div>
@@ -233,47 +219,47 @@
         color: #6c757d;
         transition: all 0.2s;
     }
-    
+
     .question-nav-btn:hover {
         background-color: #e9ecef;
         border-color: #ced4da;
     }
-    
+
     .question-nav-btn.active {
         background-color: #0d6efd;
         border-color: #0d6efd;
         color: #fff;
     }
-    
+
     .question-nav-btn.answered {
         background-color: #198754;
         border-color: #198754;
         color: #fff;
     }
-    
+
     .question-nav-btn.flagged {
         background-color: #ffc107;
         border-color: #ffc107;
         color: #000;
     }
-    
+
     .custom-option .form-check-input {
         display: none;
     }
-    
+
     .custom-option .form-check-label {
         cursor: pointer;
     }
-    
-    .custom-option .form-check-input:checked + .form-check-label .card {
+
+    .custom-option .form-check-input:checked+.form-check-label .card {
         border-color: #0d6efd;
         background-color: #f8f9fa;
     }
-    
+
     .custom-option .card {
         transition: all 0.2s;
     }
-    
+
     .custom-option .card:hover {
         border-color: #0d6efd;
         background-color: #f8f9fa;
@@ -508,7 +494,7 @@
 
     // Initialize progress
     updateProgress();
-    </script>
+</script>
 @endpush
 
 @endsection

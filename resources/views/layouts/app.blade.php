@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'KelasPrivat.id - Les Privat Online Terbaik')</title>
-    <meta name="description" content="@yield('meta_description', 'Les privat online terbaik dengan pengajar berpengalaman. Program les privat SD, SMP, SMA dengan metode pembelajaran interaktif.')">
-    <meta name="keywords" content="@yield('meta_keywords', 'les privat, les privat online, bimbel online, les privat SD, les privat SMP, les privat SMA')">
+    <meta name="description"
+        content="@yield('meta_description', 'Les privat online terbaik dengan pengajar berpengalaman. Program les privat SD, SMP, SMA dengan metode pembelajaran interaktif.')">
+    <meta name="keywords"
+        content="@yield('meta_keywords', 'les privat, les privat online, bimbel online, les privat SD, les privat SMP, les privat SMA')">
     @section('og_title', 'Judul untuk social media')
     @section('og_description', 'Deskripsi untuk social media')
     @section('og_image', asset('images/og-image.jpg'))
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="icon" type="image/svg+xml" href="/favicon-32x32.svg" sizes="32x32">
@@ -19,33 +22,34 @@
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#2563EB">
     <meta name="msapplication-TileColor" content="#2563EB">
-    
+
     <!-- PWA Meta Tags -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="KelasPrivat">
     <meta name="msapplication-config" content="/browserconfig.xml">
-    
+
     <!-- Apple Touch Icons -->
     <link rel="apple-touch-icon" href="/assets/img/icon-152x152.png">
     <link rel="apple-touch-icon" sizes="152x152" href="/assets/img/icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/icon-180x180.png">
     <link rel="apple-touch-icon" sizes="167x167" href="/assets/img/icon-167x167.png">
-    
+
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
 
-    
+
+
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <!-- AOS Animation -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
+
     <!-- Custom CSS -->
     <style>
         /* Custom Bootstrap Enhancements */
@@ -70,13 +74,13 @@
             --gray-800: #1F2937;
             --gray-900: #111827;
         }
-        
+
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             color: var(--dark-color);
             background-color: var(--light-color);
         }
-        
+
         /* Enhanced Navbar */
         .navbar {
             background: rgba(255, 255, 255, 0.98) !important;
@@ -91,7 +95,7 @@
             width: 100% !important;
             min-height: 70px !important;
         }
-        
+
         .navbar-brand {
             font-weight: 700;
             font-size: 1.5rem;
@@ -102,7 +106,7 @@
             visibility: visible !important;
             opacity: 1 !important;
         }
-        
+
         .nav-link {
             font-weight: 500;
             color: var(--dark-color);
@@ -110,7 +114,7 @@
             transition: all 0.3s ease;
             position: relative;
         }
-        
+
         .nav-link::after {
             content: '';
             position: absolute;
@@ -122,11 +126,11 @@
             transition: all 0.3s ease;
             transform: translateX(-50%);
         }
-        
+
         .nav-link:hover::after {
             width: 100%;
         }
-        
+
         /* Enhanced Buttons */
         .btn {
             padding: 0.75rem 1.5rem;
@@ -139,31 +143,31 @@
             visibility: visible !important;
             opacity: 1 !important;
         }
-        
+
         .btn-primary {
             background: var(--primary-color);
             border: none;
             color: white;
             box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
         }
-        
+
         .btn-primary:hover {
             background: var(--primary-dark);
             transform: translateY(-2px);
             box-shadow: 0 8px 15px -3px rgba(37, 99, 235, 0.3);
         }
-        
+
         .btn-outline-primary {
             border: 2px solid var(--primary-color);
             color: var(--primary-color);
         }
-        
+
         .btn-outline-primary:hover {
             background: var(--primary-color);
             color: white;
             transform: translateY(-2px);
         }
-        
+
         /* Enhanced Footer */
         .footer {
             background: var(--dark-color);
@@ -172,7 +176,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .footer::before {
             content: '';
             position: absolute;
@@ -182,19 +186,19 @@
             height: 4px;
             background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
         }
-        
+
         .footer-link {
             color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
             transition: all 0.3s ease;
             display: inline-block;
         }
-        
+
         .footer-link:hover {
             color: white;
             transform: translateX(5px);
         }
-        
+
         .social-icon {
             width: 40px;
             height: 40px;
@@ -207,29 +211,29 @@
             transition: all 0.3s ease;
             margin: 0 0.5rem;
         }
-        
+
         .social-icon:hover {
             background: var(--primary-color);
             transform: translateY(-3px) rotate(360deg);
         }
-        
+
         /* Enhanced Cards */
         .card {
             border: none;
             border-radius: 1rem;
             background: white;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
-                        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                0 2px 4px -1px rgba(0, 0, 0, 0.06);
             transition: all 0.3s ease;
             overflow: hidden;
         }
-        
+
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 
-                        0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+                0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
-        
+
         /* Enhanced Form Controls */
         .form-control {
             padding: 0.75rem 1rem;
@@ -237,85 +241,97 @@
             border: 2px solid var(--gray-200);
             transition: all 0.3s ease;
         }
-        
+
         .form-control:focus {
             border-color: var(--primary-color);
             box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
         }
-        
+
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 10px;
         }
-        
+
         ::-webkit-scrollbar-track {
             background: #f1f1f1;
         }
-        
+
         ::-webkit-scrollbar-thumb {
             background: var(--primary-color);
             border-radius: 5px;
         }
-        
+
         ::-webkit-scrollbar-thumb:hover {
             background: var(--secondary-color);
         }
-        
+
         /* Gradients */
         .gradient-primary {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
         }
-        
+
         .gradient-dark {
             background: linear-gradient(135deg, var(--secondary-color) 0%, var(--dark-color) 100%);
         }
-        
+
         /* Animations */
         .fade-in {
             animation: fadeIn 0.5s ease-in-out;
         }
-        
+
         .slide-up {
             animation: slideUp 0.5s ease-out;
         }
-        
+
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
-        
+
         @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
-        
+
         /* Hover Effects */
         .hover-lift {
             transition: transform 0.3s ease;
         }
-        
+
         .hover-lift:hover {
             transform: translateY(-5px);
         }
-        
+
         .hover-glow {
             transition: box-shadow 0.3s ease;
         }
-        
+
         .hover-glow:hover {
             box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
         }
-        
+
         /* Mobile Responsive */
         @media (max-width: 991.98px) {
             .navbar-toggler {
                 display: block !important;
             }
-            
+
             .navbar-collapse {
                 display: none !important;
             }
-            
+
             .navbar-collapse.show {
                 display: flex !important;
                 flex-direction: column !important;
@@ -324,22 +340,22 @@
                 left: 0 !important;
                 right: 0 !important;
                 background: white !important;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
                 padding: 1rem !important;
             }
-            
+
             .navbar-nav {
                 flex-direction: column !important;
                 width: 100% !important;
             }
-            
+
             .navbar-nav .nav-item {
                 width: 100% !important;
                 margin-bottom: 0.5rem !important;
             }
         }
 
-        
+
         /* Floating Orbs */
         .bg-gradient-primary .floating-orb {
             position: absolute;
@@ -371,7 +387,7 @@
             top: 50%;
             left: -75px;
             animation-delay: -10s;
-        }   
+        }
 
         /* Enhanced Animations */
         .floating {
@@ -379,15 +395,31 @@
         }
 
         @keyframes floating {
-            0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(2deg); }
-            100% { transform: translateY(0px) rotate(0deg); }
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(2deg);
+            }
+
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
         }
 
         @keyframes floatOrb {
-            0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-            100% { transform: translateY(0) rotate(360deg); }
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+
+            100% {
+                transform: translateY(0) rotate(360deg);
+            }
         }
 
         :root {
@@ -424,13 +456,13 @@
             --spacing-16: 4rem;
             --spacing-20: 5rem;
         }
-        
+
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             color: var(--dark-color);
             background-color: var(--light-color);
         }
-        
+
         .navbar {
             background: rgba(255, 255, 255, 0.98) !important;
             backdrop-filter: blur(10px) !important;
@@ -442,11 +474,11 @@
             right: 0 !important;
             z-index: 1030 !important;
         }
-        
+
         .navbar.scrolled {
             padding: 0.5rem 0;
         }
-        
+
         .navbar-brand {
             font-weight: 700;
             font-size: 1.5rem;
@@ -454,7 +486,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        
+
         .nav-link {
             font-weight: 500;
             color: var(--dark-color);
@@ -462,7 +494,7 @@
             transition: all 0.3s ease;
             position: relative;
         }
-        
+
         .nav-link::after {
             content: '';
             position: absolute;
@@ -474,11 +506,11 @@
             transition: all 0.3s ease;
             transform: translateX(-50%);
         }
-        
+
         .nav-link:hover::after {
             width: 100%;
         }
-        
+
         .btn {
             padding: 0.75rem 1.5rem;
             font-weight: 600;
@@ -487,31 +519,31 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .btn-primary {
             background: var(--primary-color);
             border: none;
             color: white;
             box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
         }
-        
+
         .btn-primary:hover {
             background: var(--primary-dark);
             transform: translateY(-2px);
             box-shadow: 0 8px 15px -3px rgba(37, 99, 235, 0.3);
         }
-        
+
         .btn-outline-primary {
             border: 2px solid var(--primary-color);
             color: var(--primary-color);
         }
-        
+
         .btn-outline-primary:hover {
             background: var(--primary-color);
             color: white;
             transform: translateY(-2px);
         }
-        
+
         .footer {
             background: var(--dark-color);
             color: white;
@@ -519,7 +551,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .footer::before {
             content: '';
             position: absolute;
@@ -529,19 +561,19 @@
             height: 4px;
             background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
         }
-        
+
         .footer-link {
             color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
             transition: all 0.3s ease;
             display: inline-block;
         }
-        
+
         .footer-link:hover {
             color: white;
             transform: translateX(5px);
         }
-        
+
         .social-icon {
             width: 40px;
             height: 40px;
@@ -554,28 +586,28 @@
             transition: all 0.3s ease;
             margin: 0 0.5rem;
         }
-        
+
         .social-icon:hover {
             background: var(--primary-color);
             transform: translateY(-3px) rotate(360deg);
         }
-        
+
         .card {
             border: none;
             border-radius: 1rem;
             background: white;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
-                        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                0 2px 4px -1px rgba(0, 0, 0, 0.06);
             transition: all 0.3s ease;
             overflow: hidden;
         }
-        
+
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 
-                        0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+                0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
-        
+
         .feature-icon {
             width: 70px;
             height: 70px;
@@ -589,135 +621,152 @@
             margin-bottom: 1.5rem;
             transition: all 0.3s ease;
         }
-        
+
         .feature-icon:hover {
             transform: rotate(10deg) scale(1.1);
         }
-        
+
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 10px;
         }
-        
+
         ::-webkit-scrollbar-track {
             background: #f1f1f1;
         }
-        
+
         ::-webkit-scrollbar-thumb {
             background: var(--primary-color);
             border-radius: 5px;
         }
-        
+
         ::-webkit-scrollbar-thumb:hover {
             background: var(--secondary-color);
         }
-        
+
         /* Gradien modern */
         .gradient-primary {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
         }
-        
+
         .gradient-dark {
             background: linear-gradient(135deg, var(--secondary-color) 0%, var(--dark-color) 100%);
         }
-        
+
         /* Typography system yang lebih profesional */
-        h1, .h1 {
+        h1,
+        .h1 {
             font-size: 3.5rem;
             font-weight: 700;
             line-height: 1.2;
             letter-spacing: -0.02em;
         }
-        
-        h2, .h2 {
+
+        h2,
+        .h2 {
             font-size: 2.5rem;
             font-weight: 700;
             line-height: 1.3;
             letter-spacing: -0.01em;
         }
-        
-        h3, .h3 {
+
+        h3,
+        .h3 {
             font-size: 2rem;
             font-weight: 600;
             line-height: 1.4;
         }
-        
-        h4, .h4 {
+
+        h4,
+        .h4 {
             font-size: 1.5rem;
             font-weight: 600;
             line-height: 1.5;
         }
-        
-        p, .p {
+
+        p,
+        .p {
             font-size: 1.125rem;
             line-height: 1.7;
             color: var(--gray-600);
         }
-        
+
         .lead {
             font-size: 1.25rem;
             font-weight: 400;
             line-height: 1.6;
             color: var(--gray-700);
         }
-        
+
         /* Container yang lebih responsif */
         .container {
             max-width: 1280px;
             padding-left: var(--spacing-4);
             padding-right: var(--spacing-4);
         }
-        
+
         @media (min-width: 640px) {
             .container {
                 padding-left: var(--spacing-6);
                 padding-right: var(--spacing-6);
             }
         }
-        
+
         @media (min-width: 1024px) {
             .container {
                 padding-left: var(--spacing-8);
                 padding-right: var(--spacing-8);
             }
         }
-        
+
         /* Animasi yang lebih halus */
         .fade-in {
             animation: fadeIn 0.5s ease-in-out;
         }
-        
+
         .slide-up {
             animation: slideUp 0.5s ease-out;
         }
-        
+
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
-        
+
         @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
-        
+
         /* Hover effects yang lebih menarik */
         .hover-lift {
             transition: transform 0.3s ease;
         }
-        
+
         .hover-lift:hover {
             transform: translateY(-5px);
         }
-        
+
         .hover-glow {
             transition: box-shadow 0.3s ease;
         }
-        
+
         .hover-glow:hover {
             box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
         }
-        
+
         /* Input fields yang lebih modern */
         .form-control {
             padding: 0.75rem 1rem;
@@ -725,17 +774,17 @@
             border: 2px solid var(--gray-200);
             transition: all 0.3s ease;
         }
-        
+
         .form-control:focus {
             border-color: var(--primary-color);
             box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
         }
-        
+
         /* Custom select yang lebih menarik */
         .select-wrapper {
             position: relative;
         }
-        
+
         .select-wrapper::after {
             content: '';
             position: absolute;
@@ -751,6 +800,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
@@ -781,31 +831,37 @@
                 </ul>
                 <div class="ms-lg-3">
                     @auth
-                        <div class="dropdown">
-                            <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                                <i class="fas fa-user-circle me-1"></i>{{ Auth::user()->name }}
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="/profile"><i class="fas fa-user me-2"></i>Profil</a></li>
-                                <li><a class="dropdown-item" href="/dashboard"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a></li>
-                                @if(auth()->user()->role === 'owner')
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="{{ route('admin.blog.index') }}"><i class="fas fa-blog me-2"></i>Kelola Blog</a></li>
-                                @endif
-                                <li><hr class="dropdown-divider"></li>
-                                <li>
-                                    <form method="POST" action="{{ route('logout') }}">
-                                        @csrf
-                                        <button type="submit" class="dropdown-item text-danger">
-                                            <i class="fas fa-sign-out-alt me-2"></i>Logout
-                                        </button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle me-1"></i>{{ Auth::user()->name }}
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="/profile"><i class="fas fa-user me-2"></i>Profil</a></li>
+                            <li><a class="dropdown-item" href="/dashboard"><i
+                                        class="fas fa-tachometer-alt me-2"></i>Dashboard</a></li>
+                            @if(auth()->user()->role === 'owner')
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="{{ route('admin.blog.index') }}"><i
+                                        class="fas fa-blog me-2"></i>Kelola Blog</a></li>
+                            @endif
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item text-danger">
+                                        <i class="fas fa-sign-out-alt me-2"></i>Logout
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
                     @else
-                        <a href="/login" class="btn btn-outline-primary me-2">Masuk</a>
-                        <a href="/register" class="btn btn-primary">Daftar</a>
+                    <a href="/login" class="btn btn-outline-primary me-2">Masuk</a>
+                    <a href="/register" class="btn btn-primary">Daftar</a>
                     @endauth
                 </div>
             </div>
@@ -814,8 +870,9 @@
 
     <!-- Main Content -->
     <main class="pt-5" style="padding-top: 100px;">
+        @yield('content-top')
         @yield('content')
-        
+
     </main>
 
     <!-- Footer -->
@@ -824,7 +881,8 @@
             <div class="row g-4">
                 <div class="col-lg-4">
                     <h5 class="fw-bold mb-3">KelasPrivat.id</h5>
-                    <p class="footer-link">Platform les privat online terbaik di Indonesia dengan pengajar berpengalaman dan metode pembelajaran interaktif.</p>
+                    <p class="footer-link">Platform les privat online terbaik di Indonesia dengan pengajar berpengalaman
+                        dan metode pembelajaran interaktif.</p>
                     <div class="mt-4 d-flex gap-2">
                         <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
@@ -853,9 +911,12 @@
                 <div class="col-lg-4">
                     <h6 class="fw-bold mb-3">Kontak Kami</h6>
                     <ul class="list-unstyled">
-                        <li class="mb-2 footer-link"><i class="fas fa-map-marker-alt me-2 text-primary"></i>Griya Family 4, Kab. Bekasi</li>
-                        <li class="mb-2"><a href="https://wa.me/6281211006445" class="footer-link"><i class="fas fa-phone me-2 text-primary"></i>+62 812 1100 6445</a></li>
-                        <li class="mb-2 footer-link"><i class="fas fa-envelope me-2 text-primary"></i>info@kelasprivat.id</li>
+                        <li class="mb-2 footer-link"><i class="fas fa-map-marker-alt me-2 text-primary"></i>Griya Family
+                            4, Kab. Bekasi</li>
+                        <li class="mb-2"><a href="https://wa.me/6281211006445" class="footer-link"><i
+                                    class="fas fa-phone me-2 text-primary"></i>+62 812 1100 6445</a></li>
+                        <li class="mb-2 footer-link"><i
+                                class="fas fa-envelope me-2 text-primary"></i>info@kelasprivat.id</li>
                     </ul>
                 </div>
             </div>
@@ -874,16 +935,16 @@
 
     <!-- Structured Data -->
     @include('partials.structured-data')
-    
+
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <!-- AOS Animation -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    
+
     <!-- Custom Scripts -->
     @stack('scripts')
-    
+
     <script>
         // Initialize AOS
         AOS.init({
@@ -968,4 +1029,5 @@
         });
     </script>
 </body>
+
 </html>

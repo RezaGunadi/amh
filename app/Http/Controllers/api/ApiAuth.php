@@ -72,13 +72,23 @@ class ApiAuth extends Controller
             'signature' => null
         ));
     }
-    protected function apiUpdate(Request $req)
+    public function apiUpdate(Request $req)
     {
         $data = User::where('remember_token', $req->remember_token)->first();
 
-        $data->name = $req['name'];
-        $data->email = $req['email'];
-        $data->hp = $req['phone'];
+        $reqData = $req->all();
+        if(array_key_exists('name', $reqData)){
+            $data->name = $reqData['name'];
+        }
+        if(array_key_exists('email', $reqData)){
+            $data->email = $reqData['email'];
+        }
+        if(array_key_exists('phone', $reqData)){
+            $data->hp = $reqData['phone'];
+        }
+        if(array_key_exists('school', $reqData)){
+            $data->school = $reqData['school'];
+        }
         $data->save();
 
         return response()->json(array(
@@ -89,12 +99,19 @@ class ApiAuth extends Controller
             'signature' => null
         ));
     }
-    protected function apiChangePassword(Request $req)
+    public function apiChangePassword(Request $req)
     {
-        $data = User::where('remember_token', $req->mobile_token)->first();
+        $reqData = $req->all();
+        $remember_token = '';
+        if (array_key_exists('mobile_token', $reqData)) {
+            $remember_token = $reqData['mobile_token'];
+        } else {
+            $remember_token = $reqData['remember_token'];
+        }
+        $data = User::where('remember_token', $remember_token)->first();
         Log::info('apiChangePassword');
         Log::info($data);
-        if ($data->passwords == $req->password) {
+        if ($data) {
             $data->password = Hash::make($req->new_password);
             $data->passwords = $req->new_password;
             $data->save();
@@ -115,101 +132,165 @@ class ApiAuth extends Controller
             ));
         }
     }
-    protected function apiRegist(Request $req)
+    public function apiRegist(Request $req)
     {
-        $data = User::where('email', strtolower($req->email))->first();
-        if ($data) {
-            return response()->json(array(
-                'error' => true,
-                'message' => "Email sudah di gunakan",
-                'data' => $data,
-                'status_code' => 201,
-                'signature' => null
-            ));
-        }
-        $random = Helpers::generateRandomString(10);
-        $cekUser = User::where('remember_token', $random)->first();
-        if ($cekUser) {
-            # code...
-            for ($i = 0; $i < 9999999; $i++) {
-                # code...
+        try {
+            Log::info('apiRegist');
+            Log::info($req->all());
+            // Validasi input
+            $req->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|string|min:6',
+                'phone' => 'nullable|string|max:20'
+            ]);
 
-                $random = Helpers::generateRandomString(10);
-                $cekLoop = User::where('remember_token', $random)->first();
-                if (!$cekLoop) {
-                    # code...
-                    break;
-                }
+            // Cek apakah email sudah digunakan
+            $existingUser = User::where('email', strtolower($req->email))->first();
+            if ($existingUser) {
+                return response()->json(array(
+                    'error' => true,
+                    'message' => "Email sudah digunakan",
+                    'data' => null,
+                    'status_code' => 409,
+                    'signature' => null
+                ));
             }
-        }
-        $data = new User;
-        $data->name = $req->name;
-        $data->email = strtolower($req->email);
-        $data->hp = $req->phone;
-        $data->password = Hash::make($req->password);
-        $data->passwords = $req->password;
-        $data->remember_token = $random;
-        $data->save();
 
-        return response()->json(array(
-            'error' => false,
-            'message' => "Registrasi Berhasil",
-            'data' => $data,
-            'status_code' => 200,
-            'signature' => null
-        ));
-    }
-    protected function apiLogin(Request $req)
-    {
-        $data = User::where('email', strtolower($req->email))->where('passwords', $req->password)->first();
-        if ($data) {
-            if ($data->remember_token==null) {
-                # code...
-                $random = Helpers::generateRandomString(10);
-                $cekUser = User::where('remember_token', $random)->first();
-                if ($cekUser) {
-                    # code...
-                    for ($i = 0; $i < 9999999; $i++) {
-                        # code...
-        
-                        $random = Helpers::generateRandomString(20);
-                        $cekLoop = User::where('remember_token', $random)->first();
-                        if (!$cekLoop) {
-                            # code...
-                            break;
-                        }
-                    }
-                }
-        
-                $data->remember_token = $random;
-                $data->save();
-            }
+            // Buat user baru
+            $user = new User;
+            $user->name = $req->name;
+            $user->email = strtolower($req->email);
+            $user->hp = $req->phone ?? null;
+            $user->password = Hash::make($req->password);
+            $user->passwords = $req->password; // Keep plain text for compatibility
+            $user->remember_token = $this->generateUniqueToken();
+            $user->save();
+
             return response()->json(array(
                 'error' => false,
-                'message' => "Login Berhasil! Selamat datang di KELAS PRIVAT",
-                'data' => $data,
+                'message' => "Registrasi Berhasil",
+                'data' => $user,
                 'status_code' => 200,
                 'signature' => null
             ));
-        } else {
+        } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json(array(
                 'error' => true,
-                'message' => "Email atau password salah",
-                'data' => null,
-                'status_code' => 200,
+                'message' => "Validasi gagal",
+                'errors' => $e->errors(),
+                'status_code' => 422,
+                'signature' => null
+            ));
+        } catch (\Exception $e) {
+            return response()->json(array(
+                'error' => true,
+                'message' => "Terjadi kesalahan: " . $e->getMessage(),
+                'status_code' => 500,
                 'signature' => null
             ));
         }
-
-        return response()->json(array(
-            'error' => false,
-            'message' => "Login Berhasil",
-            'data' => $data,
-            'status_code' => 200,
-            'signature' => null
-        ));
     }
-    protected function mobileVersion(Request $req)
+    public function apiLogin(Request $req)
+    {
+        try {
+            Log::info('apiLogin');
+            Log::info($req->all());
+            // Validasi input
+            $req->validate([
+                // 'email' => 'required|email',
+                'password' => 'required|string'
+            ]);
+            $dataReq = $req->all();
+            $user = User::query();
+            if (array_key_exists('email', $dataReq)) {
+                $user->where('email', strtolower($req->email));
+            } else if (array_key_exists('hp', $dataReq)) {
+                $user->where('hp', $req->hp);
+            } else if (array_key_exists('username', $dataReq)) {
+                $user->where('username', $req->username);
+            } else {
+                return response()->json(array(
+                    'error' => true,
+                    'message' => "Email, HP, atau username tidak ditemukan",
+                    'data' => null,     
+                    'status_code' => 404,
+                    'signature' => null
+                ));
+            }
+            // Cari user berdasarkan email
+            $user = $user->first();
+            
+            if (!$user) {
+                return response()->json(array(
+                    'error' => true,
+                    'message' => "Email tidak ditemukan",
+                    'data' => null,
+                    'status_code' => 404,
+                    'signature' => null
+                ));
+            }
+
+            Log::info('passwords '.$user->passwords);
+            Log::info('password '. $req->password);
+            Log::info('passwords'. strlen($user->passwords));
+            Log::info('password '. strlen($req->password));
+            Log::info('password '. Hash::check($req->password, $user->password));
+            // Verifikasi password (gunakan field passwords untuk kompatibilitas)
+            if (Hash::check($req->password, $user->password)==true || $user->passwords === $req->password || Hash::check($req->password, $user->password)==1) {
+                // Generate remember token jika belum ada
+                Log::info('remember_token '.$user->remember_token);
+                if ($user->remember_token == null) {
+                    $user->remember_token = $this->generateUniqueToken();
+                    $user->save();
+                }
+
+                return response()->json(array(
+                    'error' => false,
+                    'message' => "Login Berhasil! Selamat datang di KELAS PRIVAT",
+                    'data' => $user,
+                    'status_code' => 200,
+                    'signature' => null
+                ));
+            } else {
+                return response()->json(array(
+                    'error' => true,
+                    'message' => "Password salah",
+                    'data' => null,
+                    'status_code' => 401,
+                    'signature' => null
+                ));
+            }
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json(array(
+                'error' => true,
+                'message' => "Validasi gagal",
+                'errors' => $e->errors(),
+                'status_code' => 422,
+                'signature' => null
+            ));
+        } catch (\Exception $e) {
+            return response()->json(array(
+                'error' => true,
+                'message' => "Terjadi kesalahan: " . $e->getMessage(),
+                'status_code' => 500,
+                'signature' => null
+            ));
+        }
+    }
+
+    /**
+     * Generate unique remember token
+     */
+    private function generateUniqueToken($length = 20)
+    {
+        do {
+            $token = \Illuminate\Support\Str::random($length);
+        } while (User::where('remember_token', $token)->exists());
+        
+        return $token;
+    }
+    public function mobileVersion(Request $req)
     {
         $data = VersionModel::orderBy('id', 'desc')->first();
         if ($data) {
@@ -230,9 +311,17 @@ class ApiAuth extends Controller
             ));
         }
     }
-    protected function profile(Request $req)
+    public function profile(Request $req)
     {
-        $user = User::where('remember_token', $req->mobile_token)->first();
+        $reqData = $req->all();
+        $remember_token = '';
+        if (array_key_exists('mobile_token', $reqData)) {
+            $remember_token = $reqData['mobile_token'];
+        } else {
+            $remember_token = $reqData['remember_token'];
+        }
+        
+        $user = User::where('remember_token', $remember_token)->first();
         if (!$user) {
             return response()->json(array(
                 'error' => true,
@@ -252,10 +341,74 @@ class ApiAuth extends Controller
     }
 
 
+    public function apiLogout(Request $req)
+    {
+        try {
+            // Validasi input
+            $req->validate([
+                'mobile_token' => 'required|string'
+            ]);
+
+            $reqData = $req->all();
+            $remember_token = '';
+            if (array_key_exists('mobile_token', $reqData)) {
+                $remember_token = $reqData['mobile_token'];
+            } else {
+                $remember_token = $reqData['remember_token'];
+            }
+            // Cari user berdasarkan remember_token
+            $user = User::where('remember_token', $remember_token)->first();
+            
+            if (!$user) {
+                return response()->json(array(
+                    'error' => true,
+                    'message' => "Token tidak valid atau user tidak ditemukan",
+                    'data' => null,
+                    'status_code' => 401,
+                    'signature' => null
+                ));
+            }
+
+            // Hapus remember_token untuk logout
+            $user->remember_token = null;
+            $user->save();
+
+            return response()->json(array(
+                'error' => false,
+                'message' => "Logout berhasil",
+                'data' => null,
+                'status_code' => 200,
+                'signature' => null
+            ));
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json(array(
+                'error' => true,
+                'message' => "Validasi gagal",
+                'errors' => $e->errors(),
+                'status_code' => 422,
+                'signature' => null
+            ));
+        } catch (\Exception $e) {
+            return response()->json(array(
+                'error' => true,
+                'message' => "Terjadi kesalahan: " . $e->getMessage(),
+                'status_code' => 500,
+                'signature' => null
+            ));
+        }
+    }
+
     public function changeProfileImage(Request $req)
     {
 
-        $user = User::where('remember_token', $req->mobile_token)->first();
+        $reqData = $req->all();
+        $remember_token = '';
+        if (array_key_exists('mobile_token', $reqData)) {
+            $remember_token = $reqData['mobile_token'];
+        } else {
+            $remember_token = $reqData['remember_token'];
+        }
+        $user = User::where('remember_token', $remember_token)->first();
         if (!$user) {
             return response()->json(array(
                 'error' => true,
@@ -301,5 +454,268 @@ class ApiAuth extends Controller
             'signature' => null
         ));
     }
+
+    public function resetPassword(Request $req)
+    {
+        try {
+            Log::info('resetPassword');
+            Log::info($req->all());
+            
+            // Validasi input
+            $req->validate([
+                'email' => 'required|email'
+            ]);
+
+            // Cari user berdasarkan email
+            $user = User::where('email', strtolower($req->email))->first();
+            
+            if (!$user) {
+                return response()->json(array(
+                    'error' => true,
+                    'message' => "Email tidak ditemukan",
+                    'data' => null,
+                    'status_code' => 404,
+                    'signature' => null
+                ));
+            }
+
+            // Buat token reset password
+            $passwordReset = \App\Models\PasswordReset::createReset($user->email);
+            
+            // Kirim email reset password
+            $resetUrl = url('/reset-password?token=' . $passwordReset->token);
+            
+            // TODO: Implementasi pengiriman email
+            // Mail::to($user->email)->send(new PasswordResetMail($resetUrl));
+            
+            // Untuk sementara, return URL reset password
+            return response()->json(array(
+                'error' => false,
+                'message' => "Link reset password telah dikirim ke email Anda",
+                'data' => [
+                    'reset_url' => $resetUrl,
+                    'expires_at' => $passwordReset->expires_at
+                ],
+                'status_code' => 200,
+                'signature' => null
+            ));
+            
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json(array(
+                'error' => true,
+                'message' => "Validasi gagal",
+                'errors' => $e->errors(),
+                'status_code' => 422,
+                'signature' => null
+            ));
+        } catch (\Exception $e) {
+            Log::error('Reset password error: ' . $e->getMessage());
+            return response()->json(array(
+                'error' => true,
+                'message' => "Terjadi kesalahan: " . $e->getMessage(),
+                'status_code' => 500,
+                'signature' => null
+            ));
+        }
+    }
+
+    public function updatePassword(Request $req)
+    {
+        try {
+            Log::info('updatePassword');
+            Log::info($req->all());
+            
+            // Validasi input
+            $req->validate([
+                'token' => 'required|string',
+                'password' => 'required|string|min:6|confirmed'
+            ]);
+
+            // Cari token reset password
+            $passwordReset = \App\Models\PasswordReset::where('token', $req->token)->first();
+            
+            if (!$passwordReset) {
+                return response()->json(array(
+                    'error' => true,
+                    'message' => "Token reset password tidak valid",
+                    'data' => null,
+                    'status_code' => 404,
+                    'signature' => null
+                ));
+            }
+
+            // Cek apakah token masih valid
+            if (!$passwordReset->isValid()) {
+                return response()->json(array(
+                    'error' => true,
+                    'message' => "Token reset password sudah expired atau sudah digunakan",
+                    'data' => null,
+                    'status_code' => 400,
+                    'signature' => null
+                ));
+            }
+
+            // Cari user berdasarkan email
+            $user = User::where('email', $passwordReset->email)->first();
+            
+            if (!$user) {
+                return response()->json(array(
+                    'error' => true,
+                    'message' => "User tidak ditemukan",
+                    'data' => null,
+                    'status_code' => 404,
+                    'signature' => null
+                ));
+            }
+
+            // Update password user
+            $user->password = Hash::make($req->password);
+            $user->passwords = $req->password; // Keep plain text for compatibility
+            $user->save();
+
+            // Mark token as used
+            $passwordReset->markAsUsed();
+
+            return response()->json(array(
+                'error' => false,
+                'message' => "Password berhasil diubah",
+                'data' => null,
+                'status_code' => 200,
+                'signature' => null
+            ));
+            
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json(array(
+                'error' => true,
+                'message' => "Validasi gagal",
+                'errors' => $e->errors(),
+                'status_code' => 422,
+                'signature' => null
+            ));
+        } catch (\Exception $e) {
+            Log::error('Update password error: ' . $e->getMessage());
+            return response()->json(array(
+                'error' => true,
+                'message' => "Terjadi kesalahan: " . $e->getMessage(),
+                'status_code' => 500,
+                'signature' => null
+            ));
+        }
+    }
+
+    public function adminUser(Request $req)
+    {
+        $limit = $req->limit ?: 10;
+        $skip = $req->skip ?: 0;
+        $dataReq = $req->all();
+        $data = User::orderBy('id', 'desc')->skip($skip)->take($limit);
+        if(array_key_exists('search', $dataReq)){
+            $data->where('name', 'like', '%'.$dataReq['search'].'%');
+        }
+        $data = $data->get();
+        return response()->json(array(
+            'error' => false,
+            'message' => "Berhasil Mengambil Data",
+            'data' => $data,
+            'status_code' => 200,
+            'signature' => null
+        ));
+    }
+    public function getAdmin(Request $req)
+    {
+        $search = $req->search ?? '';
+        $data = User::whereIn('role', ['admin', 'super_admin', 'super_user']);
+        if($search != ''){
+            $data->where('name', 'like', '%'.$search.'%');
+        }
+        $data = $data->get();
+
+        return response()->json(array(
+            'error' => false,
+            'message' => "Berhasil Mengambil Data",
+            'data' => $data,
+            'status_code' => 200,
+            'signature' => null
+        ));
+    }
+    public function createOrUpdateAdmin(Request $req)
+    {
+        $reqData = $req->all();
+        // if(array_key_exists('id', $reqData)){
+        //     $data = User::where('id', $reqData['id'])->first();
+        //     if (!$data) {
+        //         return response()->json(array(
+        //             'error' => true,
+        //             'message' => "Admin tidak ditemukan",
+        //             'data' => null,
+        //             'status_code' => 404,
+        //             'signature' => null
+        //         ));
+        //     }
+        //     $data->update($reqData);
+        //     return response()->json(array(
+        //         'error' => false,
+        //         'message' => "Berhasil Mengubah Data",
+        //         'data' => $data,
+        //         'status_code' => 200,
+        //         'signature' => null
+        //     ));
+        // } else {
+            $data = User::where('email', $reqData['email'])->first();
+            if (!$data) {
+                User::create([
+                    'email' => $reqData['email'],
+                    'name' => $reqData['name'],
+                    'role' => $reqData['role']??'admin',
+                    'password' => Hash::make($reqData['password']),
+                    'passwords' => $reqData['password'],
+                    'remember_token' => $this->generateUniqueToken(),
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                    'school' => $reqData['school'],
+                ]);
+            } else {
+                $data->update([
+                    'name' => $reqData['name'],
+                    'role' => $reqData['role']??'admin',
+                    'password' => Hash::make($reqData['password']),
+                    'passwords' => $reqData['password'],
+                    'updated_at' => now(),
+                    'school' => $reqData['school'],
+                ]);
+            }
+            return response()->json(array(
+                'error' => false,
+                'message' => "Berhasil Membuat Data",
+                'data' => $data,
+                'status_code' => 200,
+                'signature' => null
+            ));
+        // }
+    }
+
+    public function deleteAdmin(Request $req)
+    {
+        $data = User::where('id', $req->id)->first();
+        if (!$data) {
+            return response()->json(array(
+                'error' => true,
+                'message' => "User tidak ditemukan",
+                'data' => null,
+                'status_code' => 404,
+                'signature' => null
+            ));
+        }
+        $data->update(['role' => 'user']);
+        return response()->json(array(
+            'error' => false,
+            'message' => "Berhasil Menghapus Data",
+            'data' => $data,
+            'status_code' => 200,
+            'signature' => null
+        ));
+    }
+
+    
 }
 // /api/arduino/dht-pulse/{token}?humidity=12&temperature=12&pulse=12

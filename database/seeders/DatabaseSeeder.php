@@ -15,7 +15,17 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call([
-            PaketSoalSeeder::class,
+            // Existing seeders
+            TestUserSeeder::class,
+            GoogleConsoleSeeder::class,
+            
+            // Sipintar migration seeders
+            AdminsSeeder::class,
+            MenuMakananSeeder::class,
+            UsersSeeder::class,
+            FavoritesSeeder::class,
+            HistorySeeder::class,
+            DeleteAccountRequestsSeeder::class,
         ]);
     }
 }
