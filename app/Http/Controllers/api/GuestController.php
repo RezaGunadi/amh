@@ -61,6 +61,7 @@ class GuestController extends Controller
             if ($search) {
                 if ($search != '' && $search != null && $search != 'all' && $search != 'semua') {
                     $query->where('nama_makanan', 'like', "%{$search}%");
+                    $allData = $allData->where('nama_makanan', 'like', "%{$search}%");
                     if (array_key_exists('remember_token', $allRequest)) {
                         $user = User::where('remember_token', $allRequest['remember_token'])->first();
                         if($user){
@@ -123,7 +124,7 @@ class GuestController extends Controller
                     });
                 }
             }
-            $query= $query->skip($skip)->take($limit);
+            $query= $query->skip($skip)->take($limit)->orderBy('id', 'desc');
 
             $menuMakanan = $query->get();
             $allDataCount = $allData->count();
