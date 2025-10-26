@@ -99,6 +99,28 @@ class GuestController extends Controller
                             $q->whereRaw("($rawSum) <= ?", [30]);
                         }
                     });
+                    $allData = $allData->where(function($q) use ($healthIndex) {
+                        // We'll sum only numeric columns for scoring. Adjust weights as appropriate.
+                        $fields = [
+                            'protein_persen',
+                            'lemak_persen',
+                            'gula_persen',
+                            'garam_persen',
+                            'serat_persen',
+                            'zat_besi_persen',
+                            'kalsium_persen'
+                        ];
+                        $rawSum = implode(' + ', $fields);
+                        if ($healthIndex === 'lebih sehat') {
+                            $q->whereRaw("($rawSum) > ?", [50]);
+                        } else if ($healthIndex === 'cukup sehat') {
+                            $q->whereRaw("($rawSum) >= ? AND ($rawSum) < ?", [40, 50]);
+                        } else if ($healthIndex === 'butuh perbaikan') {
+                            $q->whereRaw("($rawSum) >= ? AND ($rawSum) < ?", [30, 40]);
+                        } else if ($healthIndex === 'tidak sehat') {
+                            $q->whereRaw("($rawSum) < ?", [30]);
+                        }
+                    });
                 }
             }
             $query= $query->skip($skip)->take($limit);
