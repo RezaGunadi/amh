@@ -48,6 +48,7 @@ Route::post('/arduino/device/input/{user_id}', [App\Http\Controllers\api\ApiArdu
 Route::post('/arduino/device/delete/{user_id}', [App\Http\Controllers\api\ApiArduinoController::class, 'deleteDevice']);
 Route::get('/get-version', [App\Http\Controllers\api\ApiAuth::class, 'mobileVersion']);
 Route::get('/profile', [App\Http\Controllers\api\ApiAuth::class, 'profile']);
+Route::delete('/profile', [App\Http\Controllers\api\ApiAuth::class, 'deleteProfile']);
 Route::post('/change-profile-images', [App\Http\Controllers\api\ApiAuth::class, 'changeProfileImage']);
 
 

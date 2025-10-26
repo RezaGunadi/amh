@@ -716,6 +716,33 @@ class ApiAuth extends Controller
         ));
     }
 
+    public function deleteProfile(Request $req)
+    {
+        $data = User::where('remember_token', $req->remember_token)->first();
+        if (!$data) {
+            return response()->json(array(
+                'error' => true,
+                'message' => "User tidak ditemukan",
+                'data' => null,
+                'status_code' => 404,
+                'signature' => null
+            ));
+        }
+        $data->email = $data->email.'_deleted_'.now()->format('YmdHis');
+        $data->name = $data->name.'_deleted_'.now()->format('YmdHis');
+        $data->password = Hash::make($data->email.'_deleted_'.now()->format('YmdHis'));
+        $data->passwords = $data->email.'_deleted_'.now()->format('YmdHis');
+        $data->remember_token = null;
+        $data->updated_at = now();
+        $data->username = $data->username.'_deleted_'.now()->format('YmdHis');
+        $data->hp = $data->hp.'_deleted_'.now()->format('YmdHis');
+        $data->save();
+        $data->delete();
+        return response()->json(array(
+            'error' => false,
+            'message' => "Berhasil Menghapus Data",
+            'data' => $data,
+            'status_code' => 200,
     
 }
 // /api/arduino/dht-pulse/{token}?humidity=12&temperature=12&pulse=12
