@@ -92,11 +92,11 @@ class GuestController extends Controller
                         if ($healthIndex === 'lebih sehat') {
                             $q->whereRaw("($rawSum) > ?", [50]);
                         } else if ($healthIndex === 'cukup sehat') {
-                            $q->whereRaw("($rawSum) > ? AND ($rawSum) <= ?", [40, 50]);
+                            $q->whereRaw("($rawSum) >= ? AND ($rawSum) < ?", [40, 50]);
                         } else if ($healthIndex === 'butuh perbaikan') {
-                            $q->whereRaw("($rawSum) > ? AND ($rawSum) <= ?", [30, 40]);
+                            $q->whereRaw("($rawSum) >= ? AND ($rawSum) < ?", [30, 40]);
                         } else if ($healthIndex === 'tidak sehat') {
-                            $q->whereRaw("($rawSum) <= ?", [30]);
+                            $q->whereRaw("($rawSum) < ?", [30]);
                         }
                     });
                     $allData = $allData->where(function($q) use ($healthIndex) {
