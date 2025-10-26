@@ -78,46 +78,46 @@ Route::prefix('sipintar')->group(function () {
     Route::get('/statistics', [App\Http\Controllers\api\ApiSiPintarController::class, 'statistics']);
 
 
-    Route::post('/food', [App\Http\Controllers\Api\ApiSiPintarController::class, 'addOrUpdateMenuMakanan']);
-    Route::get('/food', [App\Http\Controllers\Api\GuestController::class, 'getMenuMakanan']);
-    Route::delete('/food', [App\Http\Controllers\Api\ApiSiPintarController::class, 'deleteMenuMakanan']);
-    Route::get('/food/{id}', [App\Http\Controllers\Api\GuestController::class, 'getMenuMakananById']);
+    Route::post('/food', [App\Http\Controllers\api\ApiSiPintarController::class, 'addOrUpdateMenuMakanan']);
+    Route::get('/food', [App\Http\Controllers\api\GuestController::class, 'getMenuMakanan']);
+    Route::delete('/food', [App\Http\Controllers\api\ApiSiPintarController::class, 'deleteMenuMakanan']);
+    Route::get('/food/{id}', [App\Http\Controllers\api\GuestController::class, 'getMenuMakananById']);
 
-    Route::get('/history', [App\Http\Controllers\Api\ApiSiPintarController::class, 'getHistory']);
-    Route::get('/favorite', [App\Http\Controllers\Api\ApiSiPintarController::class, 'getFavorite']);
-    Route::post('/history', [App\Http\Controllers\Api\ApiSiPintarController::class, 'addHistory']);
-    Route::delete('/history', [App\Http\Controllers\Api\ApiSiPintarController::class, 'deleteHistory']);
-    Route::post('/favorite', [App\Http\Controllers\Api\ApiSiPintarController::class, 'addFavorite']);
-    Route::get('/categories', [App\Http\Controllers\Api\GuestController::class, 'getCategories']);
-    Route::get('/search', [App\Http\Controllers\Api\GuestController::class, 'searchMenuMakanan']);
-    Route::get('/app-info', [App\Http\Controllers\Api\GuestController::class, 'getAppInfo']);
+    Route::get('/history', [App\Http\Controllers\api\ApiSiPintarController::class, 'getHistory']);
+    Route::get('/favorite', [App\Http\Controllers\api\ApiSiPintarController::class, 'getFavorite']);
+    Route::post('/history', [App\Http\Controllers\api\ApiSiPintarController::class, 'addHistory']);
+    Route::delete('/history', [App\Http\Controllers\api\ApiSiPintarController::class, 'deleteHistory']);
+    Route::post('/favorite', [App\Http\Controllers\api\ApiSiPintarController::class, 'addFavorite']);
+    Route::get('/categories', [App\Http\Controllers\api\GuestController::class, 'getCategories']);
+    Route::get('/search', [App\Http\Controllers\api\GuestController::class, 'searchMenuMakanan']);
+    Route::get('/app-info', [App\Http\Controllers\api\GuestController::class, 'getAppInfo']);
 });
 
 // App information routes (no authentication required)
 Route::prefix('sipintar/app')->group(function () {
-    Route::get('/info', [App\Http\Controllers\Api\AppInfoController::class, 'getAppInfo']);
-    Route::get('/version', [App\Http\Controllers\Api\AppInfoController::class, 'getVersionInfo']);
-    Route::get('/config', [App\Http\Controllers\Api\AppInfoController::class, 'getAppConfig']);
-    Route::get('/store-info', [App\Http\Controllers\Api\AppInfoController::class, 'getStoreInfo']);
+    Route::get('/info', [App\Http\Controllers\api\AppInfoController::class, 'getAppInfo']);
+    Route::get('/version', [App\Http\Controllers\api\AppInfoController::class, 'getVersionInfo']);
+    Route::get('/config', [App\Http\Controllers\api\AppInfoController::class, 'getAppConfig']);
+    Route::get('/store-info', [App\Http\Controllers\api\AppInfoController::class, 'getStoreInfo']);
 });
 
 // Authenticated routes
 Route::prefix('sipintar')->middleware('auth:sanctum')->group(function () {
     // Account management
     Route::prefix('account')->group(function () {
-        Route::post('/delete', [App\Http\Controllers\Api\AccountController::class, 'deleteAccount']);
-        Route::post('/request-deletion', [App\Http\Controllers\Api\AccountController::class, 'requestAccountDeletion']);
-        Route::get('/deletion-status', [App\Http\Controllers\Api\AccountController::class, 'getDeletionRequestStatus']);
-        Route::post('/cancel-deletion', [App\Http\Controllers\Api\AccountController::class, 'cancelDeletionRequest']);
-        Route::get('/export-data', [App\Http\Controllers\Api\AccountController::class, 'exportUserData']);
+        Route::post('/delete', [App\Http\Controllers\api\AccountController::class, 'deleteAccount']);
+        Route::post('/request-deletion', [App\Http\Controllers\api\AccountController::class, 'requestAccountDeletion']);
+        Route::get('/deletion-status', [App\Http\Controllers\api\AccountController::class, 'getDeletionRequestStatus']);
+        Route::post('/cancel-deletion', [App\Http\Controllers\api\AccountController::class, 'cancelDeletionRequest']);
+        Route::get('/export-data', [App\Http\Controllers\api\AccountController::class, 'exportUserData']);
     });
     
     // Consent management
     Route::prefix('consent')->group(function () {
-        Route::get('/info', [App\Http\Controllers\Api\ConsentController::class, 'getConsentInfo']);
-        Route::get('/status', [App\Http\Controllers\Api\ConsentController::class, 'getConsentStatus']);
-        Route::post('/update', [App\Http\Controllers\Api\ConsentController::class, 'updateConsent']);
-        Route::post('/accept-terms', [App\Http\Controllers\Api\ConsentController::class, 'acceptTermsAndPrivacy']);
-        Route::post('/withdraw', [App\Http\Controllers\Api\ConsentController::class, 'withdrawConsent']);
+        Route::get('/info', [App\Http\Controllers\api\ConsentController::class, 'getConsentInfo']);
+        Route::get('/status', [App\Http\Controllers\api\ConsentController::class, 'getConsentStatus']);
+        Route::post('/update', [App\Http\Controllers\api\ConsentController::class, 'updateConsent']);
+        Route::post('/accept-terms', [App\Http\Controllers\api\ConsentController::class, 'acceptTermsAndPrivacy']);
+        Route::post('/withdraw', [App\Http\Controllers\api\ConsentController::class, 'withdrawConsent']);
     });
 });
