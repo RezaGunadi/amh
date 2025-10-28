@@ -743,6 +743,27 @@ class ApiAuth extends Controller
             'message' => "Berhasil Menghapus Data",
             'data' => $data,
             'status_code' => 200,
-    
+            'signature' => null
+        ));
+    }
+    public function checkUsername(Request $req)
+    {
+        $data = User::where('username', $req->username)->first();
+        if (!$data) {
+            return response()->json(array(
+                'error' => true,
+                'message' => "Username tidak ditemukan",
+                'data' => true,
+                'status_code' => 404,
+                'signature' => null
+            ));
+        }   
+        return response()->json(array(
+            'error' => false,
+            'message' => "Username sudah digunakan",
+            'data' => false,
+            'status_code' => 200,
+            'signature' => null
+        ));
+    }
 }
-// /api/arduino/dht-pulse/{token}?humidity=12&temperature=12&pulse=12

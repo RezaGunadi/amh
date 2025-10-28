@@ -31,6 +31,7 @@ Route::get('/', function () {
 Route::post('/login', [App\Http\Controllers\api\ApiAuth::class, 'apiLogin']);
 Route::post('/logout', [App\Http\Controllers\api\ApiAuth::class, 'apiLogout']);
 Route::post('/regist', [App\Http\Controllers\api\ApiAuth::class, 'apiRegist']);
+Route::get('/check-username', [App\Http\Controllers\api\ApiAuth::class, 'checkUsername']);
 Route::post('/auth/update', [App\Http\Controllers\api\ApiAuth::class, 'apiUpdate']);
 Route::post('/auth/change-password', [App\Http\Controllers\api\ApiAuth::class, 'apiChangePassword']);
 Route::post('/auth/reset-password', [App\Http\Controllers\api\ApiAuth::class, 'resetPassword']);
