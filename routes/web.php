@@ -30,12 +30,8 @@ Route::get('/reset-password', function () {
 })->name('reset-password');
 
 Route::get('/', function () {
-    return response()->json([
-        'error' => false,
-        'message' => "Welcome to Sipintar API",
-        'data' => null,
-        'status_code' => 200,
-        'signature' => null
+    return view('amhriset.welcome', [
+        'title' => 'amhriset.com - Riset & Produk',
     ]);
 });
 // API Routes
@@ -71,6 +67,12 @@ Route::get('/terms-conditions', function () {
 Route::get('/sipintar', function () {
     return view('sipintar.welcome', [
         'title' => 'Sipintar - Edukasi Nutrisi',
+    ]);
+});
+
+Route::get('/child-care', function () {
+    return view('childcare.welcome', [
+        'title' => 'Child Care - Smart Shoe Monitoring',
     ]);
 });
 
