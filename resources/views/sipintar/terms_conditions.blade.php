@@ -163,6 +163,17 @@
             <li>We comply with applicable privacy laws and regulations</li>
         </ul>
 
+        <h3>6.1 Use of Camera and Microphone</h3>
+        <div class="important">
+            <p><strong>Camera and Microphone Access:</strong></p>
+            <ul>
+                <li>Aplikasi Si Pintar menggunakan kamera dan mikrofon hanya untuk keperluan fitur pengawasan, bukan untuk merekam atau membagikan data pengguna ke pihak lain.</li>
+                <li>Kami tidak menyimpan data foto atau video di server tanpa izin pengguna. Semua akses kamera dan mikrofon dilakukan secara lokal pada perangkat pengguna.</li>
+                <li>Data pribadi (seperti email, foto, lokasi) hanya digunakan untuk mendukung fungsi aplikasi dan tidak dibagikan ke pihak ketiga.</li>
+                <li>Pengguna memiliki kontrol penuh untuk memberikan atau mencabut izin akses kamera dan mikrofon melalui pengaturan perangkat.</li>
+            </ul>
+        </div>
+
         <h2>7. Disclaimers and Limitations</h2>
 
         <h3>7.1 Service Availability</h3>

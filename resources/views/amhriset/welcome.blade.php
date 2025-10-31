@@ -266,11 +266,11 @@
       "@type": "Organization",
       "name": "amhriset",
       "url": "{{ url('/') }}",
-      "sameAs": [],
-      "brand": {
-        "@type": "Brand",
-        "name": "amhriset"
-      }
+    "sameAs": [],
+    "brand": {
+    "@type": "Brand",
+    "name": "amhriset"
+    }
     }
     </script>
     <script type="application/ld+json">
@@ -303,7 +303,8 @@
     <section class="hero">
         <div class="container">
             <h1>Solusi Berbasis Riset untuk Keluarga dan Pendidikan</h1>
-            <p class="subtitle" style="color: #fff !important;">amhriset mengembangkan produk berdampak berbasis IoT dan data: Child Care (smart shoe
+            <p class="subtitle" style="color: #fff !important;">amhriset mengembangkan produk berdampak berbasis IoT dan
+                data: Child Care (smart shoe
                 monitoring anak) dan Sipintar (edukasi nutrisi & gamifikasi jajanan sehat).</p>
             <div class="hero-cta">
                 <a class="btn btn-primary" href="#products">Lihat Produk</a>
