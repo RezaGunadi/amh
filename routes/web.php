@@ -45,11 +45,9 @@ Route::get('/tnc-kelas-privat', function () {
         'title' => 'T&C Kelas Privat',
     ]);
 });
-Route::get('/delete-account', function () {
-    return view('delete_account', [
-        'title' => 'Delete Account',
-    ]);
-});
+// Delete Account Routes
+Route::get('/delete-account', [App\Http\Controllers\DeleteAccountController::class, 'index'])->name('delete-account');
+Route::post('/delete-account', [App\Http\Controllers\DeleteAccountController::class, 'delete'])->name('delete-account.process');
 
 // Sipintar Web Routes
 Route::get('/privacy-policy', function () {

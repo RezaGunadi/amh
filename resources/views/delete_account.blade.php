@@ -1,367 +1,289 @@
-@extends('layouts.app')
-
-
-@push('meta')
-    
-    
-<meta name="title" content="Kelas Privat - Les Privat Terbaik">
-<meta name="description" content="Les Privat terbaik berkualitas dan responsive">
-<meta name="keywords" content="Kelas Privat, latihan soal, pendalaman matri, Les Privat, olimpiade, berita seputar pendidikan">
-<meta property="og:title" content="Kelas Privat: Les Privat Terbaik">
-<meta property="og:description" content="latihan soal, pendalaman matri, Les Privat, olimpiade dan berita seputar pendidikan">
-<meta property="og:site_name" content="Kelas Privat: Les Privat Terbaik">
-
-<meta property="og:image" content="https://kelas-privat.com/assets/img/logo.png">
-<meta property="og:image:width" content="600">
-<meta property="og:image:height" content="600">
-<meta property="og:type" content="aplikasi">
-<meta property="og:url" content="https://kelas-privat.com">
-@endpush
-
-
-
-@section('content')
-  
-{{-- <div class="mt-3 p-3 p-md-5f my-auto rounded" style=' background-image: url("/assets/img/edu.jpg"); background-repeat: no-repeat;
-background-position: right;
-background-size: 100% 100%;
-  -webkit-background-size: strech;
-  -moz-background-size: strech;
-  -o-background-size: strech;
-  background-size: strech;'>
-    <div class="fs-2 fw-bold col-12 mx-auto text-center stroke" id="colorChange1">
-        Fasilitas Gratis 
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-md-auto col-12 fs-4" style="-webkit-text-stroke: 1px black; font-weight:500; color:white">
-            ⦿ Akses Ribuan Soal Latihan
-        </div>
-        <div class="col-md-auto col-12 fs-4" style="-webkit-text-stroke: 1px black; font-weight:500; color:white">
-            ⦿ Les / Tanya PR via WA
-        </div>
-        <div class="col-md-auto col-12 fs-4" style="-webkit-text-stroke: 1px black; font-weight:500; color:white">
-            ⦿ Re-Schedule jadwal
-        </div>
-        <div class="col-md-auto col-12 fs-4" style="-webkit-text-stroke: 1px black; font-weight:500; color:white">
-            ⦿ Beasiswa pendaftaran lomba & Olimpiade
-        </div>
-        <div class="col-md-auto col-12 fs-4" style="-webkit-text-stroke: 1px black; font-weight:500; color:white">
-            ⦿ Konsultasi via WA
-        </div>
-    </div>
-</div> --}}
-<div class="mx-auto mt-4 mb-3">
-    <div class="text-center fs-1" style="-webkit-text-stroke: 1px black; font-weight:600; color:black">
-        Penghapusan Akun
-    </div>
-    <div class="mt-2 text-left fs-5">
-        {{-- <div class="fw-bold">
-
-            Kebijakan Privasi
-        </div> --}}
-        <br>
-        <br>
-        Untuk menghapus akun anda, anda dapat mengiriamkan pesan bantuan pada aplikasi dengan cara menekan tanda (?) pada halaman profile.
-        <br>
-        
-    </div>
-</div>
-
-{{-- <div class="mx-auto mb-5">
-
-    <div class="row">
-        <div class="col text-center shadow rounded py-3">
-            <a href="https://api.whatsapp.com/send?phone=6281211006445&text=Halo%20nama%20saya%20......%20saya,%20mau%20tanya%20terkait">
-                <div class="bg-primary mb-3 fs-6" style="-webkit-text-stroke: 1px gold; font-weight:600; color:yellow; border-radius:12px;">
-                    <div>
-                        Bimbingan
-                    </div>
-                    <div>
-                        Olimpiade
-                    </div>
-                </div>
-                <i class="bi bi-award fs-1"></i>
-            </a>
-        </div>
-        <div class="col text-center shadow rounded py-3">
-            <a href="{{ URL::route('practice') }}">
-                <div class="bg-primary mb-3 fs-6" style="-webkit-text-stroke: 1px gold; font-weight:600; color:yellow; border-radius:12px;">
-                    <div>
-                        Bimbingan
-                    </div>
-                    <div>
-                        Belajar
-                    </div>
-                </div>
-                <i class="bi bi-journal-richtext fs-1"></i>
-            </a>
-        </div>
-        <div class="col text-center shadow rounded py-3 nav-materi">
-            <div class="bg-primary mb-3 fs-6" style="-webkit-text-stroke: 1px gold; font-weight:600; color:yellow; border-radius:12px;">
-                <div>
-                    Pengembangan
-                </div>
-                <div>
-                    Bakat
-                </div>
-            </div>
-            <i class="bi bi-cpu fs-1"></i>
-             <i class="bi bi-browser-safari fs-1"></i> 
-        </div>
-        <div class="col text-center shadow rounded py-3 nav-materi">
-            <div class="bg-primary mb-3 fs-6" style="-webkit-text-stroke: 1px gold; font-weight:600; color:yellow; border-radius:12px;">
-                <div>
-                    Pendalaman
-                </div>
-                <div>
-                    Materi
-                </div>
-            </div>
-            <i class="bi bi-book-half fs-1" ></i>
-        </div>
-    </div>
-</div>
-<div class="mx-auto">
-
-      <section>
-        <div class=" reveal fade-bottom px-0 pb-md-3 pb-1">
-            <div class="row shadow rounded p-3">
-                <div class="col-md-6 col-12 my-auto">
-                    
-                    <div class="col-md-auto col-12 mb-3 fs-1" style="-webkit-text-stroke: 1px blue; font-weight:600; color: GOLD">
-                        Kami Merencanakan
-                    </div>
-                    <div class="col-md-auto col-12 fs-4" style="-webkit-text-stroke: 1px blue; font-weight:500; color: blue">
-                        ⦿ Metode Belajar
-                    </div>
-                    <div class="col-md-auto col-12 fs-4" style="-webkit-text-stroke: 1px blue; font-weight:500; color: blue">
-                        ⦿ Perkembangan & Prestasi
-                    </div>
-                    <div class="col-md-auto col-12 fs-4" style="-webkit-text-stroke: 1px blue; font-weight:500; color: blue">
-                        ⦿ Pemahaman Mendalam
-                    </div>
-                    <div class="col-md-auto col-12 fs-4" style="-webkit-text-stroke: 1px blue; font-weight:500; color: blue">
-                        ⦿ Minat & Bakat
-                    </div>
-                </div>
-                <div class="col-md-6 col-12">
-                    <img src="{{ URL::To('assets/img/guru-belajar.png') }}" class="img-fluid" alt="">
-                </div>
-            </div>
-        </div>
-      </section>
-      
-      <section>
-        <div class=" reveal fade-left">
-            <div class="row">
-                @for($i = 1; $i < 13; $i++)
-                    
-                <div class="col-4 px-0" style="border-radius:8%; background:white;">
-                    <img src='{{ URL::To("assets/img/testi/k$i.jpg") }}' class="img-fluid" style="border-radius:8%; height: auto; padding:1%" alt="">
-                </div>
-                @endfor
-            </div>
-        </div>
-      </section>
-      
-      <section>
-        <div class="container reveal fade-right">
-         
-        </div>
-      </section> --}}
-  
-</div>
-@endsection
-
-@push('css')
-{{-- <style>
-    .stroke{
-        
-        -webkit-text-stroke: 1px black;
-    }
-    .carousel-indicators [data-bs-target]{
-        width: 6px;
-        height: 6px;
-        border-radius: 100%;
-        margin-right: 2px;
-        margin-left: 2px;
-    }
-    .carousel-control-prev{
-        background-color: rgba(37, 40, 43, 0.6);
-        opacity: 1;
-        margin-left: 16px;
-        border-radius: 7px;
-        width: 28px;
-        height: 28px;
-        
-    }
-    .carousel-control-next{
-        background-color: rgba(37, 40, 43, 0.6);
-        opacity: 1;
-        margin-right: 16px;
-        border-radius: 7px;
-        width: 28px;
-        height: 28px;
-        
-    }
-    .carousel-control-next-icon, .carousel-control-prev-icon{
-        height: 15px;
-        width: 10px;
-    }
-    
-</style>
-<style>
-    /* @import url("https://fonts.googleapis.com/css2?family=Asap&display=swap");
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ $title ?? 'Hapus Akun - amhriset' }}</title>
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+    <style>
         * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Asap", sans-serif;
-        }
-        body {
-        background: #42455a;
-        } */
-        section {
-        min-height:40vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        }
-        /* section:nth-child(1) {
-        color: #e0ffff;
-        }
-        section:nth-child(2) {
-        color: #42455a;
-        background: #e0ffff;
-        }
-        section:nth-child(3) {
-        color: #e0ffff;
-        }
-        section:nth-child(4) {
-        color: #42455a;
-        background: #e0ffff;
-        }
-        section .container {
-        margin: 100px;
-        }
-        section h1 {
-        font-size: 3rem;
-        margin: 20px;
-        }
-        section h2 {
-        font-size: 40px;
-        text-align: center;
-        text-transform: uppercase;
-        }
-        section .text-container {
-        display: flex;
-        }
-        section .text-container .text-box {
-        margin: 20px;
-        padding: 20px;
-        background: #00c2cb;
-        }
-        section .text-container .text-box h3 {
-        font-size: 30px;
-        text-align: center;
-        text-transform: uppercase;
-        margin-bottom: 10px;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        @media (max-width: 900px) {
-        section h1 {
-            font-size: 2rem;
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            color: white;
+            padding: 30px;
             text-align: center;
         }
-        section .text-container {
-            flex-direction: column;
-        } */
-        /* } */
 
-        .reveal {
-        position: relative;
-        opacity: 0;
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
         }
 
-        .reveal.active {
-        opacity: 1;
-        }
-        .active.fade-bottom {
-        animation: fade-bottom 1s ease-in;
-        }
-        .active.fade-left {
-        animation: fade-left 1s ease-in;
-        }
-        .active.fade-right {
-        animation: fade-right 1s ease-in;
-        }
-        @keyframes fade-bottom {
-        0% {
-            transform: translateY(50px);
-            opacity: 0;
-        }
-        100% {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        }
-        @keyframes fade-left {
-        0% {
-            transform: translateX(-100px);
-            opacity: 0;
-        }
-        100% {
-            transform: translateX(0);
-            opacity: 1;
-        }
+        .header p {
+            opacity: 0.9;
+            font-size: 0.95rem;
         }
 
-        @keyframes fade-right {
-        0% {
-            transform: translateX(100px);
-            opacity: 0;
+        .content {
+            padding: 30px;
         }
-        100% {
-            transform: translateX(0);
-            opacity: 1;
-        }
-        }
-</style> --}}
-@endpush
-@push('script')
-    {{-- <script>
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
 
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 150;
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
 
-                if (elementTop < windowHeight - elementVisible) {
-                reveals[i].classList.add("active");
-                } else {
-                reveals[i].classList.remove("active");
-                }
+        .warning-box h3 {
+            color: #856404;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .warning-box ul {
+            margin-left: 20px;
+            color: #856404;
+        }
+
+        .warning-box li {
+            margin-bottom: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-top: 4px;
+            width: auto;
+        }
+
+        .checkbox-group label {
+            font-weight: normal;
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #f5c6cb;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #c3e6cb;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+            margin-top: 10px;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .user-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .user-info p {
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px auto;
+            }
+
+            .content {
+                padding: 20px;
             }
         }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🗑️ Hapus Akun</h1>
+            <p>Hapus akun Anda secara permanen</p>
+        </div>
 
-        window.addEventListener("scroll", reveal);
-    </script>
-    <script>
-        let colors = ['red','pink','coral','orange','yellow','green'];
+        <div class="content">
+            @if(session('success'))
+                <div class="success-message">
+                    {{ session('success') }}
+                </div>
+            @endif
 
-        let i= 0;
+            @if($errors->any())
+                <div class="error-message">
+                    <strong>Terjadi kesalahan:</strong>
+                    <ul style="margin-top: 8px; margin-left: 20px;">
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-        function changeColor(){ 
-            
-      $('#colorChange1').css('color',  colors[i]); 
-            i++;
-            if (i >= colors.length) {
-                i = 0;
-            }
-        }
+            @if(isset($user) && $user)
+                <div class="user-info">
+                    <p><strong>Email:</strong> {{ $user->email }}</p>
+                    <p><strong>Nama:</strong> {{ $user->name }}</p>
+                    @if($user->hp)
+                        <p><strong>No. HP:</strong> {{ $user->hp }}</p>
+                    @endif
+                </div>
 
-        window.setInterval(changeColor,700 );
-    </script> --}}
-@endpush
+                <div class="warning-box">
+                    <h3>⚠️ Peringatan Penting</h3>
+                    <ul>
+                        <li>Penghapusan akun bersifat <strong>permanen dan tidak dapat dibatalkan</strong></li>
+                        <li>Semua data akun akan dihapus: email, username, nomor HP</li>
+                        <li>Riwayat, favorites, dan data terkait akun akan ikut terhapus</li>
+                        <li>Anda tidak dapat menggunakan email atau username yang sama untuk registrasi ulang</li>
+                    </ul>
+                </div>
+
+                <form method="POST" action="{{ route('delete-account.process') }}">
+                    @csrf
+                    
+                    <input type="hidden" name="token" value="{{ $token ?? request('token') }}">
+
+                    <div class="form-group">
+                        <label for="password">Masukkan Password untuk Konfirmasi</label>
+                        <input type="password" id="password" name="password" required 
+                               placeholder="Password Anda" autocomplete="current-password">
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="confirmation" name="confirmation" value="1" required>
+                        <label for="confirmation">
+                            Saya memahami bahwa penghapusan akun bersifat <strong>permanen</strong> dan 
+                            tidak dapat dibatalkan. Saya setuju untuk menghapus akun saya.
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-danger">
+                        🗑️ Hapus Akun Saya Secara Permanen
+                    </button>
+                </form>
+            @else
+                <div class="error-message">
+                    <strong>Token tidak valid atau akun tidak ditemukan.</strong>
+                    <p style="margin-top: 8px;">Silakan gunakan link yang diberikan dari aplikasi atau hubungi support.</p>
+                </div>
+            @endif
+
+            <div class="back-link">
+                <a href="/">← Kembali ke Beranda</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
