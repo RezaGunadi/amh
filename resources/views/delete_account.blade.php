@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -206,6 +207,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -215,69 +217,105 @@
 
         <div class="content">
             @if(session('success'))
-                <div class="success-message">
-                    {{ session('success') }}
-                </div>
+            <div class="success-message">
+                {{ session('success') }}
+            </div>
+            @endif
+
+            @if(session('info'))
+            <div class="success-message" style="background: #d1ecf1; color: #0c5460; border-color: #bee5eb;">
+                {{ session('info') }}
+            </div>
             @endif
 
             @if($errors->any())
-                <div class="error-message">
-                    <strong>Terjadi kesalahan:</strong>
-                    <ul style="margin-top: 8px; margin-left: 20px;">
-                        @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
+            <div class="error-message">
+                <strong>Terjadi kesalahan:</strong>
+                <ul style="margin-top: 8px; margin-left: 20px;">
+                    @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
             @endif
 
-            @if(isset($user) && $user)
-                <div class="user-info">
-                    <p><strong>Email:</strong> {{ $user->email }}</p>
-                    <p><strong>Nama:</strong> {{ $user->name }}</p>
-                    @if($user->hp)
-                        <p><strong>No. HP:</strong> {{ $user->hp }}</p>
-                    @endif
+            @if(isset($verified) && $verified && isset($user) && $user)
+            {{-- Confirmation Form (After Login) --}}
+            <div class="user-info">
+                <p><strong>Email:</strong> {{ $user->email }}</p>
+                <p><strong>Nama:</strong> {{ $user->name }}</p>
+                @if($user->hp)
+                <p><strong>No. HP:</strong> {{ $user->hp }}</p>
+                @endif
+                @if($user->username)
+                <p><strong>Username:</strong> {{ $user->username }}</p>
+                @endif
+            </div>
+
+            <div class="warning-box">
+                <h3>⚠️ Peringatan Penting</h3>
+                <ul>
+                    <li>Penghapusan akun bersifat <strong>permanen dan tidak dapat dibatalkan</strong></li>
+                    <li>Semua data akun akan dihapus: email, username, nomor HP</li>
+                    <li>Riwayat, favorites, dan data terkait akun akan ikut terhapus</li>
+                    <li>Anda tidak dapat menggunakan email atau username yang sama untuk registrasi ulang</li>
+                </ul>
+            </div>
+
+            <form method="POST" action="{{ route('delete-account.process') }}">
+                @csrf
+
+                <div class="form-group">
+                    <label for="password">Masukkan Password untuk Konfirmasi Akhir</label>
+                    <input type="password" id="password" name="password" required placeholder="Password Anda"
+                        autocomplete="current-password">
                 </div>
 
-                <div class="warning-box">
-                    <h3>⚠️ Peringatan Penting</h3>
-                    <ul>
-                        <li>Penghapusan akun bersifat <strong>permanen dan tidak dapat dibatalkan</strong></li>
-                        <li>Semua data akun akan dihapus: email, username, nomor HP</li>
-                        <li>Riwayat, favorites, dan data terkait akun akan ikut terhapus</li>
-                        <li>Anda tidak dapat menggunakan email atau username yang sama untuk registrasi ulang</li>
-                    </ul>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="confirmation" name="confirmation" value="1" required>
+                    <label for="confirmation">
+                        Saya memahami bahwa penghapusan akun bersifat <strong>permanen</strong> dan
+                        tidak dapat dibatalkan. Saya setuju untuk menghapus akun saya.
+                    </label>
                 </div>
 
-                <form method="POST" action="{{ route('delete-account.process') }}">
-                    @csrf
-                    
-                    <input type="hidden" name="token" value="{{ $token ?? request('token') }}">
+                <button type="submit" class="btn btn-danger">
+                    🗑️ Hapus Akun Saya Secara Permanen
+                </button>
+            </form>
 
-                    <div class="form-group">
-                        <label for="password">Masukkan Password untuk Konfirmasi</label>
-                        <input type="password" id="password" name="password" required 
-                               placeholder="Password Anda" autocomplete="current-password">
-                    </div>
-
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="confirmation" name="confirmation" value="1" required>
-                        <label for="confirmation">
-                            Saya memahami bahwa penghapusan akun bersifat <strong>permanen</strong> dan 
-                            tidak dapat dibatalkan. Saya setuju untuk menghapus akun saya.
-                        </label>
-                    </div>
-
-                    <button type="submit" class="btn btn-danger">
-                        🗑️ Hapus Akun Saya Secara Permanen
-                    </button>
-                </form>
+            <div class="back-link" style="margin-top: 15px;">
+                <a href="{{ route('delete-account.cancel') }}">← Batal dan Kembali</a>
+            </div>
             @else
-                <div class="error-message">
-                    <strong>Token tidak valid atau akun tidak ditemukan.</strong>
-                    <p style="margin-top: 8px;">Silakan gunakan link yang diberikan dari aplikasi atau hubungi support.</p>
+            {{-- Login Form (First Step) --}}
+            <p style="margin-bottom: 20px; color: #666;">
+                Masukkan kredensial akun Anda untuk melanjutkan proses penghapusan akun.
+            </p>
+
+            <form method="POST" action="{{ route('delete-account.verify') }}">
+                @csrf
+
+                <div class="form-group">
+                    <label for="identifier">Email, Username, atau Nomor Ponsel</label>
+                    <input type="text" id="identifier" name="identifier" required
+                        placeholder="contoh: user@email.com, username123, atau 081234567890"
+                        value="{{ old('identifier') }}" autocomplete="username">
+                    <small style="color: #666; font-size: 0.85rem; margin-top: 5px; display: block;">
+                        Anda dapat menggunakan email, username, atau nomor ponsel untuk login
+                    </small>
                 </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="Password Anda"
+                        autocomplete="current-password">
+                </div>
+
+                <button type="submit" class="btn btn-danger">
+                    Verifikasi Akun
+                </button>
+            </form>
             @endif
 
             <div class="back-link">
@@ -286,4 +324,5 @@
         </div>
     </div>
 </body>
+
 </html>

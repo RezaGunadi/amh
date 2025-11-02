@@ -47,7 +47,9 @@ Route::get('/tnc-kelas-privat', function () {
 });
 // Delete Account Routes
 Route::get('/delete-account', [App\Http\Controllers\DeleteAccountController::class, 'index'])->name('delete-account');
+Route::post('/delete-account/verify', [App\Http\Controllers\DeleteAccountController::class, 'verify'])->name('delete-account.verify');
 Route::post('/delete-account', [App\Http\Controllers\DeleteAccountController::class, 'delete'])->name('delete-account.process');
+Route::get('/delete-account/cancel', [App\Http\Controllers\DeleteAccountController::class, 'cancel'])->name('delete-account.cancel');
 
 // Sipintar Web Routes
 Route::get('/privacy-policy', function () {

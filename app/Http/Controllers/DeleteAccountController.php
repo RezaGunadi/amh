@@ -11,24 +11,73 @@ use Illuminate\Support\Facades\Validator;
 class DeleteAccountController extends Controller
 {
     /**
-     * Show delete account page
+     * Show delete account page - form login
      */
     public function index(Request $request)
     {
-        // Get user from remember_token or session
-        $user = null;
-        
-        if ($request->has('token')) {
-            $user = User::where('remember_token', $request->token)->first();
-        } elseif (Auth::check()) {
-            $user = Auth::user();
+        // If already verified, show confirmation form
+        if ($request->session()->has('delete_account_verified_user_id')) {
+            $userId = $request->session()->get('delete_account_verified_user_id');
+            $user = User::find($userId);
+            
+            if ($user) {
+                return view('delete_account', [
+                    'title' => 'Hapus Akun - amhriset',
+                    'user' => $user,
+                    'verified' => true
+                ]);
+            }
         }
         
         return view('delete_account', [
             'title' => 'Hapus Akun - amhriset',
-            'user' => $user,
-            'token' => $request->token
+            'user' => null,
+            'verified' => false
         ]);
+    }
+
+    /**
+     * Verify user credentials (login step)
+     */
+    public function verify(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'identifier' => 'required|string',
+            'password' => 'required|string'
+        ], [
+            'identifier.required' => 'Email, Username, atau Nomor Ponsel harus diisi',
+            'password.required' => 'Password harus diisi'
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        // Find user by email, username, or phone
+        $identifier = $request->identifier;
+        $user = User::where(function($query) use ($identifier) {
+            $query->where('email', strtolower($identifier))
+                  ->orWhere('username', $identifier)
+                  ->orWhere('hp', $identifier);
+        })->first();
+        
+        if (!$user) {
+            return back()->withErrors(['identifier' => 'Email, Username, atau Nomor Ponsel tidak ditemukan'])->withInput();
+        }
+
+        // Verify password (same logic as API)
+        $passwordValid = Hash::check($request->password, $user->password) || 
+                        ($user->passwords === $request->password) ||
+                        Hash::check($request->password, $user->password);
+
+        if (!$passwordValid) {
+            return back()->withErrors(['password' => 'Password salah'])->withInput();
+        }
+
+        // Store user ID in session for verification
+        $request->session()->put('delete_account_verified_user_id', $user->id);
+
+        return redirect()->route('delete-account')->with('verified', true);
     }
 
     /**
@@ -36,12 +85,15 @@ class DeleteAccountController extends Controller
      */
     public function delete(Request $request)
     {
+        // Check if user is verified
+        if (!$request->session()->has('delete_account_verified_user_id')) {
+            return redirect()->route('delete-account')->withErrors(['error' => 'Silakan verifikasi akun terlebih dahulu']);
+        }
+
         $validator = Validator::make($request->all(), [
-            'token' => 'required|string',
             'password' => 'required|string',
             'confirmation' => 'required|accepted'
         ], [
-            'token.required' => 'Token autentikasi diperlukan',
             'password.required' => 'Password diperlukan untuk konfirmasi',
             'confirmation.accepted' => 'Anda harus menyetujui penghapusan akun'
         ]);
@@ -50,13 +102,15 @@ class DeleteAccountController extends Controller
             return back()->withErrors($validator)->withInput();
         }
 
-        $user = User::where('remember_token', $request->token)->first();
+        $userId = $request->session()->get('delete_account_verified_user_id');
+        $user = User::find($userId);
         
         if (!$user) {
-            return back()->withErrors(['error' => 'Token tidak valid atau akun tidak ditemukan'])->withInput();
+            $request->session()->forget('delete_account_verified_user_id');
+            return redirect()->route('delete-account')->withErrors(['error' => 'Akun tidak ditemukan']);
         }
 
-        // Verify password
+        // Verify password again for security
         $passwordValid = Hash::check($request->password, $user->password) || 
                         ($user->passwords === $request->password);
 
@@ -88,12 +142,24 @@ class DeleteAccountController extends Controller
         // Soft delete
         $user->delete();
 
+        // Clear session
+        $request->session()->forget('delete_account_verified_user_id');
+
         // Logout if authenticated via session
         if (Auth::check() && Auth::id() == $user->id) {
             Auth::logout();
         }
 
         return redirect('/')->with('success', 'Akun berhasil dihapus. Semua data telah dihapus secara permanen.');
+    }
+
+    /**
+     * Cancel and clear verification session
+     */
+    public function cancel(Request $request)
+    {
+        $request->session()->forget('delete_account_verified_user_id');
+        return redirect()->route('delete-account')->with('info', 'Verifikasi akun dibatalkan');
     }
 }
 
