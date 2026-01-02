@@ -9,6 +9,8 @@ class PasswordReset extends Model
 {
     protected $table = 'password_resets';
     
+    public $timestamps = true;
+    
     protected $fillable = [
         'email',
         'token',
@@ -18,7 +20,9 @@ class PasswordReset extends Model
     
     protected $casts = [
         'expires_at' => 'datetime',
-        'used' => 'boolean'
+        'used' => 'boolean',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime'
     ];
     
     /**
