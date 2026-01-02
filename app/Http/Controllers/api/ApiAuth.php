@@ -467,7 +467,7 @@ class ApiAuth extends Controller
             ]);
 
             // Cari user berdasarkan email
-            $user = User::where('email', strtolower($req->email))->first();
+            $user = User::where('email', 'like',$req->email)->first();
             
             if (!$user) {
                 return response()->json(array(
