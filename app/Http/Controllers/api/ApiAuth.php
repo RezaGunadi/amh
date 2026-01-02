@@ -11,6 +11,8 @@ use App\Http\Controllers\Controller;
 use App\Models\VersionModel;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PasswordResetMail;
 
 class ApiAuth extends Controller
 {
@@ -485,20 +487,42 @@ class ApiAuth extends Controller
             // Kirim email reset password
             $resetUrl = url('/reset-password?token=' . $passwordReset->token);
             
-            // TODO: Implementasi pengiriman email
-            // Mail::to($user->email)->send(new PasswordResetMail($resetUrl));
-            
-            // Untuk sementara, return URL reset password
-            return response()->json(array(
-                'error' => false,
-                'message' => "Link reset password telah dikirim ke email Anda",
-                'data' => [
-                    'reset_url' => $resetUrl,
-                    'expires_at' => $passwordReset->expires_at
-                ],
-                'status_code' => 200,
-                'signature' => null
-            ));
+            try {
+                // Kirim email reset password
+                Mail::to($user->email)->send(new PasswordResetMail(
+                    $resetUrl,
+                    $user->name,
+                    $passwordReset->expires_at
+                ));
+                
+                Log::info('Password reset email sent to: ' . $user->email);
+                
+                return response()->json(array(
+                    'error' => false,
+                    'message' => "Link reset password telah dikirim ke email Anda. Silakan cek inbox atau folder spam Anda.",
+                    'data' => [
+                        'email' => $user->email,
+                        'expires_at' => $passwordReset->expires_at
+                    ],
+                    'status_code' => 200,
+                    'signature' => null
+                ));
+            } catch (\Exception $e) {
+                Log::error('Failed to send password reset email: ' . $e->getMessage());
+                
+                // Fallback: return URL jika email gagal dikirim
+                return response()->json(array(
+                    'error' => false,
+                    'message' => "Link reset password berhasil dibuat. Email gagal dikirim, silakan gunakan link berikut:",
+                    'data' => [
+                        'reset_url' => $resetUrl,
+                        'expires_at' => $passwordReset->expires_at,
+                        'email_sent' => false
+                    ],
+                    'status_code' => 200,
+                    'signature' => null
+                ));
+            }
             
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json(array(

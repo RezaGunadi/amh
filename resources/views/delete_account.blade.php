@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? 'Hapus Akun - amhriset' }}</title>
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
-    <style>
+<style>
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
         }
 
         body {
@@ -56,13 +56,13 @@
             background: #fff3cd;
             border: 1px solid #ffc107;
             border-radius: 8px;
-            padding: 20px;
+        padding: 20px;
             margin-bottom: 25px;
         }
 
         .warning-box h3 {
             color: #856404;
-            margin-bottom: 10px;
+        margin-bottom: 10px;
             font-size: 1.1rem;
         }
 
