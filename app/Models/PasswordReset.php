@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 
 class PasswordReset extends Model
@@ -30,6 +31,9 @@ class PasswordReset extends Model
      */
     public function isExpired()
     {
+        if (!$this->expires_at) {
+            return true; // If no expiry date, consider expired for safety
+        }
         return $this->expires_at < now();
     }
     
@@ -38,7 +42,10 @@ class PasswordReset extends Model
      */
     public function isValid()
     {
-        return !$this->used && !$this->isExpired();
+        if ($this->used) {
+            return false;
+        }
+        return !$this->isExpired();
     }
     
     /**
@@ -65,12 +72,29 @@ class PasswordReset extends Model
         // Delete any existing tokens for this email
         self::where('email', $email)->delete();
         
+        // Generate token
+        $token = self::generateToken();
+        
+        // Log token untuk debugging
+        Log::info('Creating password reset token for: ' . $email);
+        Log::info('Generated token: ' . $token);
+        Log::info('Token length: ' . strlen($token));
+        
         // Create new token
-        return self::create([
-            'email' => $email,
-            'token' => self::generateToken(),
+        $passwordReset = self::create([
+            'email' => strtolower($email),
+            'token' => $token,
             'expires_at' => now()->addHours(1), // Token expires in 1 hour
             'used' => false
         ]);
+        
+        // Verify token was saved correctly
+        $savedToken = self::where('email', strtolower($email))->latest()->first();
+        if ($savedToken) {
+            Log::info('Token saved in DB: ' . $savedToken->token);
+            Log::info('Tokens match: ' . ($savedToken->token === $token ? 'true' : 'false'));
+        }
+        
+        return $passwordReset;
     }
 }

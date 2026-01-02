@@ -484,8 +484,14 @@ class ApiAuth extends Controller
             // Buat token reset password
             $passwordReset = \App\Models\PasswordReset::createReset($user->email);
             
+            // Log token yang dibuat
+            Log::info('Password reset token created: ' . $passwordReset->token);
+            Log::info('Token length: ' . strlen($passwordReset->token));
+            
             // Kirim email reset password
-            $resetUrl = url('/reset-password?token=' . $passwordReset->token);
+            $resetUrl = url('/reset-password?token=' . urlencode($passwordReset->token));
+            
+            Log::info('Reset URL: ' . $resetUrl);
             
             try {
                 // Kirim email reset password
@@ -552,27 +558,55 @@ class ApiAuth extends Controller
             // Validasi input
             $req->validate([
                 'token' => 'required|string',
-                'password' => 'required|string|min:6|confirmed'
+                'password' => 'required|string|min:6',
+                'password_confirmation' => 'required|string|same:password'
             ]);
 
-            // Cari token reset password
-            $passwordReset = \App\Models\PasswordReset::where('token', $req->token)->first();
+            // Decode token jika di-encode oleh URL
+            $token = urldecode($req->token);
+            $token = trim($token); // Remove any whitespace
             
+            Log::info('Token received: ' . $token);
+            Log::info('Token length: ' . strlen($token));
+            
+            // Cari token reset password (case sensitive)
+            $passwordReset = \App\Models\PasswordReset::where('token', $token)->first();
+            
+            // Log untuk debugging
             if (!$passwordReset) {
+                // Cek apakah ada token yang mirip (untuk debugging)
+                $similarTokens = \App\Models\PasswordReset::where('token', 'like', substr($token, 0, 10) . '%')->get();
+                Log::info('Token not found. Similar tokens count: ' . $similarTokens->count());
+                Log::info('All tokens in DB: ' . \App\Models\PasswordReset::select('token')->get()->pluck('token')->toJson());
+                
                 return response()->json(array(
                     'error' => true,
-                    'message' => "Token reset password tidak valid",
+                    'message' => "Token reset password tidak valid atau tidak ditemukan",
                     'data' => null,
                     'status_code' => 404,
                     'signature' => null
                 ));
             }
+            
+            Log::info('Token found. Email: ' . $passwordReset->email);
+            Log::info('Token used: ' . ($passwordReset->used ? 'true' : 'false'));
+            Log::info('Token expires_at: ' . $passwordReset->expires_at);
+            Log::info('Current time: ' . now());
 
             // Cek apakah token masih valid
             if (!$passwordReset->isValid()) {
+                $reason = '';
+                if ($passwordReset->used) {
+                    $reason = 'Token sudah digunakan';
+                } elseif ($passwordReset->isExpired()) {
+                    $reason = 'Token sudah expired';
+                }
+                
+                Log::info('Token invalid. Reason: ' . $reason);
+                
                 return response()->json(array(
                     'error' => true,
-                    'message' => "Token reset password sudah expired atau sudah digunakan",
+                    'message' => "Token reset password sudah expired atau sudah digunakan. " . $reason,
                     'data' => null,
                     'status_code' => 400,
                     'signature' => null

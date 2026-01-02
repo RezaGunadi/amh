@@ -113,7 +113,7 @@
 
                         <form id="resetPasswordForm">
                             @csrf
-                            <input type="hidden" id="token" name="token" value="{{ request('token') }}">
+                            <input type="hidden" id="token" name="token" value="{{ request('token') ?? '' }}">
 
                             <div class="mb-4">
                                 <label for="password" class="form-label fw-semibold">
@@ -306,8 +306,16 @@
         // Check if token exists
         const urlParams = new URLSearchParams(window.location.search);
         const token = urlParams.get('token');
+        const tokenInput = document.getElementById('token');
         
-        if (!token) {
+        // Ensure token is set correctly
+        if (token) {
+            tokenInput.value = token;
+            console.log('Token from URL:', token);
+            console.log('Token length:', token.length);
+        } else if (tokenInput.value) {
+            console.log('Token from input:', tokenInput.value);
+        } else {
             document.getElementById('alert-container').innerHTML = `
                 <div class="alert alert-danger">
                     <i class="fas fa-exclamation-circle me-2"></i>
@@ -316,6 +324,11 @@
             `;
             document.getElementById('resetPasswordForm').style.display = 'none';
         }
+        
+        // Log token before submission
+        document.getElementById('resetPasswordForm').addEventListener('submit', function() {
+            console.log('Submitting token:', tokenInput.value);
+        }, { once: true });
     </script>
 </body>
 
