@@ -28,7 +28,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
-    <link rel="stylesheet" href="{{ asset('css/amh.css') }}">
+    {{-- Version the stylesheet by its mtime. Without this the URL never
+         changes, so browsers keep serving a cached copy and CSS edits appear
+         not to have taken effect until a manual hard refresh. --}}
+    @php
+        $amhCssPath = public_path('css/amh.css');
+        $amhCssUrl = asset('css/amh.css');
+        if (is_file($amhCssPath)) {
+            $amhCssUrl .= '?v=' . filemtime($amhCssPath);
+        }
+    @endphp
+    <link rel="stylesheet" href="{{ $amhCssUrl }}">
 
     @stack('head')
 </head>
