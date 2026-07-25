@@ -1,287 +1,278 @@
-<!DOCTYPE html>
-<html lang="id">
+@extends('layouts.public')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title ?? 'Child Care - Smart Shoe Monitoring' }}</title>
-    <meta name="description"
-        content="Child Care - Sepatu pintar untuk monitoring anak: detak jantung, suhu tubuh, kelembapan tubuh, kecemasan, dan lokasi. Terintegrasi aplikasi Android.">
-    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box
-        }
+@section('title', $title ?? 'Child Care — Smart Shoe Monitoring')
+@section('description', 'Child Care: sepatu pintar untuk memantau detak jantung, suhu tubuh, kelembapan, tingkat kecemasan, dan lokasi anak secara real-time. Terintegrasi dengan aplikasi Android.')
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-            line-height: 1.6;
-            color: #111;
-            background: #0f172a
-        }
+@section('nav_links')
+    <a href="#fitur">Fitur</a>
+    <a href="#sensor">Sensor</a>
+    <a href="#cara-kerja">Cara Kerja</a>
+    <a href="#privasi">Privasi</a>
+    <a href="#download">Download</a>
+@endsection
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px
-        }
+@section('nav_actions')
+    <a class="btn btn-primary btn-sm" href="#download">Dapatkan Aplikasi</a>
+@endsection
 
-        .nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 16px 0
-        }
+@section('content')
 
-        .logo {
-            color: #fff;
-            text-decoration: none;
-            font-weight: 800
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 20px;
-            list-style: none
-        }
-
-        .nav-links a {
-            color: #cbd5e1;
-            text-decoration: none
-        }
-
-        .nav-links a:hover {
-            color: #fff
-        }
-
-        .hero {
-            padding: 64px 0;
-            color: #fff
-        }
-
-        .hero h1 {
-            font-size: 2.3rem;
-            font-weight: 800;
-            margin-bottom: 10px
-        }
-
-        .hero p {
-            color: #cbd5e1;
-            max-width: 760px
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-            margin-top: 28px
-        }
-
-        .card {
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 14px;
-            padding: 20px;
-            color: #e5e7eb
-        }
-
-        .badge {
-            display: inline-block;
-            background: #1d4ed8;
-            color: #fff;
-            border-radius: 999px;
-            padding: 6px 12px;
-            font-size: .8rem;
-            font-weight: 700
-        }
-
-        .features {
-            margin-top: 12px
-        }
-
-        .features li {
-            margin-left: 18px;
-            color: #cbd5e1
-        }
-
-        .metrics {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin-top: 20px
-        }
-
-        .metric {
-            background: #0b1220;
-            border: 1px solid #1f2937;
-            border-radius: 12px;
-            padding: 16px;
-            color: #cbd5e1;
-            text-align: center
-        }
-
-        .metric h3 {
-            color: #fff;
-            font-size: 1.6rem
-        }
-
-        .section {
-            padding: 48px 0
-        }
-
-        .section h2 {
-            color: #fff;
-            font-size: 1.6rem;
-            margin-bottom: 10px
-        }
-
-        .btn {
-            display: inline-block;
-            text-decoration: none;
-            font-weight: 800;
-            border-radius: 10px;
-            padding: 12px 16px
-        }
-
-        .btn-primary {
-            background: #22c55e;
-            color: #0f172a
-        }
-
-        .btn-outline {
-            border: 1px solid #334155;
-            color: #e5e7eb
-        }
-
-        .footer {
-            border-top: 1px solid #1f2937;
-            margin-top: 48px;
-            padding: 24px 0;
-            color: #94a3b8;
-            text-align: center
-        }
-
-        @media(max-width:900px) {
-            .grid {
-                grid-template-columns: 1fr
-            }
-
-            .metrics {
-                grid-template-columns: repeat(2, 1fr)
-            }
-        }
-    </style>
-</head>
-
-<body>
-    <header>
+    {{-- ─────────────────────────────────────────────────────────── HERO ── --}}
+    <section class="hero on-ink" style="--brand:var(--childcare)">
         <div class="container">
-            <nav class="nav">
-                <a href="/" class="logo">amhriset.com</a>
-                <ul class="nav-links">
-                    <li><a href="#fitur">Fitur</a></li>
-                    <li><a href="#cara-kerja">Cara Kerja</a></li>
-                    <li><a href="#download">Download</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+            <div class="hero-split">
+                <div>
+                    <span class="chip chip-ink chip-dot">IoT • Wearable</span>
 
-    <section class="hero">
-        <div class="container">
-            <span class="badge">IoT • Wearable</span>
-            <h1>Child Care — Smart Shoe Monitoring</h1>
-            <p>Sepatu pintar untuk orang tua: pantau detak jantung, suhu, kelembapan tubuh, tingkat kecemasan, dan
-                lokasi anak secara real-time. Sensor & tracking terintegrasi di sepatu, sinkron ke aplikasi.</p>
-            <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
-                <a class="btn btn-primary" href="#download">Dapatkan Aplikasi</a>
-                <a class="btn btn-outline" href="/">Produk Lainnya</a>
-            </div>
-            <div class="metrics">
-                <div class="metric">
-                    <h3>24/7</h3>
-                    <div>Monitoring Real-Time</div>
+                    <h1 class="mt-3">Ketenangan pikiran, langsung dari sepatu anak Anda</h1>
+
+                    <p class="lead">
+                        Child Care memantau detak jantung, suhu tubuh, kelembapan, tingkat kecemasan, dan lokasi anak
+                        secara real-time. Sensor tertanam rapi di dalam sepatu dan sinkron otomatis ke aplikasi.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a class="btn btn-primary btn-lg" href="#download">Dapatkan Aplikasi</a>
+                        <a class="btn btn-secondary btn-lg" href="#cara-kerja">Lihat Cara Kerja</a>
+                    </div>
+
+                    <div class="hero-chips">
+                        <span class="chip chip-ink">Sinkron otomatis</span>
+                        <span class="chip chip-ink">Notifikasi anomali</span>
+                        <span class="chip chip-ink">Data terenkripsi</span>
+                    </div>
                 </div>
-                <div class="metric">
-                    <h3>5+</h3>
-                    <div>Sensor Terintegrasi</div>
-                </div>
-                <div class="metric">
-                    <h3>LTE/GPS</h3>
-                    <div>Pelacakan Lokasi</div>
-                </div>
-                <div class="metric">
-                    <h3>Alert</h3>
-                    <div>Notifikasi Cerdas</div>
+
+                {{-- Live-monitor mock panel --}}
+                <div class="card reveal"
+                    style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.13);backdrop-filter:blur(14px)">
+                    <div class="row" style="justify-content:space-between">
+                        <div>
+                            <div class="small" style="color:var(--ink-muted)">Perangkat aktif</div>
+                            <strong style="color:#fff;font-size:1.05rem">Sepatu Aira</strong>
+                        </div>
+                        <span class="chip chip-ink chip-dot" style="color:#4ade80">Live</span>
+                    </div>
+
+                    <div class="grid grid-2 mt-4" style="gap:12px">
+                        @foreach ([
+                            ['💗', 'Detak jantung', '96', 'bpm'],
+                            ['🌡️', 'Suhu tubuh', '36.8', '°C'],
+                            ['💧', 'Kelembapan', '54', '%'],
+                            ['🧠', 'Kecemasan', 'Normal', ''],
+                        ] as [$icon, $label, $value, $unit])
+                            <div
+                                style="padding:15px 16px;border-radius:var(--radius);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)">
+                                <div class="small" style="color:var(--ink-muted)">
+                                    <span aria-hidden="true">{{ $icon }}</span> {{ $label }}
+                                </div>
+                                <div class="tabular"
+                                    style="margin-top:6px;font-size:1.4rem;font-weight:800;letter-spacing:-.03em;color:#fff">
+                                    {{ $value }}<span
+                                        style="font-size:.8rem;font-weight:600;color:var(--ink-muted)">{{ $unit ? ' ' . $unit : '' }}</span>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <div class="row mt-4"
+                        style="gap:10px;padding:13px 15px;border-radius:var(--radius);background:rgba(74,222,128,.09);border:1px solid rgba(74,222,128,.22)">
+                        <span aria-hidden="true">📍</span>
+                        <span class="small" style="color:var(--ink-text)">Lokasi terakhir diperbarui 12 detik lalu</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <main class="section" id="fitur">
-        <div class="container grid">
-            <div class="card">
-                <h2>Fitur Utama</h2>
-                <ul class="features">
-                    <li>Pemantauan detak jantung, suhu, dan kelembapan tubuh</li>
-                    <li>Deteksi kecemasan berbasis pola sensor</li>
-                    <li>Pelacakan lokasi anak (GPS)</li>
-                    <li>Notifikasi kondisi kritis ke orang tua</li>
-                    <li>Riwayat data dan grafik tren</li>
-                    <li>Sinkronisasi real-time ke aplikasi Android</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h2>Keamanan & Privasi</h2>
-                <ul class="features">
-                    <li>Enkripsi data end-to-end</li>
-                    <li>Kontrol akses data oleh orang tua</li>
-                    <li>Penghapusan dan ekspor data</li>
-                    <li>Kompatibel dengan kebijakan store</li>
-                </ul>
+    {{-- ────────────────────────────────────────────────────────── METRIK ── --}}
+    <section class="section-tight" style="background:var(--bg-subtle);border-bottom:1px solid var(--border)">
+        <div class="container">
+            <div class="grid grid-4">
+                <div class="stat reveal" style="--brand:var(--childcare)">
+                    <div class="stat-value">24/7</div>
+                    <div class="stat-label">Monitoring real-time</div>
+                </div>
+                <div class="stat reveal" style="--brand:var(--childcare)">
+                    <div class="stat-value" data-count="5" data-suffix="+">5+</div>
+                    <div class="stat-label">Sensor terintegrasi</div>
+                </div>
+                <div class="stat reveal" style="--brand:var(--childcare)">
+                    <div class="stat-value">GPS</div>
+                    <div class="stat-label">Pelacakan lokasi</div>
+                </div>
+                <div class="stat reveal" style="--brand:var(--childcare)">
+                    <div class="stat-value" data-count="30" data-suffix="s">30s</div>
+                    <div class="stat-label">Interval pembaruan</div>
+                </div>
             </div>
         </div>
-    </main>
+    </section>
 
+    {{-- ─────────────────────────────────────────────────────────── FITUR ── --}}
+    <section class="section" id="fitur">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="eyebrow" style="color:var(--childcare)">Fitur</span>
+                <h2>Semua yang orang tua butuhkan, dalam satu aplikasi</h2>
+                <p>Dirancang agar informasi penting terbaca dalam sekali lihat — tanpa mengganggu aktivitas anak.</p>
+            </div>
+
+            <div class="grid grid-3">
+                @foreach ([
+                    ['💗', 'Vital sign real-time', 'Detak jantung, suhu tubuh, dan kelembapan direkam terus-menerus dan dikirim otomatis ke aplikasi.'],
+                    ['🧠', 'Deteksi kecemasan', 'Pola sensor dianalisis untuk mengenali kondisi tidak normal, lalu memicu notifikasi ke orang tua.'],
+                    ['📍', 'Pelacakan lokasi', 'Posisi anak dapat dibuka langsung di Google Maps dari kartu lokasi di aplikasi.'],
+                    ['📈', 'Grafik tren', 'Riwayat setiap sensor divisualisasikan sebagai grafik agar perubahan mudah dikenali.'],
+                    ['🔔', 'Notifikasi kritis', 'Peringatan dikirim saat ada anomali sehingga Anda bisa segera bertindak.'],
+                    ['👥', 'Berbagi akses', 'Wali atau anggota keluarga lain dapat diberi akses untuk ikut memantau.'],
+                ] as [$icon, $heading, $body])
+                    <article class="card card-hover card-accent reveal"
+                        style="--accent:var(--childcare);--accent-soft:var(--childcare-soft)">
+                        <div class="card-icon" aria-hidden="true">{{ $icon }}</div>
+                        <h3>{{ $heading }}</h3>
+                        <p>{{ $body }}</p>
+                    </article>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    {{-- ────────────────────────────────────────────────────────── SENSOR ── --}}
+    <section class="section section-subtle" id="sensor">
+        <div class="container">
+            <div class="grid grid-2" style="align-items:start;gap:clamp(32px,5vw,64px)">
+                <div class="reveal">
+                    <span class="eyebrow" style="color:var(--childcare)">Perangkat</span>
+                    <h2>Sensor tertanam, anak tetap bebas bergerak</h2>
+                    <p class="lead mt-3">
+                        Seluruh modul sensor terpasang di dalam sol sepatu. Tidak ada perangkat tambahan yang harus
+                        dipakai anak, dan tidak ada kabel yang mengganggu.
+                    </p>
+
+                    <ul class="list-check mt-5" style="--check:var(--childcare)">
+                        <li><strong>Modul detak jantung</strong> — pembacaan berkala saat anak beraktivitas</li>
+                        <li><strong>Sensor suhu &amp; kelembapan</strong> — memantau kondisi tubuh dan lingkungan</li>
+                        <li><strong>Modul lokasi</strong> — koordinat lat/lng dikirim bersama data sensor</li>
+                        <li><strong>Konektivitas nirkabel</strong> — data diteruskan ke server lalu ke aplikasi</li>
+                    </ul>
+                </div>
+
+                <div class="card reveal">
+                    <span class="eyebrow" style="color:var(--childcare)">Spesifikasi</span>
+                    <h3>Ringkasan teknis</h3>
+
+                    <div class="spec mt-4">
+                        <div class="spec-row">
+                            <span class="spec-key">Jumlah kanal sensor</span>
+                            <span class="spec-val">Hingga 7</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-key">Interval sinkronisasi</span>
+                            <span class="spec-val">30 detik</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-key">Data lokasi</span>
+                            <span class="spec-val">Latitude / Longitude</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-key">Aplikasi pendamping</span>
+                            <span class="spec-val">Android</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-key">Riwayat data</span>
+                            <span class="spec-val">Grafik &amp; tabel</span>
+                        </div>
+                    </div>
+
+                    <p class="small muted mt-4">
+                        Jumlah kanal aktif menyesuaikan konfigurasi perangkat yang Anda daftarkan.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- ──────────────────────────────────────────────────────── CARA KERJA ── --}}
     <section class="section" id="cara-kerja">
-        <div class="container grid">
-            <div class="card">
-                <h2>Cara Kerja</h2>
-                <ol style="margin-left:18px;color:#cbd5e1">
-                    <li>Sensor di sepatu merekam data vital anak</li>
-                    <li>Data dikirim ke ponsel melalui koneksi nirkabel</li>
-                    <li>Aplikasi menganalisis dan menampilkan metrik</li>
-                    <li>Notifikasi dikirim saat ada anomali</li>
-                </ol>
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="eyebrow" style="color:var(--childcare)">Cara kerja</span>
+                <h2>Empat langkah, dari sepatu ke ponsel Anda</h2>
             </div>
-            <div class="card">
-                <h2>Integrasi</h2>
-                <ul class="features">
-                    <li>Android (Play Store) — aplikasi pendamping</li>
-                    <li>Dashboard tren harian/mingguan</li>
-                    <li>Berbagi akses dengan wali</li>
-                </ul>
+
+            <div class="steps grid grid-4">
+                @foreach ([
+                    ['Sensor merekam', 'Modul di dalam sepatu merekam data vital dan lokasi anak secara berkala.'],
+                    ['Data terkirim', 'Data diteruskan melalui koneksi nirkabel ke server Child Care.'],
+                    ['Aplikasi menganalisis', 'Aplikasi menampilkan metrik terkini beserta grafik tren riwayatnya.'],
+                    ['Notifikasi dikirim', 'Saat terdeteksi anomali, peringatan langsung dikirim ke orang tua.'],
+                ] as [$heading, $body])
+                    <div class="step reveal" style="--brand:var(--childcare)">
+                        <h3>{{ $heading }}</h3>
+                        <p>{{ $body }}</p>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>
 
+    {{-- ───────────────────────────────────────────────────────── PRIVASI ── --}}
+    <section class="section section-subtle" id="privasi">
+        <div class="container">
+            <div class="grid grid-2" style="align-items:start;gap:clamp(32px,5vw,64px)">
+                <div class="reveal">
+                    <span class="eyebrow" style="color:var(--childcare)">Keamanan &amp; privasi</span>
+                    <h2>Data anak Anda, kendali Anda</h2>
+                    <p class="lead mt-3">
+                        Data kesehatan anak adalah data paling sensitif yang kami tangani. Kami memperlakukannya sesuai
+                        itu — dari transportasi hingga penyimpanan dan penghapusan.
+                    </p>
+
+                    <div class="row mt-5" style="gap:10px">
+                        <a class="btn btn-secondary" href="{{ url('/tnc-child-care') }}">Baca kebijakan privasi</a>
+                        <a class="btn btn-ghost" href="{{ url('/delete-account') }}">Hapus akun &amp; data</a>
+                    </div>
+                </div>
+
+                <div class="grid reveal" style="gap:14px">
+                    @foreach ([
+                        ['🔒', 'Transportasi terenkripsi', 'Seluruh komunikasi antara perangkat, server, dan aplikasi dilindungi enkripsi.'],
+                        ['🎛️', 'Kontrol akses orang tua', 'Hanya akun terdaftar yang dapat melihat data perangkat miliknya.'],
+                        ['🗑️', 'Hapus kapan saja', 'Perangkat dan akun beserta datanya dapat dihapus langsung oleh pengguna.'],
+                        ['📋', 'Sesuai kebijakan store', 'Memenuhi persyaratan privasi Google Play untuk aplikasi anak.'],
+                    ] as [$icon, $heading, $body])
+                        <div class="note">
+                            <span class="note-icon" aria-hidden="true">{{ $icon }}</span>
+                            <span>
+                                <strong>{{ $heading }}</strong>
+                                {{ $body }}
+                            </span>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- ──────────────────────────────────────────────────────── DOWNLOAD ── --}}
     <section class="section" id="download">
         <div class="container">
-            <h2 style="color:#fff">Download</h2>
-            <p style="color:#cbd5e1">Aplikasi pendamping tersedia di Play Store. Unduh untuk menghubungkan sepatu pintar
-                Anda dan mulai memantau.</p>
-            <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
-                <a class="btn btn-primary" href="#">📱 Google Play Store</a>
-                <a class="btn btn-outline" href="mailto:contact@amhriset.com">Hubungi Kami</a>
+            <div class="cta-panel on-ink reveal" style="--brand:var(--childcare)">
+                <h2>Mulai pantau anak Anda hari ini</h2>
+                <p>
+                    Unduh aplikasi pendamping, daftarkan sepatu pintar Anda dengan alamat perangkat, dan data akan mulai
+                    tampil di dashboard dalam hitungan menit.
+                </p>
+                <div class="hero-actions">
+                    <a class="btn btn-primary btn-lg" href="#">📱 Google Play Store</a>
+                    <a class="btn btn-secondary btn-lg" href="mailto:contact@amhriset.com">Hubungi Kami</a>
+                </div>
+                <p class="small" style="margin-top:22px;color:var(--ink-muted)">
+                    Butuh bantuan pemasangan? Tim kami merespons maksimal 1×24 jam.
+                </p>
             </div>
         </div>
     </section>
 
-    <footer class="footer">
-        <div class="container">© {{ date('Y') }} amhriset.com — Child Care</div>
-    </footer>
-</body>
-
-</html>
+@endsection

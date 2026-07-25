@@ -1,906 +1,333 @@
-<!DOCTYPE html>
-<html lang="id">
+@extends('layouts.public')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title ?? 'amhriset.com - Riset & Produk' }}</title>
-    <meta name="description"
-        content="amhriset.com - Riset dan produk: Child Care (smart shoe monitoring) dan Sipintar (edukasi nutrisi & gamifikasi jajanan sehat).">
-    <link rel="icon" type="image/svg+xml" href="{{ asset('images/FTII.png') }}">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box
-        }
+@section('title', $title ?? 'amhriset.com — Riset & Produk Teknologi')
+@section('description', 'amhriset.com menghadirkan Child Care (smart shoe monitoring berbasis IoT) dan Sipintar (edukasi nutrisi & gamifikasi jajanan sehat) untuk keluarga dan institusi pendidikan.')
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #f6f9fc;
-            overflow-x: hidden
-        }
+@section('nav_links')
+    <a href="#produk">Produk</a>
+    <a href="#solusi">Solusi</a>
+    <a href="#tentang">Tentang</a>
+    <a href="#kontak">Kontak</a>
+@endsection
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px
-        }
+@section('content')
 
-        .header {
-            position: sticky;
-            top: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid #eef2f7;
-            z-index: 1000;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05)
-        }
-
-        .nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 16px 0
-        }
-
-        .logo {
-            font-weight: 800;
-            color: #111;
-            text-decoration: none;
-            font-size: 1.25rem;
-            transition: transform 0.3s ease
-        }
-
-        .logo:hover {
-            transform: scale(1.05)
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 24px;
-            list-style: none
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #444;
-            font-weight: 600;
-            position: relative;
-            transition: color 0.3s ease
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #111;
-            transition: width 0.3s ease
-        }
-
-        .nav-links a:hover {
-            color: #111
-        }
-
-        .nav-links a:hover::after {
-            width: 100%
-        }
-
-        .hero {
-            background: linear-gradient(135deg, #111827 0%, #1f2937 50%, #0f172a 100%);
-            color: #fff;
-            padding: 100px 0 80px;
-            position: relative;
-            overflow: hidden
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 30% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 50%);
-            animation: pulse 4s ease-in-out infinite
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                opacity: 0.5
-            }
-
-            50% {
-                opacity: 0.8
-            }
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            line-height: 1.2;
-            animation: fadeInUp 0.8s ease-out
-        }
-
-        .hero p {
-            opacity: .95;
-            max-width: 760px;
-            font-size: 1.1rem;
-            animation: fadeInUp 0.8s ease-out 0.2s both
-        }
-
-        .hero-cta {
-            display: flex;
-            gap: 12px;
-            margin-top: 30px;
-            flex-wrap: wrap;
-            animation: fadeInUp 0.8s ease-out 0.4s both
-        }
-
-        .badge-grid {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 30px;
-            animation: fadeInUp 0.8s ease-out 0.6s both
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #cbd5e1;
-            background: rgba(11, 18, 32, 0.5);
-            padding: 10px 16px;
-            border-radius: 999px;
-            font-size: .9rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px)
-        }
-
-        .hero-badge:hover {
-            background: rgba(11, 18, 32, 0.8);
-            transform: translateY(-2px);
-            border-color: rgba(255, 255, 255, 0.4)
-        }
-
-        .products {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-top: 50px
-        }
-
-        .card {
-            background: #fff;
-            border: 1px solid #eef2f7;
-            border-radius: 20px;
-            padding: 32px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            transform: scaleX(0);
-            transition: transform 0.4s ease
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            border-color: #d1d5db
-        }
-
-        .card:hover::before {
-            transform: scaleX(1)
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 8px 14px;
-            border-radius: 999px;
-            font-size: .8rem;
-            font-weight: 700;
-            margin-bottom: 16px;
-            transition: transform 0.3s ease
-        }
-
-        .badge:hover {
-            transform: scale(1.05)
-        }
-
-        .badge-green {
-            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
-            color: #065f46
-        }
-
-        .badge-blue {
-            background: linear-gradient(135deg, #eff6ff, #dbeafe);
-            color: #1e40af
-        }
-
-        .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 12px;
-            color: #111;
-            font-weight: 700
-        }
-
-        .card p {
-            color: #555;
-            line-height: 1.7
-        }
-
-        .features {
-            margin-top: 20px;
-            list-style: none
-        }
-
-        .features li {
-            position: relative;
-            padding-left: 24px;
-            margin-bottom: 10px;
-            color: #444;
-            transition: color 0.3s ease
-        }
-
-        .features li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: #16a34a;
-            font-weight: 800;
-            font-size: 1.1rem
-        }
-
-        .card:hover .features li {
-            color: #333
-        }
-
-        .cta {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 24px
-        }
-
-        .btn {
-            display: inline-block;
-            text-decoration: none;
-            font-weight: 700;
-            border-radius: 12px;
-            padding: 14px 24px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s
-        }
-
-        .btn:hover::before {
-            width: 300px;
-            height: 300px
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #111, #333);
-            color: #fff;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2)
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3)
-        }
-
-        .btn-outline {
-            border: 2px solid #cbd5e1;
-            color: #111;
-            background: transparent
-        }
-
-        .btn-outline:hover {
-            background: #f8f9fa;
-            border-color: #94a3b8;
-            transform: translateY(-3px)
-        }
-
-        .btn-dark {
-            background: linear-gradient(135deg, #111, #333);
-            color: #fff;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2)
-        }
-
-        .btn-dark:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3)
-        }
-
-        .muted {
-            color: #64748b
-        }
-
-        .subtitle {
-            color: #475569
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px
-        }
-
-        .section {
-            padding: 80px 0;
-            position: relative
-        }
-
-        .section h2 {
-            font-size: 2.2rem;
-            margin-bottom: 16px;
-            color: #111;
-            font-weight: 800;
-            position: relative;
-            padding-bottom: 12px
-        }
-
-        .section h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            border-radius: 2px
-        }
-
-        .section p.lead {
-            color: #475569;
-            max-width: 820px;
-            font-size: 1.1rem;
-            line-height: 1.8
-        }
-
-        .list-check {
-            list-style: none;
-            margin-top: 16px
-        }
-
-        .list-check li {
-            margin-left: 0;
-            position: relative;
-            padding-left: 28px;
-            margin-bottom: 12px;
-            color: #444;
-            line-height: 1.7
-        }
-
-        .list-check li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            top: 2px;
-            color: #16a34a;
-            font-weight: 800;
-            font-size: 1.2rem;
-            animation: checkmark 0.5s ease-out
-        }
-
-        @keyframes checkmark {
-            0% {
-                transform: scale(0) rotate(45deg);
-                opacity: 0
-            }
-
-            50% {
-                transform: scale(1.2) rotate(0deg)
-            }
-
-            100% {
-                transform: scale(1) rotate(0deg);
-                opacity: 1
-            }
-        }
-
-        .footer {
-            border-top: 1px solid #eef2f7;
-            background: #fff;
-            padding: 40px 0;
-            margin-top: 80px;
-            text-align: center;
-            color: #6b7280;
-            font-size: .95rem
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px)
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0)
-            }
-        }
-
-        .fade-in-up {
-            animation: fadeInUp 0.8s ease-out
-        }
-
-        .fade-in-up-delay {
-            animation: fadeInUp 0.8s ease-out 0.3s both
-        }
-
-        /* Scroll animations */
-        .scroll-animate {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1)
-        }
-
-        .scroll-animate.active {
-            opacity: 1;
-            transform: translateY(0)
-        }
-
-        /* Stats section */
-        .stats-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 60px 0
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin-top: 40px
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            backdrop-filter: blur(10px);
-            transition: transform 0.3s ease
-        }
-
-        .stat-item:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.15)
-        }
-
-        .stat-item h3 {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 8px
-        }
-
-        .stat-item p {
-            font-size: 1.1rem;
-            opacity: 0.9
-        }
-
-        @media(max-width:768px) {
-            .grid-2 {
-                grid-template-columns: 1fr
-            }
-
-            .hero h1 {
-                font-size: 2.2rem
-            }
-
-            .hero {
-                padding: 60px 0 50px
-            }
-
-            .section {
-                padding: 50px 0
-            }
-
-            .nav-links {
-                gap: 16px;
-                font-size: 0.9rem
-            }
-        }
-    </style>
-</head>
-
-<body>
-    <header class="header">
+    {{-- ─────────────────────────────────────────────────────────── HERO ── --}}
+    <section class="hero on-ink">
         <div class="container">
-            <nav class="nav">
-                <a href="/" class="logo">amhriset<span style="color:#6b7280">.com</span></a>
-                <ul class="nav-links">
-                    <li><a href="#products">Produk</a></li>
-                    <li><a href="#about">Tentang</a></li>
-                    <li><a href="#contact">Kontak</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+            <div class="hero-split">
+                <div>
+                    <span class="chip chip-ink chip-dot">Riset &amp; produk teknologi</span>
 
-    <section class="hero">
-        <div class="container">
-            <h1>Inovasi Teknologi untuk Masa Depan Keluarga & Pendidikan yang Lebih Baik</h1>
-            <p class="subtitle" style="color: #fff !important;">
-                Kami menghadirkan solusi berbasis riset yang menggabungkan teknologi IoT, data analytics, dan desain
-                yang berpusat pada manusia. Dari monitoring kesehatan anak secara real-time hingga edukasi nutrisi
-                yang interaktif—amhriset membangun ekosistem teknologi yang benar-benar berdampak.
-            </p>
-            <div class="hero-cta">
-                <a class="btn btn-primary" href="#products">Jelajahi Produk</a>
-                <a class="btn btn-outline" style="color: #fff !important; border-color: rgba(255,255,255,0.3);"
-                    href="#solutions">Temukan Solusi</a>
-            </div>
-            <div class="badge-grid">
-                <span class="hero-badge">🛡️ GDPR/CCPA Compliant</span>
-                <span class="hero-badge">📱 Tersedia di Play Store & App Store</span>
-                <span class="hero-badge">📊 Powered by Data Analytics</span>
-                <span class="hero-badge">🤝 Trusted by Schools & Parents</span>
-            </div>
-        </div>
-    </section>
+                    <h1 class="mt-3">Teknologi berbasis riset untuk keluarga dan pendidikan</h1>
 
-    <section class="stats-section">
-        <div class="container">
-            <h2 style="color: white; text-align: center; margin-bottom: 20px;">Dampak yang Terukur</h2>
-            <div class="stats-grid">
-                <div class="stat-item scroll-animate">
-                    <h3>1000+</h3>
-                    <p>Pengguna Aktif</p>
+                    <p class="lead">
+                        Kami menggabungkan IoT, analitik data, dan desain yang berpusat pada manusia — dari monitoring
+                        kesehatan anak secara real-time hingga edukasi nutrisi yang interaktif.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a class="btn btn-primary btn-lg" href="#produk">Jelajahi Produk</a>
+                        <a class="btn btn-secondary btn-lg" href="#solusi">Lihat Solusi</a>
+                    </div>
+
+                    <div class="hero-chips">
+                        <span class="chip chip-ink">Sesuai GDPR &amp; CCPA</span>
+                        <span class="chip chip-ink">Tersedia di Play Store</span>
+                        <span class="chip chip-ink">Analitik real-time</span>
+                    </div>
                 </div>
-                <div class="stat-item scroll-animate">
-                    <h3>50+</h3>
-                    <p>Sekolah Mitra</p>
-                </div>
-                <div class="stat-item scroll-animate">
-                    <h3>24/7</h3>
-                    <p>Monitoring Support</p>
-                </div>
-                <div class="stat-item scroll-animate">
-                    <h3>98%</h3>
-                    <p>Kepuasan Pengguna</p>
+
+                {{-- Product preview cards --}}
+                <div class="grid" style="--stack:0;gap:16px">
+                    <a href="{{ url('/child-care') }}" class="card card-hover card-accent"
+                        style="--accent:var(--childcare);--accent-soft:var(--childcare-soft);background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12);backdrop-filter:blur(12px)">
+                        <div class="card-icon" aria-hidden="true">👟</div>
+                        <h3 style="color:#fff">Child Care</h3>
+                        <p style="color:var(--ink-muted)">
+                            Sepatu pintar yang memantau detak jantung, suhu tubuh, kelembapan, dan lokasi anak — langsung
+                            ke ponsel Anda.
+                        </p>
+                        <span class="chip chip-ink mt-3" style="align-self:flex-start">IoT &amp; Wearable →</span>
+                    </a>
+
+                    <a href="{{ url('/sipintar') }}" class="card card-hover card-accent"
+                        style="--accent:var(--sipintar);--accent-soft:var(--sipintar-soft);background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12);backdrop-filter:blur(12px)">
+                        <div class="card-icon" aria-hidden="true">🥗</div>
+                        <h3 style="color:#fff">Sipintar</h3>
+                        <p style="color:var(--ink-muted)">
+                            Platform edukasi nutrisi dengan gamifikasi — membantu sekolah membangun budaya jajanan sehat
+                            berbasis data.
+                        </p>
+                        <span class="chip chip-ink mt-3" style="align-self:flex-start">Edukasi &amp; Gamifikasi →</span>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <main class="section" id="products">
+    {{-- ────────────────────────────────────────────────────────── STATS ── --}}
+    <section class="section-tight" style="background:var(--bg-subtle);border-bottom:1px solid var(--border)">
         <div class="container">
-            <h2 class="scroll-animate">Produk Inovatif Kami</h2>
-            <p class="lead scroll-animate" style="margin-top: 12px;">
-                Dua produk unggulan yang telah terbukti memberikan nilai nyata bagi keluarga dan institusi pendidikan.
-                Setiap produk dirancang dengan pendekatan berbasis riset dan teknologi terkini.
-            </p>
-            <div class="products">
-                <div class="card scroll-animate">
-                    <span class="badge badge-blue">🌡️ IoT & Wearable Technology</span>
+            <div class="grid grid-4">
+                <div class="stat reveal">
+                    <div class="stat-value" data-count="1000" data-suffix="+">1000+</div>
+                    <div class="stat-label">Pengguna aktif</div>
+                </div>
+                <div class="stat reveal">
+                    <div class="stat-value" data-count="50" data-suffix="+">50+</div>
+                    <div class="stat-label">Sekolah mitra</div>
+                </div>
+                <div class="stat reveal">
+                    <div class="stat-value">24/7</div>
+                    <div class="stat-label">Monitoring support</div>
+                </div>
+                <div class="stat reveal">
+                    <div class="stat-value" data-count="98" data-suffix="%">98%</div>
+                    <div class="stat-label">Kepuasan pengguna</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- ─────────────────────────────────────────────────────── PRODUCTS ── --}}
+    <section class="section" id="produk">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="eyebrow">Produk</span>
+                <h2>Dua produk, satu ekosistem</h2>
+                <p>
+                    Setiap produk dirancang dengan pendekatan berbasis riset dan teknologi terkini, dengan nilai nyata
+                    bagi keluarga maupun institusi pendidikan.
+                </p>
+            </div>
+
+            <div class="grid grid-2">
+                {{-- Child Care --}}
+                <article class="card card-hover card-accent reveal"
+                    style="--accent:var(--childcare);--accent-soft:var(--childcare-soft)">
+                    <div class="row" style="justify-content:space-between;align-items:flex-start">
+                        <div class="card-icon" aria-hidden="true">👟</div>
+                        <span class="chip chip-childcare">IoT &amp; Wearable</span>
+                    </div>
+
                     <h3>Child Care — Smart Shoe Monitoring</h3>
-                    <p class="muted">
-                        Teknologi terdepan dalam satu sepatu. Pantau kesehatan dan keamanan anak Anda secara real-time
-                        melalui sensor cerdas yang terintegrasi langsung dengan aplikasi mobile. Solusi lengkap untuk
-                        orang tua yang ingin memberikan perlindungan terbaik tanpa mengganggu aktivitas anak.
+                    <p>
+                        Teknologi terdepan dalam satu sepatu. Pantau kesehatan dan keamanan anak secara real-time melalui
+                        sensor cerdas yang terintegrasi langsung dengan aplikasi mobile.
                     </p>
-                    <ul class="features">
-                        <li>Monitoring real-time: detak jantung, suhu tubuh, dan kelembapan</li>
-                        <li>Sistem deteksi kecemasan berbasis AI dengan notifikasi instan</li>
-                        <li>Pelacakan lokasi GPS/LBS yang akurat dan aman</li>
-                        <li>Sensor canggih terintegrasi dalam sepatu</li>
-                        <li>Sinkronisasi data ke aplikasi Android secara otomatis</li>
-                        <li>Dashboard analitik untuk tracking tren kesehatan</li>
+
+                    <ul class="list-check mt-4">
+                        <li>Monitoring real-time detak jantung, suhu tubuh, dan kelembapan</li>
+                        <li>Deteksi kecemasan berbasis pola sensor dengan notifikasi instan</li>
+                        <li>Pelacakan lokasi GPS yang akurat dan aman</li>
+                        <li>Dashboard analitik untuk tren kesehatan harian</li>
                     </ul>
-                    <div class="cta">
-                        <a class="btn btn-dark" href="{{ url('/child-care') }}">Pelajari Lebih Lanjut</a>
-                        <a class="btn btn-outline" href="#">Download di Play Store</a>
+
+                    <div class="card-footer row">
+                        <a class="btn btn-primary" href="{{ url('/child-care') }}">Pelajari Child Care</a>
+                        <a class="btn btn-ghost" href="{{ url('/tnc-child-care') }}">Kebijakan privasi</a>
                     </div>
-                </div>
-                <div class="card scroll-animate">
-                    <span class="badge badge-green">📚 Edukasi & Gamifikasi</span>
-                    <h3>Sipintar — Platform Edukasi Nutrisi Interaktif</h3>
-                    <p class="muted">
-                        Transformasi cara siswa belajar tentang nutrisi melalui gamifikasi yang menyenangkan.
-                        Platform komprehensif yang membantu sekolah membangun budaya jajanan sehat dengan pendekatan
-                        data-driven dan engagement tinggi.
-                    </p>
-                    <ul class="features">
-                        <li>Database lengkap jajanan dengan informasi nutrisi akurat</li>
-                        <li>Sistem gamifikasi untuk meningkatkan engagement siswa</li>
-                        <li>Personal tracking konsumsi makanan harian</li>
-                        <li>Fitur favorites dan history untuk pembelajaran personal</li>
-                        <li>Konten edukasi nutrisi yang mudah dipahami</li>
-                        <li>Akses tanpa login untuk browsing informasi nutrisi</li>
-                    </ul>
-                    <div class="cta">
-                        <a class="btn btn-dark" href="{{ url('/sipintar') }}">Jelajahi Sipintar</a>
-                        <a class="btn btn-outline" href="#">Download Aplikasi</a>
+                </article>
+
+                {{-- Sipintar --}}
+                <article class="card card-hover card-accent reveal"
+                    style="--accent:var(--sipintar);--accent-soft:var(--sipintar-soft)">
+                    <div class="row" style="justify-content:space-between;align-items:flex-start">
+                        <div class="card-icon" aria-hidden="true">🥗</div>
+                        <span class="chip chip-sipintar">Edukasi &amp; Gamifikasi</span>
                     </div>
-                </div>
+
+                    <h3>Sipintar — Edukasi Nutrisi Interaktif</h3>
+                    <p>
+                        Transformasi cara siswa belajar tentang nutrisi melalui gamifikasi yang menyenangkan, dengan
+                        pendekatan data-driven dan tingkat keterlibatan yang tinggi.
+                    </p>
+
+                    <ul class="list-check mt-4">
+                        <li>Database jajanan lengkap dengan informasi nutrisi akurat</li>
+                        <li>Sistem gamifikasi untuk meningkatkan keterlibatan siswa</li>
+                        <li>Tracking konsumsi harian, favorites, dan riwayat personal</li>
+                        <li>Akses tanpa login untuk menjelajahi informasi nutrisi</li>
+                    </ul>
+
+                    <div class="card-footer row">
+                        <a class="btn btn-primary" href="{{ url('/sipintar') }}">Jelajahi Sipintar</a>
+                        <a class="btn btn-ghost" href="{{ url('/privacy-policy') }}">Kebijakan privasi</a>
+                    </div>
+                </article>
             </div>
         </div>
-    </main>
+    </section>
 
-    <section class="section" id="solutions" style="background: #f8f9fa;">
+    {{-- ────────────────────────────────────────────────────────── SOLUSI ── --}}
+    <section class="section section-subtle" id="solusi">
         <div class="container">
-            <h2 class="scroll-animate">Solusi untuk Setiap Kebutuhan</h2>
-            <p class="lead scroll-animate" style="margin-top: 12px;">
-                Produk amhriset dirancang khusus untuk memenuhi kebutuhan spesifik berbagai pihak—dari orang tua yang
-                peduli keamanan anak hingga institusi pendidikan yang ingin membangun program kesehatan berbasis data.
-                Setiap solusi dibuat dengan pendekatan holistik dan teknologi terdepan.
-            </p>
-            <div class="grid-2" style="margin-top: 40px;">
-                <div class="card scroll-animate">
-                    <h3>👨‍👩‍👧‍👦 Untuk Orang Tua</h3>
-                    <p style="margin-bottom: 12px; color: #64748b;">
-                        Ket tenangan pikiran melalui teknologi yang terpercaya. Pantau dan lindungi anak Anda dengan
-                        solusi yang mudah digunakan namun canggih.
+            <div class="section-head reveal">
+                <span class="eyebrow">Solusi</span>
+                <h2>Dirancang untuk setiap kebutuhan</h2>
+                <p>
+                    Dari orang tua yang peduli keamanan anak hingga institusi yang ingin membangun program kesehatan
+                    berbasis data.
+                </p>
+            </div>
+
+            <div class="grid grid-3">
+                <article class="card card-hover reveal">
+                    <div class="card-icon" aria-hidden="true">👨‍👩‍👧</div>
+                    <h3>Untuk Orang Tua</h3>
+                    <p>Ketenangan pikiran lewat teknologi yang terpercaya dan mudah digunakan.</p>
+                    <ul class="list-check mt-4">
+                        <li>Monitoring kesehatan anak 24/7</li>
+                        <li>Notifikasi instan saat kondisi tidak normal</li>
+                        <li>Riwayat kesehatan dan tren analitik</li>
+                        <li>Privasi data sesuai standar GDPR/CCPA</li>
+                    </ul>
+                </article>
+
+                <article class="card card-hover reveal">
+                    <div class="card-icon" aria-hidden="true">🏫</div>
+                    <h3>Untuk Sekolah</h3>
+                    <p>Bangun program kesehatan dan nutrisi yang efektif dengan data yang terukur.</p>
+                    <ul class="list-check mt-4">
+                        <li>Kampanye jajanan sehat berbasis analytics</li>
+                        <li>Program gamifikasi untuk partisipasi siswa</li>
+                        <li>Laporan konsumsi dan keterlibatan yang detail</li>
+                        <li>Integrasi mudah dengan sistem sekolah</li>
+                    </ul>
+                </article>
+
+                <article class="card card-hover reveal">
+                    <div class="card-icon" aria-hidden="true">🏛️</div>
+                    <h3>Untuk Dinas &amp; Komunitas</h3>
+                    <p>Skalakan inisiatif kesehatan anak dan edukasi nutrisi ke level regional.</p>
+                    <ul class="list-check mt-4">
+                        <li>Implementasi program skala besar</li>
+                        <li>Edukasi nutrisi terstruktur dan berkelanjutan</li>
+                        <li>Pelatihan dan pendampingan untuk staf</li>
+                        <li>Evaluasi program berbasis metrik dan KPI</li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    {{-- ───────────────────────────────────────────────────────── TENTANG ── --}}
+    <section class="section" id="tentang">
+        <div class="container">
+            <div class="grid grid-2" style="align-items:start;gap:clamp(32px,5vw,64px)">
+                <div class="reveal">
+                    <span class="eyebrow">Tentang kami</span>
+                    <h2>Riset dulu, produk kemudian</h2>
+                    <p class="lead mt-3">
+                        Kami membangun ekosistem teknologi yang mendukung keluarga dan pendidikan dengan cara yang
+                        berkelanjutan dan etis — dengan fokus pada riset mendalam dan pengembangan yang berpusat pada
+                        pengguna.
                     </p>
-                    <ul class="list-check">
-                        <li>Monitoring kesehatan anak secara real-time 24/7</li>
-                        <li>Notifikasi instan untuk kondisi tidak normal</li>
-                        <li>Riwayat kesehatan dan tren analitik yang komprehensif</li>
-                        <li>Akses mudah melalui aplikasi mobile yang user-friendly</li>
-                        <li>Privasi data yang terjamin dengan standar GDPR/CCPA</li>
+
+                    <ul class="list-check mt-5">
+                        <li><strong>Keamanan &amp; privasi data</strong> sebagai standar fundamental di setiap produk</li>
+                        <li><strong>Desain inklusif</strong> yang dapat diakses semua kalangan pengguna</li>
+                        <li><strong>Kolaborasi aktif</strong> dengan sekolah, orang tua, dan komunitas</li>
+                        <li><strong>Pendekatan berbasis riset</strong> untuk memastikan efektivitas solusi</li>
                     </ul>
                 </div>
-                <div class="card scroll-animate">
-                    <h3>🏫 Untuk Sekolah & Institusi Pendidikan</h3>
-                    <p style="margin-bottom: 12px; color: #64748b;">
-                        Bangun program kesehatan dan nutrisi yang efektif dengan data yang terukur dan engagement tinggi
-                        dari siswa.
+
+                <div class="card reveal">
+                    <span class="eyebrow">Kapabilitas</span>
+                    <h3>Keunggulan teknologi kami</h3>
+
+                    <div class="spec mt-4">
+                        <div class="spec-row">
+                            <span class="spec-key">Integrasi IoT &amp; mobile</span>
+                            <span class="spec-val">Seamless</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-key">Pemrosesan data</span>
+                            <span class="spec-val">Real-time</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-key">Arsitektur</span>
+                            <span class="spec-val">Scalable</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-key">Infrastruktur</span>
+                            <span class="spec-val">Cloud</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-key">Analitik</span>
+                            <span class="spec-val">Actionable</span>
+                        </div>
+                    </div>
+
+                    <p class="small muted mt-4">
+                        Setiap kapabilitas divalidasi lewat pilot project bersama sekolah dan keluarga pengguna sebelum
+                        dirilis luas.
                     </p>
-                    <ul class="list-check">
-                        <li>Kampanye jajanan sehat berbasis data dan analytics</li>
-                        <li>Program gamifikasi untuk meningkatkan partisipasi siswa</li>
-                        <li>Laporan konsumsi dan engagement yang detail</li>
-                        <li>Dashboard admin untuk monitoring program</li>
-                        <li>Integrasi mudah dengan sistem sekolah yang ada</li>
-                    </ul>
                 </div>
             </div>
-            <div class="card scroll-animate" style="margin-top: 30px;">
-                <h3>🏛️ Untuk Dinas Pendidikan & Komunitas</h3>
-                <p style="margin-bottom: 12px; color: #64748b;">
-                    Skalakan inisiatif kesehatan anak dan edukasi nutrisi ke level regional dengan platform yang
-                    dapat diandalkan dan terukur.
+        </div>
+    </section>
+
+    {{-- ───────────────────────────────────────────────────── TESTIMONIALS ── --}}
+    <section class="section section-subtle">
+        <div class="container">
+            <div class="section-head reveal">
+                <span class="eyebrow">Testimoni</span>
+                <h2>Apa kata pengguna kami</h2>
+            </div>
+
+            <div class="grid grid-2">
+                <figure class="card card-hover reveal">
+                    <div style="font-size:2rem;line-height:1;color:var(--brand);opacity:.35" aria-hidden="true">&ldquo;</div>
+                    <blockquote style="margin-top:8px;font-size:1.05rem;line-height:1.75;color:var(--text)">
+                        Sebagai orang tua yang bekerja, Child Care memberikan ketenangan yang luar biasa. Saya bisa
+                        memantau kesehatan anak kapan saja, dan notifikasinya sangat responsif.
+                    </blockquote>
+                    <figcaption class="row mt-4" style="gap:12px">
+                        <span aria-hidden="true"
+                            style="display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--brand-soft);color:var(--brand-text);font-weight:800">S</span>
+                        <span>
+                            <strong style="display:block">Ibu Sarah</strong>
+                            <span class="small muted">Pengguna Child Care</span>
+                        </span>
+                    </figcaption>
+                </figure>
+
+                <figure class="card card-hover reveal">
+                    <div style="font-size:2rem;line-height:1;color:var(--brand);opacity:.35" aria-hidden="true">&ldquo;</div>
+                    <blockquote style="margin-top:8px;font-size:1.05rem;line-height:1.75;color:var(--text)">
+                        Sipintar membantu sekolah kami membangun program jajanan sehat yang efektif. Siswa antusias
+                        dengan gamifikasinya, dan dashboard analytics sangat membantu evaluasi program.
+                    </blockquote>
+                    <figcaption class="row mt-4" style="gap:12px">
+                        <span aria-hidden="true"
+                            style="display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--sipintar-soft);color:var(--sipintar-text);font-weight:800">B</span>
+                        <span>
+                            <strong style="display:block">Pak Budi</strong>
+                            <span class="small muted">Kepala Sekolah, Mitra Sipintar</span>
+                        </span>
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    {{-- ────────────────────────────────────────────────────────── KONTAK ── --}}
+    <section class="section" id="kontak">
+        <div class="container">
+            <div class="cta-panel on-ink reveal">
+                <h2>Siap memulai perjalanan bersama kami?</h2>
+                <p>
+                    Tim kami siap memberikan demo produk, menjalankan pilot project di sekolah Anda, atau membangun
+                    kemitraan program kesehatan anak dan edukasi nutrisi yang berkelanjutan.
                 </p>
-                <ul class="list-check">
-                    <li>Implementasi program kesehatan anak skala besar</li>
-                    <li>Inisiatif edukasi nutrisi yang terstruktur dan berkelanjutan</li>
-                    <li>Pelatihan dan pendampingan implementasi untuk staf</li>
-                    <li>Evaluasi program berbasis metrik dan KPI yang jelas</li>
-                    <li>Dukungan teknis dan konsultasi dari tim ahli</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="about">
-        <div class="container grid-2">
-            <div class="scroll-animate">
-                <h2>Tentang amhriset</h2>
-                <p class="lead">
-                    Kami adalah tim yang berkomitmen untuk menghadirkan solusi teknologi yang benar-benar berdampak.
-                    Dengan fokus pada riset mendalam dan pengembangan produk yang berpusat pada pengguna, kami membangun
-                    ekosistem teknologi yang mendukung keluarga dan pendidikan dengan cara yang berkelanjutan dan etis.
-                </p>
-                <ul class="list-check" style="margin-top: 24px;">
-                    <li><strong>Keamanan & Privasi Data</strong> sebagai standar fundamental dalam setiap produk</li>
-                    <li><strong>Desain Inklusif</strong> yang dapat diakses oleh semua kalangan pengguna</li>
-                    <li><strong>Kolaborasi Aktif</strong> dengan sekolah, orang tua, dan komunitas</li>
-                    <li><strong>Pendekatan Berbasis Riset</strong> untuk memastikan efektivitas solusi</li>
-                    <li><strong>Komitmen Berkelanjutan</strong> terhadap perbaikan dan inovasi terus-menerus</li>
-                </ul>
-            </div>
-            <div class="card scroll-animate">
-                <h3>Keunggulan Teknologi Kami</h3>
-                <ul class="features">
-                    <li><strong>Integrasi IoT & Mobile:</strong> Seamless connection antara perangkat hardware dan
-                        software</li>
-                    <li><strong>Advanced Analytics:</strong> Insight-driven dengan pelaporan yang actionable</li>
-                    <li><strong>Scalable Architecture:</strong> Dapat berkembang sesuai kebutuhan institusi</li>
-                    <li><strong>Real-time Processing:</strong> Data dan notifikasi yang selalu up-to-date</li>
-                    <li><strong>Cloud Infrastructure:</strong> Reliable dan secure dengan uptime tinggi</li>
-                    <li><strong>User Experience:</strong> Interface yang intuitif dan mudah digunakan</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="testimonials" style="background: #f8f9fa;">
-        <div class="container">
-            <h2 class="scroll-animate">Apa Kata Pengguna Kami</h2>
-            <div class="grid-2" style="margin-top: 30px;">
-                <div class="card scroll-animate">
-                    <p class="muted" style="font-style: italic; font-size: 1.05rem; line-height: 1.8;">
-                        "Sebagai orang tua yang bekerja, Child Care memberikan saya ketenangan yang luar biasa.
-                        Saya bisa memantau kesehatan anak saya kapan saja melalui aplikasi, dan sistem notifikasinya
-                        sangat responsif. Ini benar-benar mengubah cara saya menjaga keamanan anak."
-                    </p>
-                    <p style="margin-top: 16px;">
-                        <strong>— Ibu Sarah, Orang Tua Siswa</strong><br>
-                        <span style="color: #64748b; font-size: 0.9rem;">Pengguna Child Care</span>
-                    </p>
-                </div>
-                <div class="card scroll-animate">
-                    <p class="muted" style="font-style: italic; font-size: 1.05rem; line-height: 1.8;">
-                        "Sipintar telah membantu sekolah kami membangun program jajanan sehat yang efektif. Siswa
-                        sangat antusias dengan fitur gamifikasi, dan kami bisa melihat peningkatan kesadaran nutrisi
-                        secara signifikan. Dashboard analytics-nya sangat membantu untuk evaluasi program."
-                    </p>
-                    <p style="margin-top: 16px;">
-                        <strong>— Pak Budi, Kepala Sekolah</strong><br>
-                        <span style="color: #64748b; font-size: 0.9rem;">Mitra Sipintar</span>
-                    </p>
+                <div class="hero-actions">
+                    <a class="btn btn-primary btn-lg" href="mailto:contact@amhriset.com">Hubungi Tim Kami</a>
+                    <a class="btn btn-secondary btn-lg" href="#produk">Jelajahi Produk</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section" id="cta"
-        style="background: linear-gradient(135deg, #111827 0%, #1f2937 100%); color: white;">
-        <div class="container" style="text-align:center">
-            <h2 style="color: white; margin-bottom: 20px;">Siap Memulai Perjalanan Bersama Kami?</h2>
-            <p class="lead" style="margin:0 auto; color: rgba(255,255,255,0.9);">
-                Mari kita diskusikan bagaimana solusi amhriset dapat membantu kebutuhan Anda. Tim kami siap memberikan
-                demo produk, menjalankan pilot project di sekolah Anda, atau membangun kemitraan program kesehatan
-                anak dan edukasi nutrisi yang berkelanjutan.
-            </p>
-            <div class="hero-cta" style="justify-content:center; margin-top: 30px;">
-                <a class="btn btn-primary" href="mailto:contact@amhriset.com"
-                    style="background: white; color: #111;">Hubungi Tim Kami</a>
-                <a class="btn btn-outline" href="#products"
-                    style="border-color: rgba(255,255,255,0.3); color: white;">Jelajahi Produk</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="contact" style="background: #fff;">
-        <div class="container">
-            <h2 class="scroll-animate">Mari Berkolaborasi</h2>
-            <p class="lead scroll-animate" style="margin-top: 12px;">
-                Kami senang mendengar dari Anda. Apakah Anda ingin mengetahui lebih lanjut tentang produk kami,
-                menjadwalkan demo, atau membahas peluang kolaborasi? Tim kami siap membantu.
-            </p>
-            <div class="cta" style="margin-top: 30px;">
-                <a class="btn btn-primary" href="mailto:contact@amhriset.com">Kirim Email</a>
-                <a class="btn btn-outline" href="#products">Pelajari Produk</a>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; {{ date('Y') }} amhriset.com - Inovasi Teknologi untuk Keluarga & Pendidikan yang Lebih Baik</p>
-            <p style="margin-top: 8px; font-size: 0.85rem;">
-                <a href="/privacy-policy" style="color: #6b7280; text-decoration: none; margin: 0 8px;">Privacy
-                    Policy</a>
-                <span>•</span>
-                <a href="/terms-conditions" style="color: #6b7280; text-decoration: none; margin: 0 8px;">Terms &
-                    Conditions</a>
-            </p>
-        </div>
-    </footer>
-
-    <script>
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, observerOptions);
-
-        // Observe all scroll-animate elements
-        document.querySelectorAll('.scroll-animate').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Header scroll effect
-        let lastScroll = 0;
-        const header = document.querySelector('.header');
-        
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            
-            if (currentScroll > 100) {
-                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
-            } else {
-                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.05)';
-            }
-            
-            lastScroll = currentScroll;
-        });
-
-        // Counter animation for stats
-        function animateCounter(element, target) {
-            let current = 0;
-            const increment = target / 50;
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    element.textContent = target + (target >= 1000 ? '+' : '') + (target === 98 ? '%' : '');
-                    clearInterval(timer);
-                } else {
-                    element.textContent = Math.floor(current) + (target >= 1000 ? '+' : '') + (target === 98 ? '%' : '');
-                }
-            }, 30);
-        }
-
-        // Trigger counter animation when stats section is visible
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const statNumbers = entry.target.querySelectorAll('.stat-item h3');
-                    const targets = [1000, 50, 24, 98];
-                    statNumbers.forEach((stat, index) => {
-                        const target = targets[index];
-                        stat.textContent = '0';
-                        setTimeout(() => animateCounter(stat, target), index * 200);
-                    });
-                    statsObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        const statsSection = document.querySelector('.stats-section');
-        if (statsSection) {
-            statsObserver.observe(statsSection);
-        }
-    </script>
-</body>
-
-</html>
+@endsection
