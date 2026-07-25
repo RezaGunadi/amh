@@ -410,6 +410,15 @@ p {
     font-weight: 600;
 }
 
+/* Holds the links and the CTA on one row. Without an explicit display here
+   it falls back to `block` on desktop and the CTA drops below the links —
+   the mobile rule below then flips it to a stacked column on purpose. */
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
 .nav-links {
     display: flex;
     align-items: center;
