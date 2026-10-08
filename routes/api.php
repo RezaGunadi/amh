@@ -50,22 +50,12 @@ Route::post('/arduino/device/delete/{user_id}', [App\Http\Controllers\api\ApiArd
 Route::get('/get-version', [App\Http\Controllers\api\ApiAuth::class, 'mobileVersion']);
 Route::get('/profile', [App\Http\Controllers\api\ApiAuth::class, 'profile']);
 Route::delete('/profile', [App\Http\Controllers\api\ApiAuth::class, 'deleteProfile']);
-Route::post('/change-profile-images', [App\Http\Controllers\api\ApiAuth::class, 'changeProfileImage']);
 
 
 // Route untuk API Arduino Atiqah
 Route::post('/arduino/atiqah/{token}', [\App\Http\Controllers\api\ApiArduinoController::class, 'atiqahData']);
 
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route::match(['get', 'post'], '/api/get-help', [App\Http\Controllers\api\NewsController::class, 'helpRequest'])->name('api_get_help');
-// API routes moved to api.php to avoid CSRF issues
-// Route::match(['get', 'post'], '/api/help', [App\Http\Controllers\api\ApiArduinoController::class, 'helpRequest'])->name('api_help');
-// Route::match(['get', 'post'], '/api/login', [App\Http\Controllers\api\ApiAuth::class, 'apiLogin'])->name('api_login');
-// Route::match(['get', 'post'], '/api/regist', [App\Http\Controllers\api\ApiAuth::class, 'apiRegist'])->name('api_regist');
-// Route::match(['get', 'post'], '/api/auth/update', [App\Http\Controllers\api\ApiAuth::class, 'apiUpdate'])->name('api_auth_update');
-// Route::match(['get', 'post'], '/api/auth/change-password', [App\Http\Controllers\api\ApiAuth::class, 'apiChangePassword'])->name('api_auth_change_password');
 Route::match(['get', 'post'], '/arduino/get-dht-pulse/detail/and-remove/{token}', [App\Http\Controllers\api\ApiArduinoController::class, 'dhtPulseGetDetailAndRemove'])->name('api_dht_pulse_detail_and_remove');
 
 Route::match(['get', 'post'], '/apiget-version', [App\Http\Controllers\api\ApiAuth::class, 'mobileVersion'])->name('mobileVersion');

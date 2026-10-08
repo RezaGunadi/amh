@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,12 +12,6 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-Auth::routes();
 
 // Password Reset Routes
 Route::get('/forgot-password', function () {
@@ -75,5 +68,3 @@ Route::get('/child-care', function () {
         'title' => 'Child Care - Smart Shoe Monitoring',
     ]);
 });
-
-// Auth::routes();

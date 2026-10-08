@@ -54,10 +54,6 @@ class User extends Authenticatable
         'consent_updated_at' => 'datetime',
     ];
 
-    public function news(){
-        return $this->hasMany('App\Models\news', 'created_by');
-    }
-    
     public function favorites()
     {
         return $this->hasMany(Favorite::class);
